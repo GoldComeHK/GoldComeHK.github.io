@@ -1,0 +1,209 @@
+<html>
+    <head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>莫氏金流商匯| 付款方式選擇</title>
+
+    <style>
+        * {margin: 0;padding: 0;box-sizing: border-box;}
+        body {justify-content: center;align-items: center;text-align: center;width: 90%;margin: auto; background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);font-family: 'Arial', sans-serif;height: 100vh;}
+        a{text-decoration: none;}
+        .payment-container {grid-template-columns: repeat(4, 1fr);margin: auto;width: auto;text-align: center;}
+        .置中{text-align: center;padding: 5% 0;}
+        .payment-option {float: left; width: 170px;height: 170px;margin: 2% ;background: rgba(0, 0, 0, 0);border-radius: 15px;display: flex;justify-content: center;align-items: center;cursor: pointer;transition: all 0.3s ease;overflow: hidden;}
+
+
+        .payment-icon {width: 250px;height: 250px;transition: all 0.3s ease;background: rgba(0, 0, 0, 0);background-image: url(./payBG2.png);}
+
+
+        .payment-info {position: absolute;top: 0;left: 0;width: 100%;height: 100%;background: rgba(0,0,0,0.9);border-radius: 15px;padding: 15px;display: flex;flex-direction: column;justify-content: center;align-items: center;opacity: 0;transition: all 0.3s ease;text-align: center;pointer-events: none;}
+
+
+        .info-image {width: 100px;height: 100px;margin-bottom: 10px;transition: all 0.3s ease;background-image: url(./payALL.png);}
+        .payment-info h2, .payment-info p {mix-blend-mode: difference;color: #c3cfe2; line-height: 200%;}
+        /* 遮罩層 */
+        .overlay {display: none;position: fixed;top: 0;left: 0;width: 100%;height: 100%;background: rgba(0, 0, 0, 0.5);z-index: 999;}
+        /* 放大後的元素樣式 */
+        .active {position: fixed !important;top: 50% !important;left: 50% !important;transform: translate(-50%, -50%) !important;width: 400px !important;height: 400px !important;z-index: 1000;box-shadow: 0 15px 30px rgba(0,0,0,0.2);}
+        .active .payment-icon {transform: scale(1.5);opacity: 0.3;}
+        .active .payment-info {opacity: 1;}
+        .active .info-image {width: 300px;height: 300px;display: block;margin-bottom: 20px;}
+        .bgimg{ background-size: auto;background-repeat: no-repeat;}
+    </style>
+
+    <link rel="stylesheet" href="https://64071181.github.io/mokJsapi/aki.css">
+    <!-- ws icon https://www.thinkcmf.com/font/font_awesome/icons.html -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="../../mokJsapi/a.js"></script>
+    </head>
+    <body>
+        <samp id="莫生查詢" style="display: none;">莫生我要查詢付款</samp>
+
+
+        <div class="overlay"></div>
+        <div class="payment-container">
+
+            <div style="text-align: center;">
+                <h1>
+                    <a href="../"><b id="_我司名"></b></a>
+                    | 付款方式選擇
+                </h1>
+                <br>
+                <p id="translate"></p>
+                <p class="mokJsApi_copyright">版權</p>
+            </div>
+
+            <div class="置中">
+
+                
+                <!-- 轉數快 -->
+                <div class="payment-option">
+                    <div class='bgimg payment-icon' style='background-position: 0px 42px;' title="轉數快" ></div> 
+                    <div class="payment-info">
+                        <h2>mok surky</h2>
+                        <h2>852 6407 1181</h2>
+                        <br>
+                        <p >「轉數快」係香港金管局推行嘅快速支付系統，只需透過電話號碼、電郵地址，或者轉數快識別碼，你就可以24小時隨時隨地進行跨行「過數」。 即時、免費同24/7。</p>
+                    </div>
+                </div>
+
+                <!-- payme 
+                <div class="payment-option">
+                    <div class='bgimg payment-icon' style='background-position: -180px 40px;' title="Payme" ></div> 
+                    <div class="payment-info">
+                        <div class='bgimg info-image' style='background-position: -300px 0px;' title="Payme" ></div> 
+                        <p >PayMe 是一款線上支付平台，由恒生銀行於2018年推出。</p>
+                    </div>
+                </div>
+                -->
+
+                <!-- AlipayHK -->
+                <div class="payment-option">
+                    <div class='bgimg payment-icon' style='background-position: -350px 40px;' title="AlipayHK" ></div> 
+                    <div class="payment-info">
+                        <div class='bgimg info-image' style='background-position: -599px 0px;' title="AlipayHK" ></div> 
+                        <p >AlipayHK 為你帶來全新的流動支付體驗，用戶可於超過100000間合作商戶盡情消費！</p>
+                    </div>
+                </div>
+        
+                <!-- WeChat Pay HK -->
+                <div class="payment-option">
+                    <div class='bgimg payment-icon' style='background-position: -520px 40px;' title="WeChat Pay HK" ></div> 
+                    <div class="payment-info">
+                        <div class='bgimg info-image' style='background-position: -900px -15px;' title="WeChat Pay HK" ></div> 
+                        <p >WeChat Pay HK是WeChat應用程式向用戶提供的一種快捷付款功能，用戶可以通過智能手機快速完成交易付款。</p>
+                    </div>
+                </div>
+
+                <!-- WeChat Pay cn 
+                <div class="payment-option">
+                    <div class='bgimg payment-icon' style='background-position: 0px -128px;' title="AlipayHK" ></div> 
+
+                    <div class="payment-info">
+                        <div class='bgimg info-image' style='background-position: 0px -300px;' title="WeChat Pay HK" ></div> 
+                        <p>微信支付是腾讯公司的支付业务品牌，微信支付商户平台支持线下场所。</p>
+                    </div>
+                </div>
+                -->
+
+
+                <!-- PayPal -->
+                <div class="payment-option">
+                    <div class='bgimg payment-icon' style='background-position: -170px -131px;' title="PayPal" ></div> 
+                    <div class="payment-info">
+                        <div class='bgimg info-image' style='background-position: -300px -300px;' title="泰达币（USDT）" ></div> 
+                        <p >全球數以百萬名買家使用PayPal 網上購物，只需輸入電郵地址和密碼便可結帳，比掏出銀包更方便。</p>
+                    </div>
+                </div>
+                
+        
+                <!-- Bitcoin -->
+                <div class="payment-option">
+                    <div class='bgimg payment-icon' style='background-position: -350px -131px;' title="比特幣(Bitcoin)" ></div> 
+                    <div class="payment-info">
+                        <div class='bgimg info-image' style='background-position: -599px -300px;' title="比特幣(Bitcoin)" ></div> 
+                        <p>比特幣(Bitcoin) bc1q0wsqpwd964q4esaxs6phcgkanct07vur5v290w</p>
+                    </div>
+                </div>
+                
+                <!-- Ether -->
+                <div class="payment-option">
+                    <div class='bgimg payment-icon' style='background-position: -535px -131px;' title="以太幣 (Ether)" ></div> 
+                    <div class="payment-info">
+                        <div class='bgimg info-image' style='background-position: -900 -300px;' title="以太幣 (Ether)" ></div> 
+                        <p >以太幣 (Ether) 0x23887F9c37a7389E3B1b0e12604709D86562b470</p>
+                    </div>
+                </div>
+                
+
+                
+                <div id="ContactAKI" class="ContactAKI"><!-- JS _顯示聯莫 --></div>
+
+                <br>
+                <br>
+                <h2>謝謝<br>付款後請將收據及帳號發信給我們</h2>
+            </div>
+
+
+        </div>
+    
+        <script>
+            let activeElement = null;
+            const overlay = document.querySelector('.overlay');
+            
+            document.querySelectorAll('.payment-option').forEach(option => {
+                option.addEventListener('click', function(e) {
+                    // 如果點擊的是已經激活的元素，則取消激活
+                    if (this === activeElement) {
+                        this.classList.remove('active');
+                        overlay.style.display = 'none';
+                        activeElement = null;
+                        return;
+                    }
+            
+                    // 移除其他元素的激活狀態
+                    if (activeElement) {
+                        activeElement.classList.remove('active');
+                    }
+            
+                    // 激活當前元素
+                    this.classList.add('active');
+                    overlay.style.display = 'block';
+                    activeElement = this;
+                });
+            });
+            
+            // 點擊遮罩層時取消激活狀態
+            overlay.addEventListener('click', function() {
+                if (activeElement) {
+                    activeElement.classList.remove('active');
+                    overlay.style.display = 'none';
+                    activeElement = null;
+                }
+            });
+        </script>
+    
+    </body>
+
+    
+    <script src="https://cdn.staticfile.net/translate.js/3.1.7/translate.js"></script>
+    <script>
+        function Start() {
+            // 翻譯 
+            //translate.language.setLocal('chinese_traditional'); //設置本地語種（當前網頁的語種）。如果不設置，默認自動識別當前網頁顯示文字的語種。 可填寫如 'english'、'chinese_simplified' 等，具體參見文檔下方關於此的說明。
+            translate.service.use('client.edge'); //設置機器翻譯服務通道，直接客戶端本身，不依賴服務端 。相關說明參考 http://translate.zvo.cn/43086.html
+            translate.execute();//進行翻譯 
+
+            // 顯示聯莫
+            const 聯莫 = ['moksurky@gmail.com','https://wa.me/85264071181/','https://i.meee.com.tw/atcX6QM.png','https://www.instagram.com/moksurky2025/','https://line.me/ti/p/UlSPd7p9zh/','https://www.facebook.com/aki.mok.10/','http://t.me/mokaki/'
+            ];
+            _顯示聯莫(聯莫);
+        }
+
+
+
+    琪琪修改('../../')
+    </script>
+</html>
