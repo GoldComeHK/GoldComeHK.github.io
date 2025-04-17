@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>莫氏金流商匯 | ws鍠</title>
+    <style>
+        :root {--metal: linear-gradient(45deg, #e6e9f0 0%, #eef1f5 100%);--water-blue: rgba(64, 156, 255, 0.3);--gold: #D4AF37;}
+
+        * {margin: 0;padding: 0;box-sizing: border-box;font-family: 'Segoe UI', Arial, sans-serif;}
+
+        body {background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);color: #e6e9f0;overflow-x: hidden;}
+
+        .water-flow {position: fixed;top: 0;left: 0;width: 100%;height: 100%;background: linear-gradient(90deg, 
+                rgba(32, 58, 67, 0.8) 0%,
+                var(--water-blue) 50%,
+                rgba(32, 58, 67, 0.8) 100%);animation: flow 20s linear infinite;z-index: -1;}
+
+        @keyframes flow {
+              0% { background-position: 0 0; }
+            100% { background-position: 200% 0; }
+        }
+
+        .container {max-width: 1200px;margin: 0 auto;padding: 2rem;position: relative;}
+
+        header {text-align: center;padding: 4rem 0;background: var(--metal);background-clip: text;-webkit-text-fill-color: #fff;position: relative;}
+
+        h1 {font-size: 3.5rem;margin-bottom: 1rem;text-shadow: 0 0 15px gold;}
+
+        li {list-style: none;}
+
+        .card {background: rgba(32, 58, 67, 0.9);border: 1px solid rgba(64, 156, 255, 0.3);border-radius: 15px;padding: 2rem;margin: 2rem 0;backdrop-filter: blur(10px);transition: transform 0.3s;box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);box-shadow: inset 25px 25px 50px 1px rgba(181, 181, 181, 0.3);}      
+
+        .card:hover {transform: translateY(-5px);}
+
+        #開通會員, .industry-solutions {display: grid;grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));gap: 1.5rem;margin: 3rem 0;}
+
+        .highlight {color: var(--gold);font-weight: bold;animation: 
+            float 3s ease-in-out infinite,metalShine 4s linear infinite;}
+
+        .cta-button {display: inline-block;padding: 1rem 2rem;background: linear-gradient(45deg, #203a43 0%, #2c5364 50%, #203a43 100%);border: 1px solid var(--gold);border-radius: 30px;color: var(--gold);text-decoration: none;font-weight: bold;transition: all 0.3s;margin: 2rem 0;position: relative;overflow: hidden;animation: 
+                float 3s ease-in-out infinite,metalShine 4s linear infinite;}
+
+        /* 水中浮动效果 */
+        @keyframes float {
+            0%, 100% {    transform: translateY(0) rotate(1deg);}
+            33% {    transform: translateY(-4px) rotate(-0.5deg);}
+            66% {    transform: translateY(3px) rotate(0.5deg);}
+        }
+
+        /* 金属光泽流动效果 */
+        @keyframes metalShine {0% {    background-position: -200% 0;}
+            100% {    background-position: 200% 0;}
+        }
+
+        /* 金属光泽伪元素 */
+        .cta-button::before {content: '';position: absolute;top: 0;left: 0;width: 150%;height: 100%;background: linear-gradient(
+                60deg,rgba(255,255,255,0) 20%,rgba(212,175,55,0.3) 50%,rgba(255,255,255,0) 80%
+            );transform: skewX(-45deg);animation: shineFlow 3s linear infinite;}
+
+        @keyframes shineFlow {
+            0% {    left: -150%;}
+            100% {    left: 150%;}
+        }
+
+        /* 悬停效果增强 */
+        .cta-button:hover {animation-play-state: paused;box-shadow: 
+                0 0 25px rgba(64, 156, 255, 0.5),0 0 15px var(--gold);transform: scale(1.05);}
+
+        .cta-button:hover::before {animation: none;opacity: 0;}
+
+        .feature-list li {padding: 1rem;margin: 1rem 0;border-left: 3px solid var(--gold);background: rgba(32, 58, 67, 0.5);}
+
+        @media (max-width: 768px) {.container {padding: 1rem; }
+            h1 {font-size: 2.5rem; }
+        }
+
+        .會員卡{opacity: 1; transform: translateY(0px); transition: 2s cubic-bezier(0.25, 0.1, 0.25, 1);}
+        
+        
+        .刪除線{text-decoration: solid line-through gold 4px;}
+
+    </style>
+
+
+  <!-- ws icon https://www.thinkcmf.com/font/font_awesome/icons.html -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+  <script src="https://64071181.github.io/mokJsapi/a.js">//琪琪修改</script>
+  <script src="https://cdn.staticfile.net/translate.js/3.1.7/translate.js">// 翻譯 放最後</script>
+
+
+</head>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<body>
+    <samp id="莫生查詢" style="display: none;">莫生我要查詢ws鍠</samp>
+
+
+    <div class="water-flow"></div>
+    
+    <div class="container">
+        <header>
+            <h1><a href="../"><b id="_我司名"></b></a> | ws鍠</h1>
+            <h2>您的WhatsApp AI應答助手</h2>
+            <p id="更新日期">202504160205</p>
+        </header>
+
+        <h3>您是跨境電商 ? <br><br>
+            您有使用WhatsApp做商務溝通工具 ? <br><br>
+            您無法 7 × 24 回覆客戶的查詢信息 ? <br><br>
+            你需要 W S 鍠 ! 
+        </h3>
+
+        <div style="text-align: center">
+            <a href="https://github.com/64071181/64071181.github.io/raw/main/ws/ws鍠.exe" download="ws鍠.exe" class="cta-button">免費下載 ws鍠</a>
+        </div>
+
+        <iframe width="100%" height="315" src="https://www.youtube.com/embed/dBTxzLg-eFA?si=PTpM-9-b3_jeVNB6" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+
+        <div class="card">
+            WS鍠 是一款專為 WhatsApp 設計的自動回覆程式，讓您無需手動操作，即可輕鬆管理您的訊息。<br><br>
+            透過設定觸發詞，當客戶發送指定訊息時，程式會自動回覆預設的內容，，無需人工干預，24小時即時服務。
+            <br><br>
+            
+        </div>
+
+        <div class="card">
+            <h2>▶ WS鍠 亮點</h2>
+            <ul class="feature-list">
+                <li><span class="highlight">√ 省時省力：</span>ai 自動處理 WhatsApp 訊息，支援文字 / 圖片 / 檔案多重格式回應 !</li>
+                <li><span class="highlight">√ 秒速應答：</span>透過觸發關鍵字，自動辨識客戶需求，0.4 秒極速回饋 !</li>
+                <li><span class="highlight">√ 使用簡單：</span>執行程式 → 設定回覆 → 登錄whatsapp → 自動執行 !</li>
+                <li><span class="highlight">√ 持久運作：</span>7 × 24 不間斷服務 !</li>
+            </ul>
+        </div>
+
+        <div style="text-align: center">
+            <a href="https://github.com/64071181/64071181.github.io/raw/main/ws/ws鍠.exe" download="ws鍠.exe" class="cta-button">★ 立即免費體驗 WS鍠 ai 自動回复的魅力 ★</a>
+        </div>
+
+
+        <h2 style="text-align: center; margin: 3rem 0">行解決方案範例</h2>
+        <div class="industry-solutions">
+            <!-- 行业解决方案卡片会自动生成 -->
+        </div>
+
+
+        <h3>WS鍠 !<br><br>
+            滿足您企業的需求 !<br><br>
+            提升您工作效率、減少人力成本 !<br><br>
+            並實現無縫優質的客戶互動 !</h3>
+
+
+        <div style="text-align: center">
+            <a href="https://github.com/64071181/64071181.github.io/raw/main/ws/ws鍠.exe" download="ws鍠.exe" class="cta-button">★ 立即下載 WS鍠 免費體驗 WhatsApp 自動回覆！ ★</a>
+        </div>
+
+
+        <h2 style="text-align: center; margin: 3rem 0">開通會員</h2>
+        <p style="text-align: center;"></p>
+        <div id="開通會員"><!-- 會員類別all --></div>
+
+        <h2>服務承諾：</h2><br>
+        <h3>✦ 15天按比例退款保證！ ✦ 7天無理由退款保證！ <br>
+            ✦ 7 × 24 技術支援保證！ ✦ 永久更新維護保證 ！
+        </h3>
+
+
+        <div id="ContactAKI" class="ContactAKI"><!-- JS _顯示聯莫 --></div>
+    </div>
+
+
+    
+
+    <p class="mokJsApi_copyright">版權</p>
+    <br><br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script>
+        // 动态生成行业解决方案卡片
+        const industries = [
+            "✦ 服飾零售：", "✦ 電商客服：", "✦ 汽車服務", "✦ 餐飲酒吧：",
+            "✦ 教育培訓：", "✦ 跨境貿易：", "✦ 美容健身：", "✦ 技術支援：", "✦ 房產仲介"
+        ];
+        const 行業痛點 = [
+            "尖峰時段諮詢暴增，新客查詢價格/尺寸重複率高。",
+            "跨國時差導致的顧客等待焦慮。",
+            "維修進度查詢需人工對接車間，保養提醒覆蓋率低。",
+            "營業時間外的訂單流失。",
+            "課程諮詢重複性高解答消耗人力。",
+            "多語區顧客跟進困難。",
+            "服務期間無暇立即回應客戶查詢。",
+            "擁有專業技術及熟悉多國語言的人才成本極高。",
+            "重複性房源諮詢效率低下，潛在客戶跟進易遺漏。"
+        ];
+        const 解決方案 = [
+            "客戶發送 '價格' → WS鍠自動推送價目表； '尺寸' → 觸發體型購買建議。",
+            "WS鍠 7 × 24 不間斷服務， '物流' → 自動回覆運單追蹤連結 ； '退換' → 觸發售後服務流程圖。",
+            "輸入車牌號碼 → WS鍠即時推播車輛保養記錄與建議項目。",
+            "非營業時段，WS鍠檢測 '訂餐' 自動回覆線上預訂連結及優惠券。",
+            "'試課' → 寄預約表單；'學費' 觸發 WS鍠 發送課程價目表。",
+            "WS鍠設定多語言應答規則，英文 / 阿拉伯語自動切換回覆內容。",
+            "WS鍠 0.4 秒回饋，為潛在客戶即時提供服務介紹、價目表、預約流程，減少等待時間。",
+            "WS鍠 自動切換語言應答，設定常見問題解答模板，將複雜的問題導向人工客服，減低薪金成本。",
+            "'三房'關鍵字 → WS鍠 自動推送配對房源 ； '租金' 觸發區域租金行情報告（每月自動更新PDF）。"
+        ];
+
+        const solutionsContainer = document.querySelector('.industry-solutions');
+
+        // 使用索引值遍历数组
+        industries.forEach((industry, index) => {
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.innerHTML = `
+                <h3>${industry}</h3>
+                <br>
+                <p>~ ${行業痛點[index]}</p>
+                <div class="highlight" style="margin-top: 1rem">√ ${解決方案[index]}</div>
+            `;
+            solutionsContainer.appendChild(card);
+        });
+
+
+
+
+
+
+
+
+
+
+
+        const 會員類別all = [
+            '✦ 1個月會員','✦ 6個月會員','✦ 12個月會員',
+            '✦ 1個月vip會員','✦ 6個月vip會員','✦ 12個月vip會員'
+        ]
+        const 說明 = [
+            'windows 電腦執行','windows 電腦執行','windows 電腦執行',
+            '直接手機執行','直接手機執行','直接手機執行'
+        ]
+        const 會費 = [
+            '','12,000','24,000',
+            '','18,000','36,000'
+        ]
+        const 優惠會費 = [
+            '2,000','10,800 ','19,200',
+            '3,000','16,200','28,800'
+        ]
+        const 開通會員box = document.querySelector('#開通會員');
+
+        // 使用索引值遍历数组
+        會員類別all.forEach((會員類別, index) => {
+            const 卡 = document.createElement('a');
+            卡.className = 'card 會員卡';
+
+            卡.title = 會員類別;
+            卡.href = "https://64071181.github.io/PayAki/index.html";
+            卡.target = "_blank";
+
+
+            會費原價 = '<br>'
+            if (會費[index] != ''){
+                會費原價 = `<p class="刪除線">$${會費[index]}港元</p>`
+            }
+
+            卡.innerHTML = `
+                <h2>${會員類別}</h2>
+                <br>
+                <p>${說明[index]}</p>
+                ${會費原價}
+                <h3 class="highlight" style="margin-top: 1rem">$${優惠會費[index]}港元</h3>
+            `;
+            開通會員box.appendChild(卡);
+        });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // 滚动动画效果
+        const cards = document.querySelectorAll('.card');
+        window.addEventListener('scroll', () => {
+            cards.forEach(card => {
+                const cardTop = card.getBoundingClientRect().top;
+                if (cardTop < window.innerHeight * 0.8) {
+                    card.style.opacity = 1;
+                    card.style.transform = 'translateY(0)';
+                }
+            });
+        });
+
+        // 初始隐藏卡片
+        cards.forEach(card => {
+            card.style.opacity = 0;
+            card.style.transform = 'translateY(50px)';
+            card.style.transition = 'all 2s cubic-bezier(0.25, 0.1, 0.25, 1)';
+        });
+
+
+
+        function _翻譯(){ 
+            translate.service.use('client.edge'); //設置機器翻譯服務通道，直接客戶端本身，不依賴服務端 。相關說明參考 http://translate.zvo.cn/43086.html
+            translate.execute();//進行翻譯 
+        }
+
+        function Start() {
+            // 顯示聯莫
+            const 聯莫 = ['moksurky@gmail.com','https://wa.me/85264071181/','https://i.meee.com.tw/atcX6QM.png','https://www.instagram.com/moksurky2025/','https://line.me/ti/p/UlSPd7p9zh/','https://www.facebook.com/aki.mok.10/','http://t.me/mokaki/'
+            ];
+            _翻譯()
+            _顯示聯莫(聯莫);
+        }
+
+        琪琪修改()
+
+
+
+
+    </script>
+</body>
+</html>
