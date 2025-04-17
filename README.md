@@ -1,6 +1,6 @@
 與其辛苦搵錢 不如要錢搵你
 
-# 金come 
+# [金come](金come.com)
 
 是一款為企業打造的自動營銷閉環系統
 
@@ -18,7 +18,7 @@
 
 Make money chase you
 
-# 金come
+# [金come](金come.com)
 
 It is an automatic marketing closed-loop system built for enterprises
 
