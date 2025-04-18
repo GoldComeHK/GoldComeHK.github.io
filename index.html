@@ -5,7 +5,304 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>金come</title>
     <style>
-        :root {--metal: linear-gradient(45deg, #e6e9f0 0%, #eef1f5 100%);--water-blue: rgba(64, 156, 255, 0.3);--gold: #D4AF37;}
+        :root {--metal: linear-gradient(45deg, #e6e9f0 0%, #eef1f5 100%);
+            --water-blue: rgba(64, 156, 255, 0.3);--gold: #D4AF37;
+        
+        
+        --金come流程-gold: gold; /* Lighter Gold */
+        --金come流程-gold-dark: #ebebeb; /* Darker Gold */
+        --金come流程-gold-shadow: #ccc; /* Shadow Gold */
+        --金come流程-white: #ffffff;
+        --金come流程-text-dark: #333;
+        --金come流程-bg: #f0f2f5; /* Light background for contrast */
+        --金come流程-metallic-gradient: linear-gradient(145deg, #fffbeb, #fde047, gold);
+        --金come流程-water-gradient: linear-gradient(45deg, rgba(255,255,255,0.1), rgba(253, 224, 71, 0.2), rgba(255,255,255,0.1));
+        }
+
+        
+        
+        #金come流程-container {
+            position: relative; /* Needed for absolute positioning of arrows */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 40px; /* Space between circles */
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            max-width: 1000px;
+            width: 95%;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        #金come流程-title {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: var(--金come流程-gold-dark);
+            text-align: center;
+            margin-bottom: 20px;
+             text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .金come流程-circle {
+            background: var(--金come流程-white);
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            width: 100%;
+            max-width: 800px;
+            position: relative;
+            border: 1px solid var(--金come流程-gold);
+            border-left: 5px solid var(--金come流程-gold-dark);
+             transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .金come流程-circle:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(80, 6, 217, 0.2);
+        }
+
+
+        .金come流程-circle-title {
+            font-size: 1.4em;
+            font-weight: bold;
+            color: var(--金come流程-gold-dark);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--金come流程-gold);
+        }
+
+        .金come流程-functions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            position: relative; /* For arrow positioning */
+        }
+
+        .金come流程-function {
+            background: var(--金come流程-metallic-gradient);
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+             border: 1px solid var(--金come流程-gold-dark);
+             position: relative;
+             overflow: hidden; /* For water effect */
+        }
+        .金come流程-function::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: var(--金come流程-water-gradient);
+            transform: rotate(30deg);
+            animation: 金come流程-water-flow 8s linear infinite;
+            opacity: 0.5;
+            z-index: 1;
+        }
+
+        @keyframes 金come流程-water-flow {
+            0% { transform: rotate(30deg) translateX(-25%); }
+            100% { transform: rotate(30deg) translateX(25%); }
+        }
+
+
+        .金come流程-function-content {
+            position: relative;
+            z-index: 2;
+        }
+
+
+        .金come流程-function-title {
+            font-size: 1.1em;
+            font-weight: bold;
+            color: var(--金come流程-gold-shadow);
+            margin-bottom: 8px;
+        }
+
+        .金come流程-function-desc {
+            font-size: 0.9em;
+            color: var(--金come流程-text-dark);
+             line-height: 1.4;
+        }
+
+         /* Arrows */
+        .金come流程-svg-arrows {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none; /* Allow clicks to pass through */
+            overflow: visible; /* Ensure arrows aren't clipped */
+            z-index: 0; /* Behind content but above background */
+        }
+
+        .金come流程-arrow {
+            stroke: var(--金come流程-gold-dark);
+            stroke-width: 2.5;
+            fill: none;
+            marker-end: url(#金come流程-arrowhead);
+            stroke-dasharray: 8; /* Creates dashed effect */
+            animation: 金come流程-dash-flow 0.8s linear infinite;
+             opacity: 0.8;
+        }
+
+         @keyframes 金come流程-dash-flow {
+            to {
+                stroke-dashoffset: -16; /* Twice the dash array */
+            }
+        }
+
+        /* --- Specific Arrow Positioning --- */
+        /* These need careful adjustment based on final layout */
+        /* Using JavaScript might be more robust for complex dynamic layouts */
+
+        /* Arrows within Circle 1 */
+        #金come流程-arrow-1-1_1-2 { top: 50%; left: 100%; transform: translate(-5px, -50%); } /* Example, might need JS */
+
+         /* Arrow between Circles 1 and 2 */
+        #金come流程-arrow-c1_c2 {
+             position: absolute;
+             left: 50%;
+             transform: translateX(-50%);
+             bottom: -35px; /* Position between circles */
+             width: 3px; /* Vertical line */
+             height: 30px;
+             background: var(--金come流程-gold-dark);
+        }
+         #金come流程-arrow-c1_c2::after { /* Arrowhead */
+             content: '';
+             position: absolute;
+             left: 50%;
+             bottom: -8px;
+             width: 0;
+             height: 0;
+             border-left: 6px solid transparent;
+             border-right: 6px solid transparent;
+             border-top: 8px solid var(--金come流程-gold-dark);
+             transform: translateX(-50%);
+         }
+
+        /* Arrow between Circles 2 and N */
+         #金come流程-arrow-c2_cN {
+             position: absolute;
+             left: 50%;
+             transform: translateX(-50%);
+             bottom: -35px;
+             width: 3px;
+             height: 30px;
+             background: var(--金come流程-gold-dark);
+         }
+          #金come流程-arrow-c2_cN::after { /* Arrowhead */
+              content: '';
+              position: absolute;
+              left: 50%;
+              bottom: -8px;
+              width: 0;
+              height: 0;
+              border-left: 6px solid transparent;
+              border-right: 6px solid transparent;
+              border-top: 8px solid var(--金come流程-gold-dark);
+              transform: translateX(-50%);
+          }
+
+
+        /* Circle N specific styles */
+        #金come流程-circleN {
+            text-align: center;
+            border-left-color: var(--金come流程-gold); /* Slightly different emphasis */
+        }
+        .金come流程-n-content {
+             font-size: 1.1em;
+             color: var(--金come流程-text-dark);
+             margin-bottom: 20px;
+             font-style: italic;
+        }
+
+        /* Looping Arrow (SVG implementation) */
+        #金come流程-loop-arrow-path {
+             /* Adjust d attribute via JS or pre-calculate */
+             stroke-dasharray: 10;
+             animation: 金come流程-dash-flow 1s linear infinite;
+        }
+
+        /* Final step */
+        #金come流程-final {
+            background: var(--金come流程-gold-dark);
+            color: var(--金come流程-white);
+            padding: 15px 30px;
+            border-radius: 50px; /* Pill shape */
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-top: 10px; /* Space after loop/arrow */
+            box-shadow: 0 5px 15px gold;
+             text-align: center;
+             position: relative; /* For arrow target */
+             z-index: 5;
+        }
+
+        /* Arrow from Circle N to Final (SVG) */
+         #金come流程-final-arrow-path {
+             stroke-dasharray: 8;
+             animation: 金come流程-dash-flow 0.8s linear infinite;
+         }
+
+
+         /* Media Queries for basic responsiveness */
+        @media (max-width: 768px) {
+             #金come流程-title {
+                 font-size: 1.5em;
+             }
+             .金come流程-circle-title {
+                 font-size: 1.2em;
+             }
+             .金come流程-functions {
+                 grid-template-columns: 1fr 1fr; /* Stack to 2 columns */
+                 gap: 15px;
+             }
+             .金come流程-function {
+                 padding: 12px;
+             }
+             .金come流程-function-title {
+                 font-size: 1em;
+             }
+             .金come流程-function-desc {
+                 font-size: 0.85em;
+             }
+             #金come流程-container {
+                 padding: 20px;
+                 gap: 30px;
+             }
+             #金come流程-final {
+                 font-size: 1.1em;
+                 padding: 12px 25px;
+             }
+
+        }
+        @media (max-width: 480px) {
+            .金come流程-functions {
+                 grid-template-columns: 1fr; /* Stack to 1 column */
+             }
+             #金come流程-title {
+                 font-size: 1.3em;
+             }
+             .金come流程-circle {
+                 padding: 20px;
+             }
+             #金come流程-final {
+                 font-size: 1em;
+                 padding: 10px 20px;
+             }
+        }
+
+
+
+
+
 
         * {margin: 0;padding: 0;box-sizing: border-box;font-family: 'Segoe UI', Arial, sans-serif;}
 
@@ -80,6 +377,80 @@
         
         .刪除線{text-decoration: solid line-through gold 4px;}
 
+
+
+
+        
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+        
+        .gallery-item {
+            flex: 1 1 calc(25% - 10px);
+            max-width: calc(25% - 10px);
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        .gallery-item:hover {
+            transform: scale(1.02);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 5px;
+        }
+        
+        /* 彈出層樣式 */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+        }
+        
+        .modal-content img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        /* 響應式設計 */
+        @media (max-width: 768px) {
+            .gallery-item {
+                flex: 1 1 calc(50% - 10px);
+                max-width: calc(50% - 10px);
+            }
+        }
+
+
+
     </style>
 
 
@@ -147,59 +518,248 @@
     <div class="container">
         <header>
             <h1><a href="../"><b id="_我司名">金come</b></a></h1>
-            <h2>您的WhatsApp AI應答助手</h2>
+            <h2>💰 與其辛苦搵錢，不如要錢搵你！</h2>
             <p id="更新日期">202504160205</p>
         </header>
 
-        <h3>您是跨境電商 ? <br><br>
-            您有使用WhatsApp做商務溝通工具 ? <br><br>
-            您無法 7 × 24 回覆客戶的查詢信息 ? <br><br>
-            你需要 W S 鍠 ! 
-        </h3>
+        <h2>
+            金come 
+            係一款專為企業打造嘅全自動營銷閉環系統，整合 AI、數據、自動化工具，幫你全天候搵客、談客、成交、回覆客戶，打造自動賺錢機器！
+        </h2>
+        <br>
+        <P>
+            4大功能包括：<br>
+            &nbsp;&nbsp;搵客鍠&nbsp;&nbsp;(收集數據)<br>
+            &nbsp;&nbsp;文案鍠&nbsp;&nbsp;(文案生成)<br>
+            &nbsp;&nbsp;促銷鍠&nbsp;&nbsp;(要約客戶)<br>
+            &nbsp;&nbsp;金come&nbsp;&nbsp;(回饋客戶)
+        </p>
 
         <div style="text-align: center">
-            <a href="https://github.com/64071181/64071181.github.io/raw/main/ws/ws鍠.exe" download="ws鍠.exe" class="cta-button">免費下載 ws鍠</a>
+            <a href="https://wa.me/85264071181/?text=莫生我要查詢金come系統/" class="cta-button">免費獲取金come系統</a>
         </div>
 
-        <iframe width="100%" height="315" src="https://www.youtube.com/embed/dBTxzLg-eFA?si=PTpM-9-b3_jeVNB6" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+
+        <div class="gallery">
+            <div class="gallery-item">
+                <img src="img/1.jpeg" alt="圖片1">
+            </div>
+            <div class="gallery-item">
+                <img src="img/2.jpeg" alt="圖片1">
+            </div>
+            <div class="gallery-item">
+                <img src="img/3.jpeg" alt="圖片1">
+            </div>
+            <div class="gallery-item">
+                <img src="img/4.jpeg" alt="圖片1">
+            </div>
+            <div class="gallery-item">
+                <img src="img/5.jpeg" alt="圖片1">
+            </div>
+
+
+
+
+        <iframe class="gallery-item" src="https://www.youtube.com/embed/dBTxzLg-eFA?si=PTpM-9-b3_jeVNB6" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+
+        <iframe class="gallery-item" src="https://www.youtube.com/embed/r4xgcOwEHhw?si=S1GPJhKFJYOvYmeL" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+    </div>
+    <!-- 圖片放大彈出層 -->
+    <div class="modal" id="imageModal">
+        <span class="close">&times;</span>
+        <div class="modal-content">
+            <img id="expandedImage" src="" alt="放大圖片">
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <div id="金come流程-container" class="card">
+                <h2 id="金come流程-title">金come 4大功能，為您打造完美自動賺錢閉環：</h2>
+        
+                <!-- SVG Definitions for Arrows -->
+                <svg width="0" height="0" style="position:absolute;">
+                    <defs>
+                        <marker id="金come流程-arrowhead" markerWidth="10" markerHeight="7"
+                        refX="0" refY="3.5" orient="auto" markerUnits="strokeWidth">
+                          <polygon points="0 0, 10 3.5, 0 7" fill="var(--金come流程-gold-dark)" />
+                        </marker>
+                         <marker id="金come流程-arrowhead-loop" markerWidth="10" markerHeight="7"
+                        refX="0" refY="3.5" orient="auto" markerUnits="strokeWidth">
+                          <polygon points="0 0, 10 3.5, 0 7" fill="var(--金come流程-gold)" />
+                        </marker>
+                    </defs>
+                </svg>
+        
+                <!-- Circle 1 -->
+                <div class="金come流程-circle" id="金come流程-circle1">
+                    <div class="金come流程-circle-title">第1圈： 獲取新客戶</div>
+                    <div class="金come流程-functions">
+                        <div class="金come流程-function" id="金come流程-func1-1">
+                            <div class="金come流程-function-content">
+                                <div class="金come流程-function-title">搵客鍠</div>
+                                <div class="金come流程-function-desc">自動按地區、依關鍵收集客戶的聯絡資料</div>
+                            </div>
+                        </div>
+                        <div class="金come流程-function" id="金come流程-func1-2">
+                             <div class="金come流程-function-content">
+                                <div class="金come流程-function-title">文案鍠</div>
+                                <div class="金come流程-function-desc">ai自動按地區、行業、文化生成促銷文章或影片</div>
+                            </div>
+                        </div>
+                        <div class="金come流程-function" id="金come流程-func1-3">
+                            <div class="金come流程-function-content">
+                                <div class="金come流程-function-title">促銷鍠</div>
+                                <div class="金come流程-function-desc">自動發送促銷信息給客戶</div>
+                            </div>
+                        </div>
+                        <div class="金come流程-function" id="金come流程-func1-4">
+                            <div class="金come流程-function-content">
+                                <div class="金come流程-function-title">金come</div>
+                                <div class="金come流程-function-desc">自動秒覆新客戶查詢</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Down Arrow Indicator -->
+                    <div id="金come流程-arrow-c1_c2"></div>
+                </div>
+        
+        
+                <!-- Circle 2 -->
+                <div class="金come流程-circle" id="金come流程-circle2">
+                    <div class="金come流程-circle-title">第2圈： 建立客戶關係</div>
+                    <div class="金come流程-functions">
+                         <div class="金come流程-function" id="金come流程-func2-1">
+                            <div class="金come流程-function-content">
+                                <div class="金come流程-function-title">搵客鍠</div>
+                                <div class="金come流程-function-desc">按成交進度篩選分類客戶群組</div>
+                             </div>
+                        </div>
+                        <div class="金come流程-function" id="金come流程-func2-2">
+                             <div class="金come流程-function-content">
+                                <div class="金come流程-function-title">文案鍠</div>
+                                <div class="金come流程-function-desc">ai按客戶分類生成客戶關係文章或影片</div>
+                            </div>
+                        </div>
+                        <div class="金come流程-function" id="金come流程-func2-3">
+                             <div class="金come流程-function-content">
+                                <div class="金come流程-function-title">促銷鍠</div>
+                                <div class="金come流程-function-desc">定期發送品牌資訊建立客戶熟悉感</div>
+                            </div>
+                        </div>
+                        <div class="金come流程-function" id="金come流程-func2-4">
+                            <div class="金come流程-function-content">
+                                <div class="金come流程-function-title">金come</div>
+                                <div class="金come流程-function-desc">自動秒覆查詢</div>
+                            </div>
+                        </div>
+                    </div>
+                     <!-- Down Arrow Indicator -->
+                     <div id="金come流程-arrow-c2_cN"></div>
+                </div>
+                <!-- Final Step -->
+                <div id="金come流程-final">成交</div>
+        
+        
+                <!-- SVG Layer for Arrows -->
+                <svg class="金come流程-svg-arrows" id="金come流程-arrow-canvas">
+                     <!-- Arrows for Circle 1 (Example - precise coords needed) -->
+                    <line class="金come流程-arrow" id="金come流程-arrow-1-1_1-2" x1="0" y1="0" x2="0" y2="0" />
+                    <line class="金come流程-arrow" id="金come流程-arrow-1-2_1-3" x1="0" y1="0" x2="0" y2="0" />
+                    <line class="金come流程-arrow" id="金come流程-arrow-1-3_1-4" x1="0" y1="0" x2="0" y2="0" />
+        
+                    <!-- Arrows for Circle 2 (Example - precise coords needed) -->
+                    <line class="金come流程-arrow" id="金come流程-arrow-2-1_2-2" x1="0" y1="0" x2="0" y2="0" />
+                    <line class="金come流程-arrow" id="金come流程-arrow-2-2_2-3" x1="0" y1="0" x2="0" y2="0" />
+                    <line class="金come流程-arrow" id="金come流程-arrow-2-3_2-4" x1="0" y1="0" x2="0" y2="0" />
+        
+                    <!-- Loop Arrow from N back to 2 -->
+                    <path class="金come流程-arrow" id="金come流程-loop-arrow-path" d="M0,0 Q0,0 0,0" style="stroke: var(--金come流程-gold); marker-end: url(#金come流程-arrowhead-loop);" />
+        
+                     <!-- Arrow from N to Final -->
+                     <line class="金come流程-arrow" id="金come流程-final-arrow-path" x1="0" y1="0" x2="0" y2="0" />
+                </svg>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
         <div class="card">
-            WS鍠 是一款專為 WhatsApp 設計的自動回覆程式，讓您無需手動操作，即可輕鬆管理您的訊息。<br><br>
-            透過設定觸發詞，當客戶發送指定訊息時，程式會自動回覆預設的內容，，無需人工干預，24小時即時服務。
-            <br><br>
-            
-        </div>
-
-        <div class="card">
-            <h2>▶ WS鍠 亮點</h2>
+            <h2>▶ 金come 亮點</h2>
             <ul class="feature-list">
-                <li><span class="highlight">√ 省時省力：</span>ai 自動處理 WhatsApp 訊息，支援文字 / 圖片 / 檔案多重格式回應 !</li>
-                <li><span class="highlight">√ 秒速應答：</span>透過觸發關鍵字，自動辨識客戶需求，0.4 秒極速回饋 !</li>
-                <li><span class="highlight">√ 使用簡單：</span>執行程式 → 設定回覆 → 登錄whatsapp → 自動執行 !</li>
-                <li><span class="highlight">√ 持久運作：</span>7 × 24 不間斷服務 !</li>
+                <li><span class="highlight">√ 自動化數據收集</span><br>
+                    自動根據地區、行業、關鍵字，全天候為你搵新客戶。<br>
+                    無需人手 cold call，金come 幫你每日主動出擊！
+                </li>
+                <li><span class="highlight">√ AI 智能文案生成</span><br>
+                    自動根據行業、文化、語氣、受眾，產出具吸引力文章與影片腳本。<br>
+                    節省時間 + 專業級內容，令推廣事半功倍。
+                </li>
+                <li><span class="highlight">√ 自動促銷推送</span><br>
+                    自動向潛在客戶發送促銷內容、優惠、邀約，提升轉化率。<br>
+                    支援 WhatsApp、Email。
+                </li>
+                <li><span class="highlight">√ 秒覆 AI 客服</span><br>
+                    自動即時回應客戶查詢，增加專業感與成交率。支援多語言。<br>
+                    7 × 24 不間斷服務 !
+                </li>
             </ul>
         </div>
 
         <div style="text-align: center">
-            <a href="https://github.com/64071181/64071181.github.io/raw/main/ws/ws鍠.exe" download="ws鍠.exe" class="cta-button">★ 立即免費體驗 WS鍠 ai 自動回复的魅力 ★</a>
+            <a href="https://wa.me/85264071181/?text=莫生我要查詢金come系統" class="cta-button">★ 立即免費體驗 獲取金come系統 ★</a>
         </div>
 
 
-        <h2 style="text-align: center; margin: 3rem 0">行解決方案範例</h2>
+        <h2 style="text-align: center; margin: 3rem 0">行業解決方案：<br>
+            金come 如何幫助唔同行業優化 B2B 營銷流程？</h2>
         <div class="industry-solutions">
             <!-- 行业解决方案卡片会自动生成 -->
         </div>
 
 
-        <h3>WS鍠 !<br><br>
+        <h3>金come !<br><br>
             滿足您企業的需求 !<br><br>
             提升您工作效率、減少人力成本 !<br><br>
             並實現無縫優質的客戶互動 !</h3>
 
 
         <div style="text-align: center">
-            <a href="https://github.com/64071181/64071181.github.io/raw/main/ws/ws鍠.exe" download="ws鍠.exe" class="cta-button">★ 立即下載 WS鍠 免費體驗 WhatsApp 自動回覆！ ★</a>
+            <a href="https://wa.me/85264071181/?text=莫生我要查詢金come系統/" class="cta-button">★ 立即下載 金come 免費體驗 自動營銷閉環系統！ ★</a>
         </div>
 
 
@@ -263,32 +823,34 @@
 
     <script>
         // 动态生成行业解决方案卡片
+        // 動態生成 B2B 行業解決方案卡片
         const industries = [
-            "✦ 服飾零售：", "✦ 電商客服：", "✦ 汽車服務", "✦ 餐飲酒吧：",
-            "✦ 教育培訓：", "✦ 跨境貿易：", "✦ 美容健身：", "✦ 技術支援：", "✦ 房產仲介"
+            "✦ 批發貿易：", "✦ 裝修工程：", "✦ 教育顧問：", "✦ 美容供應：",
+            "✦ 餐飲設備商：", "✦ IT方案商：", "✦ 企業顧問：", "✦ 商務印刷：", "✦ B2B電商平台"
         ];
         const 行業痛點 = [
-            "尖峰時段諮詢暴增，新客查詢價格/尺寸重複率高。",
-            "跨國時差導致的顧客等待焦慮。",
-            "維修進度查詢需人工對接車間，保養提醒覆蓋率低。",
-            "營業時間外的訂單流失。",
-            "課程諮詢重複性高解答消耗人力。",
-            "多語區顧客跟進困難。",
-            "服務期間無暇立即回應客戶查詢。",
-            "擁有專業技術及熟悉多國語言的人才成本極高。",
-            "重複性房源諮詢效率低下，潛在客戶跟進易遺漏。"
+            "難以持續接觸新客，依賴舊客戶與人脈圈，推廣渠道單一。",
+            "與設計公司、建材商、包工頭溝通耗時，資料傳遞效率低。",
+            "中小學、補習社、企業 HR 資源分散，找客成本高。",
+            "美容店東常忙於營運，難及時回覆供應商合作邀約。",
+            "新開餐廳頻繁，客戶流動性高，難追蹤需求與推廣成效。",
+            "企業經常比較多間服務商，難即時抓住商機窗口。",
+            "潛在企業客戶決策鏈長，需持續提供價值感內容。",
+            "傳統地推效率低，無法量化成效及有效篩選潛在客戶。",
+            "B端用戶多資訊查詢集中在白天，非辦公時間流失查詢。"
         ];
         const 解決方案 = [
-            "客戶發送 '價格' → WS鍠自動推送價目表； '尺寸' → 觸發體型購買建議。",
-            "WS鍠 7 × 24 不間斷服務， '物流' → 自動回覆運單追蹤連結 ； '退換' → 觸發售後服務流程圖。",
-            "輸入車牌號碼 → WS鍠即時推播車輛保養記錄與建議項目。",
-            "非營業時段，WS鍠檢測 '訂餐' 自動回覆線上預訂連結及優惠券。",
-            "'試課' → 寄預約表單；'學費' 觸發 WS鍠 發送課程價目表。",
-            "WS鍠設定多語言應答規則，英文 / 阿拉伯語自動切換回覆內容。",
-            "WS鍠 0.4 秒回饋，為潛在客戶即時提供服務介紹、價目表、預約流程，減少等待時間。",
-            "WS鍠 自動切換語言應答，設定常見問題解答模板，將複雜的問題導向人工客服，減低薪金成本。",
-            "'三房'關鍵字 → WS鍠 自動推送配對房源 ； '租金' 觸發區域租金行情報告（每月自動更新PDF）。"
+            "金come 自動建立商戶名單，定期推送最新貨品或批發價單，並設秒覆詢價系統。",
+            "裝修公司上傳案例圖集 → 金come 自動回覆『設計報價』、『材質說明』等對話模組。",
+            "目標對象輸入『顧問合作』 → 金come 自動寄出方案簡報 + 預約連結。",
+            "設定『合作供應』關鍵詞 → 金come 自動推送供應品類清單、合作條件與 WhatsApp 聯絡人。",
+            "新客輸入『爐具』 → 金come 發送產品圖 + 尺寸規格 + 報價單 PDF；『安裝』 → 發送流程教學影片。",
+            "'試用方案' 觸發方案比較表單，系統根據客戶行業推送成功案例鏈結。",
+            "金come 根據潛在客戶開信與點擊行為自動分類興趣，定期推播專欄文章與案例分析。",
+            "掃街收集名片資料 → 匯入金come 自動發送品牌介紹與優惠邀約，並設關鍵詞秒覆。",
+            "非營業時間輸入『採購』 → 金come 自動推送線上產品型錄與聯絡窗口。"
         ];
+
 
         const solutionsContainer = document.querySelector('.industry-solutions');
 
@@ -309,6 +871,75 @@
 
 
 
+// Function to draw arrows using SVG
+        function 金come流程DrawArrows() {
+            const svgCanvas = document.getElementById('金come流程-arrow-canvas');
+            const container = document.getElementById('金come流程-container');
+            const containerRect = container.getBoundingClientRect();
+
+             // Helper to get element position relative to the SVG canvas
+            const getElementCenter = (elementId) => {
+                const elem = document.getElementById(elementId);
+                if (!elem) return { x: 0, y: 0 };
+                const elemRect = elem.getBoundingClientRect();
+                // Calculate center relative to the container top-left
+                const x = elemRect.left + elemRect.width / 2 - containerRect.left;
+                const y = elemRect.top + elemRect.height / 2 - containerRect.top;
+                return { x, y };
+            };
+             const getElementEdge = (elementId, side = 'right') => {
+                 const elem = document.getElementById(elementId);
+                 if (!elem) return { x: 0, y: 0 };
+                 const elemRect = elem.getBoundingClientRect();
+                 const x = side === 'left' ? elemRect.left - containerRect.left : elemRect.right - containerRect.left;
+                 const y = elemRect.top + elemRect.height / 2 - containerRect.top;
+                 return { x, y };
+             };
+              const getElementVerticalEdge = (elementId, side = 'bottom') => {
+                 const elem = document.getElementById(elementId);
+                 if (!elem) return { x: 0, y: 0 };
+                 const elemRect = elem.getBoundingClientRect();
+                 const x = elemRect.left + elemRect.width / 2 - containerRect.left;
+                 const y = side === 'top' ? elemRect.top - containerRect.top : elemRect.bottom - containerRect.top;
+                 return { x, y };
+            };
+
+
+             // --- Draw Arrows within Circle 1 ---
+             // These depend heavily on the grid layout. Simple horizontal arrows assumed.
+             // Adjust offsets (+/- pixels) as needed for visual alignment
+             const func1_1_pos = getElementEdge('金come流程-func1-1', 'right');
+             const func1_2_pos_left = getElementEdge('金come流程-func1-2', 'left');
+             const func1_2_pos_right = getElementEdge('金come流程-func1-2', 'right');
+             const func1_3_pos_left = getElementEdge('金come流程-func1-3', 'left');
+             const func1_3_pos_right = getElementEdge('金come流程-func1-3', 'right');
+             const func1_4_pos_left = getElementEdge('金come流程-func1-4', 'left');
+
+             // Check if elements are on the same row before drawing horizontal arrows
+             const arrow1_1_2 = document.getElementById('金come流程-arrow-1-1_1-2');
+             if (Math.abs(func1_1_pos.y - func1_2_pos_left.y) < 10) { // Allow small vertical difference
+                 arrow1_1_2.setAttribute('x1', func1_1_pos.x + 5);
+                 arrow1_1_2.setAttribute('y1', func1_1_pos.y);
+                 arrow1_1_2.setAttribute('x2', func1_2_pos_left.x - 5);
+                 arrow1_1_2.setAttribute('y2', func1_2_pos_left.y);
+             } else { arrow1_1_2.style.display = 'none'; } // Hide if not aligned
+
+             const arrow1_2_3 = document.getElementById('金come流程-arrow-1-2_1-3');
+              if (Math.abs(func1_2_pos_right.y - func1_3_pos_left.y) < 10) {
+                 arrow1_2_3.setAttribute('x1', func1_2_pos_right.x + 5);
+                 arrow1_2_3.setAttribute('y1', func1_2_pos_right.y);
+                 arrow1_2_3.setAttribute('x2', func1_3_pos_left.x - 5);
+                 arrow1_2_3.setAttribute('y2', func1_3_pos_left.y);
+              } else { arrow1_2_3.style.display = 'none'; }
+
+             const arrow1_3_4 = document.getElementById('金come流程-arrow-1-3_1-4');
+              if (Math.abs(func1_3_pos_right.y - func1_4_pos_left.y) < 10) {
+                 arrow1_3_4.setAttribute('x1', func1_3_pos_right.x + 5);
+                 arrow1_3_4.setAttribute('y1', func1_3_pos_right.y);
+                 arrow1_3_4.setAttribute('x2', func1_4_pos_left.x - 5);
+                 arrow1_3_4.setAttribute('y2', func1_4_pos_left.y);
+              } else { arrow1_3_4.style.display = 'none'; }
+            }
 
 
 
@@ -324,12 +955,12 @@
             '直接手機執行','直接手機執行','直接手機執行'
         ]
         const 會費 = [
-            '','12,000','24,000',
-            '','18,000','36,000'
+            '','30,000','60,000',
+            '','36,000','72,000'
         ]
         const 優惠會費 = [
-            '2,000','10,800 ','19,200',
-            '3,000','16,200','28,800'
+            '5,000','27,000 ','48,000',
+            '6,000','32,400','57,600'
         ]
         const 開通會員box = document.querySelector('#開通會員');
 
@@ -360,17 +991,39 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
+        // 獲取所有圖片元素
+        const galleryItems = document.querySelectorAll('.gallery-item img');
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('expandedImage');
+        const closeBtn = document.querySelector('.close');
+        
+        // 為每個圖片添加點擊事件
+        galleryItems.forEach(item => {
+            item.addEventListener('click', function() {
+                modal.style.display = 'flex';
+                modalImg.src = this.src;
+                modalImg.alt = this.alt;
+            });
+        });
+        
+        // 關閉彈出層
+        closeBtn.addEventListener('click', function() {
+            modal.style.display = 'none';
+        });
+        
+        // 點擊彈出層背景也關閉
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+        
+        // 按ESC鍵關閉彈出層
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && modal.style.display === 'flex') {
+                modal.style.display = 'none';
+            }
+        });
 
 
 
