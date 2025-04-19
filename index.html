@@ -40,18 +40,18 @@
         }
         .金come流程-arrow {stroke: var(--金come流程-gold-dark);stroke-width: 2.5;fill: none;marker-end: url(#金come流程-arrowhead);stroke-dasharray: 8; /* Creates dashed effect */
             animation: 金come流程-dash-flow 0.8s linear infinite; opacity: 0.8;  }
-
+ 
          @keyframes 金come流程-dash-flow {to {    stroke-dashoffset: -16; /* Twice the dash array */
             }
         }
-
+ 
         /* --- Specific Arrow Positioning --- */
         /* These need careful adjustment based on final layout */
         /* Using JavaScript might be more robust for complex dynamic layouts */
-
+ 
         /* Arrows within Circle 1 */
         #金come流程-arrow-1-1_1-2 { top: 50%; left: 100%; transform: translate(-5px, -50%); } /* Example, might need JS */
-
+ 
          /* Arrow between Circles 1 and 2 */
         #金come流程-arrow-c1_c2 { position: absolute; left: 50%; transform: translateX(-50%); bottom: -35px; /* Position between circles */
              width: 3px; /* Vertical line */
@@ -59,35 +59,35 @@
         #金come流程-arrow-c1_c2::after { /* Arrowhead */
             content: ''; position: absolute; left: 50%; bottom: -8px; width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-top: 8px solid var(--金come流程-gold-dark); transform: translateX(-50%);
         }
-
+ 
         /* Arrow between Circles 2 and N */
         #金come流程-arrow-c2_cN { position: absolute; left: 50%; transform: translateX(-50%); bottom: -35px; width: 3px; height: 30px; background: var(--金come流程-gold-dark);
         }
         #金come流程-arrow-c2_cN::after { /* Arrowhead */
             content: '';  position: absolute;  left: 50%;  bottom: -8px;  width: 0;  height: 0;  border-left: 6px solid transparent;  border-right: 6px solid transparent;  border-top: 8px solid var(--金come流程-gold-dark);  transform: translateX(-50%);
         }
-
-
+ 
+ 
         /* Circle N specific styles */
         #金come流程-circleN {text-align: center;border-left-color: var(--金come流程-gold); /* Slightly different emphasis */
         }
         .金come流程-n-content { font-size: 1.1em; color: var(--金come流程-text-dark); margin-bottom: 20px; font-style: italic;  }
-
+ 
         /* Looping Arrow (SVG implementation) */
         #金come流程-loop-arrow-path { /* Adjust d attribute via JS or pre-calculate */
             stroke-dasharray: 10; animation: 金come流程-dash-flow 1s linear infinite;  }
-
+ 
         /* Final step */
         #金come流程-final {background: var(--金come流程-gold-dark);color: var(--金come流程-white);padding: 15px 30px;border-radius: 50px; /* Pill shape */
             font-size: 1.3em;font-weight: bold;margin-top: 10px; /* Space after loop/arrow */
             box-shadow: 0 5px 15px gold; text-align: center; position: relative; /* For arrow target */
             z-index: 5;  
         }
-
+ 
         /* Arrow from Circle N to Final (SVG) */
         #金come流程-final-arrow-path { stroke-dasharray: 8; animation: 金come流程-dash-flow 0.8s linear infinite;}
-
-
+ 
+ 
          /* Media Queries for basic responsiveness */
         @media (max-width: 768px) { #金come流程-title {     font-size: 1.5em; }
             .金come流程-circle-title {     font-size: 1.2em; }
@@ -114,7 +114,7 @@
         @keyframes flow {  0% { background-position: 0 0; }
             100% { background-position: 200% 0; }
         }
-
+ 
         .container {max-width: 1200px;margin: 0 auto;padding: 2rem;position: relative;}
         header {text-align: center;padding: 4rem 0;background: var(--metal);background-clip: text;-webkit-text-fill-color: #fff;position: relative;}
         h1 {font-size: 3.5rem;margin-bottom: 1rem;text-shadow: 0 0 15px gold;}
@@ -126,7 +126,7 @@
             float 3s ease-in-out infinite,metalShine 4s linear infinite;}
         .cta-button {display: inline-block;padding: 1rem 2rem;background: linear-gradient(45deg, #203a43 0%, #2c5364 50%, #203a43 100%);border: 1px solid var(--gold);border-radius: 30px;color: var(--gold);text-decoration: none;font-weight: bold;transition: all 0.3s;margin: 2rem 0;position: relative;overflow: hidden;animation: 
                 float 3s ease-in-out infinite,metalShine 4s linear infinite;}
-
+ 
         /* 水中浮动效果 */
         @keyframes float {0%, 100% {    transform: translateY(0) rotate(1deg);}
             33% {    transform: translateY(-4px) rotate(-0.5deg);}
@@ -151,10 +151,10 @@
         @media (max-width: 768px) {.container {padding: 1rem; }
             h1 {font-size: 2.5rem; }
         }
-
+ 
         .會員卡{opacity: 1; transform: translateY(0px); transition: 2s cubic-bezier(0.25, 0.1, 0.25, 1);}
         .刪除線{text-decoration: solid line-through gold 4px;}
-
+ 
         .gallery {display: flex;flex-wrap: wrap;gap: 10px;justify-content: center;  }
         .gallery-item {flex: 1 1 calc(25% - 10px);max-width: calc(25% - 10px);cursor: pointer;transition: transform 0.3s;  }
         .gallery-item:hover {transform: scale(1.02);  }
@@ -164,72 +164,72 @@
         .modal-content {max-width: 90%;max-height: 90%;  }        
         .modal-content img {width: 100%;height: auto;display: block;  }        
         .close {position: absolute;top: 20px;right: 30px;color: white;font-size: 40px;font-weight: bold;cursor: pointer;  }
-
+ 
         /* 響應式設計 */
         @media (max-width: 768px) {.gallery-item {    flex: 1 1 calc(50% - 10px);    max-width: calc(50% - 10px);}
         }
     </style>
-
-
+ 
+ 
   <!-- ws icon https://www.thinkcmf.com/font/font_awesome/icons.html -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
   <script src="https://GoldComeHK.github.io/mokJsapi/a.js">//琪琪修改</script>
   <script src="https://cdn.staticfile.net/translate.js/3.1.7/translate.js">// 翻譯 放最後</script>
-
-
+ 
+ 
 </head>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
 <body>
     <samp id="莫生查詢" style="display: none;">莫生我要查詢金come</samp>
-
-
+ 
+ 
     <div class="water-flow"></div>
     
     <div class="container">
@@ -238,26 +238,28 @@
             <h2>💰 與其辛苦搵錢，不如要錢搵你！</h2>
             <p id="更新日期">202504160205</p>
         </header>
-
-        <h2>
-            金come 
-            係一款專為企業打造嘅全自動營銷閉環系統，整合AI數據、自動化工具，幫你全天候搵客、創作、建立客戶關係達致成交！打造你的自動賺錢機器！
-        </h2>
+ 
+        <h2><b id="_我司名"></b></h2>
+        <p>係一款專為企業打造嘅全自動營銷閉環系統，<br>
+            整合人工智慧、自動化工具。<br>
+            無論你係中小企業或創業者，<br>
+            <b id="_我司名"></b>都可幫你 7*24 搵客、創作、建立客戶關係..達致成交！<br>
+            <b id="_我司名"></b>就是你的自動賺錢機器！</p>  
         <br>
         <P>
-            4大功能包括：<br>
-            &nbsp;&nbsp;搵客鍠&nbsp;&nbsp;(收集數據)<br>
-            &nbsp;&nbsp;文案鍠&nbsp;&nbsp;(文案生成)<br>
-            &nbsp;&nbsp;促銷鍠&nbsp;&nbsp;(要約客戶)<br>
-            &nbsp;&nbsp;客服鍠&nbsp;&nbsp;(回饋客戶)
+            <b id="_我司名"></b> 4大功能：<br>
+              搵客鍠  (收集數據)<br>
+              文案鍠  (文案生成)<br>
+              促銷鍠  (要約客戶)<br>
+              客服鍠  (回饋客戶)
         </p>
-
+ 
         <div style="text-align: center">
             <a href="https://wa.me/85264071181/?text=莫生我要查詢金come系統/" class="cta-button">免費獲取金come系統</a>
         </div>
-
-
-
+ 
+ 
+ 
         <div class="gallery">
             <div class="gallery-item">
                 <img src="img/1.jpeg" alt="圖片1">
@@ -274,40 +276,40 @@
             <div class="gallery-item">
                 <img src="img/5.jpeg" alt="圖片1">
             </div>
-
-
-
-
+ 
+ 
+ 
+ 
         <iframe class="gallery-item" src="https://www.youtube.com/embed/dBTxzLg-eFA?si=PTpM-9-b3_jeVNB6" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-
-
+ 
+ 
         <iframe class="gallery-item" src="https://www.youtube.com/embed/r4xgcOwEHhw?si=S1GPJhKFJYOvYmeL" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-
+ 
     </div>
     <!-- 圖片放大彈出層 -->
     <div class="modal" id="imageModal">
-        <span class="close">&times;</span>
+        <span class="close">×</span>
         <div class="modal-content">
             <img id="expandedImage" src="" alt="放大圖片">
         </div>
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
         <div id="金come流程-container" class="card">
                 <h2 id="金come流程-title">金come 4大功能，為您打造完美自動賺錢閉環：</h2>
         
@@ -414,27 +416,27 @@
                      <line class="金come流程-arrow" id="金come流程-final-arrow-path" x1="0" y1="0" x2="0" y2="0" />
                 </svg>
         </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
         <div class="card">
             <h2>▶ 金come 四大優勢</h2>
             <ul class="feature-list">
@@ -449,96 +451,96 @@
                     實時追蹤客戶進度，從獲客到成交全程透明化管理！
                 </li>
                 <li><span class="highlight">√ 彈性整合</span><br>
-                    適用電商、零售、服務業等多種產業，量身打造您的行銷閉環！  
+                    適用電商、零售、服務業等多種產業，量身打造您的行銷閉環！  
                 </li>
             </ul>
         </div>
-
-
-
-
-
+ 
+ 
+ 
+ 
+ 
         <div style="text-align: center">
             <a href="https://wa.me/85264071181/?text=莫生我要查詢金come系統" class="cta-button">★ 立即免費體驗 獲取金come系統 ★</a>
         </div>
-
-
+ 
+ 
         <h2 style="text-align: center; margin: 3rem 0">行業解決方案：<br>
             金come 如何幫助唔同行業優化 B2B 營銷流程？</h2>
         <div class="industry-solutions">
             <!-- 行业解决方案卡片会自动生成 -->
         </div>
-
-
+ 
+ 
         <h3>金come !<br><br>
             滿足您企業的需求 !<br><br>
             提升您工作效率、減少人力成本 !<br><br>
             並實現無縫優質的客戶互動 !</h3>
-
-
+ 
+ 
         <div style="text-align: center">
             <a href="https://wa.me/85264071181/?text=莫生我要查詢金come系統/" class="cta-button">★ 立即下載 金come 免費體驗 自動營銷閉環系統！ ★</a>
         </div>
-
-
+ 
+ 
         <h2 style="text-align: center; margin: 3rem 0">開通會員</h2>
         <p style="text-align: center;"></p>
         <div id="開通會員"><!-- 會員類別all --></div>
-
+ 
         <h2>服務承諾：</h2><br>
         <h3>✦ 15天按比例退款保證！ ✦ 7天無理由退款保證！ <br>
             ✦ 7 × 24 技術支援保證！ ✦ 永久更新維護保證 ！
         </h3>
-
-
+ 
+ 
         <div id="ContactAKI" class="ContactAKI"><!-- JS _顯示聯莫 --></div>
     </div>
-
-
+ 
+ 
     
-
+ 
     <p class="mokJsApi_copyright">版權</p>
     <br><br>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
     <script>
         // 动态生成行业解决方案卡片
         // 動態生成 B2B 行業解決方案卡片
@@ -568,10 +570,10 @@
             "掃街收集名片資料 → 匯入金come 自動發送品牌介紹與優惠邀約，並設關鍵詞秒覆。",
             "非營業時間輸入『採購』 → 金come 自動推送線上產品型錄與聯絡窗口。"
         ];
-
-
+ 
+ 
         const solutionsContainer = document.querySelector('.industry-solutions');
-
+ 
         // 使用索引值遍历数组
         industries.forEach((industry, index) => {
             const card = document.createElement('div');
@@ -584,17 +586,17 @@
             `;
             solutionsContainer.appendChild(card);
         });
-
-
-
-
-
+ 
+ 
+ 
+ 
+ 
 // Function to draw arrows using SVG
         function 金come流程DrawArrows() {
             const svgCanvas = document.getElementById('金come流程-arrow-canvas');
             const container = document.getElementById('金come流程-container');
             const containerRect = container.getBoundingClientRect();
-
+ 
              // Helper to get element position relative to the SVG canvas
             const getElementCenter = (elementId) => {
                 const elem = document.getElementById(elementId);
@@ -621,8 +623,8 @@
                  const y = side === 'top' ? elemRect.top - containerRect.top : elemRect.bottom - containerRect.top;
                  return { x, y };
             };
-
-
+ 
+ 
              // --- Draw Arrows within Circle 1 ---
              // These depend heavily on the grid layout. Simple horizontal arrows assumed.
              // Adjust offsets (+/- pixels) as needed for visual alignment
@@ -632,7 +634,7 @@
              const func1_3_pos_left = getElementEdge('金come流程-func1-3', 'left');
              const func1_3_pos_right = getElementEdge('金come流程-func1-3', 'right');
              const func1_4_pos_left = getElementEdge('金come流程-func1-4', 'left');
-
+ 
              // Check if elements are on the same row before drawing horizontal arrows
              const arrow1_1_2 = document.getElementById('金come流程-arrow-1-1_1-2');
              if (Math.abs(func1_1_pos.y - func1_2_pos_left.y) < 10) { // Allow small vertical difference
@@ -641,7 +643,7 @@
                  arrow1_1_2.setAttribute('x2', func1_2_pos_left.x - 5);
                  arrow1_1_2.setAttribute('y2', func1_2_pos_left.y);
              } else { arrow1_1_2.style.display = 'none'; } // Hide if not aligned
-
+ 
              const arrow1_2_3 = document.getElementById('金come流程-arrow-1-2_1-3');
               if (Math.abs(func1_2_pos_right.y - func1_3_pos_left.y) < 10) {
                  arrow1_2_3.setAttribute('x1', func1_2_pos_right.x + 5);
@@ -649,7 +651,7 @@
                  arrow1_2_3.setAttribute('x2', func1_3_pos_left.x - 5);
                  arrow1_2_3.setAttribute('y2', func1_3_pos_left.y);
               } else { arrow1_2_3.style.display = 'none'; }
-
+ 
              const arrow1_3_4 = document.getElementById('金come流程-arrow-1-3_1-4');
               if (Math.abs(func1_3_pos_right.y - func1_4_pos_left.y) < 10) {
                  arrow1_3_4.setAttribute('x1', func1_3_pos_right.x + 5);
@@ -658,12 +660,12 @@
                  arrow1_3_4.setAttribute('y2', func1_4_pos_left.y);
               } else { arrow1_3_4.style.display = 'none'; }
             }
-
-
-
-
-
-
+ 
+ 
+ 
+ 
+ 
+ 
         const 會員類別all = [
             '✦ 1個月會員','✦ 6個月會員','✦ 12個月會員',
             '✦ 1個月vip會員','✦ 6個月vip會員','✦ 12個月vip會員'
@@ -681,22 +683,22 @@
             '6,000','32,400','57,600'
         ]
         const 開通會員box = document.querySelector('#開通會員');
-
+ 
         // 使用索引值遍历数组
         會員類別all.forEach((會員類別, index) => {
             const 卡 = document.createElement('a');
             卡.className = 'card 會員卡';
-
+ 
             卡.title = 會員類別;
             卡.href = "PayAki/index.html";
             卡.target = "_blank";
-
-
+ 
+ 
             會費原價 = '<br>'
             if (會費[index] != ''){
                 會費原價 = `<p class="刪除線">$${會費[index]}港元</p>`
             }
-
+ 
             卡.innerHTML = `
                 <h2>${會員類別}</h2>
                 <br>
@@ -706,9 +708,9 @@
             `;
             開通會員box.appendChild(卡);
         });
-
-
-
+ 
+ 
+ 
         // 獲取所有圖片元素
         const galleryItems = document.querySelectorAll('.gallery-item img');
         const modal = document.getElementById('imageModal');
@@ -742,21 +744,21 @@
                 modal.style.display = 'none';
             }
         });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
         // 滚动动画效果
         const cards = document.querySelectorAll('.card');
         window.addEventListener('scroll', () => {
@@ -768,21 +770,21 @@
                 }
             });
         });
-
+ 
         // 初始隐藏卡片
         cards.forEach(card => {
             card.style.opacity = 0;
             card.style.transform = 'translateY(50px)';
             card.style.transition = 'all 2s cubic-bezier(0.25, 0.1, 0.25, 1)';
         });
-
-
-
+ 
+ 
+ 
         function _翻譯(){ 
             translate.service.use('client.edge'); //設置機器翻譯服務通道，直接客戶端本身，不依賴服務端 。相關說明參考 http://translate.zvo.cn/43086.html
             translate.execute();//進行翻譯 
         }
-
+ 
         function Start() {
             // 顯示聯莫
             const 聯莫 = ['moksurky@gmail.com','https://wa.me/85264071181/','https://i.meee.com.tw/atcX6QM.png','https://www.instagram.com/moksurky2025/','https://line.me/ti/p/UlSPd7p9zh/','https://www.facebook.com/aki.mok.10/','http://t.me/mokaki/'
@@ -790,12 +792,12 @@
             _翻譯()
             _顯示聯莫(聯莫);
         }
-
+ 
         琪琪修改()
-
-
-
-
+ 
+ 
+ 
+ 
     </script>
 </body>
 </html>
