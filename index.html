@@ -21,19 +21,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>金come | 全自動營銷閉環系統</title>
     <style>
-        :root {--metal: linear-gradient(45deg, #e6e9f0 0%, #eef1f5 100%);--water-blue: rgba(64, 156, 255, 0.3);--gold: #D4AF37;
-        --金come流程-gold: gold; /* Lighter Gold */
-        --金come流程-gold-dark: #ebebeb; /* Darker Gold */
-        --金come流程-gold-shadow: #ccc; /* Shadow Gold */
-        --金come流程-white: #ffffff;
+        :root {
+        --metal: linear-gradient(45deg, #e6e9f0 0%, #eef1f5 100%);
+        --water-blue: rgba(64, 156, 255, 0.3);
+        --金come流程-gold: rgba(255, 217, 0, 0.8); /* Lighter Gold */
+        --金come流程-gold-dark: #fff; /* Darker Gold */
+        --金come流程-gold-shadow: #fff; /* Shadow Gold */
+        --金come流程-white: #444444a5;
         --金come流程-text-dark: #333;
         --金come流程-bg: #f0f2f5; /* Light background for contrast */
         --金come流程-metallic-gradient: linear-gradient(145deg, #fffbeb, #fde047, gold);
         --金come流程-water-gradient: linear-gradient(45deg, rgba(255,255,255,0.1), rgba(253, 224, 71, 0.2), rgba(255,255,255,0.1));  }
-        
         #金come流程-container {position: relative; /* Needed for absolute positioning of arrows */
             display: flex;flex-direction: column;align-items: center;gap: 40px; /* Space between circles */
-            padding: 30px;background: rgba(255, 255, 255, 0.8);border-radius: 15px;box-shadow: 0 10px 30px rgba(255, 255, 255, 0.1);max-width: 1000px;width: 95%;backdrop-filter: blur(5px);border: 1px solid rgba(255, 255, 255, 0.2);  }
+            padding: 30px;border-radius: 15px;max-width: 1000px;backdrop-filter: blur(5px);border: 1px solid rgba(255, 255, 255, 0.2);
+        }
         #金come流程-title {font-size: 1.8em;font-weight: bold;color: var(--金come流程-gold-dark);text-align: center;margin-bottom: 20px; text-shadow: 1px 1px 2px rgba(0,0,0,0.1);  }
         .金come流程-circle {background: var(--金come流程-white);border-radius: 10px;padding: 25px;box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);width: 100%;max-width: 800px;position: relative;border: 1px solid var(--金come流程-gold);border-left: 5px solid var(--金come流程-gold-dark); transition: transform 0.3s ease, box-shadow 0.3s ease;  }
         .金come流程-circle:hover {transform: translateY(-3px);box-shadow: 0 8px 20px rgba(80, 6, 217, 0.2);  }
@@ -138,9 +140,9 @@
         .card {background: rgba(32, 58, 67, 0.9);border: 1px solid rgba(64, 156, 255, 0.3);border-radius: 15px;padding: 2rem;margin: 2rem 0;backdrop-filter: blur(10px);transition: transform 0.3s;box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);box-shadow: inset 25px 25px 50px 1px rgba(181, 181, 181, 0.3);}      
         .card:hover {transform: translateY(-5px);}
         #開通會員, .industry-solutions {display: grid;grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));gap: 1.5rem;margin: 3rem 0;}
-        .highlight {color: var(--gold);font-weight: bold;animation: 
+        .highlight {color: var(--金come流程-gold);font-weight: bold;animation: 
             float 3s ease-in-out infinite,metalShine 4s linear infinite;}
-        .cta-button {display: inline-block;padding: 1rem 2rem;background: linear-gradient(45deg, #203a43 0%, #2c5364 50%, #203a43 100%);border: 1px solid var(--gold);border-radius: 30px;color: var(--gold);text-decoration: none;font-weight: bold;transition: all 0.3s;margin: 2rem 0;position: relative;overflow: hidden;animation: 
+        .cta-button {display: inline-block;padding: 1rem 2rem;background: linear-gradient(45deg, #203a43 0%, #2c5364 50%, #203a43 100%);border: 1px solid var(--金come流程-gold);border-radius: 30px;color: var(--金come流程-gold);text-decoration: none;font-weight: bold;transition: all 0.3s;margin: 2rem 0;position: relative;overflow: hidden;animation: 
                 float 3s ease-in-out infinite,metalShine 4s linear infinite;}
  
         /* 水中浮动效果 */
@@ -161,9 +163,9 @@
         }
         /* 悬停效果增强 */
         .cta-button:hover {animation-play-state: paused;box-shadow: 
-                0 0 25px rgba(64, 156, 255, 0.5),0 0 15px var(--gold);transform: scale(1.05);}
+                0 0 25px rgba(64, 156, 255, 0.5),0 0 15px var(--金come流程-gold);transform: scale(1.05);}
         .cta-button:hover::before {animation: none;opacity: 0;}
-        .feature-list li {padding: 1rem;margin: 1rem 0;border-left: 3px solid var(--gold);background: rgba(32, 58, 67, 0.5);}
+        .feature-list li {padding: 1rem;margin: 1rem 0;border-left: 3px solid var(--金come流程-gold);background: rgba(32, 58, 67, 0.5);}
         @media (max-width: 768px) {.container {padding: 1rem; }
             h1 {font-size: 2.5rem; }
         }
@@ -260,29 +262,31 @@
     <div class="container">
         <header>
             <h1><a href="../"><b class="_我司名"></b></a></h1>
-            <h2>💰 與其辛苦搵錢，不如要錢搵你！</h2>
+            <h2>💰 與其辛苦搵錢，不如要錢搵您！</h2>
             <p id="更新日期">202504160205</p>
         </header>
  
-        <h2><b class="_我司名"></b></h2>
-        <p>係一款專為企業打造嘅全自動營銷閉環系統，<br>
-            整合人工智慧、自動化工具。<br>
-            無論你係中小企業或創業者，<br>
-            <b class="_我司名"></b>都可幫你 7*24 搵客、創作、建立客戶關係..達致成交！<br>
-            <b class="_我司名"></b>就是你的自動賺錢機器！</p>  
+        <h2><b class="_我司名"></b></h2><br>
+        <p>係一款專為企業打造嘅全自動營銷閉環系統！<br>
+            整合人工智慧、自動化工具。<br><br>
+            無論您係大中小企業或創業者，<br>
+            <b class="_我司名"></b>都可幫您 7*24 搵客、創作、建立客戶關係..達致成交！<br><br>
+            <b class="_我司名"></b>就是您的自動賺錢神器！</p>  
         <br>
 
 
 
-
+        <div style="text-align: center">
+            <a href="https://wa.me/85264071181/?text=莫生我要查詢金come系統" class="cta-button">💰 立即查詢金come系統 💰</a>
+        </div>
 
         
         <div class="card">
-            <h2>▶ <b class="_我司名"></b> 四大功能</h2>
+            <h2> <b class="_我司名"></b> 四大功能</h2>
             <ul class="feature-list">
                 <li><span class="highlight">√ 搵客鍠</span><br>
-                    根據地區、行業、關鍵字，全天候自動為你搵新客戶。<br>
-                    無需人手 cold call，<b class="_我司名"></b> 幫你每日主動出擊！
+                    根據地區、行業、關鍵字，全天候自動為您搵新客戶。<br>
+                    無需人手 cold call，<b class="_我司名"></b> 幫您每日主動出擊！
                 </li>
                 <li><span class="highlight">√ 文案鍠</span><br>
                     自動按行業、文化、語氣、受眾，產出具吸引力文章、海報、影片。<br>
@@ -290,7 +294,7 @@
                 </li>
                 <li><span class="highlight">√ 促銷鍠</span><br>
                     365日自動向潛在客戶發送促銷內容、優惠、邀約，提升轉化率。<br>
-                    支援 WhatsApp、Email!
+                    支援多種通訊工具!
                 </li>
                 <li><span class="highlight">√ 客服鍠</span><br>
                     自動即時回應客戶查詢，增加專業感與成交率。支援多語言。<br>
@@ -326,7 +330,7 @@
 -->
  
         <div style="text-align: center">
-            <a href="https://wa.me/85264071181/?text=莫生我要查詢金come系統" class="cta-button">💰 免費獲取金come系統 💰</a>
+            <a href="https://wa.me/85264071181/?text=莫生我要金come系統教學" class="cta-button">💰 收看金come系統演示 💰</a>
         </div>
 
         
@@ -433,7 +437,7 @@
                         <div class="金come流程-function" id="金come流程-func1-4">
                             <div class="金come流程-function-content">
                                 <div class="金come流程-function-title">4:客服鍠</div>
-                                <div class="金come流程-function-desc">新客戶查詢 AI 自動秒覆</div>
+                                <div class="金come流程-function-desc">7*24 AI自動秒覆新客查詢  </div>
                             </div>
                         </div>
                     </div>
@@ -475,7 +479,11 @@
                      <div id="金come流程-arrow-c2_cN"></div>
                 </div>
                 <!-- Final Step -->
-                <a id="金come流程-final" href="https://wa.me/85264071181/?text=莫生我要購買金come系統">成交</a>
+                <a id="金come流程-final" href="https://wa.me/85264071181/?text=莫生我要訂購金come系統">成交
+
+    
+
+                </a>
         
         
                 <!-- SVG Layer for Arrows -->
@@ -531,7 +539,7 @@
 
 
         <div class="card">
-            <h2>▶ 金come 四大優勢</h2>
+            <h2> 金come 四大優勢</h2>
             <ul class="feature-list">
                 <li><span class="highlight">√ 無需學習</span><br>
                     操作簡單直觀，無需額外培訓或人力成本！
@@ -553,7 +561,7 @@
  
  
         <div style="text-align: center">
-            <a href="https://wa.me/85264071181/?text=莫生我要查詢金come系統" class="cta-button">💰 立即免費體驗 獲取金come系統 💰</a>
+            <a href="https://wa.me/85264071181/?text=莫生我要試用金come系統" class="cta-button">💰 立即免費體驗 獲取金come系統 💰</a>
         </div>
  
  
@@ -561,8 +569,9 @@
 
 
 
-        <h2 style="text-align: center; margin: 3rem 0">行業解決方案：<br>
-            <b class="_我司名"></b> 如何幫助唔同行業優化 B2B 營銷流程？</h2>
+        <h2 style="text-align: center; margin: 3rem 0">
+            <b class="_我司名"></b> 行業解決方案：
+        </h2>
         <div class="industry-solutions">
             <!-- 行业解决方案卡片会自动生成 -->
         </div>
@@ -578,7 +587,7 @@
  
  
         <div style="text-align: center">
-            <a href="https://wa.me/85264071181/?text=莫生我要查詢金come系統" class="cta-button">💰 立即下載 金come 免費體驗 自動營銷閉環系統！ 💰</a>
+            <a href="https://wa.me/85264071181/?text=莫生我要下載金come系統" class="cta-button">💰 立即下載 金come 免費體驗 自動營銷閉環系統！ 💰</a>
         </div>
         
         <!--
@@ -651,33 +660,35 @@
  
  
     <script>
+        const 我司號 = '85264071181'
         // 动态生成行业解决方案卡片
         // 動態生成 B2B 行業解決方案卡片
         const industries = [
-            "✦ 批發貿易：", "✦ 裝修工程：", "✦ 教育顧問：", "✦ 美容供應：",
-            "✦ 餐飲設備商：", "✦ IT方案商：", "✦ 企業顧問：", "✦ 商務印刷：", "✦ B2B電商平台"
+            "房產買賣", "保險經紀", "跨境貿易", "教育培訓",
+            "批發平台", "裝修工程", "企業顧問", "貨運物流", 
+            "設備供應"
         ];
         const 行業痛點 = [
-            "難以持續接觸新客，依賴舊客戶與人脈圈，推廣渠道單一。",
-            "與設計公司、建材商、包工頭溝通耗時，資料傳遞效率低。",
-            "中小學、補習社、企業 HR 資源分散，找客成本高。",
-            "美容店東常忙於營運，難及時回覆供應商合作邀約。",
-            "新開餐廳頻繁，客戶流動性高，難追蹤需求與推廣成效。",
-            "企業經常比較多間服務商，難即時抓住商機窗口。",
-            "潛在企業客戶決策鏈長，需持續提供價值感內容。",
-            "傳統地推效率低，無法量化成效及有效篩選潛在客戶。",
-            "B端用戶多資訊查詢集中在白天，非辦公時間流失查詢。"
+            "客戶查詢分散（地段/價格/按揭），重複解答消耗人力...",
+            "保單到期提醒遺漏導致續保率低...",
+            "多語言查詢需專人跟進，跨國時差導致的顧客等待焦慮...",
+            "傳統宣傳轉化率低...",
+            "採購主任慣於凌晨查詢貨期，錯失緊急訂單...",
+            "市場競爭激烈，難以找出潛在客戶...",
+            "決策層需要長期價值培育，但內容推送頻率難掌控...",
+            "突發物流異常時解釋耗時，客戶信任度下降...",
+            "介紹新設備技術消耗大量時間..."
         ];
         const 解決方案 = [
-            "金come 自動建立商戶名單，定期推送最新貨品或批發價單，並設秒覆詢價系統。",
-            "裝修公司上傳案例圖集 → 金come 自動回覆『設計報價』、『材質說明』等對話模組。",
-            "目標對象輸入『顧問合作』 → 金come 自動寄出方案簡報 + 預約連結。",
-            "設定『合作供應』關鍵詞 → 金come 自動推送供應品類清單、合作條件與 WhatsApp 聯絡人。",
-            "新客輸入『爐具』 → 金come 發送產品圖 + 尺寸規格 + 報價單 PDF；『安裝』 → 發送流程教學影片。",
-            "'試用方案' 觸發方案比較表單，系統根據客戶行業推送成功案例鏈結。",
-            "金come 根據潛在客戶開信與點擊行為自動分類興趣，定期推播專欄文章與案例分析。",
-            "掃街收集名片資料 → 匯入金come 自動發送品牌介紹與優惠邀約，並設關鍵詞秒覆。",
-            "非營業時間輸入『採購』 → 金come 自動推送線上產品型錄與聯絡窗口。"
+            "√ 文案鍠：將傳統簡單樓盤介紹轉變成VR睇樓網!<br><br>√ 客服鍠：客戶輸入「海景盤」→ 0.4秒推送VR睇樓連結+按揭計算工具!",
+            "√ 文案鍠：將傳統續保說明文件轉變成續保互動動畫!<br><br>√ 促銷鍠：設定保單到期前30日/7日自動發送續保動畫說明+視像諮詢連結!",
+            "√ 客服鍠：設定多語言應答規則，英文 / 阿拉伯語自動切換回覆內容，7 × 24 不間斷服務!",
+            "√ 搵客鍠：自動鎖定IG標註#fail的學生帳號!<br><br>√ 促銷鍠：定期向目標發送AI重製的《熱門題型殺手表》!",
+            "√ 文案鍠：AI將產品目錄轉換成「AR虛擬展間連結」!",
+            "√ 搵客鍠：抓取小紅書收藏「蝸居改造」攻略的潛在客戶!",
+            "√ 文案鍠：生成《AI時代組織重構路線圖》<br><br>√ 促銷鍠：設定每周推送!",
+            "√ 客服鍠：輸入運單號→即時顯示全球定位+海關申報狀態（自動翻譯當地語言）!",
+            "√ 文案鍠：AI將設備教學、技術手冊轉換成互動式FAQ動畫!"
         ];
  
  
@@ -685,13 +696,18 @@
  
         // 使用索引值遍历数组
         industries.forEach((industry, index) => {
-            const card = document.createElement('div');
+            const card = document.createElement('a');
             card.className = 'card';
+            card.title = `立即查詢${industry}解決方案`;
+            card.href = `https://wa.me/${我司號}/?text=莫生我要查詢${industry}解決方案`;
+            card.target = "_blank";
+
+            
             card.innerHTML = `
-                <h3>${industry}</h3>
+                <h3>✦ ${industry}：</h3>
                 <br>
                 <p>~ ${行業痛點[index]}</p>
-                <div class="highlight" style="margin-top: 1rem">√ ${解決方案[index]}</div>
+                <div class="highlight" style="margin-top: 1rem">${解決方案[index]}</div>
             `;
             solutionsContainer.appendChild(card);
         });
@@ -904,6 +920,7 @@
             _顯示聯莫(聯莫);
         }
  
+        
         琪琪修改()
  
  
