@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>金come | 全自動營銷閉環系統</title>
+    <style>
+        body { font-family: Arial, sans-serif;background: linear-gradient(145deg, #a8a8a8, #000000);color: #ecf0f1;padding: 20px; }
+        h1 { text-align: center;margin-bottom: 20px;font-size: 2em;text-shadow: 2px 2px 4px gold; }
+        .container { max-width: 600px;margin: 0 auto;padding: 20px;border-radius: 12px;background: #2f3030;box-shadow: 4px 4px 8px #767676; }
+        label, p { margin: 10px 0 5px; }
+        input, textarea, select, button { margin-bottom: 10px;padding: 8px;border-radius: 8px;border: none;outline: none; }
+        input, textarea, select { width: 100%; }
+        .大鍵 {border-radius: 10px; background: #282828;color: #bdbdbd;box-shadow: inset 25px 25px 50px rgba(139, 139, 139, 0.8);border: 1px solid #686868;font-size: 48px;width: 100%; }
+        .大鍵:hover { background: #484949; }
+        button { background-color: #000000;color: white;cursor: pointer; }
+        button:hover { background-color: #484949; }
+        .hidden { display: none; }
+        .reply-group { margin-bottom: 15px;position: relative; }
+        .delete-btn { position: absolute;right: -15px;top: 35%;transform: translateY(-50%);width: 30px;height: 30px;background-color: #444;color: white;border-radius: 50%;display: flex;align-items: center;justify-content: center;font-size: 16px;padding: 0; }
+        .delete-btn:hover { background-color: #777; }
+        .reply-container { display: flex;align-items: center;gap: 10px; }
+        .reply-inputs { flex-grow: 1; }
+
+
+
+    </style>
+
+  <!-- ws icon https://www.thinkcmf.com/font/font_awesome/icons.html -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+  <script src="../mokJsapi/a.js">//琪琪修改</script>
+  <script src="https://cdn.staticfile.net/translate.js/3.1.7/translate.js">// 翻譯 放最後</script>
+
+</head>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<body>
+    <samp id="莫生查詢" style="display: none;">莫生我要查詢金come使用問題</samp>
+
+    <h1><a href="./set.html"><b class="_我司名"></b></a> | 搵客鍠🔍</h1>
+    <p class="mokJsApi_copyright">版權</p>
+
+
+    
+
+
+
+
+
+
+
+
+
+    <div class="container" style="padding: 20px;">
+        <iframe width="100%" height="315" src="https://www.youtube.com/embed/dBTxzLg-eFA?si=PTpM-9-b3_jeVNB6" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+
+
+
+
+
+
+
+
+
+
+    <div  class="container" style="padding: 20px;">
+        
+            <!-- 部份1: 帳號 -->
+            <label>您的手機地區號</label>
+            <input id="區號" type="text" placeholder="例如: 86" title="例如: 86" required>
+            <label>您的WhatsApp 號碼</label>
+            <input id="WhatsApp號" type="text" placeholder="輸入WhatsApp號碼" title="輸入WhatsApp號碼" required>
+
+
+
+            <!-- 部份2: setting -->
+            <div class="reply-group">
+                
+                <label>請選擇客戶地區*</label>
+                <select id="地區" title="請選擇客戶地區">
+                    <option value="hk" selected>香港</option>
+                    <option value="usa" >美國</option>
+                </select>
+
+                <label>請填寫客戶關鍵字</label>
+                <input id="關鍵字" type="text" placeholder="請填寫客戶關鍵字" title="請填寫客戶關鍵字" value="金融">
+            
+            </div>
+
+            <samp style="float: right;">
+            <button onclick="下載設定檔()">⬇️ 下載設定檔</button>
+            <input type="file" id="uploadInput" style="display: none;" accept=".json" onchange="上傳設定檔(event)">
+            <button onclick="document.getElementById('uploadInput').click()">⬆️ 上傳設定檔</button>
+        </samp>        
+
+
+
+            <!-- 部份3: _顯示聯莫 -->
+            <div id="ContactAKI" class="ContactAKI"><!-- JS _顯示聯莫 --></div>
+            <br>
+
+            <!-- 部份4: 執行金come -->
+            <button class="大鍵 執行金come" style="display: none;" title="執行金come" onclick="執行金come()">執行搵客鍠 🔍</button>
+
+            <h3><a href="./set.html">返回<b class="_我司名"></b></a></h3>
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- 部份5: py code -->
+            <div class="hidden">
+
+                <p id="搜HK">
+### 勞工處 ###### 勞工處 ###### 勞工處 ###### 勞工處 ###
+### 勞工處 ###### 勞工處 ###### 勞工處 ###### 勞工處 ###
+### 勞工處 ###### 勞工處 ###### 勞工處 ###### 勞工處 ###
+def _自動獲取香港勞工處工作資料(keyword=''):
+
+    print(f'搵客鍠 搵HK={keyword}')               
+
+    _金come_VIP._獲取帳號資料('@帳號1181@')
+    _Start._歡迎登入('搵客鍠')
+
+    _chrome_雜項._Chrome設定(1)# 無頭
+
+    all_Boss料 = []
+
+    # html修改
+    公司名xpath = '//*[@id="empName"]/text()'
+    表格xpath = '//*[@id="jobOrderTable"]'
+    電話開頭 = '4569'
+    電話位數 = 7
+    最多找幾頁 = 1
+    # html修改
+
+    # 勞工處網分流
+    勞工處ulr = ''
+    子域名清單 = ["www","www1", "www2", "www3", "www4"]
+
+    for 子域名 in 子域名清單:
+        勞工處ulr = f"https://{子域名}.jobs.gov.hk/0/tc/jobseeker/jobsearch/joblist/"  # 替換子域名
+        try:
+            driver.get(勞工處ulr)
+            break
+        except:
+            continue
+
+    print(f'正確勞工處ul={勞工處ulr}')
+
+    driver.get(勞工處ulr)
+    # 填寫關鍵字並點擊搜尋按鈕
+    search_box = driver.find_element(By.ID, "simp_searchKeyword")
+    search_box.send_keys(keyword)
+    search_button = driver.find_element(By.ID, "btnSearch")
+    search_button.click()
+    
+    找頁數 = 0
+    顯總料數 = 0
+    _每頁量 = 20
+    while True:
+    # 等待搜尋結果加載完成
+        WebDriverWait(driver, 10).until(EC.url_changes(勞工處ulr))
+
+        # 獲取搜尋結果的HTML
+        page_source = driver.page_source
+
+        # 解析HTML並提取工作資料
+        soup = BeautifulSoup(page_source, "html.parser")
+        content_div = soup.find("div", id="content-innerdiv")
+        job_listings = content_div.find_all("tr", class_="bg-white")
+
+        # 取得資料總數
+        if 顯總料數 == 0:
+            total_jobs = soup.find("div", class_="py-2 d-lg-none").strong.text.strip()
+            print(f'*** {total_jobs}個公司資料 @ 香港勞工處 ***')
+            顯總料數 = 1
+
+        勞工處ulB = 勞工處ulr.replace('0/tc/jobseeker/jobsearch/joblist/', '')
+        for job in job_listings:
+            網址 = 勞工處ulB + job.find_next("a")["href"]
+
+            客的真聯 = _雜項._提取聯絡方式(網址,公司名xpath,表格xpath,[電話開頭,電話位數])
+            if 客的真聯:
+                all_Boss料.append(客的真聯)
+                #print(f'客的真聯={客的真聯}')
+
+        if isinstance(最多找幾頁, (int)):  # 检查是否是数字
+            if 找頁數 >= 最多找幾頁 :
+                print(f"第{找頁數}頁，結束搜尋")
+                break
+
+        # 點擊下一頁按鈕
+        if int(total_jobs) > _每頁量:
+            # 點擊下一頁按鈕
+            next_page_button = driver.find_element(By.XPATH, '//*[@id="content-innerdiv"]/div[4]/div/a[3]')
+            next_page_button.click()
+            _每頁量 += 20
+            找頁數 +=1
+        else:
+            break
+    # 關閉瀏覽器
+    driver.quit()
+
+    #print(f'all_Boss料={all_Boss料}')
+    #print(f'==========')
+    真all_Boss料 = _雜項._西選重聯(all_Boss料)
+    
+    print(f'真all_Boss料={真all_Boss料}')
+            #################
+            # print 到 html #
+            #################
+
+_自動獲取香港勞工處工作資料('@關鍵字@')
+#########結束#########
+                </p>
+
+
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script>
+        function saveToLocalStorage(key, value) {
+            localStorage.setItem(key, value);
+        }
+
+        function loadFromLocalStorage(key) {
+            return localStorage.getItem(key);
+        }
+
+        function loadSavedData() {
+            document.getElementById('區號').value = loadFromLocalStorage('區號') || '';
+            document.getElementById('WhatsApp號').value = loadFromLocalStorage('WhatsApp號') || '';
+            document.getElementById('關鍵字').value = loadFromLocalStorage('關鍵字') || '';
+            document.getElementById('地區').value = loadFromLocalStorage('地區') || '';
+        }
+
+        window.addEventListener('beforeunload', () => {
+            saveToLocalStorage('區號', document.getElementById('區號').value);
+            saveToLocalStorage('WhatsApp號', document.getElementById('WhatsApp號').value);
+            saveToLocalStorage('關鍵字', document.getElementById('關鍵字').value);
+            saveToLocalStorage('地區', document.getElementById('地區').value);
+        });
+
+
+
+
+        function 下載設定檔() {
+            const 區號 = document.getElementById('區號').value;
+            const WhatsApp號 = document.getElementById('WhatsApp號').value;
+            const 關鍵字 = document.getElementById('關鍵字').value;
+            const 地區 = document.getElementById('地區').value;
+
+            const data = {
+                區號,
+                WhatsApp號,
+                關鍵字,
+                地區
+            };
+
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+            const url = URL.createObjectURL(blob);
+            
+            const link = document.createElement("a");
+            link.href = url;
+            link.download = "whatsapp_設定檔.json";
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+
+
+
+        function 上傳設定檔(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const data = JSON.parse(e.target.result);
+
+                    // 匯入值
+                    document.getElementById('區號').value = data.區號 || '';
+                    document.getElementById('WhatsApp號').value = data.WhatsApp號 || '';
+                    document.getElementById('關鍵字').value = data.關鍵字 || '';
+                    document.getElementById('地區').value = data.地區 || '';
+
+                    alert("設定檔已成功匯入！");
+                } catch (error) {
+                    alert("檔案格式錯誤或解析失敗");
+                    console.error(error);
+                }
+            };
+            reader.readAsText(file);
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /* ********************* */
+        async function 執行金come() {
+            const 區號 = document.getElementById('區號').value;
+            const WhatsApp號 = document.getElementById('WhatsApp號').value;
+            const 關鍵字 = document.getElementById('關鍵字').value;
+            const 地區 = document.getElementById('地區').value;
+            let 搵客鍠py
+            // 按地區選py code
+            if (地區 == 'hk') {
+                搵客鍠py = document.getElementById('搜HK').textContent.trim();
+            }
+
+
+            const 執行碼 = 搵客鍠py.replace("@帳號1181@", `${區號}${WhatsApp號}`).replace("@關鍵字@", 關鍵字); 
+            navigator.clipboard.writeText(執行碼);
+            // py 檢查 剪贴板 轉變執行
+        }
+        /* ********************* */
+        function _翻譯(){ 
+            translate.service.use('client.edge'); //設置機器翻譯服務通道，直接客戶端本身，不依賴服務端 。相關說明參考 http://translate.zvo.cn/43086.html
+            translate.execute();//進行翻譯 
+        }
+
+        // 等待頁面完全加載 
+        window.onload = function() {
+            // 再顯示按鈕
+            document.querySelector('.執行金come').style.display = 'inline-block';
+        };
+
+        function Start() {
+            // 顯示聯莫
+            const 聯莫 = ['moksurky@gmail.com','https://wa.me/85264071181/','https://i.meee.com.tw/atcX6QM.png','https://www.instagram.com/moksurky2025/','https://line.me/ti/p/UlSPd7p9zh/','https://www.facebook.com/aki.mok.10/','http://t.me/mokaki/'
+            ];
+            _翻譯()
+            _顯示聯莫(聯莫);
+            
+            loadSavedData();
+        }
+
+        琪琪修改()
+
+        
+
+    </script>
+</body>
+</html>
