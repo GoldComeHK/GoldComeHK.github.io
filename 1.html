@@ -15,15 +15,14 @@
         .大鍵:hover { background: #484949; }
         button { background-color: #000000;color: white;cursor: pointer; }
         button:hover { background-color: #484949; }
-        .hidden { display: none; }
+        
         .reply-group { margin-bottom: 15px;position: relative; }
         .delete-btn { position: absolute;right: -15px;top: 35%;transform: translateY(-50%);width: 30px;height: 30px;background-color: #444;color: white;border-radius: 50%;display: flex;align-items: center;justify-content: center;font-size: 16px;padding: 0; }
         .delete-btn:hover { background-color: #777; }
         .reply-container { display: flex;align-items: center;gap: 10px; }
         .reply-inputs { flex-grow: 1; }
-
-
-
+        .hidden,#uploadInput,.執行金come { display: none; }
+        .執行金come{place-items: center;}
     </style>
 
   <!-- ws icon https://www.thinkcmf.com/font/font_awesome/icons.html -->
@@ -35,48 +34,8 @@
   <script src="https://cdn.staticfile.net/translate.js/3.1.7/translate.js">// 翻譯 放最後</script>
 
 </head>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <body>
     <samp id="莫生查詢" style="display: none;">莫生我要查詢金come使用問題</samp>
-
     <h1><a href="./set.html"><b class="_我司名"></b></a> | 搵客鍠🔍</h1>
     <p class="mokJsApi_copyright">版權</p>
 
@@ -91,9 +50,51 @@
 
 
 
+
+
+
+
+
+
+
+
+
     <div class="container" style="padding: 20px;">
         <iframe width="100%" height="315" src="https://www.youtube.com/embed/dBTxzLg-eFA?si=PTpM-9-b3_jeVNB6" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
     </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -130,7 +131,7 @@
 
             <samp style="float: right;">
             <button onclick="下載設定檔()">⬇️ 下載設定檔</button>
-            <input type="file" id="uploadInput" style="display: none;" accept=".json" onchange="上傳設定檔(event)">
+            <input type="file" id="uploadInput" accept=".json" onchange="上傳設定檔(event)">
             <button onclick="document.getElementById('uploadInput').click()">⬆️ 上傳設定檔</button>
         </samp>        
 
@@ -141,9 +142,11 @@
             <br>
 
             <!-- 部份4: 執行金come -->
-            <button class="大鍵 執行金come" style="display: none;" title="執行金come" onclick="執行金come()">執行搵客鍠 🔍</button>
+            <div class="執行金come">
+                <button class="大鍵"  title="執行金come" onclick="執行金come()">執行搵客鍠 🔍</button>
+                <h3><a href="./set.html">返回<b class="_我司名"></b></a></h3>
+            </div>
 
-            <h3><a href="./set.html">返回<b class="_我司名"></b></a></h3>
             <div class="scroll-top" id="scrollTop" onclick="scrollToTop()">↑</div>
 
     </div>
@@ -270,9 +273,6 @@
             saveToLocalStorage('地區', document.getElementById('地區').value);
         });
 
-
-
-
         function 下載設定檔() {
             const 區號 = document.getElementById('區號').value;
             const WhatsApp號 = document.getElementById('WhatsApp號').value;
@@ -296,9 +296,6 @@
             link.click();
             document.body.removeChild(link);
         }
-
-
-
 
         function 上傳設定檔(event) {
             const file = event.target.files[0];
@@ -372,17 +369,26 @@
             // py 檢查 剪贴板 轉變執行
         }
         /* ********************* */
+
+
+
+
+
+
+
+
+
+
+
         function _翻譯(){ 
             translate.service.use('client.edge'); //設置機器翻譯服務通道，直接客戶端本身，不依賴服務端 。相關說明參考 http://translate.zvo.cn/43086.html
             translate.execute();//進行翻譯 
         }
-
         // 等待頁面完全加載 
         window.onload = function() {
             // 再顯示按鈕
-            document.querySelector('.執行金come').style.display = 'inline-block';
+            document.querySelector('.執行金come').style.display = 'grid';
         };
-
         function Start() {
             // 顯示聯莫
             const 聯莫 = ['moksurky@gmail.com','https://wa.me/85264071181/','https://i.meee.com.tw/atcX6QM.png','https://www.instagram.com/moksurky2025/','https://line.me/ti/p/UlSPd7p9zh/','https://www.facebook.com/aki.mok.10/','http://t.me/mokaki/'
@@ -392,11 +398,7 @@
             
             loadSavedData();
         }
-
         琪琪修改()
-
-        
-
     </script>
 </body>
 </html>
