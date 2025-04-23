@@ -75,16 +75,16 @@ def _自動獲取香港勞工處工作資料(keyword=''):
             if 顯總料數 == 0:
                 
                 # qqqqqq
-                #total_jobs = soup.find("div", class_="py-2 d-lg-none").strong.text.strip()
-                total_jobs = WebDriverWait(搵客鍠_driver, 10).until(
-                    EC.element_to_be_clickable((By.XPATH, '//*[@id="content-innerdiv"]/div[3]/strong[1]'))
-                )
+                total_jobs = soup.find("div", class_="py-2 d-lg-none").strong.text.strip()
+                #total_jobs = WebDriverWait(搵客鍠_driver, 10).until(
+                #    EC.element_to_be_clickable((By.XPATH, '//*[@id="content-innerdiv"]/div[3]/strong[1]'))
+                #)
                 # qqqqqq
 
 
 
                 
-                print(f'*** {total_jobs}個公司資料 @ 香港勞工處 ***')
+                print(f'*** {total_jobs.text}個公司資料 @ 香港勞工處 ***')
                 顯總料數 = 1
 
             勞工處ulB = 勞工處ulr.replace('0/tc/jobseeker/jobsearch/joblist/', '')
