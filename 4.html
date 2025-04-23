@@ -465,7 +465,7 @@
                     replies[text] = response;
                 }
             });
-            const 回覆內容 = '${JSON.stringify(replies, null, 2)}'
+            const 回覆內容 = JSON.stringify(replies, null, 2)
 
             const 執行碼 = 客服.replace("@帳號1181@", `'${區號}','${WhatsApp號}','客服鍠'`) // _獲取帳號資料 必須
                 // 執行的功能要值
