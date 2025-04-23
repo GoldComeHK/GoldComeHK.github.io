@@ -90,21 +90,17 @@ def _自動獲取香港勞工處工作資料(keyword=''):
             break
     # 關閉瀏覽器
     搵客鍠_driver.quit()
-    #搵客鍠_driver = None 
-
-    #print(f'all_Boss料={all_Boss料}') # 真all_Boss料=['基督教家庭服務中心:recruit@cfsc.org.hk', 'ZOE COMPANY LIMITED:98489878'] 
-    #print(f'==========')
 
     #################
     真all_Boss料 = _搵客鍠_雜項._西選重聯(all_Boss料)
-    #print(f'真all_Boss料={真all_Boss料}') # ['基督教家庭服務中心:recruit@cfsc.org.hk', 'ZOE COMPANY LIMITED:98489878']
+    print(f'真all_Boss料={真all_Boss料}') # ['基督教家庭服務中心:recruit@cfsc.org.hk', 'ZOE COMPANY LIMITED:98489878']
+    print(f'==========')
     #################
 
     # 時間生成
     now = datetime.now()
     現在時間 = now.strftime("[%Y-%m-%d|%H:%M:%S]")
     
-
     # 转换为带换行的字符串（每条记录占一行）
     真all_Boss料_print到html = f"{現在時間}<br>" + "<br>".join(真all_Boss料) + "<br>---------<br>"  # 最后加两个换行保证分隔
 
