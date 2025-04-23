@@ -343,14 +343,15 @@
         const 搵客鍠結果 = document.getElementById("搵客鍠結果");
 
         const observer = new MutationObserver(function(mutations) {
-            console.log('臨時結果=',臨時結果)
             mutations.forEach(function(mutation) {
-                if (臨時結果.textContent.trim() !== "") {
-                    // 將新內容添加到 textarea 前面，並保留原有內容
-                    搵客鍠結果.value = 臨時結果.textContent + "\n" + 搵客鍠結果.value;
+                if (臨時結果.innerHTML.trim() !== "") {  // 改用innerHTML
+                    // 將<br>轉換為換行符
+                    const 格式化內容 = 臨時結果.innerHTML
+                        .replace(/<br\s*\/?>/gi, "\n")  // 處理普通<br>
+                        .replace(/<\/?[^>]+(>|$)/g, ""); // 移除其他HTML標籤（可選）
                     
-                    // 清空臨時結果
-                    臨時結果.textContent = "";
+                    搵客鍠結果.value = 格式化內容 + "\n" + 搵客鍠結果.value;
+                    臨時結果.innerHTML = ""; // 用innerHTML清空
                 }
             });
         });
