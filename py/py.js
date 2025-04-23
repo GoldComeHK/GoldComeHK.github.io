@@ -57,6 +57,10 @@ def _自動獲取香港勞工處工作資料(keyword=''):
         # 解析HTML並提取工作資料
         soup = BeautifulSoup(page_source, "html.parser")
         content_div = soup.find("div", id="content-innerdiv")
+
+        element = WebDriverWait(driver, 10).until(
+          EC.element_to_be_clickable((By.CLASS_NAME, "bg-white"))
+        )
         job_listings = content_div.find_all("tr", class_="bg-white")
 
         # 取得資料總數
