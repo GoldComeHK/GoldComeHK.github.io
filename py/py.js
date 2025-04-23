@@ -123,12 +123,12 @@ def _自動獲取香港勞工處工作資料(keyword=''):
         driver.execute_script(
         """
         const tempResult = document.getElementById('臨時結果');
-        // 将内容写入臨時結果（使用innerHTML以支持@換行@换行）
+        // 将内容写入臨時結果（使用innerHTML以支持<br>换行）
         let newContent = arguments[0];
         
         // 如果臨時結果已有内容，在前面添加新内容（保持原有内容）
         if (tempResult.innerHTML) {
-            tempResult.innerHTML = newContent + '@換行@' + tempResult.innerHTML;
+            tempResult.innerHTML = newContent + '<br>' + tempResult.innerHTML;
         } else {
             tempResult.innerHTML = newContent;
         }
