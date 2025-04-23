@@ -23,6 +23,30 @@
         .reply-inputs { flex-grow: 1; }
         .hidden,#uploadInput,.執行金come { display: none; }
         .執行金come{place-items: center;}
+        
+        #執行中請不要關閉網頁 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;    /* 使用视口单位确保全覆盖 */
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.1); /* 改用 rgba 透明度 */
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(10px); /* Safari 兼容 */
+    z-index: 9999;   /* 确保在最顶层 */
+    display: flex;    /* 新增以下居中样式 */
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    display: none; 
+}
+
+#執行中請不要關閉網頁 h2 {
+    color: white;
+    font-size: 2rem;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
     </style>
 
   <!-- ws icon https://www.thinkcmf.com/font/font_awesome/icons.html -->
@@ -38,7 +62,13 @@
     <samp id="莫生查詢" style="display: none;">莫生我要查詢金come使用問題</samp>
 
 
-    <div id="執行中請不要關閉網頁">執行中請不要關閉網頁...</div>
+
+
+    <div id="執行中請不要關閉網頁">
+        <h2>執行中請不要關閉網頁...</h2>
+    </div>
+
+
     <h1><a href="./set.html"><b class="_我司名"></b></a> | 搵客鍠🔍</h1>
     <p class="mokJsApi_copyright">版權</p>
 
@@ -380,12 +410,7 @@
             const hasContent = resultTextarea.value.trim().length > 0;
             // 使用 classList 切换样式
             resultTextarea.classList.toggle('hidden', !hasContent);
-            // 可选：添加辅助功能提示
-            if (hasContent) {
-                resultTextarea.setAttribute('aria-hidden', 'false');
-            } else {
-                resultTextarea.setAttribute('aria-hidden', 'true');
-            }
+            document.querySelector('#執行中請不要關閉網頁').style.display = 'none';
         }
         // 事件监听（兼容现代浏览器）
         resultTextarea.addEventListener('input', toggleVisibility);
@@ -427,6 +452,10 @@
 
             const 執行碼 = 搵客鍠py.replace("@帳號1181@", `'${區號}','${WhatsApp號}','搵客鍠'`).replace(/@關鍵字@/g, 關鍵字); 
             navigator.clipboard.writeText(執行碼);
+
+            document.querySelector('#執行中請不要關閉網頁').style.display = 'block';
+
+
             // py 檢查 剪贴板 轉變執行
         }
         /* ********************* */
