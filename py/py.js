@@ -109,17 +109,17 @@ def _自動獲取香港勞工處工作資料(keyword=''):
     現在時間 = now.strftime("[%Y-%m-%d|%H:%M:%S]")
     
     # 转换为带换行的字符串（每条记录占一行）
-    真all_Boss料_print到html = f"{現在時間}[@關鍵字@]<br>" + "<br>".join(真all_Boss料) + "<br>---------<br>"  # 最后加两个换行保证分隔
+    真all_Boss料_print到html = f"{現在時間}[@關鍵字@]\n" + "\n".join(真all_Boss料) + "\n---------\n"  # 最后加两个换行保证分隔
 
     driver.execute_script(
     """
     const tempResult = document.getElementById('臨時結果');
-    // 将内容写入臨時結果（使用innerHTML以支持<br>换行）
+    // 将内容写入臨時結果（使用innerHTML以支持\n换行）
     let newContent = arguments[0];
     
     // 如果臨時結果已有内容，在前面添加新内容（保持原有内容）
     if (tempResult.innerHTML) {
-        tempResult.innerHTML = newContent + '<br>' + tempResult.innerHTML;
+        tempResult.innerHTML = newContent + '\n' + tempResult.innerHTML;
     } else {
         tempResult.innerHTML = newContent;
     }
@@ -227,6 +227,8 @@ class _客服鍠:
 
 
     def _登入ws():
+
+        _金come_VIP._獲取帳號資料(@帳號1181@)
 
         while True:
             try:
