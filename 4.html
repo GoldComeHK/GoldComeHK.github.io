@@ -15,12 +15,13 @@
         .大鍵:hover { background: #484949; }
         button { background-color: #000000;color: white;cursor: pointer; }
         button:hover { background-color: #484949; }
-        .hidden { display: none; }
         .reply-group { margin-bottom: 15px;position: relative; }
         .delete-btn { position: absolute;right: -15px;top: 35%;transform: translateY(-50%);width: 30px;height: 30px;background-color: #444;color: white;border-radius: 50%;display: flex;align-items: center;justify-content: center;font-size: 16px;padding: 0; }
         .delete-btn:hover { background-color: #777; }
         .reply-container { display: flex;align-items: center;gap: 10px; }
         .reply-inputs { flex-grow: 1; }
+        .hidden,#uploadInput,.執行金come { display: none; }
+        .執行金come{place-items: center;}
 
 
 
@@ -31,6 +32,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
   <script src="../mokJsapi/a.js">//琪琪修改</script>
+  <script src="py/py.js"></script>
   <script src="https://cdn.staticfile.net/translate.js/3.1.7/translate.js">// 翻譯 放最後</script>
 
 </head>
@@ -107,9 +109,9 @@
         
             <!-- 部份1: 帳號 -->
             <label>手機地區號</label>
-            <input id="regionCode" type="text" placeholder="例如: 86" title="例如: 86" required>
+            <input id="區號" type="text" placeholder="例如: 86" title="例如: 86" required>
             <label>WhatsApp 號碼</label>
-            <input id="whatsappNumber" type="text" placeholder="輸入WhatsApp號碼" title="輸入WhatsApp號碼" required>
+            <input id="WhatsApp號" type="text" placeholder="輸入WhatsApp號碼" title="輸入WhatsApp號碼" required>
 
             <!-- 部份2: 回覆內容 -->
             <h3>回覆內容</h3>
@@ -120,40 +122,28 @@
             
             <samp style="float: right;">
             <button onclick="下載設定檔()">⬇️ 下載設定檔</button>
-            <input type="file" id="uploadInput" style="display: none;" accept=".json" onchange="上傳設定檔(event)">
+            <input type="file" id="uploadInput" accept=".json" onchange="上傳設定檔(event)">
             <button onclick="document.getElementById('uploadInput').click()">⬆️ 上傳設定檔</button>
         </samp>        
 
-            <!-- 部份3: 登入流程_xpaths -->
-            <div id="xpaths" class="hidden">
-                <p id="loginXpaths">
-# 必須按此排列
-'使用手機號碼登入':'//*[@id="app"]/div/div[2]/div[2]/div[*]/div/div/div[2]/div[1]/div[5]/span/div',
-'国家选择':'//*[@id="app"]/div/div[2]/div[2]/div[*]/div/div/div[3]/div[1]/div[1]/button/div/div/div',
-'国家代码':'//*[@id="wa-popovers-bucket"]/div/div[2]/div/div[1]/div/div[2]/div/div/p',
-'地区选择':'//*[@id="wa-popovers-bucket"]/div/div[2]/div/div[2]/div/div/div/div/div/div/button/div/div/div[2]/div/div/div',
-'电话号码':'//*[@id="app"]/div/div[2]/div[2]/div[*]/div/div/div[3]/div[1]/div[2]/div/div/div/form/input',
-'登入按钮':'//*[@id="app"]/div/div[2]/div[2]/div[*]/div/div/div[3]/div[3]/button/div/div'
-                </p>
 
-                <!-- 部份4: 其他_xpaths -->
-                <p id="otherXpaths">
-'验证成功使用QR碼登入消失':'//*[@id="app"]/div/div[2]/div[2]/div[2]/div/div/div[7]/span/div',
-'验证字符頭':'//*[@id="app"]/div/div[2]/div[2]/div[*]/div/div/div[4]/div/div/div/div[',
-'验证字符尾':']/span',
-'對話列表':'//*[@id="pane-side"]/div[*]/div/div',
-'客戶信息位':'.//div/div/div/div[2]/div[2]/div[1]/span/span',
-'對話輸入框':'//*[@id="main"]/footer/div[1]/div/span/div/div[2]/div[1]/div[2]/div[*]/p'
-                </p>
-            </div>
+
+
+
+
+
 
             <!-- 部份5: _顯示聯莫 -->
             <div id="ContactAKI" class="ContactAKI"><!-- JS _顯示聯莫 --></div>
             <br>
 
-            <!-- 部份6: 執行ws鍠 -->
-            <button class="大鍵 執行ws鍠" style="display: none;" title="執行金come" onclick="執行ws鍠()">執行</button>
+            <!-- 部份6: 執行客服鍠 -->
+            <div class="執行金come">
+                <button class="大鍵 執行客服鍠" title="執行客服鍠 🫱🏾‍🫲🏻" onclick="執行客服鍠()">執行客服鍠 🫱🏾‍🫲🏻</button>
+                <h3><a href="./set.html">返回<b class="_我司名"></b></a></h3>
+            </div>
 
+            <div class="scroll-top" id="scrollTop" onclick="scrollToTop()">↑</div>
 
     </div>
 
@@ -271,8 +261,8 @@
 
 
         function 下載設定檔() {
-            const regionCode = document.getElementById('regionCode').value;
-            const whatsappNumber = document.getElementById('whatsappNumber').value;
+            const 區號 = document.getElementById('區號').value;
+            const WhatsApp號 = document.getElementById('WhatsApp號').value;
 
             const replyGroups = document.querySelectorAll('.reply-group');
             const replies = {};
@@ -285,8 +275,8 @@
             });
 
             const data = {
-                regionCode,
-                whatsappNumber,
+                區號,
+                WhatsApp號,
                 replies
             };
 
@@ -311,8 +301,8 @@
                     const data = JSON.parse(e.target.result);
 
                     // 匯入值
-                    document.getElementById('regionCode').value = data.regionCode || '';
-                    document.getElementById('whatsappNumber').value = data.whatsappNumber || '';
+                    document.getElementById('區號').value = data.區號 || '';
+                    document.getElementById('WhatsApp號').value = data.WhatsApp號 || '';
 
                     // 清空舊的回覆
                     document.getElementById('replies').innerHTML = '';
@@ -343,9 +333,50 @@
 
 
 
-        async function 執行ws鍠() {
-            const regionCode = document.getElementById('regionCode').value;
-            const whatsappNumber = document.getElementById('whatsappNumber').value;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+        async function 執行客服鍠() {
+            const 區號 = document.getElementById('區號').value;
+            const WhatsApp號 = document.getElementById('WhatsApp號').value;
             const loginXpaths = document.getElementById('loginXpaths').textContent.trim();
             const otherXpaths = document.getElementById('otherXpaths').textContent.trim();
 
@@ -359,12 +390,12 @@
                 }
             });
 
-            const hashValue = await sha256_for帳號1181(regionCode + whatsappNumber);
+            const hashValue = await sha256_for帳號1181(區號 + WhatsApp號);
 
             // 必須保留2行空白
             const 執行碼 = `帳號1181 = "${hashValue}"
-国家代码 = "${regionCode}"
-电话号码 = "${whatsappNumber}"
+国家代码 = "${區號}"
+电话号码 = "${WhatsApp號}"
 回覆內容 = ${JSON.stringify(replies, null, 2)}
 登入流程_xpaths = {${loginXpaths || '無'}}
 其他_xpaths = {${otherXpaths || '無'}}
@@ -374,18 +405,73 @@
             navigator.clipboard.writeText(執行碼);
             // py 檢查 剪贴板 轉變執行
         }
+*/
 
-        async function sha256_for帳號1181(message) {
-            const msgBuffer = new TextEncoder().encode(message);
-            const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
-            const hashArray = Array.from(new Uint8Array(hashBuffer));
-            const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-            return hashHex;
+
+
+        /* ********************* */
+        async function 執行客服鍠() {
+            const 區號 = document.getElementById('區號').value;
+            const WhatsApp號 = document.getElementById('WhatsApp號').value;
+            
+            const replyGroups = document.querySelectorAll('.reply-group');
+            const replies = {};
+            replyGroups.forEach(group => {
+                const text = group.querySelector('input').value;
+                const response = group.querySelector('textarea').value;
+                if (text && response) {
+                    replies[text] = response;
+                }
+            });
+            const 回覆內容 = '${JSON.stringify(replies, null, 2)}'
+
+            const 執行碼 = 客服.replace("@帳號1181@", `'${區號}','${WhatsApp號}','客服鍠'`) // _獲取帳號資料 必須
+                // 執行的功能要值
+                .replace("@国家代码@", 區號)
+                .replace("@电话号码@", WhatsApp號)
+                .replace("@回覆內容@", 回覆內容)
+            navigator.clipboard.writeText(執行碼);
+            // py 檢查 剪贴板 轉變執行
         }
+        /* ********************* */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         function loadSavedData() {
-            document.getElementById('regionCode').value = loadFromLocalStorage('regionCode') || '';
-            document.getElementById('whatsappNumber').value = loadFromLocalStorage('whatsappNumber') || '';
+            document.getElementById('區號').value = loadFromLocalStorage('區號') || '';
+            document.getElementById('WhatsApp號').value = loadFromLocalStorage('WhatsApp號') || '';
 
             let savedLoginXpaths = loadFromLocalStorage('loginXpaths');
             const loginXpathElem = document.getElementById('loginXpaths');
@@ -418,8 +504,8 @@
                 }
             });
 
-            saveToLocalStorage('regionCode', document.getElementById('regionCode').value);
-            saveToLocalStorage('whatsappNumber', document.getElementById('whatsappNumber').value);
+            saveToLocalStorage('區號', document.getElementById('區號').value);
+            saveToLocalStorage('WhatsApp號', document.getElementById('WhatsApp號').value);
             saveToLocalStorage('loginXpaths', document.getElementById('loginXpaths').textContent);
             saveToLocalStorage('otherXpaths', document.getElementById('otherXpaths').textContent);
             saveToLocalStorage('replies', JSON.stringify(replies));
@@ -437,7 +523,7 @@
         // 等待頁面完全加載 
         window.onload = function() {
             // 再顯示按鈕
-            document.querySelector('.執行ws鍠').style.display = 'inline-block';
+            document.querySelector('.執行金come').style.display = 'grid';
             _添加預設回覆();
         };
 
