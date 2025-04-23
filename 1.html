@@ -129,21 +129,27 @@
             
             </div>
 
+            <!-- 部份3: 結果 -->
+            <textarea id="搵客鍠結果" ></textarea>
+
             <samp style="float: right;">
             <button onclick="下載設定檔()">⬇️ 下載設定檔</button>
             <input type="file" id="uploadInput" accept=".json" onchange="上傳設定檔(event)">
             <button onclick="document.getElementById('uploadInput').click()">⬆️ 上傳設定檔</button>
+
+
+
         </samp>        
 
 
 
-            <!-- 部份3: _顯示聯莫 -->
+            <!-- 部份4: _顯示聯莫 -->
             <div id="ContactAKI" class="ContactAKI"><!-- JS _顯示聯莫 --></div>
             <br>
 
-            <!-- 部份4: 執行金come -->
+            <!-- 部份5: 執行金come -->
             <div class="執行金come">
-                <button class="大鍵"  title="執行金come" onclick="執行金come()">執行搵客鍠 🔍</button>
+                <button class="大鍵"  title="執行金come" onclick="執行搵客鍠()">執行搵客鍠 🔍</button>
                 <h3><a href="./set.html">返回<b class="_我司名"></b></a></h3>
             </div>
 
@@ -251,6 +257,9 @@
 
 
     <script>
+
+        AllData位 = ['區號','WhatsApp號','關鍵字','地區','搵客鍠結果']
+        // loadSaved 自動保存
         function saveToLocalStorage(key, value) {
             localStorage.setItem(key, value);
         }
@@ -260,31 +269,29 @@
         }
 
         function loadSavedData() {
-            document.getElementById('區號').value = loadFromLocalStorage('區號') || '';
-            document.getElementById('WhatsApp號').value = loadFromLocalStorage('WhatsApp號') || '';
-            document.getElementById('關鍵字').value = loadFromLocalStorage('關鍵字') || '';
-            document.getElementById('地區').value = loadFromLocalStorage('地區') || '';
+            AllData位.forEach((field) => {
+                const element = document.getElementById(field);
+                if (element) {
+                    element.value = loadFromLocalStorage(field) || '';
+                }
+            });
         }
 
         window.addEventListener('beforeunload', () => {
-            saveToLocalStorage('區號', document.getElementById('區號').value);
-            saveToLocalStorage('WhatsApp號', document.getElementById('WhatsApp號').value);
-            saveToLocalStorage('關鍵字', document.getElementById('關鍵字').value);
-            saveToLocalStorage('地區', document.getElementById('地區').value);
+            AllData位.forEach((field) => {
+                saveToLocalStorage(field, document.getElementById(field).value);
+            });
         });
 
-        function 下載設定檔() {
-            const 區號 = document.getElementById('區號').value;
-            const WhatsApp號 = document.getElementById('WhatsApp號').value;
-            const 關鍵字 = document.getElementById('關鍵字').value;
-            const 地區 = document.getElementById('地區').value;
 
-            const data = {
-                區號,
-                WhatsApp號,
-                關鍵字,
-                地區
-            };
+
+        // 手動上下載
+        function 下載設定檔() {
+            const data = AllData位.reduce((obj, field) => {
+                const element = document.getElementById(field);
+                obj[field] = element ? element.value : '';
+                return obj;
+            }, {});
 
             const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
             const url = URL.createObjectURL(blob);
@@ -297,6 +304,8 @@
             document.body.removeChild(link);
         }
 
+
+
         function 上傳設定檔(event) {
             const file = event.target.files[0];
             if (!file) return;
@@ -304,18 +313,20 @@
             const reader = new FileReader();
             reader.onload = function(e) {
                 try {
-                    const data = JSON.parse(e.target.result);
-
-                    // 匯入值
-                    document.getElementById('區號').value = data.區號 || '';
-                    document.getElementById('WhatsApp號').value = data.WhatsApp號 || '';
-                    document.getElementById('關鍵字').value = data.關鍵字 || '';
-                    document.getElementById('地區').value = data.地區 || '';
+                    const importedData = JSON.parse(e.target.result);
+                    
+                    // 使用 AllData位 自动匹配并导入数据
+                    AllData位.forEach(field => {
+                        const element = document.getElementById(field);
+                        if (element) {
+                            element.value = importedData[field] || '';
+                        }
+                    });
 
                     alert("設定檔已成功匯入！");
                 } catch (error) {
                     alert("檔案格式錯誤或解析失敗");
-                    console.error(error);
+                    console.error("解析错误:", error);
                 }
             };
             reader.readAsText(file);
@@ -350,9 +361,8 @@
 
 
 
-
         /* ********************* */
-        async function 執行金come() {
+        async function 執行搵客鍠() {
             const 區號 = document.getElementById('區號').value;
             const WhatsApp號 = document.getElementById('WhatsApp號').value;
             const 關鍵字 = document.getElementById('關鍵字').value;
@@ -362,7 +372,6 @@
             if (地區 == 'hk') {
                 搵客鍠py = 搜HK;
             }
-
 
             const 執行碼 = 搵客鍠py.replace("@帳號1181@", `'${區號}','${WhatsApp號}','搵客鍠'`).replace("@關鍵字@", 關鍵字); 
             navigator.clipboard.writeText(執行碼);
