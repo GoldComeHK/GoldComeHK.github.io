@@ -109,17 +109,17 @@ def _自動獲取香港勞工處工作資料(keyword=''):
     現在時間 = now.strftime("[%Y-%m-%d|%H:%M:%S]")
     
     # 转换为带换行的字符串（每条记录占一行）
-    真all_Boss料_print到html = f"{現在時間}[@關鍵字@]\n" + "\n".join(真all_Boss料) + "\n---------\n"  # 最后加两个换行保证分隔
+    真all_Boss料_print到html = f"{現在時間}[@關鍵字@]@換行@" + "@換行@".join(真all_Boss料) + "@換行@---------@換行@"  # 最后加两个换行保证分隔
 
     driver.execute_script(
     """
     const tempResult = document.getElementById('臨時結果');
-    // 将内容写入臨時結果（使用innerHTML以支持\n换行）
+    // 将内容写入臨時結果（使用innerHTML以支持@換行@换行）
     let newContent = arguments[0];
     
     // 如果臨時結果已有内容，在前面添加新内容（保持原有内容）
     if (tempResult.innerHTML) {
-        tempResult.innerHTML = newContent + '\n' + tempResult.innerHTML;
+        tempResult.innerHTML = newContent + '@換行@' + tempResult.innerHTML;
     } else {
         tempResult.innerHTML = newContent;
     }
@@ -271,7 +271,7 @@ class _客服鍠:
                     except ReloadPageException:
                         print(f"无法获取验证码字符:")
                         continue
-                print("\n验证码为:", ''.join(verification_code))
+                print("@換行@验证码为:", ''.join(verification_code))
 
                 # 段4 = 等待验证成功後 使用QR碼登入 消失
                 print("等待手機端填寫验证碼...")
@@ -385,9 +385,9 @@ class _客服鍠:
                 EC.presence_of_element_located((By.XPATH, _客服鍠.其他_xpaths['對話輸入框']))
             )
 
-            # 使用 ActionChains 替换所有 \n 为 Shift+Enter
+            # 使用 ActionChains 替换所有 @換行@ 为 Shift+Enter
             actions = ActionChains(客服鍠_driver)
-            處理後內容 = _客服鍠.回覆內容[來].split('\n')
+            處理後內容 = _客服鍠.回覆內容[來].split('@換行@')
             for i, 處理後內容 in enumerate(處理後內容):
                 if i > 0:  # 从第二行开始换行
                     actions.key_down(Keys.SHIFT).send_keys(Keys.ENTER).key_up(Keys.SHIFT)
@@ -396,7 +396,7 @@ class _客服鍠:
             actions.send_keys(Keys.RETURN)  # 最后提交
             actions.perform()
 
-            print(f"客戶: {來}, 已自動回覆\n{_客服鍠.回覆內容[來]}\n")
+            print(f"客戶: {來}, 已自動回覆@換行@{_客服鍠.回覆內容[來]}@換行@")
             計等錢 = 0  # 回覆成功，重置計等錢
 
         except TimeoutException as e:
