@@ -127,10 +127,8 @@ def _自動獲取香港勞工處工作資料(keyword=''):
     真all_Boss料_print到html.strip()  # 移除末尾多余换行
     )
 
-
+_自動獲取香港勞工處工作資料(@關鍵字@)
 #########結束#########
-_自動獲取香港勞工處工作資料,@關鍵字@
-
 `
 
 
@@ -248,12 +246,12 @@ class _客服鍠:
                             # 使用字典映射對應參數
                             參數映射 = {"国家代码": _客服鍠.国家代码, "电话号码": _客服鍠.电话号码}
                             if not _chrome_雜項._檢查文字輸入(鍵, 值, 參數映射[鍵]):
-                                raise ReloadPageException()
+                                raise _ReloadPageException()
                         else:
                             if not _chrome_雜項._檢查點擊(鍵,值):
-                                raise ReloadPageException()
+                                raise _ReloadPageException()
                         time.sleep(random.uniform(0.8, 4.8))
-                except ReloadPageException:
+                except _ReloadPageException:
                     continue
 
                 # 段3 = 等待验证码加载
@@ -268,7 +266,7 @@ class _客服鍠:
                                 验证码字符XPATH))
                         )
                         verification_code.append(code_element.text)
-                    except ReloadPageException:
+                    except _ReloadPageException:
                         print(f"无法获取验证码字符:")
                         continue
                 print("@換行@验证码为:", ''.join(verification_code))
