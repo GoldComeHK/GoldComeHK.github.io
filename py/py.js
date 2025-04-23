@@ -132,10 +132,10 @@ def _自動獲取香港勞工處工作資料(keyword=''):
         真all_Boss料_print到html.strip()  # 移除末尾多余换行
         )
     except Exception as e:
-        print(f"\n_自動獲取香港勞工處工作資料-執行錯誤: {e}")
+        print(f"_自動獲取香港勞工處工作資料-執行錯誤: {e}")
 
 
-        
+
 
 def _提取聯絡方式(url,公司名xpath,表格xpath,電話篩選):
     try:
