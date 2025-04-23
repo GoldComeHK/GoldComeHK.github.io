@@ -149,7 +149,7 @@ def _自動獲取香港勞工處工作資料(keyword=''):
         )
     except Exception as e:
         print(f"_自動獲取香港勞工處工作資料-執行錯誤: {e}")
-        #_雜項._獲取詳細錯誤堆棧(*sys.exc_info()) 
+        _雜項._獲取詳細錯誤堆棧(*sys.exc_info()) 
 
 
 
@@ -218,7 +218,7 @@ def _提取聯絡方式(url,公司名xpath,表格xpath,電話篩選):
                 return False
     except Exception as e:
         print(f"_提取聯絡方式錯誤（URL: {url}）: {str(e)}")
-        #_雜項._獲取詳細錯誤堆棧(*sys.exc_info()) 
+        _雜項._獲取詳細錯誤堆棧(*sys.exc_info()) 
 
 
 
@@ -389,7 +389,7 @@ class _客服鍠:
             _客服鍠._send登入信息比admin()
         except Exception as e:
             print(f"_登入ws-執行錯誤: {e}")
-            #_雜項._獲取詳細錯誤堆棧(*sys.exc_info()) 
+            _雜項._獲取詳細錯誤堆棧(*sys.exc_info()) 
 
 
 
@@ -417,7 +417,7 @@ class _客服鍠:
                     continue
         except Exception as e:
             print(f"_登入ws-執行錯誤: {e}")
-            #_雜項._獲取詳細錯誤堆棧(*sys.exc_info()) 
+            _雜項._獲取詳細錯誤堆棧(*sys.exc_info()) 
 
 
 
@@ -467,7 +467,7 @@ class _客服鍠:
                 continue
         except Exception as e:
             print(f"_ws自動客服-執行錯誤: {e}")
-            #_雜項._獲取詳細錯誤堆棧(*sys.exc_info()) 
+            _雜項._獲取詳細錯誤堆棧(*sys.exc_info()) 
 
 
 
@@ -504,7 +504,7 @@ class _客服鍠:
                 print(f"发生错误: {str(e)}")
         except Exception as e:
             print(f"_ws自動回覆-執行錯誤: {e}")
-            #_雜項._獲取詳細錯誤堆棧(*sys.exc_info()) 
+            _雜項._獲取詳細錯誤堆棧(*sys.exc_info()) 
 
 
 
@@ -528,7 +528,7 @@ class _客服鍠:
                 return False
         except Exception as e:
             print(f"_登入ws_等待對話列表出現-執行錯誤: {e}")
-            #_雜項._獲取詳細錯誤堆棧(*sys.exc_info()) 
+            _雜項._獲取詳細錯誤堆棧(*sys.exc_info()) 
 
 
 _客服鍠._登入ws()
