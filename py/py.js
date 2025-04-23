@@ -73,29 +73,16 @@ def _自動獲取香港勞工處工作資料(keyword=''):
 
             # 取得資料總數
             if 顯總料數 == 0:
-                
-                # qqqqqq
                 total_jobs = soup.find("div", class_="py-2 d-lg-none").strong.text.strip()
-                #total_jobs = WebDriverWait(搵客鍠_driver, 10).until(
-                #    EC.element_to_be_clickable((By.XPATH, '//*[@id="content-innerdiv"]/div[3]/strong[1]'))
-                #)
-                # qqqqqq
-
-
-
-                
                 print(f'*** {total_jobs}個公司資料 @ 香港勞工處 ***')
                 顯總料數 = 1
 
             勞工處ulB = 勞工處ulr.replace('0/tc/jobseeker/jobsearch/joblist/', '')
             for job in job_listings:
-                #網址 = 勞工處ulB + job.find_next("a")["href"]
                 # 定位当前 job 元素下的第一个 <a> 标签
                 link_element = job.find_element(By.TAG_NAME, "a")
                 # 获取 href 属性并拼接完整 URL
-                網址 = 勞工處ulB + link_element.get_attribute("href")
-
-
+                網址 = link_element.get_attribute("href")
 
                 客的真聯 = _提取聯絡方式(網址,公司名xpath,表格xpath,[電話開頭,電話位數])
                 if 客的真聯:
@@ -179,6 +166,7 @@ def _提取聯絡方式(url,公司名xpath,表格xpath,電話篩選):
         job_table = tree.xpath(表格xpath)[0]
         table_text = job_table.text_content()
         '''
+        company_elements = tree.xpath(公司名xpath)
         if not company_elements:  # 若無匹配元素
             print(f"公司名稱 XPath 無效: {公司名xpath}")
             return False
