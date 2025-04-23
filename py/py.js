@@ -84,7 +84,7 @@ def _自動獲取香港勞工處工作資料(keyword=''):
 
 
                 
-                print(f'*** {total_jobs.text}個公司資料 @ 香港勞工處 ***')
+                print(f'*** {total_jobs}個公司資料 @ 香港勞工處 ***')
                 顯總料數 = 1
 
             勞工處ulB = 勞工處ulr.replace('0/tc/jobseeker/jobsearch/joblist/', '')
