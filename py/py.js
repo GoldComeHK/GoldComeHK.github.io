@@ -155,12 +155,38 @@ def _提取聯絡方式(url,公司名xpath,表格xpath,電話篩選):
         # 1. 提取公司名稱
         #_雜項._檢查元素存在('公司名xpath',公司名xpath)
         company_name = tree.xpath(公司名xpath)
+
+
+
+
+
+        
+        '''
         company_name = company_name[0].strip() if company_name else "未找到公司名稱"
-            
         # 2. 提取整個表格內容來搜尋聯絡方式
         #_雜項._檢查元素存在('表格xpath',表格xpath)
         job_table = tree.xpath(表格xpath)[0]
         table_text = job_table.text_content()
+        '''
+        if not company_elements:  # 若無匹配元素
+            print(f"公司名稱 XPath 無效: {公司名xpath}")
+            return False
+        company_name = company_elements[0].strip()
+
+        # 檢查表格是否存在
+        table_elements = tree.xpath(表格xpath)
+        if not table_elements:  # 若無匹配元素
+            print(f"表格 XPath 無效: {表格xpath}")
+            return False
+        job_table = table_elements[0]
+        table_text = job_table.text_content()
+
+
+
+
+
+
+
             
         # 提取聯絡方式
         phones, emails = _搵客鍠._篩選聯絡(table_text,電話篩選)
@@ -176,7 +202,7 @@ def _提取聯絡方式(url,公司名xpath,表格xpath,電話篩選):
             else:
                 return False
     except Exception as e:
-        print(f"_提取聯絡方式有錯誤: {e}")
+        print(f"_提取聯絡方式錯誤（URL: {url}）: {str(e)}")
 
 
 
