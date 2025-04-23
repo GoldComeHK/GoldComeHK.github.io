@@ -106,15 +106,15 @@ def _自動獲取香港勞工處工作資料(keyword=''):
     
 
     # 转换为带换行的字符串（每条记录占一行）
-    真all_Boss料_print到html = f"{現在時間}\n" + "\n".join(真all_Boss料) + "\n---------\n"  # 最后加两个换行保证分隔
+    真all_Boss料_print到html = f"{現在時間}<br>" + "<br>".join(真all_Boss料) + "<br>---------<br>"  # 最后加两个换行保证分隔
 
     搵客鍠_driver.execute_script(
     """
     const textarea = document.getElementById('搵客鍠結果');
     // 标准化换行符并确保开头有分隔
     let newContent = arguments[0];
-    if (textarea.value && !textarea.value.startsWith('\n')) {
-        newContent = newContent + '\n';
+    if (textarea.value && !textarea.value.startsWith('<br>')) {
+        newContent = newContent + '<br>';
     }
     textarea.value = newContent + textarea.value;
     """,
