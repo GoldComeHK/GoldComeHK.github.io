@@ -63,10 +63,17 @@ def _自動獲取香港勞工處工作資料(keyword=''):
             soup = BeautifulSoup(page_source, "html.parser")
             content_div = soup.find("div", id="content-innerdiv")
 
+            ''' qqqqqq
             # 等待表格加载
             WebDriverWait(搵客鍠_driver, 10).until(
                 EC.presence_of_element_located((By.CSS_SELECTOR, "tr.bg-white"))
             )
+            '''
+            # 同时满足元素存在且可见的条件
+            WebDriverWait(搵客鍠_driver, 15).until(
+                lambda d: d.find_element(By.CSS_SELECTOR, "tr.bg-white").is_displayed()
+            )
+
 
             # 获取所有符合条件的行
             job_listings = 搵客鍠_driver.find_elements(By.CSS_SELECTOR, "tr.bg-white")
