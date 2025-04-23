@@ -19,7 +19,7 @@ def _自動獲取香港勞工處工作資料(keyword=''):
         
 
         搵客鍠_driver = _chrome_雜項._Chrome設定('搵客鍠')
-        #print("搵客鍠_driver id =", id(搵客鍠_driver))
+        搵客鍠_driver.maximize_window() # 最大化窗口
 
         公司名xpath = '//*[@id="empName"]/text()'
         表格xpath = '//*[@id="jobOrderTable"]'
@@ -97,8 +97,9 @@ def _自動獲取香港勞工處工作資料(keyword=''):
             # 點擊下一頁按鈕
             if int(total_jobs) > _每頁量:
                 # 點擊下一頁按鈕
-                next_page_button = 搵客鍠_driver.find_element(By.XPATH, '//*[@id="content-innerdiv"]/div[4]/div/a[3]')
-                next_page_button.click()
+                #next_page_button = 搵客鍠_driver.find_element(By.XPATH, '//*[@id="content-innerdiv"]/div[4]/div/a[3]')
+                #next_page_button.click()
+                _chrome_雜項._檢查點擊('勞工處點擊下一頁按鈕','//*[@id="content-innerdiv"]/div[4]/div/a[3]')
                 _每頁量 += 20
                 找頁數 +=1
             else:
