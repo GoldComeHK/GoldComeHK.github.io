@@ -79,7 +79,13 @@ def _自動獲取香港勞工處工作資料(keyword=''):
 
             勞工處ulB = 勞工處ulr.replace('0/tc/jobseeker/jobsearch/joblist/', '')
             for job in job_listings:
-                網址 = 勞工處ulB + job.find_next("a")["href"]
+                #網址 = 勞工處ulB + job.find_next("a")["href"]
+                # 定位当前 job 元素下的第一个 <a> 标签
+                link_element = job.find_element(By.TAG_NAME, "a")
+                # 获取 href 属性并拼接完整 URL
+                網址 = 勞工處ulB + link_element.get_attribute("href")
+
+
 
                 客的真聯 = _提取聯絡方式(網址,公司名xpath,表格xpath,[電話開頭,電話位數])
                 if 客的真聯:
