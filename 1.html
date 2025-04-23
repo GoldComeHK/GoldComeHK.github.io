@@ -131,6 +131,7 @@
 
             <!-- 部份3: 結果 -->
             <textarea id="搵客鍠結果" ></textarea>
+            <p id="'臨時結果"></p>
 
             <samp style="float: right;">
             <button onclick="下載設定檔()">⬇️ 下載設定檔</button>
@@ -337,7 +338,28 @@
 
 
 
+        // 監聽臨時結果元素的變化
+        const 臨時結果 = document.getElementById("臨時結果");
+        const 搵客鍠結果 = document.getElementById("搵客鍠結果");
 
+        const observer = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutation) {
+                if (臨時結果.textContent.trim() !== "") {
+                    // 將新內容添加到 textarea 前面，並保留原有內容
+                    搵客鍠結果.value = 臨時結果.textContent + "\n" + 搵客鍠結果.value;
+                    
+                    // 清空臨時結果
+                    臨時結果.textContent = "";
+                }
+            });
+        });
+
+        // 開始觀察臨時結果元素的子節點和文本內容變化
+        observer.observe(臨時結果, {
+            childList: true,
+            characterData: true,
+            subtree: true
+        });
 
 
 
