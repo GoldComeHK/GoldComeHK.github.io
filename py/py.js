@@ -93,7 +93,7 @@ def _自動獲取香港勞工處工作資料(keyword=''):
 
     #################
     真all_Boss料 = _搵客鍠_雜項._西選重聯(all_Boss料)
-    print(f'真all_Boss料={真all_Boss料}') # ['基督教家庭服務中心:recruit@cfsc.org.hk', 'ZOE COMPANY LIMITED:98489878']
+    #print(f'真all_Boss料={真all_Boss料}') # ['基督教家庭服務中心:recruit@cfsc.org.hk', 'ZOE COMPANY LIMITED:98489878']
     print(f'==========')
     #################
 
