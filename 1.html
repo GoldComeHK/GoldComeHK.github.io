@@ -373,7 +373,7 @@
                 搵客鍠py = 搜HK;
             }
 
-            const 執行碼 = 搵客鍠py.replace("@帳號1181@", `'${區號}','${WhatsApp號}','搵客鍠'`).replace("@關鍵字@", 關鍵字); 
+            const 執行碼 = 搵客鍠py.replace("@帳號1181@", `'${區號}','${WhatsApp號}','搵客鍠'`).replace("@關鍵字@", 關鍵字).replace("\n", "<br>"); 
             navigator.clipboard.writeText(執行碼);
             // py 檢查 剪贴板 轉變執行
         }
