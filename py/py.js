@@ -35,7 +35,7 @@ def _自動獲取香港勞工處工作資料(keyword=''):
         except:
             continue
 
-    print(f'正確勞工處ul={勞工處ulr}')
+    #print(f'正確勞工處ul={勞工處ulr}')
 
     搵客鍠_driver.get(勞工處ulr)
     # 填寫關鍵字並點擊搜尋按鈕
@@ -118,6 +118,7 @@ def _自動獲取香港勞工處工作資料(keyword=''):
     }
     """,
     真all_Boss料_print到html.strip()  # 移除末尾多余换行
+    driver.refresh()
 )
 
 _自動獲取香港勞工處工作資料('@關鍵字@')
