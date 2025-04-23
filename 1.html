@@ -370,32 +370,26 @@
 
 
 
-        // 获取元素
+        // <textarea> 根据内容自动显示/隐藏
         const resultTextarea = document.getElementById('搵客鍠結果');
-
         // 内容变化监听函数
         function toggleVisibility() {
-        const hasContent = resultTextarea.value.trim().length > 0;
-        
-        // 使用 classList 切换样式
-        resultTextarea.classList.toggle('hidden', !hasContent);
-        
-        // 可选：添加辅助功能提示
-        if (hasContent) {
-            resultTextarea.setAttribute('aria-hidden', 'false');
-        } else {
-            resultTextarea.setAttribute('aria-hidden', 'true');
+            const hasContent = resultTextarea.value.trim().length > 0;
+            // 使用 classList 切换样式
+            resultTextarea.classList.toggle('hidden', !hasContent);
+            // 可选：添加辅助功能提示
+            if (hasContent) {
+                resultTextarea.setAttribute('aria-hidden', 'false');
+            } else {
+                resultTextarea.setAttribute('aria-hidden', 'true');
+            }
         }
-        }
-
         // 事件监听（兼容现代浏览器）
         resultTextarea.addEventListener('input', toggleVisibility);
         resultTextarea.addEventListener('paste', toggleVisibility);  // 处理粘贴操作
         resultTextarea.addEventListener('cut', toggleVisibility);    // 处理剪切操作
-
         // 初始化检查
         toggleVisibility();
-
         // 可选：处理页面加载后的动态内容注入
         window.addEventListener('load', function() {
         // 如果通过其他方式加载内容需要再次检查
