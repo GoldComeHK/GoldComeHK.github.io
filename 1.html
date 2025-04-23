@@ -343,6 +343,7 @@
         const 搵客鍠結果 = document.getElementById("搵客鍠結果");
 
         const observer = new MutationObserver(function(mutations) {
+            console.log('臨時結果=',臨時結果)
             mutations.forEach(function(mutation) {
                 if (臨時結果.textContent.trim() !== "") {
                     // 將新內容添加到 textarea 前面，並保留原有內容
@@ -356,6 +357,7 @@
 
         // 開始觀察臨時結果元素的子節點和文本內容變化
         observer.observe(臨時結果, {
+            
             childList: true,
             characterData: true,
             subtree: true
