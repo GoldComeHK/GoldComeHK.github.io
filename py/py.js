@@ -14,6 +14,11 @@
 ### 勞工處 ###### 勞工處 ###### 勞工處 ###### 勞工處 ###
 def _自動獲取香港勞工處工作資料(keyword=''):
 
+    勞工處XPATH = {
+        '左上資料數':'//*[@id="totalRecord"]',
+        '勞工處點擊下一頁按鈕':'//*[@id="swapNextPage"]'
+    }
+        
     try:
         _金come_VIP._獲取帳號資料(@帳號1181@)
         
@@ -53,7 +58,8 @@ def _自動獲取香港勞工處工作資料(keyword=''):
         顯總料數 = 0
         _每頁量 = 20
         while True:
-        # 等待搜尋結果加載完成
+
+            # 等待搜尋結果加載完成
             WebDriverWait(搵客鍠_driver, 10).until(EC.url_changes(勞工處ulr))
 
             # 獲取搜尋結果的HTML
@@ -62,29 +68,17 @@ def _自動獲取香港勞工處工作資料(keyword=''):
             # 解析HTML並提取工作資料
             soup = BeautifulSoup(page_source, "html.parser")
             content_div = soup.find("div", id="content-innerdiv")
-
-            ''' qqqqqq
-            # 等待表格加载
-            WebDriverWait(搵客鍠_driver, 10).until(
-                EC.presence_of_element_located((By.CSS_SELECTOR, "tr.bg-white"))
-            )
-            '''
-            # 同时满足元素存在且可见的条件
-            WebDriverWait(搵客鍠_driver, 15).until(
-                lambda d: d.find_element(By.CSS_SELECTOR, "tr.bg-white").is_displayed()
-            )
-
-
-            # 获取所有符合条件的行
-            job_listings = 搵客鍠_driver.find_elements(By.CSS_SELECTOR, "tr.bg-white")
+            job_listings = content_div.find_all("tr", class_="bg-white")
 
             # 取得資料總數
             if 顯總料數 == 0:
-                total_jobs = soup.find("div", class_="py-2 d-lg-none").strong.text.strip()
-                print(f'*** {total_jobs}個公司資料 @ 香港勞工處 ***')
-                顯總料數 = 1
+                顯總料數 = WebDriverWait(搵客鍠_driver, 9).until(
+                    EC.visibility_of_element_located((By.XPATH, 勞工處XPATH['左上資料數']))
+                )
+                顯總料數 = 顯總料數.text.strip()
+                print(f'*** 正在搜尋[{keyword}]有{顯總料數}個公司資料 @ 香港勞工處 ***')
 
-            勞工處ulB = 勞工處ulr.replace('0/tc/jobseeker/jobsearch/joblist/', '')
+            print(f"獲取第{找頁數+1}頁...")
             for job in job_listings:
                 # 定位当前 job 元素下的第一个 <a> 标签
                 link_element = job.find_element(By.TAG_NAME, "a")
@@ -102,11 +96,9 @@ def _自動獲取香港勞工處工作資料(keyword=''):
                     break
 
             # 點擊下一頁按鈕
-            if int(total_jobs) > _每頁量:
+            if int(顯總料數) > _每頁量:
                 # 點擊下一頁按鈕
-                #next_page_button = 搵客鍠_driver.find_element(By.XPATH, '//*[@id="content-innerdiv"]/div[4]/div/a[3]')
-                #next_page_button.click()
-                _chrome_雜項._檢查點擊('勞工處點擊下一頁按鈕','//*[@id="content-innerdiv"]/div[4]/div/a[3]')
+                _chrome_雜項._檢查點擊('勞工處點擊下一頁按鈕',勞工處XPATH['勞工處點擊下一頁按鈕'])
                 _每頁量 += 20
                 找頁數 +=1
             else:
