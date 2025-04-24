@@ -11,23 +11,28 @@
 搜HK = `
 ### 勞工處 ###### 勞工處 ###### 勞工處 ###### 勞工處 ###
 ### 勞工處 ###### 勞工處 ###### 勞工處 ###### 勞工處 ###
-### 勞工處 ###### 勞工處 ###### 勞工處 ###### 勞工處 ###
+##################  202504241656  ####################
 def _自動獲取香港勞工處工作資料(keyword=''):
 
     勞工處XPATH = {
-        '左上資料數':'//*[@id="totalRecord"]',
-        '勞工處點擊下一頁按鈕':'//*[@id="swapNextPage"]'
+        '左上資料數':'//*[@id="content-innerdiv"]/div[1]/div[1]/strong[1]',
+        '勞工處點擊下一頁按鈕':'//*[@id="swapNextPage"]',
+        '列表顯示':'//*[@id="content-innerdiv"]/div[1]/div/div[2]/a',
+        '公司名xpath':'//*[@id="empName"]/text()',
+        '表格xpath':'//*[@id="jobOrderTable"]',
+
+        '工作列表':'//*[@id="job_list_table"]/tbody',
+        '工作列表中的所有href':'//*[@id="job_list_table"]//a[contains(@id, "_orderNo_hyper")]'
     }
 
     try:
         _金come_VIP._獲取帳號資料(@帳號1181@)
-        
 
         搵客鍠_driver = _chrome_雜項._Chrome設定('搵客鍠')
         搵客鍠_driver.maximize_window() # 最大化窗口
 
-        公司名xpath = '//*[@id="empName"]/text()'
-        表格xpath = '//*[@id="jobOrderTable"]'
+        公司名xpath = 勞工處XPATH['公司名xpath']
+        表格xpath = 勞工處XPATH['表格xpath']
         電話開頭 = '4569'
         電話位數 = 7
         最多找幾頁 = 10
@@ -45,30 +50,22 @@ def _自動獲取香港勞工處工作資料(keyword=''):
             except:
                 continue
 
-        #print(f'正確勞工處ul={勞工處ulr}')
-
         搵客鍠_driver.get(勞工處ulr)
         # 填寫關鍵字並點擊搜尋按鈕
         search_box = 搵客鍠_driver.find_element(By.ID, "simp_searchKeyword")
         search_box.send_keys(keyword)
         search_button = 搵客鍠_driver.find_element(By.ID, "btnSearch")
         search_button.click()
-        
+
+        列表顯示 = 搵客鍠_driver.find_element(By.XPATH, 勞工處XPATH['列表顯示'])
+        列表顯示.click()
+
+        #print("目前網址:", 搵客鍠_driver.current_url)
+
         找頁數 = 0
         顯總料數 = 0
         _每頁量 = 20
         while True:
-
-            # 等待搜尋結果加載完成
-            WebDriverWait(搵客鍠_driver, 10).until(EC.url_changes(勞工處ulr))
-
-            # 獲取搜尋結果的HTML
-            page_source = 搵客鍠_driver.page_source
-
-            # 解析HTML並提取工作資料
-            soup = BeautifulSoup(page_source, "html.parser")
-            content_div = soup.find("div", id="content-innerdiv")
-            job_listings = content_div.find_all("tr", class_="bg-white")
 
             # 取得資料總數
             if 顯總料數 == 0:
@@ -79,12 +76,17 @@ def _自動獲取香港勞工處工作資料(keyword=''):
                 print(f'*** 正在搜尋[{keyword}]有{顯總料數}個公司資料 @ 香港勞工處 ***')
 
             print(f"獲取第{找頁數+1}頁...")
-            for job in job_listings:
-                # 定位当前 job 元素下的第一个 <a> 标签
-                link_element = job.find_element(By.TAG_NAME, "a")
-                # 获取 href 属性并拼接完整 URL
-                網址 = link_element.get_attribute("href")
 
+            # 6. 擷取工作列表中的所有 href 連結
+            WebDriverWait(搵客鍠_driver, 10).until(
+                EC.presence_of_element_located((By.XPATH, 勞工處XPATH['工作列表']))
+            )
+            rows = 搵客鍠_driver.find_elements(By.XPATH, 勞工處XPATH['工作列表中的所有href'])
+
+            print(f'結果列表中每行')
+            # 遍历每行提取链接
+            for row in rows:
+                網址 = row.get_attribute('href')
                 客的真聯 = _提取聯絡方式(網址,公司名xpath,表格xpath,[電話開頭,電話位數])
                 if 客的真聯:
                     all_Boss料.append(客的真聯)
@@ -115,16 +117,17 @@ def _自動獲取香港勞工處工作資料(keyword=''):
         # 時間生成
         now = datetime.now()
         現在時間 = now.strftime("[%Y-%m-%d|%H:%M:%S]")
-        
+
         # 转换为带换行的字符串（每条记录占一行）
         真all_Boss料_print到html = f"{現在時間}[@關鍵字@]@換行@" + "@換行@".join(真all_Boss料) + "@換行@---------@換行@"  # 最后加两个换行保证分隔
         print(真all_Boss料_print到html)
+
         driver.execute_script(
         """
         const tempResult = document.getElementById('臨時結果');
         // 将内容写入臨時結果（使用innerHTML以支持<br>换行）
         let newContent = arguments[0];
-        
+
         // 如果臨時結果已有内容，在前面添加新内容（保持原有内容）
         if (tempResult.innerHTML) {
             tempResult.innerHTML = newContent + '<br>' + tempResult.innerHTML;
@@ -136,7 +139,7 @@ def _自動獲取香港勞工處工作資料(keyword=''):
         )
     except Exception as e:
         print(f"_自動獲取香港勞工處工作資料-執行錯誤: {e}")
-        _雜項._獲取詳細錯誤堆棧(*sys.exc_info()) 
+        _雜項._獲取詳細錯誤堆棧(*sys.exc_info())
 
 
 
@@ -146,54 +149,20 @@ def _提取聯絡方式(url,公司名xpath,表格xpath,電話篩選):
         # 獲取網頁內容
         response = requests.get(url)
         response.raise_for_status()  # 檢查請求是否成功
-            
+
         # 解析HTML
         tree = html.fromstring(response.content)
-            
-        # 1. 提取公司名稱
-        #_雜項._檢查元素存在('公司名xpath',公司名xpath)
+
+        # 1. 提取公司名稱、廣告整頁內容
         company_name = tree.xpath(公司名xpath)
-
-
-
-
-
-        # qqqqqq
-        '''
-        company_name = company_name[0].strip() if company_name else "未找到公司名稱"
-        # 2. 提取整個表格內容來搜尋聯絡方式
-        #_雜項._檢查元素存在('表格xpath',表格xpath)
+        #print(f"company_name",company_name)
         job_table = tree.xpath(表格xpath)[0]
         table_text = job_table.text_content()
-        '''
-        company_elements = tree.xpath(公司名xpath)
-        if not company_elements:  # 若無匹配元素
-            print(f"公司名稱 XPath 無效: {公司名xpath}")
-            return False
-        company_name = company_elements[0].strip()
-        # qqqqqq
+        #print(f"廣告整頁內容",table_text)
 
-
-
-
-        # 檢查表格是否存在
-        table_elements = tree.xpath(表格xpath)
-        if not table_elements:  # 若無匹配元素
-            print(f"表格 XPath 無效: {表格xpath}")
-            return False
-        job_table = table_elements[0]
-        table_text = job_table.text_content()
-
-
-
-
-
-
-
-            
         # 提取聯絡方式
         phones, emails = _搵客鍠._篩選聯絡(table_text,電話篩選)
-            
+
         # 優先找ws
         if phones:
             for phone in phones:
@@ -206,10 +175,7 @@ def _提取聯絡方式(url,公司名xpath,表格xpath,電話篩選):
                 return False
     except Exception as e:
         print(f"_提取聯絡方式錯誤（URL: {url}）: {str(e)}")
-        _雜項._獲取詳細錯誤堆棧(*sys.exc_info()) 
-
-
-
+        _雜項._獲取詳細錯誤堆棧(*sys.exc_info())
 
 _自動獲取香港勞工處工作資料('@關鍵字@')
 #########結束#########
