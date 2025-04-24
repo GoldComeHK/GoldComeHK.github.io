@@ -67,12 +67,15 @@ def _自動獲取香港勞工處工作資料(keyword=''):
         while True:
 
             # 取得資料總數
+            顯總料數 = WebDriverWait(搵客鍠_driver, 9).until(
+                EC.visibility_of_element_located((By.XPATH, 勞工處XPATH['左上資料數']))
+            )
+            顯總料數 = 顯總料數.text.strip()
+            print(f'*** 正在搜尋[{keyword}]有{顯總料數}個公司資料 @ 香港勞工處 ***')
+
             if 顯總料數 == 0:
-                顯總料數 = WebDriverWait(搵客鍠_driver, 9).until(
-                    EC.visibility_of_element_located((By.XPATH, 勞工處XPATH['左上資料數']))
-                )
-                顯總料數 = 顯總料數.text.strip()
-                print(f'*** 正在搜尋[{keyword}]有{顯總料數}個公司資料 @ 香港勞工處 ***')
+                print("沒有資料，搜尋結束...")
+                break
 
             print(f"獲取第{找頁數+1}頁...")
 
