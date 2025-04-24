@@ -154,7 +154,7 @@ def _提取聯絡方式(url,公司名xpath,表格xpath,電話篩選):
         tree = html.fromstring(response.content)
 
         # 1. 提取公司名稱、廣告整頁內容
-        company_name = tree.xpath(公司名xpath)
+        company_name = tree.xpath(公司名xpath)[0]   #qqqq
         #print(f"company_name",company_name)
         job_table = tree.xpath(表格xpath)[0]
         table_text = job_table.text_content()
