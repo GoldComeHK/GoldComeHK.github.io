@@ -110,36 +110,11 @@ def _自動獲取香港勞工處工作資料(keyword=''):
         # 關閉瀏覽器
         搵客鍠_driver.quit()
 
-        #################
+        ######### Boss料PoHtml #########
         真all_Boss料 = _搵客鍠._西選重聯(all_Boss料)
-        print(f'真all_Boss料={真all_Boss料}') # ['基督教家庭服務中心:recruit@cfsc.org.hk', 'ZOE COMPANY LIMITED:98489878']
-        print(f'==========')
-        #################
-
-        # 時間生成
-        now = datetime.now()
-        現在時間 = now.strftime("[%Y-%m-%d|%H:%M:%S]")
-
-        # 转换为带换行的字符串（每条记录占一行）
-        真all_Boss料_print到html = f"{現在時間}[@關鍵字@]@換行@" + "@換行@".join(真all_Boss料) + "@換行@---------@換行@"  # 最后加两个换行保证分隔
-        print(真all_Boss料_print到html)
-
-        driver.execute_script(
-        """
-        const tempResult = document.getElementById('臨時結果');
-        // 将内容写入臨時結果（使用innerHTML以支持<br>换行）
-        let newContent = arguments[0];
-
-        // 如果臨時結果已有内容，在前面添加新内容（保持原有内容）
-        if (tempResult.innerHTML) {
-            tempResult.innerHTML = newContent + '<br>' + tempResult.innerHTML;
-        } else {
-            tempResult.innerHTML = newContent;
-        }
-        """,
-        真all_Boss料_print到html.strip()  # 移除末尾多余换行
-        )
-        driver.refresh()
+        _搵客鍠._聯Po網(真all_Boss料,'@關鍵字@')
+        ######### Boss料PoHtml #########
+        
     except Exception as e:
         print(f"_自動獲取香港勞工處工作資料-執行錯誤: {e}")
         _雜項._獲取詳細錯誤堆棧(*sys.exc_info())
