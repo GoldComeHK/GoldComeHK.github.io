@@ -73,13 +73,11 @@ def _自動獲取香港勞工處工作資料(keyword=''):
             顯總料數 = 顯總料數.text.strip()
             print(f'*** 正在搜尋[{keyword}]有{顯總料數}個公司資料 @ 香港勞工處 ***')
 
-            print(f"type(顯總料數)...{type(顯總料數)}")
             if int(顯總料數) == 0:
                 print("沒有資料，搜尋結束...")
                 break
 
             print(f"獲取第{找頁數+1}頁...")
-
             # 6. 擷取工作列表中的所有 href 連結
             WebDriverWait(搵客鍠_driver, 10).until(
                 EC.presence_of_element_located((By.XPATH, 勞工處XPATH['工作列表']))
@@ -102,7 +100,9 @@ def _自動獲取香港勞工處工作資料(keyword=''):
             # 點擊下一頁按鈕
             if int(顯總料數) > _每頁量:
                 # 點擊下一頁按鈕
-                _chrome_雜項._檢查點擊('勞工處點擊下一頁按鈕',勞工處XPATH['勞工處點擊下一頁按鈕'])
+                # qqqq
+                _chrome_雜項._檢查點擊(搵客鍠_driver,'勞工處點擊下一頁按鈕',勞工處XPATH['勞工處點擊下一頁按鈕'])
+                # qqqq
                 _每頁量 += 20
                 找頁數 +=1
             else:
@@ -223,11 +223,9 @@ _自動獲取香港勞工處工作資料('@關鍵字@')
 客服 = `
 class _客服鍠:
 
-
     国家代码 = '@国家代码@'
     电话号码 = '@电话号码@'
     回覆內容 = @回覆內容@    
-
 
     登入流程_xpaths = {
         # 必須按此排列
@@ -245,21 +243,31 @@ class _客服鍠:
         '验证字符尾':']/span',
         '對話列表':'//*[@id="pane-side"]/div[*]/div/div',
         '客戶信息位':'.//div/div/div/div[2]/div[2]/div[1]/span/span',
-        '對話輸入框':'//*[@id="main"]/footer/div[1]/div/span/div/div[2]/div[1]/div[2]/div[*]/p'
+        '對話輸入框':'//*[@id="main"]/footer/div[1]/div/span/div/div[2]/div[1]/div[2]/div[*]/p',
+        '繼續前往對話':'//*[@id="action-button"]',
+        '使用WhatsApp網頁版':'//*[@id="fallback_block"]/div/div/h4[2]/a'
     }
 
-    客服鍠_driver = _chrome_雜項._Chrome設定('客服鍠')
+    # Chrome設定
+    _driver = None  # 預設為 None
 
+    @classmethod
+    def _取得driver(cls):
+        if cls._driver is None:
+            cls._driver = _chrome_雜項._Chrome設定('客服鍠')
+        return cls._driver
 
-    def _登入ws():
+    @classmethod
+    def _登入ws(cls):
+        客服鍠_driver = cls._取得driver()
         try:
             _金come_VIP._獲取帳號資料(@帳號1181@)
 
             while True:
                 try:
                     # 打开WhatsApp网页版
-                    _客服鍠.客服鍠_driver.get("https://web.whatsapp.com/")
-                    time.sleep(random.uniform(3, 6))
+                    客服鍠_driver.get("https://web.whatsapp.com/")
+                    time.sleep(random.uniform(3, 20))
 
                     if _客服鍠._登入ws_等待對話列表出現():
                         print(f"已登入WhatsApp,如需登入其他帳號，請登出再重新執行程式。")
@@ -271,10 +279,10 @@ class _客服鍠:
                             if 鍵 in ("国家代码", "电话号码"):
                                 # 使用字典映射對應參數
                                 參數映射 = {"国家代码": _客服鍠.国家代码, "电话号码": _客服鍠.电话号码}
-                                if not _chrome_雜項._檢查文字輸入(鍵, 值, 參數映射[鍵]):
+                                if not _chrome_雜項._檢查文字輸入(客服鍠_driver,鍵, 值, 參數映射[鍵]):
                                     raise _ReloadPageException()
                             else:
-                                if not _chrome_雜項._檢查點擊(鍵,值):
+                                if not _chrome_雜項._檢查點擊(客服鍠_driver,鍵,值):
                                     raise _ReloadPageException()
                             time.sleep(random.uniform(0.8, 4.8))
                     except _ReloadPageException:
@@ -286,9 +294,9 @@ class _客服鍠:
                     for i in range(1, 9):
                         验证码字符XPATH = _客服鍠.其他_xpaths['验证字符頭'] + str(i) + _客服鍠.其他_xpaths['验证字符尾']
                         try:
-                            code_element = WebDriverWait(_客服鍠.客服鍠_driver, 30).until(
+                            code_element = WebDriverWait(客服鍠_driver, 30).until(
                                 EC.visibility_of_element_located((
-                                    By.XPATH, 
+                                    By.XPATH,
                                     验证码字符XPATH))
                             )
                             verification_code.append(code_element.text)
@@ -299,13 +307,13 @@ class _客服鍠:
 
                     # 段4 = 等待验证成功後 使用QR碼登入 消失
                     print("等待手機端填寫验证碼...")
-                    WebDriverWait(_客服鍠.客服鍠_driver, 180).until_not(
+                    WebDriverWait(客服鍠_driver, 180).until_not(
                         EC.presence_of_element_located((
-                            By.XPATH, 
+                            By.XPATH,
                             _客服鍠.其他_xpaths['验证成功使用QR碼登入消失']
                         ))
                     )
-                    
+
                     # 段5 = 验证成功 等待對話列表出現
                     time.sleep(random.uniform(3.8, 5.8))
                     _客服鍠._登入ws_等待對話列表出現()
@@ -313,30 +321,32 @@ class _客服鍠:
                 except Exception as e:
                     print(f"主程序出错: {str(e)}")
                     print(f"登入WhatsApp超时，刷新页面...")
+                    _雜項._獲取詳細錯誤堆棧(*sys.exc_info())
                     continue
 
             # 段6 = send登入信息比admin
             _客服鍠._send登入信息比admin()
         except Exception as e:
             print(f"_登入ws-執行錯誤: {e}")
-            _雜項._獲取詳細錯誤堆棧(*sys.exc_info()) 
+            _雜項._獲取詳細錯誤堆棧(*sys.exc_info())
 
 
 
 
 
-
-    def _send登入信息比admin():
+    @classmethod
+    def _send登入信息比admin(cls):
+        客服鍠_driver = cls._取得driver()
         try:
-            _客服鍠.客服鍠_driver.get(f"https://api.whatsapp.com/send/?phone={官Ws}&text={月費用戶}%0D%0A{本程式名}%0D%0A{帳號1181}")
+            客服鍠_driver.get(f"https://api.whatsapp.com/send/?phone={官Ws}&text={月費用戶}%0D%0A{本程式名}%0D%0A{帳號1181}")
 
             while True:
                 try:
-                    _chrome_雜項._檢查點擊('繼續前往對話','//*[@id="action-button"]')
-                    _chrome_雜項._檢查點擊('使用 WhatsApp 網頁版','//*[@id="fallback_block"]/div/div/h4[2]/a')
+                    _chrome_雜項._檢查點擊(客服鍠_driver,'繼續前往對話', _客服鍠.其他_xpaths['繼續前往對話'])
+                    _chrome_雜項._檢查點擊(客服鍠_driver,'使用 WhatsApp 網頁版', _客服鍠.其他_xpaths['使用WhatsApp網頁版'])
 
                     # 等待輸入框出現並輸入回覆
-                    對話輸入框 = WebDriverWait(_客服鍠.客服鍠_driver, 10).until(
+                    對話輸入框 = WebDriverWait(客服鍠_driver, 10).until(
                         EC.presence_of_element_located((By.XPATH, _客服鍠.其他_xpaths['對話輸入框']))
                     )
 
@@ -347,14 +357,16 @@ class _客服鍠:
                     continue
         except Exception as e:
             print(f"_登入ws-執行錯誤: {e}")
-            _雜項._獲取詳細錯誤堆棧(*sys.exc_info()) 
+            _雜項._獲取詳細錯誤堆棧(*sys.exc_info())
 
 
 
 
 
     計等錢 = 0
-    def _ws自動客服():
+    @classmethod
+    def _ws自動客服(cls):
+        客服鍠_driver = cls._取得driver()
         try:
             while True:
                 try:
@@ -362,21 +374,21 @@ class _客服鍠:
                     break
                 except:
                     continue
-            
+
             while True:
                 _客服鍠.計等錢 +=1
                 print(f"你已收到{_客服鍠.計等錢}萬元")
 
                 try:
                     # 每次迭代時重新獲取 chat_list
-                    chat_list = WebDriverWait(_客服鍠.客服鍠_driver, 30).until(
+                    chat_list = WebDriverWait(客服鍠_driver, 30).until(
                         EC.presence_of_all_elements_located((By.XPATH, _客服鍠.其他_xpaths['對話列表']))
                     )
 
                     for chat in chat_list:
                         try:
                             # 每次點擊前重新獲取 chat 元素
-                            chat = WebDriverWait(_客服鍠.客服鍠_driver, 10).until(
+                            chat = WebDriverWait(客服鍠_driver, 10).until(
                                 EC.presence_of_element_located((By.XPATH,_客服鍠.其他_xpaths['客戶信息位']))
                             )
                             客來詢 = chat.text
@@ -397,25 +409,27 @@ class _客服鍠:
                 continue
         except Exception as e:
             print(f"_ws自動客服-執行錯誤: {e}")
-            _雜項._獲取詳細錯誤堆棧(*sys.exc_info()) 
+            _雜項._獲取詳細錯誤堆棧(*sys.exc_info())
 
 
 
 
 
-    def _ws自動回覆(來):
+    @classmethod
+    def _ws自動回覆(cls,來):
+        客服鍠_driver = cls._取得driver()
         try:
             if not 月費用戶:
                 _金come_VIP._檢查使用次數()
 
             try:
                 # 等待輸入框出現並輸入回覆
-                WebDriverWait(_客服鍠.客服鍠_driver, 10).until(
+                WebDriverWait(客服鍠_driver, 10).until(
                     EC.presence_of_element_located((By.XPATH, _客服鍠.其他_xpaths['對話輸入框']))
                 )
 
                 # 使用 ActionChains 替换所有 @換行@ 为 Shift+Enter
-                actions = ActionChains(_客服鍠.客服鍠_driver)
+                actions = ActionChains(客服鍠_driver)
                 處理後內容 = _客服鍠.回覆內容[來].split('@換行@')
                 for i, 處理後內容 in enumerate(處理後內容):
                     if i > 0:  # 从第二行开始换行
@@ -434,18 +448,20 @@ class _客服鍠:
                 print(f"发生错误: {str(e)}")
         except Exception as e:
             print(f"_ws自動回覆-執行錯誤: {e}")
-            _雜項._獲取詳細錯誤堆棧(*sys.exc_info()) 
+            _雜項._獲取詳細錯誤堆棧(*sys.exc_info())
 
 
 
 
     檢列 = 0
-    def _登入ws_等待對話列表出現():
+    @classmethod
+    def _登入ws_等待對話列表出現(cls):
+        客服鍠_driver = cls._取得driver()
         try:
             try:
-                WebDriverWait(_客服鍠.客服鍠_driver, 5).until(
+                WebDriverWait(客服鍠_driver, 5).until(
                 EC.presence_of_element_located((
-                    By.XPATH, 
+                    By.XPATH,
                     _客服鍠.其他_xpaths['對話列表']  # 同时验证属性
                 ))
                 )
@@ -458,8 +474,7 @@ class _客服鍠:
                 return False
         except Exception as e:
             print(f"_登入ws_等待對話列表出現-執行錯誤: {e}")
-            _雜項._獲取詳細錯誤堆棧(*sys.exc_info()) 
-
+            _雜項._獲取詳細錯誤堆棧(*sys.exc_info())
 
 _客服鍠._登入ws()
 _客服鍠._ws自動客服()
