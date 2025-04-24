@@ -26,7 +26,7 @@ def _自動獲取香港勞工處工作資料(keyword=''):
     }
 
     try:
-        _金come_VIP._獲取帳號資料(@帳號1181@)
+        最多找幾頁 = _金come_VIP._獲取帳號資料(@帳號1181@)
 
         搵客鍠_driver = _chrome_雜項._Chrome設定('搵客鍠')
         搵客鍠_driver.maximize_window() # 最大化窗口
@@ -35,11 +35,8 @@ def _自動獲取香港勞工處工作資料(keyword=''):
         表格xpath = 勞工處XPATH['表格xpath']
         電話開頭 = '4569'
         電話位數 = 7
-        最多找幾頁 = 1
-        if 月費用戶:
-            最多找幾頁 = 10
-        all_Boss料 = []
 
+        all_Boss料 = []
         # 勞工處網分流
         勞工處ulr = ''
         子域名清單 = ["www","www1", "www2", "www3", "www4"]
@@ -94,10 +91,9 @@ def _自動獲取香港勞工處工作資料(keyword=''):
                     all_Boss料.append(客的真聯)
                     print(f'{客的真聯}')
 
-            if isinstance(最多找幾頁, (int)):  # 检查是否是数字
-                if 找頁數 >= 最多找幾頁 :
-                    print(f"第{找頁數}頁，結束搜尋")
-                    break
+            if 找頁數 >= 最多找幾頁 :
+                print(f"第{找頁數}頁，結束搜尋")
+                break
 
             # 點擊下一頁按鈕
             if int(顯總料數) > _每頁量:
