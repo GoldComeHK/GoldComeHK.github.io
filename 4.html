@@ -23,6 +23,14 @@
         .hidden,#uploadInput,.執行金come { display: none; }
         .執行金come{place-items: center;}
 
+        #執行中請不要關閉網頁 {position: fixed;top: 0;left: 0;width: 100vw;    /* 使用视口单位确保全覆盖 */
+            height: 100vh;background: rgba(0, 0, 0, 0.1); /* 改用 rgba 透明度 */
+            backdrop-filter: blur(2px);-webkit-backdrop-filter: blur(10px); /* Safari 兼容 */
+            z-index: 9999;   /* 确保在最顶层 */
+            justify-content: center; /* 水平居中 */
+            align-items: center;    /* 垂直居中 */
+            justify-content: center;align-items: center;flex-direction: column;display: none;}
+        #執行中請不要關閉網頁 h2 {color: white;font-size: 2rem;text-shadow: 0 2px 4px rgba(0,0,0,0.5);}
 
 
     </style>
@@ -78,6 +86,9 @@
 <body>
     <samp id="莫生查詢" style="display: none;">莫生我要查詢金come使用問題</samp>
 
+    <div id="執行中請不要關閉網頁">
+        <h2>執行中請不要關閉網頁...</h2>
+    </div>
     <h1><a href="./set.html"><b class="_我司名"></b></a> | 客服鍠</h1>
     <p class="mokJsApi_copyright">版權</p>
 
@@ -474,6 +485,8 @@
                 .replace("@回覆內容@", 回覆內容)
             navigator.clipboard.writeText(執行碼);
             // py 檢查 剪贴板 轉變執行
+
+            document.querySelector('#執行中請不要關閉網頁').style.display = 'flex';
         }
         /* ********************* */
 
