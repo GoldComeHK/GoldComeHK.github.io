@@ -18,7 +18,7 @@ def _自動獲取香港勞工處工作資料(keyword=''):
         '左上資料數':'//*[@id="totalRecord"]',
         '勞工處點擊下一頁按鈕':'//*[@id="swapNextPage"]'
     }
-        
+
     try:
         _金come_VIP._獲取帳號資料(@帳號1181@)
         
@@ -118,7 +118,7 @@ def _自動獲取香港勞工處工作資料(keyword=''):
         
         # 转换为带换行的字符串（每条记录占一行）
         真all_Boss料_print到html = f"{現在時間}[@關鍵字@]@換行@" + "@換行@".join(真all_Boss料) + "@換行@---------@換行@"  # 最后加两个换行保证分隔
-
+        print(真all_Boss料_print到html)
         driver.execute_script(
         """
         const tempResult = document.getElementById('臨時結果');
