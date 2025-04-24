@@ -24,28 +24,13 @@
         .hidden,#uploadInput,.執行金come { display: none; }
         .執行金come{place-items: center;}
         
-        #執行2中請不要關閉網頁 {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;    /* 使用视口单位确保全覆盖 */
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.1); /* 改用 rgba 透明度 */
-    backdrop-filter: blur(2px);
-    -webkit-backdrop-filter: blur(10px); /* Safari 兼容 */
-    z-index: 9999;   /* 确保在最顶层 */
-    display: flex;    /* 新增以下居中样式 */
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    display: none; 
-}
-
-#執行中請不要關閉網頁 h2 {
-    color: white;
-    font-size: 2rem;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
-}
+        #執行中請不要關閉網頁 {position: fixed;top: 0;left: 0;width: 100vw;    /* 使用视口单位确保全覆盖 */
+            height: 100vh;background: rgba(0, 0, 0, 0.1); /* 改用 rgba 透明度 */
+            backdrop-filter: blur(2px);-webkit-backdrop-filter: blur(10px); /* Safari 兼容 */
+            z-index: 9999;   /* 确保在最顶层 */
+            display: flex;    /* 新增以下居中样式 */
+            justify-content: center;align-items: center;flex-direction: column;display: none;}
+        #執行中請不要關閉網頁 h2 {color: white;font-size: 2rem;text-shadow: 0 2px 4px rgba(0,0,0,0.5);}
 
     </style>
 
@@ -403,7 +388,7 @@
 
 
 
-        /*
+
         // <textarea> 根据内容自动显示/隐藏
         const resultTextarea = document.getElementById('搵客鍠結果');
         // 内容变化监听函数
@@ -424,7 +409,6 @@
         // 如果通过其他方式加载内容需要再次检查
         toggleVisibility();
         });
-        */
 
 
 
