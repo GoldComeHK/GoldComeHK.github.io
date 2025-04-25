@@ -9,8 +9,8 @@
         h1 { text-align: center;margin-bottom: 20px;font-size: 2em;text-shadow: 2px 2px 4px gold; }
         .container { max-width: 600px;margin: 0 auto;padding: 20px;border-radius: 12px;background: #2f3030;box-shadow: 4px 4px 8px #767676; }
         label, p { margin: 10px 0 5px; }
-        input, textarea, button { margin-bottom: 10px;padding: 8px;border-radius: 8px;border: none;outline: none; }
-        input, textarea { width: 100%; }
+        input, textarea, select, button { margin-bottom: 10px;padding: 8px;border-radius: 8px;border: none;outline: none; }
+        input, select, textarea { width: 100%; }
         .大鍵 {border-radius: 10px; background: #282828;color: #bdbdbd;box-shadow: inset 25px 25px 50px rgba(139, 139, 139, 0.8);border: 1px solid #686868;font-size: 48px;width: 100%; }
         .大鍵:hover { background: #484949; }
         button { background-color: #000000;color: white;cursor: pointer; }
@@ -130,7 +130,7 @@
 
 
 
-    <div  class="container" style="padding: 20px;">
+    <div id="促銷鍠Box" class="container" style="padding: 20px;">
         
             <!-- 部份1: 帳號 -->
             <label>請填寫您的手機地區號*</label>
@@ -144,20 +144,27 @@
             <input id="發出促銷信的gmail" type="text" placeholder="請填寫發出促銷信的gmail" title="請填寫發出促銷信的gmail" required>
             <a href="#"><label>gmail的應用程式密碼*</label><b>❔</b></a>
             <input id="gmail的應用程式密碼" type="text" placeholder="請填寫gmail的應用程式密碼" title="請填寫gmail的應用程式密碼" required>
+            <div id="repliesSelectContainer"> <!-- 这里动态加载 select 或提示 --> </div>
+            <label>促銷信內容*</label>
+            <textarea id="促銷信內容" placeholder="請編寫促銷信內容..." title="請編寫促銷信內容"></textarea>
+
+
+            <!-- 部份3: 促銷鍠草稿 -->
+            <hr>
+            <label>草稿</label>
+            <p id="促銷信草稿" class="container"></p>
+            <hr>
+            <label>自動回覆內容</label>
+            <p id="自動回覆內容" class="container"></p>
 
 
 
-
-
-
-
-
-            
+            <!-- 部份4: 設定檔 -->
             <samp style="float: right;">
-            <button onclick="下載設定檔()">⬇️ 下載設定檔</button>
-            <input type="file" id="uploadInput" accept=".json" onchange="上傳設定檔(event)">
-            <button onclick="document.getElementById('uploadInput').click()">⬆️ 上傳設定檔</button>
-        </samp>        
+                <button onclick="下載設定檔()">⬇️ 下載設定檔</button>
+                <input type="file" id="uploadInput" accept=".json" onchange="上傳設定檔(event)">
+                <button onclick="document.getElementById('uploadInput').click()">⬆️ 上傳設定檔</button>
+            </samp>        
 
 
 
@@ -226,7 +233,7 @@
 
 
     <script>
-        AllData位 = ['區號','WhatsApp號','發出促銷信的gmail','gmail的應用程式密碼','搵qqqq客鍠結果']
+        AllData位 = ['區號','WhatsApp號','發出促銷信的gmail','gmail的應用程式密碼','促銷鍠客詢select','促銷信內容']
         // loadSaved 自動保存
         function saveToLocalStorage(key, value) {
             localStorage.setItem(key, value);
@@ -308,7 +315,6 @@
                 }
             };
             reader.readAsText(file);
-            location.reload();
         }
 
 
@@ -340,6 +346,58 @@
 
 
 
+        
+
+
+
+        // 客詢select
+        let 對應回覆內容 = ''
+        function _客詢select() {
+            const container = document.getElementById('repliesSelectContainer');
+            const replies = JSON.parse(localStorage.getItem('replies') || '{}');
+
+            const 促銷鍠Box = document.getElementById('促銷鍠Box');
+            // 清空容器
+            container.innerHTML = '';
+
+            if (Object.keys(replies).length === 0) {
+                // 如果没有数据，显示提示
+                促銷鍠Box.innerHTML = '';
+
+                促銷鍠Box.innerHTML = '<p class="大鍵"><a href="./4.html" title="🫱🏾‍🫲🏻 客服鍠：7 × 24 不間斷即時回應客戶查詢，增加專業感與成交率。支援多語言。" >请先到 客服鍠 🫱🏾‍🫲🏻 增加客服自动回复内容</a> </p>';
+
+            } else {
+                // 如果有数据，创建 select 元素
+                const select = document.createElement('select');
+                select.id = '促銷鍠客詢select';  // 添加 ID
+
+                // 遍历 replies 的 key，添加到 select
+                Object.keys(replies).forEach(key => {
+                    const option = document.createElement('option');
+                    option.value = key;
+                    option.textContent = key;
+                    select.appendChild(option);
+                });
+
+                // 添加到页面
+                const label = document.createElement('label');
+                label.textContent = '請選擇回覆關鍵字*'; // 设置标签文字
+                container.appendChild(label); // 先添加 label
+                container.appendChild(select);
+
+                // 可选：监听选择变化
+                select.addEventListener('change', (e) => {
+                    const selectedKey = e.target.value;
+                    if (selectedKey) {
+                        對應回覆內容 = replies[selectedKey]
+
+                        _促銷鍠草稿();
+                        
+                        //alert(`選擇的回覆關鍵字:\n ${selectedKey}\n=========\n對應回覆內容:\n ${replies[selectedKey]}`);
+                    }
+                });
+            }
+        }
 
 
 
@@ -352,23 +410,39 @@
 
 
 
+        function _促銷鍠草稿() {
+            // 获取DOM元素
+            const 區號B = document.getElementById('區號').value;
+            const WhatsApp號B = document.getElementById('WhatsApp號').value;
+            const 我ws號 = 區號B + WhatsApp號B
 
+            // 将换行符转换为 <br>，并保留空格（使用HTML实体&nbsp;）
+            const promoContent = document.getElementById('促銷信內容').value
+                .replace(/\n/g, '<br>')  // 替换换行符
+                .replace(/ /g, '&nbsp;'); // 替换空格（可选，如需保留空格）
+                
+            const querySelect = document.getElementById('促銷鍠客詢select').value;
+                
+            對應回覆內容 = 對應回覆內容.replace(/\n/g, '<br>')  // 替换换行符
+            .replace(/ /g, '&nbsp;'); // 替换空格（可选，如需保留空格）
 
+            // 構建WhatsApp鏈接
+            let whatsappLink = '';
+            if (我ws號) {
+                whatsappLink = `https://wa.me/${我ws號}`;
+                if (querySelect) {
+                    whatsappLink += `/?text=${querySelect}`;
+                }
+            }
 
+            // 更新自动回复内容的函数
+            document.getElementById('促銷信草稿').innerHTML  = 
+                `${promoContent}
+                <br><br>
+                ${whatsappLink}`;
+            document.getElementById('自動回覆內容').innerHTML  = 對應回覆內容;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+        }
 
 
 
@@ -467,7 +541,9 @@
             // 再顯示按鈕
             document.querySelector('.執行金come').style.display = 'grid';
 
-            console.log(localStorage);
+            _客詢select()
+            // 監聽輸入變化
+            document.getElementById('促銷信內容').addEventListener('input', _促銷鍠草稿);
         };
 
         function Start() {
