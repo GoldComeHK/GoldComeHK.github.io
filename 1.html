@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>金come | 全自動營銷閉環系統</title>
+    <title>搵客鍠🔍 | 金come</title>
     <style>
         body { font-family: Arial, sans-serif;background: linear-gradient(145deg, #a8a8a8, #000000);color: #ecf0f1;padding: 20px; }
         h1 { text-align: center;margin-bottom: 20px;font-size: 2em;text-shadow: 2px 2px 4px gold; }
@@ -45,12 +45,16 @@
 
 </head>
 <body>
-    <samp id="莫生查詢" style="display: none;">莫生我要查詢金come使用問題</samp>
+    <samp id="莫生查詢" style="display: none;">莫生我要查詢搵客鍠使用問題</samp>
+
+    <samp id="匯入警告" style="display: none;">匯入設定檔會刪除現時設定！</samp>
+    <samp id="設定匯入" style="display: none;">設定檔已成功匯入！</samp>
+    <samp id="設定格式錯誤" style="display: none;">檔案格式錯誤或解析失敗</samp>
 
     <div id="執行中請不要關閉網頁">
         <h2>執行中請不要關閉網頁...</h2>
     </div>
-    <h1><a href="./set.html"><b class="_我司名"></b></a> | 搵客鍠🔍</h1>
+    <h1>搵客鍠🔍 | <a href="./set.html"><b class="_我司名"></b></a></h1>
     <p class="mokJsApi_copyright">版權</p>
 
 
@@ -122,24 +126,24 @@
     <div  class="container" style="padding: 20px;">
         
             <!-- 部份1: 帳號 -->
-            <label>您的手機地區號</label>
+            <label>請填寫您的手機地區號*</label>
             <input id="區號" type="text" placeholder="例如: 86" title="例如: 86" required>
-            <label>您的WhatsApp 號碼</label>
-            <input id="WhatsApp號" type="text" placeholder="輸入WhatsApp號碼" title="輸入WhatsApp號碼" required>
+            <label>請填寫您的 WhatsApp 號碼*</label>
+            <input id="WhatsApp號" type="text" placeholder="請填寫WhatsApp號碼" title="請填寫WhatsApp號碼" required>
 
 
 
             <!-- 部份2: setting -->
             <div class="reply-group">
                 
-                <label>請選擇客戶地區*</label>
-                <select id="地區" title="請選擇客戶地區">
+                <label>請選擇搜尋地區*</label>
+                <select id="地區" title="請選擇搜尋地區">
                     <option value="hk" selected>香港</option>
                     <option value="usa" >美國</option>
                 </select>
 
-                <label>請填寫客戶關鍵字</label>
-                <input id="關鍵字" type="text" placeholder="請填寫客戶關鍵字" title="請填寫客戶關鍵字" value="金融">
+                <label>請填寫搜尋關鍵字</label>
+                <input id="關鍵字" type="text" placeholder="請填寫搜尋關鍵字" title="請填寫搜尋關鍵字" value="金融">
             
             </div>
 
@@ -322,6 +326,12 @@
 
 
         function 上傳設定檔(event) {
+            const 設定匯入 = document.getElementById('設定匯入').textContent;
+            const 設定格式錯誤 = document.getElementById('設定格式錯誤').textContent;
+
+            const 匯入警告 = document.getElementById('匯入警告').textContent;
+            if (!confirm(匯入警告)) {location.reload(); return;}
+
             const file = event.target.files[0];
             if (!file) return;
 
@@ -338,13 +348,14 @@
                         }
                     });
 
-                    alert("設定檔已成功匯入！");
+                    alert(設定匯入);
                 } catch (error) {
-                    alert("檔案格式錯誤或解析失敗");
+                    alert(設定格式錯誤);
                     console.error("解析错误:", error);
                 }
             };
             reader.readAsText(file);
+            location.reload();
         }
 
 

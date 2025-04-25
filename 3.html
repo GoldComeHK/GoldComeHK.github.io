@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>客服鍠 🫱🏾‍🫲🏻 | 金come</title>
+    <title>促銷鍠 📣 | 金come</title>
     <style>
         body { font-family: Arial, sans-serif;background: linear-gradient(145deg, #a8a8a8, #000000);color: #ecf0f1;padding: 20px; }
         h1 { text-align: center;margin-bottom: 20px;font-size: 2em;text-shadow: 2px 2px 4px gold; }
@@ -84,7 +84,7 @@
 
 
 <body>
-    <samp id="莫生查詢" style="display: none;">莫生我要查詢客服鍠使用問題</samp>
+    <samp id="莫生查詢" style="display: none;">莫生我要查詢促銷鍠使用問題</samp>
 
     <samp id="匯入警告" style="display: none;">匯入設定檔會刪除現時設定！</samp>
     <samp id="設定匯入" style="display: none;">設定檔已成功匯入！</samp>
@@ -100,12 +100,10 @@
     <samp id="預設客戶說3" style="display: none;">謝謝</samp>
     <samp id="預設自動回3" style="display: none;">不客氣，這是我們應該做的。</samp>
 
-
-
     <div id="執行中請不要關閉網頁">
         <h2>執行中請不要關閉網頁...</h2>
     </div>
-    <h1>客服鍠 🫱🏾‍🫲🏻 | <a href="./set.html"><b class="_我司名"></b></a></h1>
+    <h1>促銷鍠 📣 | <a href="./set.html"><b class="_我司名"></b></a></h1>
     <p class="mokJsApi_copyright">版權</p>
 
 
@@ -140,12 +138,20 @@
             <label>請填寫您的 WhatsApp 號碼*</label>
             <input id="WhatsApp號" type="text" placeholder="請填寫WhatsApp號碼" title="請填寫WhatsApp號碼" required>
 
-            <!-- 部份2: 回覆內容 -->
-            <h3>回覆內容</h3>
-            <samp>不能用表情符號</samp>
-            
-            <div id="replies"></div>
-            <button onclick="addReply()">增加回覆內容</button>
+
+            <!-- 部份2: 促銷鍠設定 -->
+            <label>發出促銷信的gmail*</label>
+            <input id="發出促銷信的gmail" type="text" placeholder="請填寫發出促銷信的gmail" title="請填寫發出促銷信的gmail" required>
+            <a href="#"><label>gmail的應用程式密碼*</label><b>❔</b></a>
+            <input id="gmail的應用程式密碼" type="text" placeholder="請填寫gmail的應用程式密碼" title="請填寫gmail的應用程式密碼" required>
+
+
+
+
+
+
+
+
             
             <samp style="float: right;">
             <button onclick="下載設定檔()">⬇️ 下載設定檔</button>
@@ -164,9 +170,9 @@
             <div id="ContactAKI" class="ContactAKI"><!-- JS _顯示聯莫 --></div>
             <br>
 
-            <!-- 部份6: 執行客服鍠 -->
+            <!-- 部份6: 執行促銷鍠 -->
             <div class="執行金come">
-                <button class="大鍵 執行客服鍠" title="執行客服鍠 🫱🏾‍🫲🏻" onclick="執行客服鍠()">執行客服鍠 🫱🏾‍🫲🏻</button>
+                <button class="大鍵 執行促銷鍠" title="執行促銷鍠 📣" onclick="執行促銷鍠()">執行促銷鍠 📣</button>
                 <h3><a href="./set.html">返回<b class="_我司名"></b></a></h3>
             </div>
 
@@ -220,6 +226,7 @@
 
 
     <script>
+        AllData位 = ['區號','WhatsApp號','發出促銷信的gmail','gmail的應用程式密碼','搵qqqq客鍠結果']
         // loadSaved 自動保存
         function saveToLocalStorage(key, value) {
             localStorage.setItem(key, value);
@@ -230,31 +237,20 @@
         }
 
         function loadSavedData() {
-            document.getElementById('區號').value = loadFromLocalStorage('區號') || '';
-            document.getElementById('WhatsApp號').value = loadFromLocalStorage('WhatsApp號') || '';
-
-
-            const savedReplies = JSON.parse(loadFromLocalStorage('replies') || '{}');
-            Object.keys(savedReplies).forEach(key => {
-                addReply(key, savedReplies[key]);
+            AllData位.forEach((field) => {
+                const element = document.getElementById(field);
+                if (element) {
+                    element.value = loadFromLocalStorage(field) || '';
+                }
             });
         }
 
         window.addEventListener('beforeunload', () => {
-            const replyGroups = document.querySelectorAll('.reply-group');
-            const replies = {};
-            replyGroups.forEach(group => {
-                const text = group.querySelector('input').value;
-                const response = group.querySelector('textarea').value;
-                if (text && response) {
-                    replies[text] = response;
-                }
+            AllData位.forEach((field) => {
+                saveToLocalStorage(field, document.getElementById(field).value);
             });
-
-            saveToLocalStorage('區號', document.getElementById('區號').value);
-            saveToLocalStorage('WhatsApp號', document.getElementById('WhatsApp號').value);
-            saveToLocalStorage('replies', JSON.stringify(replies));
         });
+
 
 
 
@@ -263,24 +259,11 @@
 
         // 手動上下載
         function 下載設定檔() {
-            const 區號 = document.getElementById('區號').value;
-            const WhatsApp號 = document.getElementById('WhatsApp號').value;
-
-            const replyGroups = document.querySelectorAll('.reply-group');
-            const replies = {};
-            replyGroups.forEach(group => {
-                const text = group.querySelector('input').value;
-                const response = group.querySelector('textarea').value;
-                if (text && response) {
-                    replies[text] = response;
-                }
-            });
-
-            const data = {
-                區號,
-                WhatsApp號,
-                replies
-            };
+            const data = AllData位.reduce((obj, field) => {
+                const element = document.getElementById(field);
+                obj[field] = element ? element.value : '';
+                return obj;
+            }, {});
 
             const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
             const url = URL.createObjectURL(blob);
@@ -292,6 +275,8 @@
             link.click();
             document.body.removeChild(link);
         }
+
+
 
         function 上傳設定檔(event) {
             const 設定匯入 = document.getElementById('設定匯入').textContent;
@@ -306,25 +291,20 @@
             const reader = new FileReader();
             reader.onload = function(e) {
                 try {
-                    const data = JSON.parse(e.target.result);
-
-                    // 匯入值
-                    document.getElementById('區號').value = data.區號 || '';
-                    document.getElementById('WhatsApp號').value = data.WhatsApp號 || '';
-
-                    // 清空舊的回覆
-                    document.getElementById('replies').innerHTML = '';
-
-                    // 加入新的回覆
-                    const replies = data.replies || {};
-                    Object.keys(replies).forEach(key => {
-                        addReply(key, replies[key]);
+                    const importedData = JSON.parse(e.target.result);
+                    
+                    // 使用 AllData位 自动匹配并导入数据
+                    AllData位.forEach(field => {
+                        const element = document.getElementById(field);
+                        if (element) {
+                            element.value = importedData[field] || '';
+                        }
                     });
 
                     alert(設定匯入);
                 } catch (error) {
                     alert(設定格式錯誤);
-                    console.error(error);
+                    console.error("解析错误:", error);
                 }
             };
             reader.readAsText(file);
@@ -351,69 +331,6 @@
 
 
 
-
-
-        // 如果 localStorage 中沒有 回覆內容 數據，添加三組預設回覆
-        function _添加預設回覆() {
-            const 預設客戶說1翻譯用 = document.getElementById('預設客戶說1').textContent;
-            const 預設客戶說2翻譯用 = document.getElementById('預設客戶說2').textContent;
-            const 預設客戶說3翻譯用 = document.getElementById('預設客戶說3').textContent;
-            const 預設自動回1翻譯用 = document.getElementById('預設自動回1').textContent;
-            const 預設自動回2翻譯用 = document.getElementById('預設自動回2').textContent;
-            const 預設自動回3翻譯用 = document.getElementById('預設自動回3').textContent;
-
-            const savedReplies = JSON.parse(localStorage.getItem('replies') || '{}');
-            
-            if (Object.keys(savedReplies).length === 0) {
-                
-                const defaultReplies = [
-                    { text: 預設客戶說1翻譯用, response: 預設自動回1翻譯用 },
-                    { text: 預設客戶說2翻譯用, response: 預設自動回2翻譯用 },
-                    { text: 預設客戶說3翻譯用, response: 預設自動回3翻譯用 }
-                ];
-                
-                // 添加預設回覆到頁面
-                defaultReplies.forEach(reply => {
-                    addReply(reply.text, reply.response);
-                });
-                
-                // 保存預設回覆到 localStorage
-                const repliesToSave = {};
-                defaultReplies.forEach(reply => {
-                    repliesToSave[reply.text] = reply.response;
-                });
-                localStorage.setItem('replies', JSON.stringify(repliesToSave));
-            } 
-        }
-
-
-        function addReply(text = '', response = '') {
-            const replies = document.getElementById('replies');
-            const replyGroup = document.createElement('div');
-            replyGroup.classList.add('reply-group');
-
-            const 當客戶說翻譯用 = document.getElementById('當客戶說').textContent;
-            const 自動回覆翻譯用 = document.getElementById('自動回覆').textContent;
-            
-            replyGroup.innerHTML = `
-                <div class="reply-container">
-                    <div class="reply-inputs">
-                        <input placeholder="${當客戶說翻譯用}..." title="${當客戶說翻譯用}" value="${text}">
-                        <textarea placeholder="${自動回覆翻譯用}..." title="${自動回覆翻譯用}">${response}</textarea>
-                    </div>
-                    <button class="delete-btn" onclick="deleteReply(this)">×</button>
-                </div>
-            `;
-            replies.appendChild(replyGroup);
-        }
-
-        function deleteReply(button) {
-            const 確定刪除翻譯用 = document.getElementById('確定刪除').textContent;
-            const replyGroup = button.closest('.reply-group');
-            if (replyGroup && confirm(`${確定刪除翻譯用}？`)) {
-                replyGroup.remove();
-            }
-        }
 
 
 
@@ -474,7 +391,7 @@
 
 
         /* ********************* */
-        async function 執行客服鍠() {
+        async function 執行促銷鍠() {
             const 區號 = document.getElementById('區號').value;
             const WhatsApp號 = document.getElementById('WhatsApp號').value;
             
@@ -489,7 +406,7 @@
             });
             const 回覆內容 = JSON.stringify(replies, null, 2)
 
-            const 執行碼 = 客服.replace("@帳號1181@", `'${區號}','${WhatsApp號}','客服鍠'`) // _獲取帳號資料 必須
+            const 執行碼 = 客服.replace("@帳號1181@", `'${區號}','${WhatsApp號}','促銷鍠'`) // _獲取帳號資料 必須
                 // 執行的功能要值
                 .replace("@国家代码@", 區號)
                 .replace("@电话号码@", WhatsApp號)
@@ -551,8 +468,6 @@
             document.querySelector('.執行金come').style.display = 'grid';
 
             console.log(localStorage);
-
-            _添加預設回覆();
         };
 
         function Start() {
