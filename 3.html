@@ -1,3 +1,28 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+      :::    :::       ::::::::::           :::        :::::::::
+     :+:    :+:       :+:                :+: :+:      :+:    :+:
+    +:+    +:+       +:+               +:+   +:+     +:+    +:+
+   +#++:++#++       +#++:++#         +#++:++#++:    +#+    +:+
+  +#+    +#+       +#+              +#+     +#+    +#+    +#+
+ #+#    #+#       #+#              #+#     #+#    #+#    #+#
+###    ###       ##########       ###     ###    #########
+-->
+
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
@@ -44,46 +69,40 @@
   <script src="https://cdn.staticfile.net/translate.js/3.1.7/translate.js">// 翻譯 放最後</script>
 
 </head>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+  :::::::::::       :::    :::   :::::::::::
+     :+:           :+:    :+:       :+:
+    +:+            +:+  +:+        +:+
+   +#+             +#++:+         +#+
+  +#+            +#+  +#+        +#+
+ #+#           #+#    #+#       #+#
+###           ###    ###       ###
+-->
     <samp id="莫生查詢" style="display: none;">莫生我要查詢促銷鍠使用問題</samp>
 
     <samp id="匯入警告" style="display: none;">匯入設定檔會刪除現時設定！</samp>
@@ -100,22 +119,18 @@
     <samp id="預設客戶說3" style="display: none;">謝謝</samp>
     <samp id="預設自動回3" style="display: none;">不客氣，這是我們應該做的。</samp>
 
+
+
+
+
+
+
+    <!-- 部份0: 基本 -->
     <div id="執行中請不要關閉網頁">
         <h2>執行中請不要關閉網頁...</h2>
     </div>
     <h1>促銷鍠 📣 | <a href="./set.html"><b class="_我司名"></b></a></h1>
     <p class="mokJsApi_copyright">版權</p>
-
-
-    
-
-
-
-
-
-
-
-
 
     <div class="container" style="padding: 20px;">
         <iframe width="100%" height="315" src="https://www.youtube.com/embed/dBTxzLg-eFA?si=PTpM-9-b3_jeVNB6" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
@@ -144,6 +159,11 @@
             <input id="發出促銷信的gmail" type="text" placeholder="請填寫發出促銷信的gmail" title="請填寫發出促銷信的gmail" required>
             <a href="#"><label>gmail的應用程式密碼*</label><b>❔</b></a>
             <input id="gmail的應用程式密碼" type="text" placeholder="請填寫gmail的應用程式密碼" title="請填寫gmail的應用程式密碼" required>
+            
+            
+            <label>促銷間隔天數*</label>
+            <input id="促銷間隔天數" value="7" type="number" min="1" step="1" required oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+            
             <div id="repliesSelectContainer"> <!-- 这里动态加载 select 或提示 --> </div>
             <label>促銷信內容*</label>
             <textarea id="促銷信內容" placeholder="請編寫促銷信內容..." title="請編寫促銷信內容"></textarea>
@@ -153,13 +173,17 @@
             <hr>
             <label>草稿</label>
             <p id="促銷信草稿" class="container"></p>
-            <hr>
             <label>自動回覆內容</label>
             <p id="自動回覆內容" class="container"></p>
+            <hr>
 
 
+            <!-- 部份4: 結果 -->
+            <textarea id="促銷鍠結果" ></textarea>
+            <p id="臨時結果"></p>
 
-            <!-- 部份4: 設定檔 -->
+
+            <!-- 部份5: 設定檔 -->
             <samp style="float: right;">
                 <button onclick="下載設定檔()">⬇️ 下載設定檔</button>
                 <input type="file" id="uploadInput" accept=".json" onchange="上傳設定檔(event)">
@@ -167,17 +191,11 @@
             </samp>        
 
 
-
-
-
-
-
-
-            <!-- 部份5: _顯示聯莫 -->
+            <!-- 部份6: _顯示聯莫 -->
             <div id="ContactAKI" class="ContactAKI"><!-- JS _顯示聯莫 --></div>
             <br>
 
-            <!-- 部份6: 執行促銷鍠 -->
+            <!-- 部份7: 執行促銷鍠 -->
             <div class="執行金come">
                 <button class="大鍵 執行促銷鍠" title="執行促銷鍠 📣" onclick="執行促銷鍠()">執行促銷鍠 📣</button>
                 <h3><a href="./set.html">返回<b class="_我司名"></b></a></h3>
@@ -206,34 +224,17 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<!-- 
+      ::::::::           :::     :::     :::       ::::::::::       :::::::::
+    :+:    :+:        :+: :+:   :+:     :+:       :+:              :+:    :+:
+   +:+              +:+   +:+  +:+     +:+       +:+              +:+    +:+
+  +#++:++#++      +#++:++#++: +#+     +:+       +#++:++#         +#+    +:+
+        +#+      +#+     +#+  +#+   +#+        +#+              +#+    +#+
+#+#    #+#      #+#     #+#   #+#+#+#         #+#              #+#    #+#
+########       ###     ###     ###           ##########       #########
+-->
     <script>
-        AllData位 = ['區號','WhatsApp號','發出促銷信的gmail','gmail的應用程式密碼','促銷鍠客詢select','促銷信內容']
+        AllData位 = ['區號','WhatsApp號','發出促銷信的gmail','gmail的應用程式密碼', '促銷間隔天數', '促銷鍠客詢select','促銷信內容','促銷鍠結果']
         // loadSaved 自動保存
         function saveToLocalStorage(key, value) {
             localStorage.setItem(key, value);
@@ -264,6 +265,29 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+      :::::::::       ::::::::     :::       :::       ::::    :::       :::        ::::::::           :::        :::::::::
+     :+:    :+:     :+:    :+:    :+:       :+:       :+:+:   :+:       :+:       :+:    :+:        :+: :+:      :+:    :+:
+    +:+    +:+     +:+    +:+    +:+       +:+       :+:+:+  +:+       +:+       +:+    +:+       +:+   +:+     +:+    +:+
+   +#+    +:+     +#+    +:+    +#+  +:+  +#+       +#+ +:+ +#+       +#+       +#+    +:+      +#++:++#++:    +#+    +:+
+  +#+    +#+     +#+    +#+    +#+ +#+#+ +#+       +#+  +#+#+#       +#+       +#+    +#+      +#+     +#+    +#+    +#+
+ #+#    #+#     #+#    #+#     #+#+# #+#+#        #+#   #+#+#       #+#       #+#    #+#      #+#     #+#    #+#    #+#
+#########       ########       ###   ###         ###    ####       ########## ########       ###     ###    #########
+
+*/
         // 手動上下載
         function 下載設定檔() {
             const data = AllData位.reduce((obj, field) => {
@@ -346,15 +370,179 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+      :::::::::       ::::::::::       ::::::::      :::    :::       :::    :::::::::::
+     :+:    :+:      :+:             :+:    :+:     :+:    :+:       :+:        :+:
+    +:+    +:+      +:+             +:+            +:+    +:+       +:+        +:+
+   +#++:++#:       +#++:++#        +#++:++#++     +#+    +:+       +#+        +#+
+  +#+    +#+      +#+                    +#+     +#+    +#+       +#+        +#+
+ #+#    #+#      #+#             #+#    #+#     #+#    #+#       #+#        #+#
+###    ###      ##########       ########       ########        ########## ###
+*/
+        // 監聽臨時結果元素的變化
+        const 臨時結果 = document.getElementById("臨時結果");
+        const 促銷鍠結果 = document.getElementById("促銷鍠結果");
+
+        const observer = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutation) {
+                if (臨時結果.innerHTML.trim() !== "") {  // 改用innerHTML
+
+
+
+                    // 將<br>轉換為換行符
+                    const 格式化內容 = 臨時結果.innerHTML
+                        .replace(/<br\s*\/?>/gi, "\n")  // 處理普通<br>
+                        .replace(/<\/?[^>]+(>|$)/g, ""); // 移除其他HTML標籤（可選）
+                    
+                    促銷鍠結果.value = 格式化內容 + "\n" + 促銷鍠結果.value;
+
+
+
+
+                    //臨時結果.innerHTML = ""; // 用innerHTML清空
+                }
+            });
+        });
+
+        // 開始觀察臨時結果元素的子節點和文本內容變化
+        observer.observe(臨時結果, {
+            childList: true,
+            characterData: true,
+            subtree: true
+        });
+
+
+        // <textarea> 根据内容自动显示/隐藏
+            const resultTextarea = document.getElementById('促銷鍠結果');
+        // 内容变化监听函数
+        function toggleVisibility() {
+            const hasContent = resultTextarea.value.trim().length > 0;
+            // 使用 classList 切换样式
+            resultTextarea.classList.toggle('hidden', !hasContent);
+            document.querySelector('#執行中請不要關閉網頁').style.display = 'none';
+        }
+        // 事件监听（兼容现代浏览器）
+        resultTextarea.addEventListener('input', toggleVisibility);
+        resultTextarea.addEventListener('paste', toggleVisibility);  // 处理粘贴操作
+        resultTextarea.addEventListener('cut', toggleVisibility);    // 处理剪切操作
+        // 初始化检查
+        toggleVisibility();
+        // 可选：处理页面加载后的动态内容注入
+        window.addEventListener('load', function() {
+        // 如果通过其他方式加载内容需要再次检查
+        toggleVisibility();
+        });
+
+
+
+
+
+
+
+
+
+
         
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+      ::::::::       ::::::::::   :::::::::::   :::::::::::       :::::::::::       ::::    :::       ::::::::
+    :+:    :+:      :+:              :+:           :+:               :+:           :+:+:   :+:      :+:    :+:
+   +:+             +:+              +:+           +:+               +:+           :+:+:+  +:+      +:+
+  +#++:++#++      +#++:++#         +#+           +#+               +#+           +#+ +:+ +#+      :#:
+        +#+      +#+              +#+           +#+               +#+           +#+  +#+#+#      +#+   +#+#
+#+#    #+#      #+#              #+#           #+#               #+#           #+#   #+#+#      #+#    #+#
+########       ##########       ###           ###           ###########       ###    ####       ########
+*/
 
         // 客詢select
         let 對應回覆內容 = ''
         function _客詢select() {
             const container = document.getElementById('repliesSelectContainer');
             const replies = JSON.parse(localStorage.getItem('replies') || '{}');
+
+            const 搵客鍠結果 = JSON.parse(localStorage.getItem('搵客鍠結果') || '{}');
 
             const 促銷鍠Box = document.getElementById('促銷鍠Box');
             // 清空容器
@@ -363,46 +551,46 @@
             if (Object.keys(replies).length === 0) {
                 // 如果没有数据，显示提示
                 促銷鍠Box.innerHTML = '';
-
                 促銷鍠Box.innerHTML = '<p class="大鍵"><a href="./4.html" title="🫱🏾‍🫲🏻 客服鍠：7 × 24 不間斷即時回應客戶查詢，增加專業感與成交率。支援多語言。" >请先到 客服鍠 🫱🏾‍🫲🏻 增加客服自动回复内容</a> </p>';
-
-            } else {
-                // 如果有数据，创建 select 元素
-                const select = document.createElement('select');
-                select.id = '促銷鍠客詢select';  // 添加 ID
-
-                // 遍历 replies 的 key，添加到 select
-                Object.keys(replies).forEach(key => {
-                    const option = document.createElement('option');
-                    option.value = key;
-                    option.textContent = key;
-                    select.appendChild(option);
-                });
-
-                // 添加到页面
-                const label = document.createElement('label');
-                label.textContent = '請選擇回覆關鍵字*'; // 设置标签文字
-                container.appendChild(label); // 先添加 label
-                container.appendChild(select);
-
-                // 可选：监听选择变化
-                select.addEventListener('change', (e) => {
-                    const selectedKey = e.target.value;
-                    if (selectedKey) {
-                        對應回覆內容 = replies[selectedKey]
-
-                        _促銷鍠草稿();
-                        
-                        //alert(`選擇的回覆關鍵字:\n ${selectedKey}\n=========\n對應回覆內容:\n ${replies[selectedKey]}`);
-                    }
-                });
+                return
+            } 
+            /*
+            if (Object.keys(搵客鍠結果).length === 0) {
+                // 如果没有数据，显示提示
+                促銷鍠Box.innerHTML = '';
+                促銷鍠Box.innerHTML = '<p class="大鍵"><a href="./1.html" title="🔍 搵客鍠：按地區、行業、關鍵字，全天候自動為您搵新客戶。" >请先到 搵客鍠 🔍 獲取客戶聯絡資料</a> </p>';
+                return
             }
+                */
+
+            // 如果有数据，创建 select 元素
+            const select = document.createElement('select');
+            select.id = '促銷鍠客詢select';  // 添加 ID
+
+            // 遍历 replies 的 key，添加到 select
+            Object.keys(replies).forEach(key => {
+                const option = document.createElement('option');
+                option.value = key;
+                option.textContent = key;
+                select.appendChild(option);
+            });
+
+            // 添加到页面
+            const label = document.createElement('label');
+            label.textContent = '請選擇回覆關鍵字*'; // 设置标签文字
+            container.appendChild(label); // 先添加 label
+            container.appendChild(select);
+
+            // 可选：监听选择变化
+            select.addEventListener('change', (e) => {
+                const selectedKey = e.target.value;
+                if (selectedKey) {
+                    對應回覆內容 = replies[selectedKey]
+
+                    _促銷鍠草稿();
+                }
+            });
         }
-
-
-
-
-
 
 
 
@@ -464,27 +652,48 @@
 
 
 
+
+
+
+
+
+/*
+      :::::::::      :::    :::       ::::    :::                       ::::::::::       :::    :::       ::::::::::
+     :+:    :+:     :+:    :+:       :+:+:   :+:                       :+:              :+:    :+:       :+:
+    +:+    +:+     +:+    +:+       :+:+:+  +:+                       +:+               +:+  +:+        +:+
+   +#++:++#:      +#+    +:+       +#+ +:+ +#+                       +#++:++#           +#++:+         +#++:++#
+  +#+    +#+     +#+    +#+       +#+  +#+#+#                       +#+               +#+  +#+        +#+
+ #+#    #+#     #+#    #+#       #+#   #+#+#                       #+#              #+#    #+#       #+#
+###    ###      ########        ###    ####       ##########      ##########       ###    ###       ##########
+
+*/
+
         /* ********************* */
         async function 執行促銷鍠() {
             const 區號 = document.getElementById('區號').value;
             const WhatsApp號 = document.getElementById('WhatsApp號').value;
-            
-            const replyGroups = document.querySelectorAll('.reply-group');
-            const replies = {};
-            replyGroups.forEach(group => {
-                const text = group.querySelector('input').value;
-                const response = group.querySelector('textarea').value;
-                if (text && response) {
-                    replies[text] = response;
-                }
-            });
-            const 回覆內容 = JSON.stringify(replies, null, 2)
 
-            const 執行碼 = 客服.replace("@帳號1181@", `'${區號}','${WhatsApp號}','促銷鍠'`) // _獲取帳號資料 必須
+            const 發出促銷信的gmail = document.getElementById('發出促銷信的gmail').value;
+            const gmail的應用程式密碼 = document.getElementById('gmail的應用程式密碼').value;
+            const 促銷間隔天數 = document.getElementById('促銷間隔天數').value;
+
+            const 促銷信草稿 = document.getElementById('促銷信草稿').textContent;
+
+            //all客聯 = 搵客鍠結果
+
+            const 要齊料 = [區號, WhatsApp號, 發出促銷信的gmail, gmail的應用程式密碼, 促銷間隔天數, 促銷信草稿];
+
+            if (要齊料.some(x => x == null || x === ''))    return ;
+
+            // qqqqqqqq 
+            const 執行碼 = 促銷.replace("@帳號1181@", `'${區號}','${WhatsApp號}','促銷鍠'`) // _獲取帳號資料 必須
                 // 執行的功能要值
-                .replace("@国家代码@", 區號)
-                .replace("@电话号码@", WhatsApp號)
-                .replace("@回覆內容@", 回覆內容)
+                .replace("@促銷gmail@", 發出促銷信的gmail)
+                .replace("@gmail應密@", gmail的應用程式密碼)
+                .replace("@間隔天@", 促銷間隔天數)
+                .replace("@促銷信@", 促銷信草稿)
+                .replace("@搵客鍠結果@", 搵客鍠結果)
+
             navigator.clipboard.writeText(執行碼);
             // py 檢查 剪贴板 轉變執行
 
@@ -529,8 +738,15 @@
 
 
 
-
-        /* ********************* */
+/*
+          :::        :::    :::       :::::::::::
+       :+: :+:      :+:   :+:            :+:
+     +:+   +:+     +:+  +:+             +:+
+   +#++:++#++:    +#++:++              +#+
+  +#+     +#+    +#+  +#+             +#+
+ #+#     #+#    #+#   #+#            #+#
+###     ###    ###    ###       ###########
+*/
         function _翻譯(){ 
             translate.service.use('client.edge'); //設置機器翻譯服務通道，直接客戶端本身，不依賴服務端 。相關說明參考 http://translate.zvo.cn/43086.html
             translate.execute();//進行翻譯 
@@ -557,9 +773,6 @@
         }
 
         琪琪修改()
-
-        
-
     </script>
 </body>
 </html>
