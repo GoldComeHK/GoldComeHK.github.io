@@ -241,6 +241,7 @@
     <script>
 
         AllData位 = ['區號','WhatsApp號','關鍵字','地區','搵客鍠結果']
+
         // loadSaved 自動保存
         function saveToLocalStorage(key, value) {
             localStorage.setItem(key, value);
@@ -303,7 +304,7 @@
             
             const link = document.createElement("a");
             link.href = url;
-            link.download = "whatsapp_設定檔.json";
+            link.download = `搵客鍠_設定檔${_現在時間()}.json`;
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
@@ -521,6 +522,22 @@
  #+#     #+#    #+#   #+#            #+#
 ###     ###    ###    ###       ###########
 */
+
+
+        function _現在時間() {
+            const now = new Date();
+            return [
+                now.getFullYear(),
+                String(now.getMonth() + 1).padStart(2, '0'),
+                String(now.getDate()).padStart(2, '0'),
+                String(now.getHours()).padStart(2, '0'),
+                String(now.getMinutes()).padStart(2, '0'),
+                String(now.getSeconds()).padStart(2, '0')
+            ].join('');
+        }
+
+
+
 
         function _翻譯(){ 
             translate.service.use('client.edge'); //設置機器翻譯服務通道，直接客戶端本身，不依賴服務端 。相關說明參考 http://translate.zvo.cn/43086.html

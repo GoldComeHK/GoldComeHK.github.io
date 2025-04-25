@@ -157,7 +157,7 @@
             <!-- 部份2: 促銷鍠設定 -->
             <label>發出促銷信的gmail*</label>
             <input id="發出促銷信的gmail" type="text" placeholder="請填寫發出促銷信的gmail" title="請填寫發出促銷信的gmail" required>
-            <a href="#"><label>gmail的應用程式密碼*</label><b>❔</b></a>
+            <a href="https://myaccount.google.com/u/1/apppasswords?pli=1&rapt=AEjHL4NB4hK6Th7KGvq8QXmew8zX6e0Q0vg_Ruwjaxi6rHdyqR9HRAen2ocS95fglp1iHWQ2zcuydfYf4-aeUc4F2sJBPQ0s7iayeTEjdPFPKUTS0UILi60"><label>gmail的應用程式密碼*</label><b>❔</b></a>
             <input id="gmail的應用程式密碼" type="text" placeholder="請填寫gmail的應用程式密碼" title="請填寫gmail的應用程式密碼" required>
             
             
@@ -301,7 +301,7 @@
             
             const link = document.createElement("a");
             link.href = url;
-            link.download = "whatsapp_設定檔.json";
+            link.download = `促銷鍠_設定檔${_現在時間()}.json`;
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
@@ -755,6 +755,23 @@
  #+#     #+#    #+#   #+#            #+#
 ###     ###    ###    ###       ###########
 */
+
+
+        function _現在時間() {
+            const now = new Date();
+            return [
+                now.getFullYear(),
+                String(now.getMonth() + 1).padStart(2, '0'),
+                String(now.getDate()).padStart(2, '0'),
+                String(now.getHours()).padStart(2, '0'),
+                String(now.getMinutes()).padStart(2, '0'),
+                String(now.getSeconds()).padStart(2, '0')
+            ].join('');
+        }
+
+
+
+
         function _翻譯(){ 
             translate.service.use('client.edge'); //設置機器翻譯服務通道，直接客戶端本身，不依賴服務端 。相關說明參考 http://translate.zvo.cn/43086.html
             translate.execute();//進行翻譯 
