@@ -541,10 +541,13 @@
         function _客詢select() {
             const container = document.getElementById('repliesSelectContainer');
             const replies = JSON.parse(localStorage.getItem('replies') || '{}');
-
             const 搵客鍠結果 = JSON.parse(localStorage.getItem('搵客鍠結果') || '{}');
-
             const 促銷鍠Box = document.getElementById('促銷鍠Box');
+
+
+
+            console.log(`replies=${replies}`)
+            console.log(`搵客鍠結果=${搵客鍠結果}`)
             // 清空容器
             container.innerHTML = '';
 
@@ -682,7 +685,10 @@
 
             const 要齊料 = [區號, WhatsApp號, 發出促銷信的gmail, gmail的應用程式密碼, 促銷間隔天數, 促銷信草稿];
 
-            if (要齊料.some(x => x == null || x === ''))    return ;
+            if (要齊料.some(x => x == null || x === '')){
+                alert(`${x} 沒填寫!`)
+                return ;
+            }
 
             // qqqqqqqq 
             const 執行碼 = 促銷.replace("@帳號1181@", `'${區號}','${WhatsApp號}','促銷鍠'`) // _獲取帳號資料 必須
