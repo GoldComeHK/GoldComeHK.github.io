@@ -161,6 +161,9 @@
             <label>促銷間隔天數*</label>
             <input id="促銷間隔天數" value="7" type="number" min="1" step="1" required oninput="this.value = this.value.replace(/[^0-9]/g, '');">
             
+            <label>促銷信的標題*</label>
+            <input id="信件標題" type="text" placeholder="請填寫促銷信的標題" title="請填寫促銷信的標題" required>
+
             <div id="repliesSelectContainer"> <!-- 这里动态加载 select 或提示 --> </div>
             <label>促銷信內容*</label>
             <textarea id="促銷信內容" placeholder="請編寫促銷信內容..." title="請編寫促銷信內容"></textarea>
@@ -231,7 +234,7 @@
 ########       ###     ###     ###           ##########       #########
 -->
     <script>
-        AllData位 = ['區號','WhatsApp號','發出促銷信的gmail','gmail的應用程式密碼', '促銷間隔天數', '促銷鍠客詢select','促銷信內容','促銷鍠結果']
+        AllData位 = ['區號','WhatsApp號','發出促銷信的gmail','gmail的應用程式密碼', '促銷間隔天數', '促銷鍠客詢select', '信件標題', '促銷信內容','促銷鍠結果']
         // loadSaved 自動保存
         function saveToLocalStorage(key, value) {
             localStorage.setItem(key, value);
@@ -540,14 +543,8 @@
 
             const replies = JSON.parse(localStorage.getItem('replies') || '{}');
             const 搵客鍠結果 = localStorage.getItem('搵客鍠結果');
-
-
             const 促銷鍠Box = document.getElementById('促銷鍠Box');
 
-
-
-            console.log(`replies=${replies}`)
-            console.log(`搵客鍠結果=${搵客鍠結果}`)
             // 清空容器
             container.innerHTML = '';
 
@@ -679,23 +676,34 @@
             const gmail的應用程式密碼 = document.getElementById('gmail的應用程式密碼').value;
             const 促銷間隔天數 = document.getElementById('促銷間隔天數').value;
 
+            const 信件標題 = document.getElementById('信件標題').value;
             const 促銷信草稿 = document.getElementById('促銷信草稿').textContent;
 
-            //all客聯 = 搵客鍠結果
-
-            const 要齊料 = [區號, WhatsApp號, 發出促銷信的gmail, gmail的應用程式密碼, 促銷間隔天數, 促銷信草稿];
-
-            if (要齊料.some(x => x == null || x === '')){
-                alert(`${x} 沒填寫!`)
-                return ;
+            // 先齊必填
+            const 要齊料 = {
+                區號: 區號,
+                WhatsApp號: WhatsApp號,
+                發出促銷信的gmail: 發出促銷信的gmail,
+                gmail的應用程式密碼: gmail的應用程式密碼,
+                促銷間隔天數: 促銷間隔天數,
+                信件標題: 信件標題,
+                促銷信草稿: 促銷信草稿
+            };
+            const 必填欄位 = Object.keys(要齊料);
+            for (const 欄位 of 必填欄位) {
+                if (要齊料[欄位] == null || 要齊料[欄位] === '') {
+                    alert(`${欄位} 沒填寫!`);
+                    return;
+                }
             }
 
-            // qqqqqqqq 
             const 執行碼 = 促銷.replace("@帳號1181@", `'${區號}','${WhatsApp號}','促銷鍠'`) // _獲取帳號資料 必須
                 // 執行的功能要值
                 .replace("@促銷gmail@", 發出促銷信的gmail)
                 .replace("@gmail應密@", gmail的應用程式密碼)
                 .replace("@間隔天@", 促銷間隔天數)
+                .replace("@標題@", 信件標題)
+                
                 .replace("@促銷信@", 促銷信草稿)
                 .replace("@搵客鍠結果@", 搵客鍠結果)
 
