@@ -414,22 +414,16 @@
         // 監聽臨時結果元素的變化
         const 臨時結果 = document.getElementById("臨時結果");
         const 促銷鍠結果 = document.getElementById("促銷鍠結果");
-
+        /*
         const observer = new MutationObserver(function(mutations) {
             mutations.forEach(function(mutation) {
                 if (臨時結果.innerHTML.trim() !== "") {  // 改用innerHTML
-
-
-
                     // 將<br>轉換為換行符
                     const 格式化內容 = 臨時結果.innerHTML
                         .replace(/<br\s*\/?>/gi, "\n")  // 處理普通<br>
                         .replace(/<\/?[^>]+(>|$)/g, ""); // 移除其他HTML標籤（可選）
                     
                     促銷鍠結果.value = 格式化內容 + "\n" + 促銷鍠結果.value;
-
-
-
 
                     //臨時結果.innerHTML = ""; // 用innerHTML清空
                 }
@@ -442,7 +436,32 @@
             characterData: true,
             subtree: true
         });
+        */
 
+        //_取消執行中
+        const autoReplyElement = document.getElementById("臨時結果");
+        const warningElement = document.querySelector("#執行中請不要關閉網頁");
+
+        if (autoReplyElement) {
+            const observer = new MutationObserver((mutations) => {
+                mutations.forEach((mutation) => {
+                    if (mutation.target.textContent.trim() !== "") {
+                        warningElement.style.display = "none";
+                        observer.disconnect(); // 停止监听（可选）
+                    }
+                });
+            });
+
+            // 监听「自動回覆內容」的文本变化
+            observer.observe(autoReplyElement, {
+                childList: true,      // 监听子元素变化
+                subtree: true,         // 监听所有后代元素
+                characterData: true,   // 监听文本内容变化
+            });
+        }
+
+
+/**/
 
         // <textarea> 根据内容自动显示/隐藏
             const resultTextarea = document.getElementById('促銷鍠結果');
@@ -451,7 +470,7 @@
             const hasContent = resultTextarea.value.trim().length > 0;
             // 使用 classList 切换样式
             resultTextarea.classList.toggle('hidden', !hasContent);
-            document.querySelector('#執行中請不要關閉網頁').style.display = 'none';
+            //document.querySelector('#執行中請不要關閉網頁').style.display = 'none';
         }
         // 事件监听（兼容现代浏览器）
         resultTextarea.addEventListener('input', toggleVisibility);
