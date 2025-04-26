@@ -568,7 +568,7 @@ class _促銷鍠:
 
             # 是ws
             結果 = f'<a href="{老闆信[0]}"  target="_blank">手動 whatsapp to[{公司名稱}:{老闆聯絡}]</a>'
-            結果Save = f'[ {公司名稱}:{老闆聯絡} ]=手動 whatsapp郵件'
+            結果Save = f'[ {公司名稱}:{老闆聯絡} ]=手動 whatsapp 發出'
 
             # 是email
             if 老闆信[1] == True:
