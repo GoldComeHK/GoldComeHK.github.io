@@ -744,7 +744,6 @@ class _促銷鍠:
 
             po咩 = data_js_mapping[id(po)]
             driver.execute_script(po咩,send料PoHtml.strip())
-        #driver.refresh()
 
 _促銷鍠._執行_自動send野()
 #########結束#########
