@@ -681,7 +681,7 @@ class _促銷鍠:
             if '@' in 聯絡方式:
                 聯絡方式B = f"mailto:{聯絡方式}?subject=尊敬的{公司名稱}{信件標題}&body="
                 宣傳文1 = 宣傳文1.replace('<br>', '@換行@').replace('&nbsp;', ' ')
-                來詢句3 = f'<a href="{來詢句1}/?text={來詢句2}">{來詢句}</a>'
+                來詢句3 = f'{來詢句1}?text={來詢句2}'
                 宣傳文 = 宣傳文1+來詢句3
             else:
                 聯絡方式B = f'https://wa.me/{聯絡方式}?text='
