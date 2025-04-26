@@ -619,7 +619,7 @@
             if (我ws號) {
                 whatsappLink = `https://wa.me/${我ws號}`;
                 if (querySelect) {
-                    whatsappLink += `/?text=${querySelect}`;
+                    whatsappLink += `/?text=${encodeURIComponent(querySelect)}`;
                 }
             }
 
@@ -678,7 +678,11 @@
             const 促銷間隔天數 = document.getElementById('促銷間隔天數').value;
 
             const 信件標題 = document.getElementById('信件標題').value;
-            const 促銷信草稿 = document.getElementById('促銷信草稿').textContent;
+            const 促銷信草稿 = document.getElementById('促銷信草稿').innerHTML;
+
+            //促銷信草稿 = encodeURIComponent(促銷信草稿);
+            //console.log(`促銷信草稿=${促銷信草稿}`);
+
 
             // 先齊必填
             const 要齊料 = {
