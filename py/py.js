@@ -676,14 +676,13 @@ class _促銷鍠:
         聯絡方式B = ''
         if '@' in 聯絡方式:
             聯絡方式B = f"mailto:{聯絡方式}?subject=尊敬的{公司名稱}{信件標題}&body="
+            宣傳文 = 宣傳文.replace('<br>', '@換行@').replace('&nbsp;', ' ')
         else:
             聯絡方式B = f'https://wa.me/{聯絡方式}?text='
-
-        sell客文 = f"{聯絡方式B}尊敬的{公司名稱}{宣傳文}"
-        if 'https://wa.me/' in 聯絡方式B:
-            sell客文 = sell客文.replace('@換行@', '%0A').replace(' ', '%20').replace('=', '%3D')
+            宣傳文 = 宣傳文.replace('<br>', '%0A').replace('&nbsp;', '%20').replace('=', '%3D')
             是email = False
 
+        sell客文 = f"{聯絡方式B}尊敬的{公司名稱}{宣傳文}"
         return sell客文,是email
 
 
