@@ -538,11 +538,12 @@
 
         // 客詢select
         let 對應回覆內容 = ''
+        const 搵客鍠結果 = localStorage.getItem('搵客鍠結果');
         function _客詢select() {
             const container = document.getElementById('repliesSelectContainer');
 
             const replies = JSON.parse(localStorage.getItem('replies') || '{}');
-            const 搵客鍠結果 = localStorage.getItem('搵客鍠結果');
+            
             const 促銷鍠Box = document.getElementById('促銷鍠Box');
 
             // 清空容器
