@@ -668,15 +668,22 @@ class _促銷鍠:
     def _整字雜項(信件標題, 聯絡方式, 公司名稱, 宣傳文):
         是email = True
 
+        # 最後一個 <br> 切分wa.me
+        宣傳文1,來詢句 = 宣傳文.rsplit('<br>', 1)
+        來詢句1,來詢句2 = 來詢句.split('?text=')
+
         # 刪空格及符號
-        公司名稱 = re.sub(r'[^\w\u4e00-\u9fa5]', '', 公司名稱)
+        公司名稱 = re.sub(r'[^w一-龥]', '', 公司名稱)
         聯絡方式 = 聯絡方式.replace(' ', '')
 
         # 分類聯絡並加字
         聯絡方式B = ''
+        來詢句3 = ''
         if '@' in 聯絡方式:
             聯絡方式B = f"mailto:{聯絡方式}?subject=尊敬的{公司名稱}{信件標題}&body="
-            宣傳文 = 宣傳文.replace('<br>', '@換行@').replace('&nbsp;', ' ')
+            宣傳文1 = 宣傳文1.replace('<br>', '@換行@').replace('&nbsp;', ' ')
+            來詢句3 = f'<a href="{來詢句1}/?text={來詢句2}">{來詢句}</a>'
+            宣傳文 = 宣傳文1+來詢句3
         else:
             聯絡方式B = f'https://wa.me/{聯絡方式}?text='
             宣傳文 = 宣傳文.replace('<br>', '%0A').replace('&nbsp;', '%20').replace('=', '%3D')
