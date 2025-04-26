@@ -597,7 +597,7 @@
 
 
 
-
+        
         function _促銷鍠草稿() {
             // 获取DOM元素
             const 區號B = document.getElementById('區號').value;
@@ -619,15 +619,14 @@
             if (我ws號) {
                 whatsappLink = `https://wa.me/${我ws號}`;
                 if (querySelect) {
-                    whatsappLink += `/?text=${encodeURIComponent(querySelect)}`;
+                    //whatsappLink += `/?text=${encodeURIComponent(querySelect)}`;
+                    whatsappLink += `/?text=${querySelect}`;
                 }
             }
 
             // 更新自动回复内容的函数
             document.getElementById('促銷信草稿').innerHTML  = 
-                `${promoContent}
-                <br><br>
-                ${whatsappLink}`;
+                `${promoContent}<br><br>${whatsappLink}`;
             document.getElementById('自動回覆內容').innerHTML  = 對應回覆內容;
 
         }
