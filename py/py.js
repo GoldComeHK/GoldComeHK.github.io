@@ -545,211 +545,217 @@ _客服鍠._ws自動客服()
 class _促銷鍠:
 
     def _執行_自動send野():
+        try:
+            _金come_VIP._獲取帳號資料(@帳號1181@)
+            由這mail = '@促銷gmail@'
+            由這mail的key = '@gmail應密@'
+            促銷間隔天數 = @間隔天@
+            信件標題 = '@標題@'
+            宣傳文 = f'''@促銷信@'''
+            all客聯 = '''@搵客鍠結果@'''
+            all客聯B = _促銷鍠._整all客聯(all客聯)
 
-        _金come_VIP._獲取帳號資料(@帳號1181@)
+            all結果睇 = []
+            all結果Save = []
+            for 公司名稱, 老闆聯絡 in all客聯B.items():
+                老闆信 = _促銷鍠._整字雜項(信件標題, 老闆聯絡, 公司名稱, 宣傳文)
 
-        由這mail = '@促銷gmail@'
-        由這mail的key = '@gmail應密@'
-        促銷間隔天數 = @間隔天@
-        信件標題 = '@標題@'
-        宣傳文 = f'''
-            @促銷信@
-        '''
-        all客聯 = '''
-        @搵客鍠結果@
-        '''
-        all客聯B = _促銷鍠._整all客聯(all客聯)
+                # 是ws
+                結果 = f'<a href="{老闆信[0]}" class="臨時結果A" target="_blank">手動 whatsapp to[{公司名稱}:{老闆聯絡}]</a>'
+                結果Save = f'[ {公司名稱}:{老闆聯絡} ]=手動 whatsapp 發出'
 
-        all結果睇 = []
-        all結果Save = []
-        for 公司名稱, 老闆聯絡 in all客聯B.items():
-            #print(f'公司名稱={公司名稱},老闆聯絡={老闆聯絡}')
-            老闆信 = _促銷鍠._整字雜項(信件標題, 老闆聯絡, 公司名稱, 宣傳文)
-
-            # 是ws
-            結果 = f'<a href="{老闆信[0]}"  target="_blank">手動 whatsapp to[{公司名稱}:{老闆聯絡}]</a>'
-            結果Save = f'[ {公司名稱}:{老闆聯絡} ]=手動 whatsapp 發出'
-
-            # 是email
-            if 老闆信[1] == True:
-                if _促銷鍠._檢查郵件7天已發(老闆聯絡, 促銷間隔天數,[由這mail,  由這mail的key]) == '冇':
-                    標題 = 老闆信[0].split('?subject=')[1].split('&body=')[0]
-                    內文 = 老闆信[0].split('&body=')[1]
-                    發成點 = _促銷鍠._自動sendGmail(標題, 內文, 老闆聯絡, [由這mail,由這mail的key])
-                    if 發成點:
-                        結果 = f'[ {公司名稱}:{老闆聯絡} ]=成功發送郵件'
+                # 是email
+                if 老闆信[1] == True:
+                    if _促銷鍠._檢查郵件7天已發(老闆聯絡, 促銷間隔天數,[由這mail,  由這mail的key]) == '冇':
+                        標題 = 老闆信[0].split('?subject=')[1].split('&body=')[0]
+                        內文 = 老闆信[0].split('&body=')[1]
+                        發成點 = _促銷鍠._自動sendGmail(標題, 內文, 老闆聯絡, [由這mail,由這mail的key])
+                        if 發成點:
+                            結果 = f'[ {公司名稱}:{老闆聯絡} ]=成功發送郵件'
+                        else:
+                            結果 = f'[ {公司名稱}:{老闆聯絡} ]={發成點}'
                     else:
-                        結果 = f'[ {公司名稱}:{老闆聯絡} ]={發成點}'
-                else:
-                    結果 = f'[ {公司名稱}:{老闆聯絡} ]={促銷間隔天數}天內已發過'
-                結果Save = 結果
-            all結果睇.append(結果)
-            all結果Save.append(結果Save)
+                        結果 = f'[ {公司名稱}:{老闆聯絡} ]={促銷間隔天數}天內已發過'
+                    結果Save = 結果
+                all結果睇.append(結果)
+                all結果Save.append(結果Save)
 
-            # ==== html ====
-            #print(f'all結果Save={all結果Save}')
-            _促銷鍠._促銷鍠Po網(all結果睇,all結果Save)
-            # ==== html ====
-
+                # ==== html ====
+                #print(f'all結果Save={all結果Save}')
+                _促銷鍠._促銷鍠Po網(all結果睇,all結果Save)
+                # ==== html ====
+        except Exception as e:
+            _雜項._獲取詳細錯誤堆棧(*sys.exc_info())
 
 
 
     def _檢查郵件7天已發(to_email, 間隔, 由這):
-        有冇semd = '有'
-        # 连接到 Gmail 的 IMAP 服务器
-        mail = imaplib.IMAP4_SSL('imap.gmail.com')
+        try:
+            有冇semd = '有'
+            # 连接到 Gmail 的 IMAP 服务器
+            mail = imaplib.IMAP4_SSL('imap.gmail.com')
 
-        # 登录
-        mail.login(由這[0], 由這[1])
-        '''
-        # 列出所有文件夹
-        status, folders = mail.list()
-        print("可用文件夹:")
-        for folder in folders:
-            print(folder)
-        '''
-        # 选择已发送邮件文件夹
-        mail.select('"[Gmail]/&W8RO9lCZTv0-"')  # 寄件備份
+            # 登录
+            mail.login(由這[0], 由這[1])
+            '''
+            # 列出所有文件夹
+            status, folders = mail.list()
+            print("可用文件夹:")
+            for folder in folders:
+                print(folder)
+            '''
+            # 选择已发送邮件文件夹
+            mail.select('"[Gmail]/&W8RO9lCZTv0-"')  # 寄件備份
 
-        # 计算7天前的日期
-        date_since = (datetime.now() - timedelta(days=間隔)).strftime("%d-%b-%Y")
+            # 计算7天前的日期
+            date_since = (datetime.now() - timedelta(days=間隔)).strftime("%d-%b-%Y")
 
-        # 搜索发件人和收件人，限制为7天内的邮件
-        status, messages = mail.search(None, f'TO "{to_email}" SINCE {date_since}')
+            # 搜索发件人和收件人，限制为7天内的邮件
+            status, messages = mail.search(None, f'TO "{to_email}" SINCE {date_since}')
 
-        # 获取邮件ID列表
-        email_ids = messages[0].split()
-        if not email_ids:
-            有冇semd = '冇'
+            # 获取邮件ID列表
+            email_ids = messages[0].split()
+            if not email_ids:
+                有冇semd = '冇'
 
-        # 关闭连接
-        mail.logout()
+            # 关闭连接
+            mail.logout()
 
-        #print(f"7天內 [{有冇semd}] 發過郵件給[{to_email}] ")
-        return 有冇semd
-
+            #print(f"7天內 [{有冇semd}] 發過郵件給[{to_email}] ")
+            return 有冇semd
+        except Exception as e:
+            _雜項._獲取詳細錯誤堆棧(*sys.exc_info())
 
 
 
     # 在 Gmail 帳戶中，您可以前往 Google 帳戶設定 > "安全性" > "應用程式密碼" 來生成應用程式專用密碼。
     # https://myaccount.google.com/u/1/apppasswords?pli=1&rapt=AEjHL4NB4hK6Th7KGvq8QXmew8zX6e0Q0vg_Ruwjaxi6rHdyqR9HRAen2ocS95fglp1iHWQ2zcuydfYf4-aeUc4F2sJBPQ0s7iayeTEjdPFPKUTS0UILi60
     def _自動sendGmail(subject, body, to_email, 由這):
-
-        # 创建邮件对象
-        msg = MIMEMultipart()
-        msg['From'] = 由這[0]
-        msg['To'] = to_email
-        msg['Subject'] = subject
-
-        # 添加邮件内容
-        msg.attach(MIMEText(body, 'plain'))
-
         try:
-            # 连接到 Gmail 的 SMTP 服务器
-            server = smtplib.SMTP('smtp.gmail.com', 587)
-            server.starttls()  # 启动 TLS 加密
-            server.login(由這[0], 由這[1])
+            # 创建邮件对象
+            msg = MIMEMultipart()
+            msg['From'] = 由這[0]
+            msg['To'] = to_email
+            msg['Subject'] = subject
 
-            # 发送邮件
-            server.send_message(msg)
+            # 添加邮件内容
+            msg.attach(MIMEText(body, 'plain'))
 
-            發成點 = True
+            try:
+                # 连接到 Gmail 的 SMTP 服务器
+                server = smtplib.SMTP('smtp.gmail.com', 587)
+                server.starttls()  # 启动 TLS 加密
+                server.login(由這[0], 由這[1])
+
+                # 发送邮件
+                server.send_message(msg)
+
+                發成點 = True
+            except Exception as e:
+                發成點 = f'郵件發送失敗: {e}'
+            finally:
+                server.quit()
+
+            return 發成點
         except Exception as e:
-            發成點 = f'郵件發送失敗: {e}'
-        finally:
-            server.quit()
-
-        return 發成點
-    # all _自動send野系列 \
+            _雜項._獲取詳細錯誤堆棧(*sys.exc_info())
 
 
 
 
     def _整字雜項(信件標題, 聯絡方式, 公司名稱, 宣傳文):
-        是email = True
+        try:
+            是email = True
 
-        # 最後一個 <br> 切分wa.me
-        宣傳文1,來詢句 = 宣傳文.rsplit('<br>', 1)
-        來詢句1,來詢句2 = 來詢句.split('?text=')
+            # 最後一個 <br> 切分wa.me
+            宣傳文1,來詢句 = 宣傳文.rsplit('<br>', 1)
+            來詢句1,來詢句2 = 來詢句.split('?text=')
 
-        # 刪空格及符號
-        公司名稱 = re.sub(r'[^w一-龥]', '', 公司名稱)
-        聯絡方式 = 聯絡方式.replace(' ', '')
+            # 刪空格及符號
+            公司名稱 = re.sub(r'[^\w\u4e00-\u9fff]', '', 公司名稱)
+            聯絡方式 = 聯絡方式.replace(' ', '')
 
-        # 分類聯絡並加字
-        聯絡方式B = ''
-        來詢句3 = ''
-        if '@' in 聯絡方式:
-            聯絡方式B = f"mailto:{聯絡方式}?subject=尊敬的{公司名稱}{信件標題}&body="
-            宣傳文1 = 宣傳文1.replace('<br>', '@換行@').replace('&nbsp;', ' ')
-            來詢句3 = f'<a href="{來詢句1}/?text={來詢句2}">{來詢句}</a>'
-            宣傳文 = 宣傳文1+來詢句3
-        else:
-            聯絡方式B = f'https://wa.me/{聯絡方式}?text='
-            宣傳文 = 宣傳文.replace('<br>', '%0A').replace('&nbsp;', '%20').replace('=', '%3D')
-            是email = False
+            # 分類聯絡並加字
+            聯絡方式B = ''
+            來詢句3 = ''
+            if '@' in 聯絡方式:
+                聯絡方式B = f"mailto:{聯絡方式}?subject=尊敬的{公司名稱}{信件標題}&body="
+                宣傳文1 = 宣傳文1.replace('<br>', '@換行@').replace('&nbsp;', ' ')
+                來詢句3 = f'<a href="{來詢句1}/?text={來詢句2}">{來詢句}</a>'
+                宣傳文 = 宣傳文1+來詢句3
+            else:
+                聯絡方式B = f'https://wa.me/{聯絡方式}?text='
+                宣傳文 = 宣傳文.replace('<br>', '%0A').replace('&nbsp;', '%20').replace('=', '%3D')
+                是email = False
 
-        sell客文 = f"{聯絡方式B}尊敬的{公司名稱}{宣傳文}"
-        return sell客文,是email
-
+            sell客文 = f"{聯絡方式B}尊敬的{公司名稱}{宣傳文}"
+            return sell客文,是email
+        except Exception as e:
+            _雜項._獲取詳細錯誤堆棧(*sys.exc_info())
 
 
 
     def _整all客聯(客聯):
-        # 初始化字典
-        all客聯B = {}
+        try:
+            # 初始化字典
+            all客聯B = {}
 
-        # 按行分割
-        lines = 客聯.split('@換行@')
+            # 按行分割
+            lines = 客聯.split('@換行@')
 
-        for line in lines:
-            line = line.strip()  # 去除首尾空格
-            if not line or line.startswith('[') or line.startswith('---'):
-                continue  # 跳過空行、日期行和分隔線
-            if '=' in line:
-                company, contact = line.split('=', 1)  # 分割公司名和聯繫方式
-                all客聯B[company.strip()] = contact.strip()
+            for line in lines:
+                line = line.strip()  # 去除首尾空格
+                if not line or line.startswith('[') or line.startswith('---'):
+                    continue  # 跳過空行、日期行和分隔線
+                if '=' in line:
+                    company, contact = line.split('=', 1)  # 分割公司名和聯繫方式
+                    all客聯B[company.strip()] = contact.strip()
 
-        return all客聯B
-
+            return all客聯B
+        except Exception as e:
+            _雜項._獲取詳細錯誤堆棧(*sys.exc_info())
 
 
 
 
     def _促銷鍠Po網(結果睇,結果Save):
+        try:
+            # 時間生成
+            now = datetime.now()
+            現在時間 = now.strftime("[%Y-%m-%d|%H:%M:%S]")
 
-        # 時間生成
-        now = datetime.now()
-        現在時間 = now.strftime("[%Y-%m-%d|%H:%M:%S]")
+            po睇 = """
+                const tempResult = document.getElementById('臨時結果');
+                let newContent = arguments[0];
+                if (tempResult.innerHTML) {
+                    tempResult.innerHTML = newContent + '<br>' + tempResult.innerHTML;
+                } else {
+                    tempResult.innerHTML = newContent;
+                }
+            """
+            poSave = """
+                const textarea = document.getElementById('促銷鍠結果');
+                textarea.value = arguments[0];
+            """
 
-        po睇 = """
-            const tempResult = document.getElementById('臨時結果');
-            let newContent = arguments[0];
-            if (tempResult.innerHTML) {
-                tempResult.innerHTML = newContent + '<br>' + tempResult.innerHTML;
-            } else {
-                tempResult.innerHTML = newContent;
+            # 建立對應關係
+            data_js_mapping = {
+                id(結果睇): (po睇, True),   # 使用 <br>
+                id(結果Save): (poSave, False)  # 使用 @換行@
             }
-        """
-        poSave = """
-            const textarea = document.getElementById('促銷鍠結果');
-            textarea.value = arguments[0];
-        """
 
-        # 建立對應關係
-        data_js_mapping = {
-            id(結果睇): po睇,   # 結果睇對應po睇
-            id(結果Save): poSave  # 結果Save對應poSave
-        }
+            PoAll = [結果睇,結果Save]
+            for po in PoAll:
+                po咩, is_html = data_js_mapping[id(po)]
+                行 = "<br>" if is_html else "@換行@"
+                # 转换为带换行的字符串（每条记录占一行）
+                send料PoHtml = f"{現在時間}[促銷鍠結果]{行}" +"@換行@".join(po) +f"{行}---------{行}"
+                #print(send料PoHtml)
 
-        PoAll = [結果睇,結果Save]
-        for po in PoAll:
-            # 转换为带换行的字符串（每条记录占一行）
-            send料PoHtml = f"{現在時間}[促銷鍠結果]@換行@" +"@換行@".join(po) +"@換行@---------@換行@"
-            #print(send料PoHtml)
-
-            po咩 = data_js_mapping[id(po)]
-            driver.execute_script(po咩,send料PoHtml.strip())
+                #po咩 = data_js_mapping[id(po)]
+                driver.execute_script(po咩,send料PoHtml.strip())
+        except Exception as e:
+            _雜項._獲取詳細錯誤堆棧(*sys.exc_info())
 
 _促銷鍠._執行_自動send野()
 #########結束#########
