@@ -183,8 +183,8 @@ class _chrome_雜項:
             chrome_options.add_experimental_option("detach", True)
             USER_DATA_DIR = os.path.join(os.getcwd(), 'chrome_user_data_default')
 
-        #if set == '搵客鍠':
-            #chrome_options.add_argument("--headless=new")
+        if set == '搵客鍠':
+            chrome_options.add_argument("--headless=new")
 
         # 每次執行程式都會重用此資料夾，LocalStorage、Cookies 等記錄不會消失
         chrome_options.add_argument(f"--user-data-dir={USER_DATA_DIR}")
@@ -861,8 +861,8 @@ class _Start:
 
             # 將特殊標記轉回\n轉義字符
             user_code = user_code.replace('@換行@', r'\n')
-            print(f'\n----1-----\n{user_code}\n----1-----\n')
-            input('按任意鍵執行...')
+            #print(f'\n----1-----\n{user_code}\n----1-----\n')
+            #input('按任意鍵執行...')
 
             try:
                 exec(user_code, globals())
