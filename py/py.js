@@ -247,7 +247,10 @@ class _客服鍠:
         '验证字符尾':']/span',
         '對話列表':'//*[@id="pane-side"]/div[*]/div/div',
         '客戶信息位':'.//div/div/div/div[2]/div[2]/div[1]/span/span',
-        '對話輸入框':'//*[@id="main"]/footer/div[1]/div/span/div/div[2]/div[1]/div[2]/div[*]/p',
+        '對話輸入框':'//*[@id="main"]/footer/div[1]/div/span/div/div[2]/div/div[3]',
+                     # //*[@id="main"]/footer/div[1]/div/span/div/div[2]/div/div[3]/div[1]/p
+
+
         '繼續前往對話':'//*[@id="action-button"]',
         '使用WhatsApp網頁版':'//*[@id="fallback_block"]/div/div/h4[2]/a',
         'Ws網頁版新功能':'//*[@id="app"]/div/span[2]/div/div/div/div/div/div/div[2]/div/button/div/div',
@@ -495,7 +498,7 @@ _客服鍠._登入ws()
 _客服鍠._ws自動客服()
 
 
-##qqqqqqqqqqqqqqqqqq##
+##333333##
 #########結束#########
 `
 
