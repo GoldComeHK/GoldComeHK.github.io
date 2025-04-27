@@ -9,7 +9,7 @@
             <samp>搵客鍠</samp>
         </div>
         <div class="按鈕AA" >
-            <a href="https://64071181.github.io/mk/" class='按鈕圖標' title="✒️ 創作鍠：按行業、文化、語氣、受眾，產出具吸引力文章、海報、影片。" >✒️</a> 
+            <a href="./2.html" class='按鈕圖標' title="✒️ 創作鍠：按行業、文化、語氣、受眾，產出具吸引力文章、海報、影片。" >✒️</a> 
             <samp>創作鍠</samp>
         </div>
         <div class="按鈕AA" >

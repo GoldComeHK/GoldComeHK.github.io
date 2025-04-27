@@ -1,7 +1,7 @@
 body { font-family: Arial, sans-serif;background: linear-gradient(145deg, #a8a8a8, #000000);color: #ecf0f1;padding: 20px; }
 h1 { text-align: center;margin-bottom: 20px;font-size: 2em;text-shadow: 2px 2px 4px gold; }
 .container { max-width: 800px;margin: 0 auto;padding: 20px;border-radius: 12px;background: #2f3030;box-shadow: 4px 4px 8px #767676; }
-.按鈕AA {float: left;width: 25%;height: 250px;margin: auto ;background: rgba(207, 8, 8, 0);display: flex;justify-content: center;align-items: center;text-align: center; cursor: pointer;transition: all 0.3s ease;overflow: hidden;position: relative;}
+.按鈕AA {float: left;width: 25%;height: 250px;margin: auto ;background: rgba(207, 8, 8, 0);display: flex;justify-content: center;align-items: center; cursor: pointer;transition: all 0.3s ease;overflow: hidden;position: relative;}
 .按鈕AA samp{position: absolute;bottom: 50px;left: 25%;z-index: 9;color: #fff;box-shadow: 4px 4px 10px  gold;}
 .按鈕圖標{font-size: 100px;transition: transform 0.3s ease, color 0.3s ease;}
 .按鈕圖標:hover{ transform: scale(1.8) rotate(15deg);}

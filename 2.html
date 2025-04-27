@@ -1,0 +1,917 @@
+<!-- 
+      :::    :::       ::::::::::           :::        :::::::::
+     :+:    :+:       :+:                :+: :+:      :+:    :+:
+    +:+    +:+       +:+               +:+   +:+     +:+    +:+
+   +#++:++#++       +#++:++#         +#++:++#++:    +#+    +:+
+  +#+    +#+       +#+              +#+     +#+    +#+    +#+
+ #+#    #+#       #+#              #+#     #+#    #+#    #+#
+###    ###       ##########       ###     ###    #########
+-->
+
+
+
+
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>創作鍠✒️ | 金come</title>
+    <style>
+        body { font-family: Arial, sans-serif;background: linear-gradient(145deg, #a8a8a8, #000000);color: #ecf0f1;padding: 20px; }
+        h1 { text-align: center;margin-bottom: 20px;font-size: 2em;text-shadow: 2px 2px 4px gold; }
+        .container { max-width: 600px;margin: 0 auto;padding: 20px;border-radius: 12px;background: #2f3030;box-shadow: 4px 4px 8px #767676; }
+        label, p { margin: 10px 0 5px; }
+        input, textarea, select, button, .鍵 { margin-bottom: 10px;padding: 8px;border-radius: 8px;border: none;outline: none; }
+        input, textarea, select { width: 100%; }
+        .大鍵 {border-radius: 10px; background: #282828;color: #bdbdbd;box-shadow: inset 25px 25px 50px rgba(139, 139, 139, 0.8);border: 1px solid #686868;font-size: 48px;width: 100%; }
+        .大鍵:hover { background: #484949; }
+        button, .鍵  { background-color: #000000;color: white;cursor: pointer; }
+        button:hover,.鍵:hover  { background-color: #484949; }
+
+        .hidden,#uploadInput,.執行金come { display: none; }
+        .執行金come{place-items: center;}
+
+        .section {display: none;}
+        .section.active {display: block;}
+        .向Ai提問 {display: none;opacity: 0;transition: opacity 0.3s ease;}
+        .向Ai提問.show {display: block;opacity: 1;}
+    </style>
+
+  <!-- ws icon https://www.thinkcmf.com/font/font_awesome/icons.html -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+  <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+  <script src="../mokJsapi/a.js">//琪琪修改</script>
+  <script src="py/py.js"></script>
+
+  <link rel="stylesheet" href="html.css">
+  <script src="html.js"></script>
+  
+  <script src="https://cdn.staticfile.net/translate.js/3.1.7/translate.js">// 翻譯 放最後</script>
+
+</head>
+<body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+  :::::::::::       :::    :::   :::::::::::
+     :+:           :+:    :+:       :+:
+    +:+            +:+  +:+        +:+
+   +#+             +#++:+         +#+
+  +#+            +#+  +#+        +#+
+ #+#           #+#    #+#       #+#
+###           ###    ###       ###
+-->
+<samp id="莫生查詢" style="display: none;">莫生我要查詢創作鍠使用問題</samp>
+<samp id="匯入警告" style="display: none;">匯入設定檔會刪除現時設定！</samp>
+<samp id="設定匯入" style="display: none;">設定檔已成功匯入！</samp>
+<samp id="設定格式錯誤" style="display: none;">檔案格式錯誤或解析失敗</samp>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- 部份0: 基本 -->
+    <div id="執行中請不要關閉網頁">
+        <h2>執行中請不要關閉網頁...</h2>
+    </div>
+    <h1>創作鍠✒️ | <a href="./set.html"><b class="_我司名"></b></a></h1>
+    <p class="mokJsApi_copyright">版權</p>
+    <div id="導航" ><!-- JS 導航 --></div>
+
+    <div class="container" style="padding: 20px;">
+
+
+
+
+        <div class="nav-buttons">
+            <button class="nav-btn" data-target="Ai提問">AI 提問</button>
+
+            <a href="https://64071181.github.io/tool2024/" target="_blank" class="鍵" >ai工具列表</a>
+
+
+            <button class="nav-btn" data-target="爆片神器">爆片神器</button>
+
+
+            <!-- 部份4: 設定檔 -->
+            <samp style="float: right;">
+                <button onclick="下載設定檔()">⬇️ 下載設定檔</button>
+                <input type="file" id="uploadInput" accept=".json" onchange="上傳設定檔(event)">
+                <button onclick="document.getElementById('uploadInput').click()">⬆️ 上傳設定檔</button>
+            </samp>
+    
+                            
+
+        </div>
+
+
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <section id="Ai提問" class="section">
+            <h3>向 Ai 提問</h3>
+            <textarea id="搜尋Perplexity" class="記錄數據用" style="text-align: left;" placeholder="請填寫您的問題" title="向 Ai 提問"></textarea>
+            <a href="#" target="_blank" class="大鍵 向Ai提問" title="向Ai提問" >向Ai提問</a>
+        </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!-- 爆片神器 -->
+        <section id="爆片神器" class="section">
+            
+
+            <h1>爆片神器</h1>
+            <hr>
+
+
+            <h3>影片主題*</h3>
+            <textarea id="影片主題" class="記錄數據用" placeholder="您需要創作的影片主題" title="您需要創作的影片主題"></textarea>
+            <h3>強調內容*</h3>
+            <textarea id="影片內容" class="記錄數據用" placeholder="影片中需要強調的內容" title="影片中需要強調的內容"></textarea>
+
+
+
+            <h3>你的角色</h3>
+            <textarea id="你的角色" class="記錄數據用" placeholder="你的角色(我是一個科技商業顧問)" title="你的角色(我是一個科技商業顧問)"></textarea>
+            <h3>目標受眾</h3>
+            <textarea id="目標受眾" class="記錄數據用" placeholder="你的目標受眾(中小型企業老闆)" title="你的目標受眾(中小型企業老闆)"></textarea>
+            <h3>需要結果</h3>
+            <textarea id="需要結果" class="記錄數據用" placeholder="出片後需要的結果(引流觀眾購買我的服務)" title="出片後需要的結果(引流觀眾購買我的服務)"></textarea>
+
+
+
+
+
+
+
+
+            <h3>主情緒槓桿*</h3>
+            <select id="主情緒槓桿" class="記錄數據用" onchange="updateSubLever()" title="情緒槓桿幫助你在內容創作中精準調動使用者情緒，可以大幅提升內容的感染力和傳播力！">
+                <option value="">請選擇主情緒槓桿</option>
+                <option value="多巴胺">多巴胺</option>
+                <option value="腎上腺素">腎上腺素</option>
+                <option value="催產素">催產素</option>
+                <option value="恐懼">恐懼</option>
+                <option value="優越感">優越感</option>
+                <option value="好奇心">好奇心</option>
+                <option value="愧疚感">愧疚感</option>
+                <option value="歸屬感">歸屬感</option>
+                <option value="希望感">希望感</option>
+                <option value="悲傷感">悲傷感</option>
+                <option value="攪笑">攪笑</option>
+            </select>
+
+            <h3>副情緒槓桿*</h3>
+            <select id="副情緒槓桿" class="記錄數據用" title="情緒槓桿幫助你在內容創作中精準調動使用者情緒，可以大幅提升內容的感染力和傳播力！">
+                <option value="">請選擇副情緒槓桿</option>
+                <option value="多巴胺">多巴胺</option>
+                <option value="腎上腺素">腎上腺素</option>
+                <option value="催產素">催產素</option>
+                <option value="恐懼">恐懼</option>
+                <option value="優越感">優越感</option>
+                <option value="好奇心">好奇心</option>
+                <option value="愧疚感">愧疚感</option>
+                <option value="歸屬感">歸屬感</option>
+                <option value="希望感">希望感</option>
+                <option value="悲傷感">悲傷感</option>
+                <option value="攪笑">攪笑</option>
+            </select>
+
+            <hr>
+
+            <h3>影片時長*</h3>
+            <button onclick="顯示隱藏('#流量優勢區間')">流量優勢區間:</button>
+            <p id="流量優勢區間" class="none">
+                。抖音(7-15)秒<br>
+                。Instagram(15-30)秒<br>
+                。微信视频号(15-60)秒<br>
+                <br>
+                。小红书(30-120)秒<br>
+                。快手(30-180)秒<br>
+                <br>
+                。西瓜视频(180-600)秒<br>
+                。哔哩哔哩(30-1800)秒<br>
+                。youtube(600-1200)秒<br>
+            </p>
+            <input type="number" id="影片時長" class="記錄數據用" placeholder="影片時長（秒）" title="影片時長（秒）" min="7" step="1" value="10">
+            
+            <hr>
+            
+            <button onclick="生成Deepseek提示词()">生成Deepseek提示词</button>
+            <textarea id="生成結果" class="none" title="單擊複製" 
+            onclick="copyToClipboard('生成結果');"
+            readonly></textarea>
+
+            <a id="Deepseek" href="https://chat.deepseek.com/" target="_blank" class="none btn">打開Deepseek</a>
+
+            <div id="整理Deepseek劇本" class="none">
+                <h3>Deepseek劇本整理</h3>
+                <input type="text" id="Deepseek劇本" title="複製Deepseek生成的javascript後貼到此處,再按一下" onclick="整理Deepseek出片文();顯示隱藏('#jimeng,#上字幕');" placeholder="複製Deepseek生成的javascript後貼到此處,再按一下">
+                <hr>
+
+                <h3>爆款标题</h3>
+                <textarea id="DS劇本_爆款标题" title="單擊複製" onclick="copyToClipboard('DS劇本_爆款标题');" readonly></textarea>
+
+                <h3>爆款關鍵字</h3>
+                <textarea id="DS劇本_關鍵字" title="單擊複製" onclick="copyToClipboard('DS劇本_關鍵字');" readonly></textarea>
+
+                <h3>分镜</h3>
+                <textarea id="DS劇本_分镜" title="單擊複製" onclick="copyToClipboard('DS劇本_分镜');" readonly></textarea>
+
+                <h3>徬白(手動複製)</h3>
+                <textarea id="DS劇本_徬白" title="手動複製每句" readonly></textarea>
+
+            </div>
+
+            <a id="jimeng" href="https://www.jianying.com/ai-creator/storyboard" target="_blank" class="none btn">打開剪映</a>
+
+            <a id="上字幕" href="https://www.capcut.com/editor?scenario=custom" target="_blank" class="none btn">上字幕</a>
+
+
+            <hr>
+            <button onclick="顯示隱藏('#爆款提示')">爆款提示:</button>
+
+            <p id="爆款提示" class="none">
+                破圈傳播密碼:<br>
+                <br>
+                提示词優化:<br>
+                    你的角色(我是一個科技商業顧問)<br>
+                    目標受眾(中小型企業老闆)<br>
+                    需要效果(引流觀眾購買我的服務)<br>
+                    <br>
+                冷啟動:<br>
+                    先做短視頻，測試那類影片更多受眾。<br>
+                    再做長視頻，測試變現效果。<br>
+                    再做產品，盈利及建立品牌。<br>
+                    <br>
+                    模因（Meme）植入<br>
+                    嫁接全網熱風雲（綠幕彈吉他、「尊嘟假嘟」配音）<br>
+                    設計可二創模板（舞蹈動作/台詞接龍）<br>
+                    <br>
+                衝突經濟學:<br>
+                    製造「可站隊爭議」（支持某觀點VS反對派）<br>
+                    埋「釣魚點」引發產業KOL下場爭論（如故意質疑主流方法）<br>
+                    <br>
+                灰階測驗思維:<br>
+                    同一腳本做5版不同結尾（求助/挑釁/祝福）AB測試<br>
+                    <br>
+                利用「熱門長尾」組合拳：<br>
+                    70%熱門話題+30%垂類內容維持標籤<br>
+                    <br>
+                數據運作暗箱<br>
+                <br>
+                    冷啟動階段：<br>
+                        發布後1小時內人工幹預（精準搜尋關鍵字進入同賽道影片評論區導流）<br>
+                        利用「完播率權重」：前3秒設計「未完待續」鉤子（例：「最後有重磅福利」）<br>
+                        <br>
+                    破播放量層級後：<br>
+                        集中回覆爭議性評論，刺激二次推薦（演算法判定為高互動優質內容）<br>
+            </p>
+
+            
+        </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+    </div>
+    <div class="執行金come">
+        <h3><a href="./set.html">返回<b class="_我司名"></b></a></h3>
+    </div>
+    <div class="scroll-top" id="scrollTop" onclick="scrollToTop()">↑</div>
+    <script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // 爆片神器
+
+        function updateSubLever() {
+            const mainLever = document.getElementById("主情緒槓桿");
+            const subLever = document.getElementById("副情緒槓桿");
+            const selectedMainValue = mainLever.value;
+
+            // 重置所有选项为可选
+            for (let i = 0; i < subLever.options.length; i++) {
+                subLever.options[i].disabled = false;
+            }
+
+            // 禁用主情绪杠杆中已选的选项
+            if (selectedMainValue) {
+                for (let i = 0; i < subLever.options.length; i++) {
+                    if (subLever.options[i].value === selectedMainValue) {
+                        subLever.options[i].disabled = true;
+                        break;
+                    }
+                }
+            }
+        }
+
+
+        function 生成Deepseek提示词() {
+
+            影片主題 = $(`#影片主題`).val()
+            影片內容 = $(`#影片內容`).val()
+            影片時長 = $(`#影片時長`).val()
+
+            主情緒槓桿 = $(`#主情緒槓桿`).val()
+            副情緒槓桿 = $(`#副情緒槓桿`).val()
+
+            // 提示词優化
+            你的角色  = $(`#你的角色`).val()
+            目標受眾  = $(`#目標受眾`).val()
+            需要結果  = $(`#需要結果`).val()
+            角色B=受眾B=結果B = ''
+            if (你的角色 !== '') { 角色B = `我是一名${你的角色},` }
+            if (目標受眾 !== '') { 受眾B = `我的目標受眾是${目標受眾},` }
+            if (需要結果 !== '') { 結果B = `我希望${需要結果}。` }
+            提示词優化1 = `
+            ${角色B}${受眾B}${結果B}
+            `
+
+            if (影片主題 === '' || 影片內容 === '' || 影片時長 === '' || 主情緒槓桿 === '' || 副情緒槓桿 === '') {
+                alert('請填寫所有 * 欄位');
+                return
+            }
+
+            提示词 = 
+            `請幫我設計一個符合抖音爆款影片的劇本:
+                ${提示词優化1}
+                影片主題:
+                    ${影片主題}。
+                內容強調:
+                    ${影片內容}。
+                情緒槓桿:
+                    ${主情緒槓桿}和${副情緒槓桿}。
+                影片時長:
+                    ${影片時長}秒。
+
+                請參考及加入以下内容价值底层逻辑:
+                    行动指令明确：
+                        步骤化教学（「3步拯救废片」比「摄影技巧」更易转化）
+                    炫耀资本：
+                        提供可展示成果（「用这个模板，领导夸我PPT像咨询公司」）
+                    强刺激开场：
+                        视觉冲击（高饱和度画面/快速剪辑）、情绪冲击（争议话题/悬念提问）。
+                    信息密度爆炸：
+                        用「前置信息」直接抛出痛点（如「月薪3千到3万，我只做了这1件事」），破除用户划走动机。
+                    算法识别信号：
+                        标题关键词+前3秒画面需高度匹配，提升平台推荐精准度（如「装修避坑」需出现施工现场画面）。
+                    反常识节奏：
+                        每數秒设置「认知颠覆点」（例：先展示失败案例再反转）
+                    伪互动陷阱：
+                        用「暂停猜结局」「评论区选A/B」提升完播率
+                    算法助推设计：
+                        关键帧插入高互动关键词（提问/挑战/投票）触发推荐机制
+            ---
+            1.幫我設計一個符合抖音爆款的标题。
+            2.及給我一些符合抖音爆款的標籤關鍵字。
+            3.請幫我設計一個符合抖音爆款影片的分镜劇本，我將要用在 剪影 的ai文本生成視頻，单分镜长度200字內，每分鏡時長3秒。单分鏡內容不要換行。每段分鏡換行
+            4.請幫我設計符合抖音爆款的徬白劇本，每段白长度200字內，每段徬白對應一個分鏡。单段徬白內容不要換行,不要時間,不要语气描述,不要其他描述,只留下徬白內容。
+
+            請用以下方式給我結果，方便我用js切割:
+                爆款标题=[]
+                關鍵字=[]
+                分镜=[]
+                徬白=[]
+
+            謝謝。`
+
+            $('#生成結果').val(提示词);
+            顯示隱藏('#生成結果,#Deepseek,#整理Deepseek劇本')
+
+        }
+
+        function 整理Deepseek出片文(){
+            要分內容 = ['爆款标题','關鍵字','分镜','徬白']
+            Deepseek劇本  = $(`#Deepseek劇本`).val()
+
+            for (i of 要分內容){
+                各內容 = Deepseek劇本.split(`${i}=[`)[1].split(']')[0].replace(/","/g,'\n').replace(/", "/g,'\n').replace(/"/g,'')
+                $(`#DS劇本_${i}`).val(各內容)
+            }
+
+        }
+
+
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const textarea = document.getElementById('搜尋Perplexity');
+            const submitButton = document.querySelector('.向Ai提問');
+            
+            // 初始檢查
+            updateButtonState();
+            
+            // 監聽textarea內容變化
+            textarea.addEventListener('input', updateButtonState);
+            
+            function updateButtonState() {
+                const content = textarea.value.trim();
+                
+                submitButton.classList.toggle('show', !!content);
+                submitButton.href = content ? `https://www.perplexity.ai/search?q=${encodeURIComponent(content)}` : '#';
+                }
+            }
+        );
+
+
+
+
+
+
+
+
+
+
+
+        $(document).ready(function() {
+            $('.nav-btn').click(function() {
+                $('.nav-btn').removeClass('active');
+                $('.section').removeClass('active');
+                
+                $(this).addClass('active');
+                $('#' + $(this).data('target')).addClass('active');
+            });
+        });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+      ::::::::           :::     :::     :::       ::::::::::       :::::::::
+    :+:    :+:        :+: :+:   :+:     :+:       :+:              :+:    :+:
+   +:+              +:+   +:+  +:+     +:+       +:+              +:+    +:+
+  +#++:++#++      +#++:++#++: +#+     +:+       +#++:++#         +#+    +:+
+        +#+      +#+     +#+  +#+   +#+        +#+              +#+    +#+
+#+#    #+#      #+#     #+#   #+#+#+#         #+#              #+#    #+#
+########       ###     ###     ###           ##########       #########
+*/
+        const 記錄位 = document.querySelectorAll(".記錄數據用");
+        function 記錄已填寫數據() {
+            // 獲取所有帶有 class="auto-save" 的元素
+            
+
+            // 頁面加載時，從 LocalStorage 恢復數據
+            document.addEventListener("DOMContentLoaded", () => {
+                記錄位.forEach(element => {
+                const savedValue = localStorage.getItem(element.id);
+                if (savedValue !== null) {
+                    element.value = savedValue; // 適用於 input、textarea、select
+                }
+                });
+            });
+
+            // 監聽輸入事件，實時保存數據
+            記錄位.forEach(element => {
+                element.addEventListener("input", () => {
+                localStorage.setItem(element.id, element.value);
+                });
+            });
+        }
+
+        // 分頁
+        function showSection(sectionId) {
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(sectionId).classList.add('active');
+        }
+
+        function 顯示隱藏(id) {
+            $(id).removeClass('none');
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+      :::::::::       ::::::::     :::       :::       ::::    :::       :::        ::::::::           :::        :::::::::
+     :+:    :+:     :+:    :+:    :+:       :+:       :+:+:   :+:       :+:       :+:    :+:        :+: :+:      :+:    :+:
+    +:+    +:+     +:+    +:+    +:+       +:+       :+:+:+  +:+       +:+       +:+    +:+       +:+   +:+     +:+    +:+
+   +#+    +:+     +#+    +:+    +#+  +:+  +#+       +#+ +:+ +#+       +#+       +#+    +:+      +#++:++#++:    +#+    +:+
+  +#+    +#+     +#+    +#+    +#+ +#+#+ +#+       +#+  +#+#+#       +#+       +#+    +#+      +#+     +#+    +#+    +#+
+ #+#    #+#     #+#    #+#     #+#+# #+#+#        #+#   #+#+#       #+#       #+#    #+#      #+#     #+#    #+#    #+#
+#########       ########       ###   ###         ###    ####       ########## ########       ###     ###    #########
+
+*/
+        // 手動上下載
+        function 下載設定檔() {
+            const data = {};
+            // 遍歷所有帶有 .記錄數據用 類的元素
+            記錄位.forEach(element => {
+                // 使用元素的 id 作為鍵，如果沒有 id 則使用 name 或其他屬性
+                const key = element.id || element.name || element.className;
+                if (key) {
+                    data[key] = element.value || '';
+                }
+            });
+
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+            const url = URL.createObjectURL(blob);
+            
+            const link = document.createElement("a");
+            link.href = url;
+            link.download = `創作鍠_設定檔${_現在時間()}.json`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+
+
+        function 上傳設定檔(event) {
+            const 設定匯入 = document.getElementById('設定匯入').textContent;
+            const 設定格式錯誤 = document.getElementById('設定格式錯誤').textContent;
+            const 匯入警告 = document.getElementById('匯入警告').textContent;
+            
+            if (!confirm(匯入警告)) {
+                location.reload(); 
+                return;
+            }
+
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const importedData = JSON.parse(e.target.result);
+                    
+                    // 遍歷所有 .記錄數據用 元素並導入數據
+                    記錄位.forEach(element => {
+                        const key = element.id || element.name || element.className;
+                        if (key && importedData.hasOwnProperty(key)) {
+                            element.value = importedData[key] || '';
+                        }
+                    });
+
+                    alert(設定匯入);
+                } catch (error) {
+                    alert(設定格式錯誤);
+                    console.error("解析错误:", error);
+                }
+            };
+            reader.readAsText(file);
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+          :::        :::    :::       :::::::::::
+       :+: :+:      :+:   :+:            :+:
+     +:+   +:+     +:+  +:+             +:+
+   +#++:++#++:    +#++:++              +#+
+  +#+     +#+    +#+  +#+             +#+
+ #+#     #+#    #+#   #+#            #+#
+###     ###    ###    ###       ###########
+*/
+
+
+
+function _現在時間() {
+            const now = new Date();
+            return [
+                now.getFullYear(),
+                String(now.getMonth() + 1).padStart(2, '0'),
+                String(now.getDate()).padStart(2, '0'),
+                String(now.getHours()).padStart(2, '0'),
+                String(now.getMinutes()).padStart(2, '0'),
+                String(now.getSeconds()).padStart(2, '0')
+            ].join('');
+        }
+
+
+
+
+        function 翻譯() {
+            translate.service.use('client.edge'); //設置機器翻譯服務通道，直接客戶端本身，不依賴服務端 。相關說明參考 http://translate.zvo.cn/43086.html
+            translate.execute();//進行翻譯 
+        }
+
+        // 等待頁面完全加載 
+        window.onload = function() {
+            // 再顯示按鈕
+            document.querySelector('.執行金come').style.display = 'grid';
+        };
+        
+        function Start() {
+            // 顯示聯莫
+            const 聯莫 = [
+                'moksurky@gmail.com',
+                'https://wa.me/85264071181/',
+                'https://i.meee.com.tw/atcX6QM.png','https://www.instagram.com/moksurky2025/',
+                'https://line.me/ti/p/UlSPd7p9zh/','https://www.facebook.com/aki.mok.10/',
+                'http://t.me/mokaki/'
+            ];
+            _顯示聯莫(聯莫);
+            
+            翻譯()
+        }
+
+        記錄已填寫數據()
+        琪琪修改();
+        
+
+    </script>
+</body>
+</html>
