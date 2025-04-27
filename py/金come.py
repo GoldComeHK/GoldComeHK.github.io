@@ -599,8 +599,6 @@ class _金come_VIP:
     def _獲取帳號資料(国码,电码,功能):
         global 月費用戶,帳號1181
 
-        搵客鍠最多找幾頁 = 1
-
         帳號 = 国码+电码
         # 創建一個 SHA-256 雜湊物件
         帳號1181 = hashlib.sha256(帳號.encode('utf-8')).hexdigest()
@@ -612,14 +610,12 @@ class _金come_VIP:
             # 搜索 帳號1181
             if 帳號1181 in response.text:
                 月費用戶 = True
-                搵客鍠最多找幾頁 = 10
 
             _Start._歡迎登入(国码,电码,功能)
         except requests.exceptions.RequestException as e:
             print(f"請求帳號資料失敗:{e}")
         
-        if 功能 == '搵客鍠':
-            return 搵客鍠最多找幾頁
+        return 月費用戶
 
 
 

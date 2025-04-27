@@ -26,7 +26,7 @@ def _自動獲取香港勞工處工作資料(keyword=''):
     }
 
     try:
-        最多找幾頁 = _金come_VIP._獲取帳號資料(@帳號1181@)
+        
 
         搵客鍠_driver = _chrome_雜項._Chrome設定('搵客鍠')
         搵客鍠_driver.maximize_window() # 最大化窗口
@@ -35,6 +35,10 @@ def _自動獲取香港勞工處工作資料(keyword=''):
         表格xpath = 勞工處XPATH['表格xpath']
         電話開頭 = '4569'
         電話位數 = 7
+        最多找幾頁 = @找幾頁@
+
+        if not _金come_VIP._獲取帳號資料(@帳號1181@):
+            最多找幾頁 = 1
 
         all_Boss料 = []
         # 勞工處網分流
@@ -62,18 +66,19 @@ def _自動獲取香港勞工處工作資料(keyword=''):
         目前網址 = 搵客鍠_driver.current_url
         #print(f"目前網址:{目前網址}")
 
+
+        # 取得資料總數
+        顯總料數 = WebDriverWait(搵客鍠_driver, 9).until(
+            EC.visibility_of_element_located((By.XPATH, 勞工處XPATH['左上資料數']))
+        )
+        顯總料數 = 顯總料數.text.strip()
+        print(f'*** 正在搜尋[{keyword}]有{顯總料數}個公司資料 @ 香港勞工處 ***')
+
         找頁數 = 1
         顯總料數 = 0
         _每頁量 = 20
         while True:
-
-            # 取得資料總數
-            顯總料數 = WebDriverWait(搵客鍠_driver, 9).until(
-                EC.visibility_of_element_located((By.XPATH, 勞工處XPATH['左上資料數']))
-            )
-            顯總料數 = 顯總料數.text.strip()
-            print(f'*** 正在搜尋[{keyword}]有{顯總料數}個公司資料 @ 香港勞工處 ***')
-
+            
             if int(顯總料數) == 0:
                 print("沒有資料，搜尋結束...")
                 break
@@ -244,7 +249,8 @@ class _客服鍠:
         '客戶信息位':'.//div/div/div/div[2]/div[2]/div[1]/span/span',
         '對話輸入框':'//*[@id="main"]/footer/div[1]/div/span/div/div[2]/div[1]/div[2]/div[*]/p',
         '繼續前往對話':'//*[@id="action-button"]',
-        '使用WhatsApp網頁版':'//*[@id="fallback_block"]/div/div/h4[2]/a'
+        '使用WhatsApp網頁版':'//*[@id="fallback_block"]/div/div/h4[2]/a',
+        'Ws網頁版新功能':'//*[@id="app"]/div/span[2]/div/div/div/div/div/div/div[2]/div/button/div/div',
     }
 
     # Chrome設定
@@ -313,6 +319,12 @@ class _客服鍠:
                         ))
                     )
 
+                    # Ws網頁版新功能
+                    try:
+                        _chrome_雜項._檢查點擊(客服鍠_driver,'Ws網頁版新功能', _客服鍠.其他_xpaths['Ws網頁版新功能'])
+                    except:
+                        pass
+
                     # 段5 = 验证成功 等待對話列表出現
                     time.sleep(random.uniform(3.8, 5.8))
                     _客服鍠._登入ws_等待對話列表出現()
@@ -341,8 +353,11 @@ class _客服鍠:
 
             while True:
                 try:
-                    _chrome_雜項._檢查點擊(客服鍠_driver,'繼續前往對話', _客服鍠.其他_xpaths['繼續前往對話'])
-                    _chrome_雜項._檢查點擊(客服鍠_driver,'使用 WhatsApp 網頁版', _客服鍠.其他_xpaths['使用WhatsApp網頁版'])
+                    try:
+                        _chrome_雜項._檢查點擊(客服鍠_driver,'繼續前往對話', _客服鍠.其他_xpaths['繼續前往對話'])
+                        _chrome_雜項._檢查點擊(客服鍠_driver,'使用 WhatsApp 網頁版', _客服鍠.其他_xpaths['使用WhatsApp網頁版'])
+                    except:
+                        pass
 
                     # 等待輸入框出現並輸入回覆
                     對話輸入框 = WebDriverWait(客服鍠_driver, 10).until(
