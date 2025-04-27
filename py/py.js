@@ -22,7 +22,9 @@ def _自動獲取香港勞工處工作資料(keyword=''):
         '表格xpath':'//*[@id="jobOrderTable"]',
 
         '工作列表':'//*[@id="job_list_table"]/tbody',
-        '工作列表中的所有href':'//*[@id="job_list_table"]//a[contains(@id, "_orderNo_hyper")]'
+        '工作列表中的所有href':'//*[@id="job_list_table"]//a[contains(@id, "_orderNo_hyper")]',
+        '關鍵字輸入框':'//*[@id="simp_searchKeyword"]',
+        '搜尋空缺按鈕':'//*[@id="btnSearch"]',
     }
 
     try:
@@ -55,13 +57,21 @@ def _自動獲取香港勞工處工作資料(keyword=''):
 
         搵客鍠_driver.get(勞工處ulr)
         # 填寫關鍵字並點擊搜尋按鈕
+
+
+        '''
         search_box = 搵客鍠_driver.find_element(By.ID, "simp_searchKeyword")
         search_box.send_keys(keyword)
         search_button = 搵客鍠_driver.find_element(By.ID, "btnSearch")
         search_button.click()
-
         列表顯示 = 搵客鍠_driver.find_element(By.XPATH, 勞工處XPATH['列表顯示'])
         列表顯示.click()
+        '''
+        # qqqq
+        _chrome_雜項._檢查文字輸入(搵客鍠_driver,關鍵字輸入框, 勞工處XPATH['關鍵字輸入框'], keyword)
+        _chrome_雜項._檢查點擊(搵客鍠_driver,搜尋空缺按鈕,勞工處XPATH['搜尋空缺按鈕'])
+        _chrome_雜項._檢查點擊(搵客鍠_driver,列表顯示,勞工處XPATH['列表顯示'])
+
 
         目前網址 = 搵客鍠_driver.current_url
         #print(f"目前網址:{目前網址}")
@@ -160,6 +170,8 @@ def _提取聯絡方式(url,公司名xpath,表格xpath,電話篩選):
         _雜項._獲取詳細錯誤堆棧(*sys.exc_info())
 
 _自動獲取香港勞工處工作資料('@關鍵字@')
+
+# 555555
 #########結束#########
 `
 
@@ -238,7 +250,7 @@ class _客服鍠:
         '国家代码':'//*[@id="wa-popovers-bucket"]/div/div[2]/div/div[1]/div/div[2]/div/div/p',
         '地区选择':'//*[@id="wa-popovers-bucket"]/div/div[2]/div/div[2]/div/div/div/div/div/div/button/div/div/div[2]/div/div/div',
         '电话号码':'//*[@id="app"]/div/div[2]/div[2]/div[*]/div/div/div[3]/div[1]/div[2]/div/div/div/form/input',
-        '登入按钮':'//*[@id="app"]/div/div[2]/div[2]/div[*]/div/div/div[3]/div[3]/button/div/div'
+        '登入按钮':'//*[@id="app"]/div/div[2]/div[2]/div[*]/div/div/div[3]/div[3]/button/div/div',
     }
 
     其他_xpaths = {
@@ -248,8 +260,6 @@ class _客服鍠:
         '對話列表':'//*[@id="pane-side"]/div[*]/div/div',
         '客戶信息位':'.//div/div/div/div[2]/div[2]/div[1]/span/span',
         '對話輸入框':'//*[@id="main"]/footer/div[1]/div/span/div/div[2]/div/div[3]/div[1]/p',
-
-
         '繼續前往對話':'//*[@id="action-button"]',
         '使用WhatsApp網頁版':'//*[@id="fallback_block"]/div/div/h4[2]/a',
         'Ws網頁版新功能':'//*[@id="app"]/div/span[2]/div/div/div/div/div/div/div[2]/div/button/div/div',
@@ -360,14 +370,8 @@ class _客服鍠:
                         _chrome_雜項._檢查點擊(客服鍠_driver,'使用 WhatsApp 網頁版', _客服鍠.其他_xpaths['使用WhatsApp網頁版'])
                     except:
                         pass
-
                     # 等待輸入框出現並輸入回覆
-                    對話輸入框 = WebDriverWait(客服鍠_driver, 10).until(
-                        EC.presence_of_element_located((By.XPATH, _客服鍠.其他_xpaths['對話輸入框']))
-                    )
-
-                    print(f"對話輸入框={對話輸入框}")
-                    對話輸入框.send_keys(Keys.RETURN)
+                    _chrome_雜項._檢查文字輸入(客服鍠_driver,對話輸入框, _客服鍠.其他_xpaths['對話輸入框'], Keys.RETURN)
                     print("成功登入WhatsApp")
                     break
                 except:
@@ -398,21 +402,33 @@ class _客服鍠:
 
                 try:
                     # 每次迭代時重新獲取 chat_list
+
+                    '''
                     chat_list = WebDriverWait(客服鍠_driver, 30).until(
                         EC.presence_of_all_elements_located((By.XPATH, _客服鍠.其他_xpaths['對話列表']))
                     )
+                    '''
+                    # qqqq
+
+                    chat_list =_檢查元素存在(客服鍠_driver,'對話列表',_客服鍠.其他_xpaths['對話列表'])
 
                     for chat in chat_list:
                         try:
                             # 每次點擊前重新獲取 chat 元素
+                            chat =_檢查元素存在(客服鍠_driver,'客戶信息位',_客服鍠.其他_xpaths['客戶信息位'])
+                            '''
                             chat = WebDriverWait(客服鍠_driver, 10).until(
                                 EC.presence_of_element_located((By.XPATH,_客服鍠.其他_xpaths['客戶信息位']))
                             )
+                            '''
+                            # qqqq
                             客來詢 = chat.text
 
                             # 判斷是否需回覆
                             if 客來詢 in _客服鍠.回覆內容:
                                 chat.click()  # 點擊進入對話
+
+
                                 _客服鍠._ws自動回覆(客來詢)
                         except StaleElementReferenceException:
                             print("元素已過期，重新取得 chat 元素...")
@@ -497,7 +513,7 @@ _客服鍠._登入ws()
 _客服鍠._ws自動客服()
 
 
-##444##
+# 555555
 #########結束#########
 `
 
