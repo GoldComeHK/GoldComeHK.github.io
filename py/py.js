@@ -364,6 +364,7 @@ class _客服鍠:
                         EC.presence_of_element_located((By.XPATH, _客服鍠.其他_xpaths['對話輸入框']))
                     )
 
+                    print(f"對話輸入框={對話輸入框}")
                     對話輸入框.send_keys(Keys.RETURN)
                     print("成功登入WhatsApp")
                     break
