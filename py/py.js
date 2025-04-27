@@ -68,9 +68,9 @@ def _自動獲取香港勞工處工作資料(keyword=''):
         列表顯示.click()
         '''
         # qqqq
-        _chrome_雜項._檢查文字輸入(搵客鍠_driver,關鍵字輸入框, 勞工處XPATH['關鍵字輸入框'], keyword)
-        _chrome_雜項._檢查點擊(搵客鍠_driver,搜尋空缺按鈕,勞工處XPATH['搜尋空缺按鈕'])
-        _chrome_雜項._檢查點擊(搵客鍠_driver,列表顯示,勞工處XPATH['列表顯示'])
+        _chrome_雜項._檢查文字輸入(搵客鍠_driver,'關鍵字輸入框', 勞工處XPATH['關鍵字輸入框'], keyword)
+        _chrome_雜項._檢查點擊(搵客鍠_driver,'搜尋空缺按鈕',勞工處XPATH['搜尋空缺按鈕'])
+        _chrome_雜項._檢查點擊(搵客鍠_driver,'列表顯示',勞工處XPATH['列表顯示'])
 
 
         目前網址 = 搵客鍠_driver.current_url
