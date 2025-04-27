@@ -735,7 +735,12 @@ class _促銷鍠:
             """
             poSave = """
                 const textarea = document.getElementById('促銷鍠結果');
-                textarea.value = arguments[0];
+                let newContent = arguments[0];
+                if (textarea.value) {
+                    textarea.value = newContent + '@換行@' + textarea.value;
+                } else {
+                    textarea.value = newContent;
+                }
             """
 
             # 建立對應關係
@@ -750,10 +755,7 @@ class _促銷鍠:
                 行 = "<br>" if is_html else "@換行@"
                 # 转换为带换行的字符串（每条记录占一行）
                 send料PoHtml = f"{現在時間}[促銷鍠結果]{行}{行.join(po)}{行}---------{行}"
-                #send料PoHtml = f"{現在時間}[促銷鍠結果]{行}" + 行.join(po) +f"{行}---------{行}"
-                #print(send料PoHtml)
 
-                #po咩 = data_js_mapping[id(po)]
                 driver.execute_script(po咩,send料PoHtml.strip())
         except Exception as e:
             _雜項._獲取詳細錯誤堆棧(*sys.exc_info())
