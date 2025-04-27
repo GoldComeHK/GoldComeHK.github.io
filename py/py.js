@@ -100,9 +100,7 @@ def _自動獲取香港勞工處工作資料(keyword=''):
             # 點擊下一頁按鈕
             if int(顯總料數) > _每頁量:
                 # 點擊下一頁按鈕
-                # qqqq
                 _chrome_雜項._檢查點擊(搵客鍠_driver,'勞工處點擊下一頁按鈕',勞工處XPATH['勞工處點擊下一頁按鈕'])
-                # qqqq
                 _每頁量 += 20
                 找頁數 +=1
             else:
@@ -132,7 +130,7 @@ def _提取聯絡方式(url,公司名xpath,表格xpath,電話篩選):
         tree = html.fromstring(response.content)
 
         # 1. 提取公司名稱、廣告整頁內容
-        company_name = tree.xpath(公司名xpath)[0]   #qqqq
+        company_name = tree.xpath(公司名xpath)[0]
         #print(f"company_name",company_name)
         job_table = tree.xpath(表格xpath)[0]
         table_text = job_table.text_content()
@@ -733,15 +731,17 @@ class _促銷鍠:
                     tempResult.innerHTML = newContent;
                 }
             """
+            # qqqq
             poSave = """
                 const textarea = document.getElementById('促銷鍠結果');
                 let newContent = arguments[0];
                 if (textarea.value) {
-                    textarea.value = newContent + '@換行@' + textarea.value;
+                    textarea.value = newContent + '\@換行@' + textarea.value;
                 } else {
                     textarea.value = newContent;
                 }
             """
+            
 
             # 建立對應關係
             data_js_mapping = {
@@ -752,13 +752,22 @@ class _促銷鍠:
             PoAll = [結果睇,結果Save]
             for po in PoAll:
                 po咩, is_html = data_js_mapping[id(po)]
-                行 = "<br>" if is_html else "@換行@"
+                行 = "<br>" if is_html else "\@換行@"
                 # 转换为带换行的字符串（每条记录占一行）
-                send料PoHtml = f"{現在時間}[促銷鍠結果]{行}{行.join(po)}{行}---------{行}"
+                #send料PoHtml = f"{現在時間}[促銷鍠結果]{行}{行.join(po)}{行}---------{行}"
+                send料PoHtml = f"{現在時間}[促銷鍠結果]{行}{行.join(str(item) for item in po)}{行}---------{行}"
 
-                driver.execute_script(po咩,send料PoHtml.strip())
+                # 確保傳遞的內容是有效的字符串
+                cleaned_content = send料PoHtml.strip().replace('\r', '').replace('@換行@', '\@換行@')
+                #driver.execute_script(po咩,send料PoHtml.strip())
+                driver.execute_script(po咩, cleaned_content)
+                
         except Exception as e:
             _雜項._獲取詳細錯誤堆棧(*sys.exc_info())
+        # qqqq
+
+
+
 
 _促銷鍠._執行_自動send野()
 #########結束#########
