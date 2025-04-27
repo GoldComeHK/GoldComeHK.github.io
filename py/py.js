@@ -736,7 +736,7 @@ class _促銷鍠:
                 const textarea = document.getElementById('促銷鍠結果');
                 let newContent = arguments[0];
                 if (textarea.value) {
-                    textarea.value = newContent + '\@換行@' + textarea.value;
+                    textarea.value = newContent + '\\@換行@' + textarea.value;
                 } else {
                     textarea.value = newContent;
                 }
@@ -752,15 +752,18 @@ class _促銷鍠:
             PoAll = [結果睇,結果Save]
             for po in PoAll:
                 po咩, is_html = data_js_mapping[id(po)]
-                行 = "<br>" if is_html else "\\@換行@"
+                行 = "<br>" if is_html else "@換行@"
+
+                # 確保傳遞的內容是有效的字符串
+                if not isinstance(po, (list, tuple)):
+                    po = [str(po)]
+
                 # 转换为带换行的字符串（每条记录占一行）
                 #send料PoHtml = f"{現在時間}[促銷鍠結果]{行}{行.join(po)}{行}---------{行}"
                 send料PoHtml = f"{現在時間}[促銷鍠結果]{行}{行.join(str(item) for item in po)}{行}---------{行}"
 
                 # 確保傳遞的內容是有效的字符串
-                cleaned_content = send料PoHtml.strip().replace('\\r', '').replace('@換行@', '\\@換行@')
-                #driver.execute_script(po咩,send料PoHtml.strip())
-                driver.execute_script(po咩, cleaned_content)
+                driver.execute_script(po咩,send料PoHtml)
                 
         except Exception as e:
             _雜項._獲取詳細錯誤堆棧(*sys.exc_info())
