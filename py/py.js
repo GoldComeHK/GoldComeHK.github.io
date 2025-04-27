@@ -716,7 +716,7 @@ class _促銷鍠:
 
 
 
-    def _促銷鍠Po網(結果睇,結果Save):
+    def _促銷11鍠Po網(結果睇,結果Save):
         try:
             # 時間生成
             now = datetime.now()
@@ -770,6 +770,43 @@ class _促銷鍠:
         # qqqq
 
 
+
+    def _促銷鍠Po網(結果睇, 結果Save):
+        try:
+            # 取得當前時間
+            now = datetime.now()
+            現在時間 = now.strftime("[%Y-%m-%d|%H:%M:%S]")
+
+            # 確保輸入是列表（如果不是，轉成列表）
+            if not isinstance(結果睇, (list, tuple)):
+                結果睇 = [結果睇]
+            if not isinstance(結果Save, (list, tuple)):
+                結果Save = [結果Save]
+
+            # (1) 處理「顯示用」的內容（HTML格式，用 <br> 換行）
+            html_content = f"{現在時間}[促銷鍠結果]<br>"
+            html_content += "<br>".join(str(item) for item in 結果睇)  # 用 <br> 連接每一條結果
+            html_content += "<br>---------<br>"  # 加入分隔線
+
+            # (2) 處理「儲存用」的內容（純文字格式，用 @換行@ 換行）
+            text_content = f"{現在時間}[促銷鍠結果]@換行@"
+            text_content += "@換行@".join(str(item) for item in 結果Save)  # 用 @換行@ 連接每一條結果
+            text_content += "@換行@---------@換行@"  # 加入分隔線
+
+            # 更新 HTML 元素（臨時結果）
+            driver.execute_script("""
+                const tempResult = document.getElementById('臨時結果');
+                tempResult.innerHTML = arguments[0] + (tempResult.innerHTML || "");
+            """, html_content)
+
+            # 更新 textarea（促銷鍠結果）
+            driver.execute_script("""
+                const textarea = document.getElementById('促銷鍠結果');
+                textarea.value = arguments[0] + (textarea.value || "");
+            """, text_content)
+
+        except Exception as e:
+            _雜項._獲取詳細錯誤堆棧(*sys.exc_info())
 
 
 _促銷鍠._執行_自動send野()
