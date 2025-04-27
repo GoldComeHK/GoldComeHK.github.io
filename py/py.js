@@ -247,8 +247,7 @@ class _客服鍠:
         '验证字符尾':']/span',
         '對話列表':'//*[@id="pane-side"]/div[*]/div/div',
         '客戶信息位':'.//div/div/div/div[2]/div[2]/div[1]/span/span',
-        '對話輸入框':'//*[@id="main"]/footer/div[1]/div/span/div/div[2]/div/div[3]',
-                     # //*[@id="main"]/footer/div[1]/div/span/div/div[2]/div/div[3]/div[1]/p
+        '對話輸入框':'//*[@id="main"]/footer/div[1]/div/span/div/div[2]/div/div[3]/div[1]/p',
 
 
         '繼續前往對話':'//*[@id="action-button"]',
