@@ -578,10 +578,10 @@ class _促銷鍠:
                 all結果睇.append(結果)
                 all結果Save.append(結果Save)
 
-                # ==== html ====
-                #print(f'all結果Save={all結果Save}')
-                _促銷鍠._促銷鍠Po網(all結果睇,all結果Save)
-                # ==== html ====
+            # ==== html ====
+            #print(f'all結果Save={all結果Save}')
+            _促銷鍠._促銷鍠Po網(all結果睇,all結果Save)
+            # ==== html ====
         except Exception as e:
             _雜項._獲取詳細錯誤堆棧(*sys.exc_info())
 
@@ -715,66 +715,6 @@ class _促銷鍠:
 
 
 
-
-    def _促銷11鍠Po網(結果睇,結果Save):
-
-        print(f"結果睇={結果睇}")
-        print(f"結果Save={結果Save}")
-
-        try:
-            # 時間生成
-            now = datetime.now()
-            現在時間 = now.strftime("[%Y-%m-%d|%H:%M:%S]")
-
-            po睇 = """
-                const tempResult = document.getElementById('臨時結果');
-                let newContent = arguments[0];
-                if (tempResult.innerHTML) {
-                    tempResult.innerHTML = newContent + '<br>' + tempResult.innerHTML;
-                } else {
-                    tempResult.innerHTML = newContent;
-                }
-            """
-            # qqqq
-            poSave = """
-                const textarea = document.getElementById('促銷鍠結果');
-                let newContent = arguments[0];
-                if (textarea.value) {
-                    textarea.value = newContent + '\\@換行@' + textarea.value;
-                } else {
-                    textarea.value = newContent;
-                }
-            """
-            
-
-            # 建立對應關係
-            data_js_mapping = {
-                id(結果睇): (po睇, True),   # 使用 <br>
-                id(結果Save): (poSave, False)  # 使用 @換行@
-            }
-
-            PoAll = [結果睇,結果Save]
-            for po in PoAll:
-                po咩, is_html = data_js_mapping[id(po)]
-                行 = "<br>" if is_html else "@換行@"
-
-                # 確保傳遞的內容是有效的字符串
-                if not isinstance(po, (list, tuple)):
-                    po = [str(po)]
-
-                # 转换为带换行的字符串（每条记录占一行）
-                #send料PoHtml = f"{現在時間}[促銷鍠結果]{行}{行.join(po)}{行}---------{行}"
-                send料PoHtml = f"{現在時間}[促銷鍠結果]{行}{行.join(str(item) for item in po)}{行}---------{行}"
-
-                # 確保傳遞的內容是有效的字符串
-                driver.execute_script(po咩,send料PoHtml)
-                
-        except Exception as e:
-            _雜項._獲取詳細錯誤堆棧(*sys.exc_info())
-        # qqqq
-
-
-
     def _促銷鍠Po網(結果睇, 結果Save):
 
         print(f"結果睇={結果睇}")
@@ -816,6 +756,9 @@ class _促銷鍠:
         except Exception as e:
             _雜項._獲取詳細錯誤堆棧(*sys.exc_info())
 
+
+
+# qqqqqqqqqqqqqqq
 
 _促銷鍠._執行_自動send野()
 #########結束#########
