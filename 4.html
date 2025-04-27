@@ -46,17 +46,6 @@
         .reply-inputs { flex-grow: 1; }
         .hidden,#uploadInput,.執行金come { display: none; }
         .執行金come{place-items: center;}
-
-        #執行中請不要關閉網頁 {position: fixed;top: 0;left: 0;width: 100vw;    /* 使用视口单位确保全覆盖 */
-            height: 100vh;background: rgba(0, 0, 0, 0.1); /* 改用 rgba 透明度 */
-            backdrop-filter: blur(2px);-webkit-backdrop-filter: blur(10px); /* Safari 兼容 */
-            z-index: 9999;   /* 确保在最顶层 */
-            justify-content: center; /* 水平居中 */
-            align-items: center;    /* 垂直居中 */
-            justify-content: center;align-items: center;flex-direction: column;display: none;}
-        #執行中請不要關閉網頁 h2 {color: white;font-size: 2rem;text-shadow: 0 2px 4px rgba(0,0,0,0.5);}
-
-
     </style>
 
   <!-- ws icon https://www.thinkcmf.com/font/font_awesome/icons.html -->
@@ -65,6 +54,10 @@
   <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
   <script src="../mokJsapi/a.js">//琪琪修改</script>
   <script src="py/py.js"></script>
+
+  <link rel="stylesheet" href="html.css">
+  <script src="html.js"></script>
+  
   <script src="https://cdn.staticfile.net/translate.js/3.1.7/translate.js">// 翻譯 放最後</script>
 
 </head>
@@ -125,10 +118,7 @@
     </div>
     <h1>客服鍠 🫱🏾‍🫲🏻 | <a href="./set.html"><b class="_我司名"></b></a></h1>
     <p class="mokJsApi_copyright">版權</p>
-
-    <div class="container" style="padding: 20px;">
-        <iframe width="100%" height="315" src="https://www.youtube.com/embed/videoseries?si=uwBbKqm1vo_ZfsFE&amp;list=PLyJPqAgyFi65hvH3RKDUtqRb_ILBgRLN_" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-    </div>
+    <div id="導航" ><!-- JS 導航 --></div>
 
 
     <div  class="container" style="padding: 20px;">
