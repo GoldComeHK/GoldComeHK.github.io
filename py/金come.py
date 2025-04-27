@@ -641,7 +641,6 @@ class _金come_VIP:
         if 用次數 > 客服鍠試用次數:
             print(f"已超過試用次數 {客服鍠試用次數} 次，退出程式...")
             driver.quit()
-            sys.exit()
 
 
 
@@ -1034,10 +1033,10 @@ class _Start:
 
 if __name__ == "__main__":
 
-    Admin模式 = True
+    Admin模式 = False
 
 
-    更新時間 = '202504272309'
+    更新時間 = '202504272327'
     本程式名 = '金come'
     賺錢鍠瀏覽器位 = 本程式名
 
