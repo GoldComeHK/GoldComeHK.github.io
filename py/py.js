@@ -749,7 +749,7 @@ class _促銷鍠:
                 po咩, is_html = data_js_mapping[id(po)]
                 行 = "<br>" if is_html else "@換行@"
                 # 转换为带换行的字符串（每条记录占一行）
-                send料PoHtml = f"{現在時間}[促銷鍠結果]{行}" +"@換行@".join(po) +f"{行}---------{行}"
+                send料PoHtml = f"{現在時間}[促銷鍠結果]{行}" +"{行}".join(po) +f"{行}---------{行}"
                 #print(send料PoHtml)
 
                 #po咩 = data_js_mapping[id(po)]
