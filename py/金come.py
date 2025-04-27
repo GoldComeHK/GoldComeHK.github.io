@@ -857,8 +857,8 @@ class _Start:
 
             # 將特殊標記轉回\n轉義字符
             user_code = user_code.replace('@換行@', r'\n')
-            print(f'\n----1-----\n{user_code}\n----1-----\n')
-            input('按任意鍵執行...')
+            #print(f'\n----1-----\n{user_code}\n----1-----\n')
+            #input('按任意鍵執行...')
 
             try:
                 exec(user_code, globals())

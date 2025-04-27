@@ -171,7 +171,7 @@ def _提取聯絡方式(url,公司名xpath,表格xpath,電話篩選):
 
 _自動獲取香港勞工處工作資料('@關鍵字@')
 
-# 9999
+# 111111
 #########結束#########
 `
 
@@ -404,14 +404,13 @@ class _客服鍠:
                     # 每次迭代時重新獲取 chat_list
 
                     '''
+                    chat_list = _chrome_雜項._檢查元素存在(客服鍠_driver,'對話列表',_客服鍠.其他_xpaths['對話列表'])
+                    '''
+                    # qqqq
                     chat_list = WebDriverWait(客服鍠_driver, 30).until(
                         EC.presence_of_all_elements_located((By.XPATH, _客服鍠.其他_xpaths['對話列表']))
                     )
-                    '''
-                    # qqqq
-
-                    chat_list = _chrome_雜項._檢查元素存在(客服鍠_driver,'對話列表',_客服鍠.其他_xpaths['對話列表'])
-
+                    
                     for chat in chat_list:
                         try:
                             # 每次點擊前重新獲取 chat 元素
@@ -513,7 +512,7 @@ _客服鍠._登入ws()
 _客服鍠._ws自動客服()
 
 
-# 9999
+# 111111
 #########結束#########
 `
 
