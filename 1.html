@@ -470,11 +470,26 @@
                 搵客鍠py = 搜HK;
             }
 
+
+            // 先齊必填
+            const 要齊料 = {
+                區號: 區號,
+                WhatsApp號: WhatsApp號,
+                關鍵字: 關鍵字,
+                地區: 地區
+            };
+            const 必填欄位 = Object.keys(要齊料);
+            for (const 欄位 of 必填欄位) {
+                if (要齊料[欄位] == null || 要齊料[欄位] === '') {
+                    alert(`${欄位} 沒填寫!`);
+                    return;
+                }
+            }
+
             const 執行碼 = 搵客鍠py.replace("@帳號1181@", `'${區號}','${WhatsApp號}','搵客鍠'`).replace(/@關鍵字@/g, 關鍵字); 
             navigator.clipboard.writeText(執行碼);
 
             document.querySelector('#執行中請不要關閉網頁').style.display = 'block';
-
 
             // py 檢查 剪贴板 轉變執行
         }

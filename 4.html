@@ -473,6 +473,20 @@
             });
             const 回覆內容 = JSON.stringify(replies, null, 2)
 
+            // 先齊必填
+            const 要齊料 = {
+                區號: 區號,
+                WhatsApp號: WhatsApp號,
+                回覆內容: 回覆內容
+            };
+            const 必填欄位 = Object.keys(要齊料);
+            for (const 欄位 of 必填欄位) {
+                if (要齊料[欄位] == null || 要齊料[欄位] === '') {
+                    alert(`${欄位} 沒填寫!`);
+                    return;
+                }
+            }
+
             const 執行碼 = 客服.replace("@帳號1181@", `'${區號}','${WhatsApp號}','客服鍠'`) // _獲取帳號資料 必須
                 // 執行的功能要值
                 .replace("@国家代码@", 區號)
