@@ -405,6 +405,25 @@ class _雜項:
 
 
 
+
+
+
+
+
+
+
+
+
+
+'''
+      ::::::::       ::::::::::           :::        :::::::::       ::::::::       :::    :::
+    :+:    :+:      :+:                :+: :+:      :+:    :+:     :+:    :+:      :+:    :+:
+   +:+             +:+               +:+   +:+     +:+    +:+     +:+             +:+    +:+
+  +#++:++#++      +#++:++#         +#++:++#++:    +#++:++#:      +#+             +#++:++#++
+        +#+      +#+              +#+     +#+    +#+    +#+     +#+             +#+    +#+
+#+#    #+#      #+#              #+#     #+#    #+#    #+#     #+#    #+#      #+#    #+#
+########       ##########       ###     ###    ###    ###      ########       ###    ###
+'''
 class _搵客鍠:
     def _篩選聯絡(表格內文, 電話篩選):
         import re
@@ -481,6 +500,10 @@ class _搵客鍠:
             Boss料PoHtml.strip()  # 移除末尾多余换行
         )
         driver.refresh()
+
+
+
+
 
 
 
@@ -795,49 +818,56 @@ class _Start:
 
     def _動態執行代碼B():
 
-        code標籤 = "#########結束#########"
-        driver.get(f'{我官網}set.html')
-        #driver.get('C:/Users/mokaki/Desktop/金/金come(2025)/GoldComeHK.github.io/set.html')
-
-        # 写入空内容覆盖剪贴板
-        pyperclip.copy('')
-        # 点击前的剪贴板内容（用于检测变化）
-        original_clipboard = pyperclip.paste()
+        # 等待網頁載入完成
+        while True:
+            driver.get(f'{我官網}set.html')
+            #driver.get('C:/Users/mokaki/Desktop/金/金come(2025)/GoldComeHK.github.io/set.html')
+            _chrome_雜項._檢查元素存在(driver,'//*[@id="更新日期"]')
+            break
 
         while True:
-            current_clipboard = pyperclip.paste()
+            code標籤 = "#########結束#########"
+                
+            
+            # 写入空内容覆盖剪贴板
+            pyperclip.copy('')
+            # 点击前的剪贴板内容（用于检测变化）
+            original_clipboard = pyperclip.paste()
 
-            '''
-            # 加解密
-            if current_clipboard != original_clipboard and current_clipboard[0:9] == 密切:
-                return _雜項._對稱加密(current_clipboard)
-            '''
+            while True:
+                current_clipboard = pyperclip.paste()
 
-            if current_clipboard != original_clipboard and code標籤 in current_clipboard:
-                break
-            print(f"設置完成後， 請按 執行{本程式名}...")
-            time.sleep(1)  # 避免过高频率检查
-        
-        # 提取代碼部分
-        user_code = current_clipboard.split(code標籤)[0].strip()
+                '''
+                # 加解密
+                if current_clipboard != original_clipboard and current_clipboard[0:9] == 密切:
+                    return _雜項._對稱加密(current_clipboard)
+                '''
 
-        # 用取到的碼轉成py碼
-        user_code_lines = []
-        for line in current_clipboard.split('\n'):
-            if line.strip() == code標籤:
-                break
-            user_code_lines.append(line)
-        user_code = '\n'.join(user_code_lines)
+                if current_clipboard != original_clipboard and code標籤 in current_clipboard:
+                    break
+                print(f"設置完成後， 請按 執行{本程式名}...")
+                time.sleep(1)  # 避免过高频率检查
+            
+            # 提取代碼部分
+            user_code = current_clipboard.split(code標籤)[0].strip()
 
-        # 將特殊標記轉回\n轉義字符
-        user_code = user_code.replace('@換行@', r'\n')
-        #print(f'\n----1-----\n{user_code}\n----1-----\n')
-        #input('sssssssssssssssssssssss')
+            # 用取到的碼轉成py碼
+            user_code_lines = []
+            for line in current_clipboard.split('\n'):
+                if line.strip() == code標籤:
+                    break
+                user_code_lines.append(line)
+            user_code = '\n'.join(user_code_lines)
 
-        try:
-            exec(user_code, globals())
-        except:
-            _雜項._獲取詳細錯誤堆棧(*sys.exc_info()) 
+            # 將特殊標記轉回\n轉義字符
+            user_code = user_code.replace('@換行@', r'\n')
+            #print(f'\n----1-----\n{user_code}\n----1-----\n')
+            #input('按任意鍵執行...')
+
+            try:
+                exec(user_code, globals())
+            except:
+                _雜項._獲取詳細錯誤堆棧(*sys.exc_info()) 
 
 
 
@@ -853,28 +883,47 @@ class _Start:
 
 
     def _歡迎登入(国家代码,电话号码,功能):
-        print(f'''
+
+        # 加到 html 執行中請不要關閉網頁
+        歡迎 = f'''
                 _\|/_
                 (o o)
         +----oOO--U--OOo-------------------------{更新時間}-+
         |                                                     |
-        {本程式名} | {功能} 歡迎您 !                                      
+            {本程式名} 歡迎您 !                                      
         |                                                     |
             {帳號1181}    
             月費用戶 = {月費用戶}                      
-            国家代码 = {国家代码}      
-            电话号码 = {电话号码}                  
+            國家代碼 = {国家代码}      
+            手機號碼 = {电话号码}                  
         |                                                     | 
             官網 = {我官網}                 
             聯絡我們 = {我官網}ContactAKI.html                 
         |                                                     | 
             *****************************************          
         |                                                     |
+            [{功能}] 執行中請不要關閉網頁
+        |                                                     |
         +-----------------------------------------------------+
-        ''')
+        '''
+        print(歡迎)
 
-
-
+        
+        歡迎Op網 = f'''
+            <h1>{本程式名}</h1>
+            帳號={帳號1181}<br><br>
+            月費用戶={月費用戶}<br><br>
+            手機號碼={国家代码} {电话号码}<br><br>
+            聯絡我們={我官網}ContactAKI.html<br><br>
+            [{功能}] 執行中....<br><br>
+        '''
+        
+        
+        
+        driver.execute_script("""
+                const 網位 = document.getElementById('執行中請不要關閉網頁');
+                網位.innerHTML = arguments[0] + (網位.innerHTML || "");
+        """, 歡迎Op網)
 
 
 
@@ -986,75 +1035,16 @@ class _Start:
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 if __name__ == "__main__":
 
-    更新時間 = '202504160205'
+    更新時間 = '202504271247'
     本程式名 = '金come'
     賺錢鍠瀏覽器位 = 本程式名
 
     官Ws = '85264071181'
     我官網 = 'https://www.金come.com/'
     VipDurl = "https://github.com/GoldComeHK/d/blob/main/d"
-    download_url = f'https://github.com/64071181/64071181.github.io/raw/main/ws/{本程式名}.exe'
+    download_url = f'https://github.com/GoldComeHK/GoldComeHK.github.io/raw/main/{本程式名}.exe'
 
     月費用戶 = False 
     客服鍠試用次數 = 10
@@ -1065,9 +1055,71 @@ if __name__ == "__main__":
     driver = _chrome_雜項._Chrome設定()
     _雜項._WindowsAPI阻止系统休眠()
 
-    while True:
-        _Start._動態執行代碼B()
-
+    _Start._動態執行代碼B()
 
 # 執行本程式系列 \
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
