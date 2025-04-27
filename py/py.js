@@ -717,6 +717,10 @@ class _促銷鍠:
 
 
     def _促銷11鍠Po網(結果睇,結果Save):
+
+        print(f"結果睇={結果睇}")
+        print(f"結果Save={結果Save}")
+        
         try:
             # 時間生成
             now = datetime.now()
