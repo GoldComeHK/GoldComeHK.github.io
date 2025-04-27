@@ -11,6 +11,7 @@ h1 { text-align: center;margin-bottom: 20px;font-size: 2em;text-shadow: 2px 2px 
     height: 100vh;background: rgba(0, 0, 0, 0.1); /* 改用 rgba 透明度 */
     backdrop-filter: blur(2px);-webkit-backdrop-filter: blur(10px); /* Safari 兼容 */
     z-index: 9999;   /* 确保在最顶层 */
+    padding: 20px;text-align: center;
     justify-content: center; /* 水平居中 */
     align-items: center;    /* 垂直居中 */
     justify-content: center;align-items: center;flex-direction: column;display: none;}
