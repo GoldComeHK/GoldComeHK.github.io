@@ -59,9 +59,10 @@ def _自動獲取香港勞工處工作資料(keyword=''):
         列表顯示 = 搵客鍠_driver.find_element(By.XPATH, 勞工處XPATH['列表顯示'])
         列表顯示.click()
 
-        #print("目前網址:", 搵客鍠_driver.current_url)
+        目前網址 = 搵客鍠_driver.current_url
+        #print(f"目前網址:{目前網址}")
 
-        找頁數 = 0
+        找頁數 = 1
         顯總料數 = 0
         _每頁量 = 20
         while True:
@@ -77,7 +78,7 @@ def _自動獲取香港勞工處工作資料(keyword=''):
                 print("沒有資料，搜尋結束...")
                 break
 
-            print(f"獲取第{找頁數+1}頁...")
+            print(f"獲取第{找頁數}頁...")
             # 6. 擷取工作列表中的所有 href 連結
             WebDriverWait(搵客鍠_driver, 10).until(
                 EC.presence_of_element_located((By.XPATH, 勞工處XPATH['工作列表']))
@@ -100,9 +101,9 @@ def _自動獲取香港勞工處工作資料(keyword=''):
             # 點擊下一頁按鈕
             if int(顯總料數) > _每頁量:
                 # 點擊下一頁按鈕
-                _chrome_雜項._檢查點擊(搵客鍠_driver,'勞工處點擊下一頁按鈕',勞工處XPATH['勞工處點擊下一頁按鈕'])
                 _每頁量 += 20
                 找頁數 +=1
+                搵客鍠_driver.get(f'{目前網址}&page={找頁數}')
             else:
                 break
         # 關閉瀏覽器
