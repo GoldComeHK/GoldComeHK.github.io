@@ -252,10 +252,6 @@
 -->
 <body>
     <samp id="莫生查詢" style="display: none;">莫生我要查詢金come</samp>
-    <samp id="莫生我要金come教學" style="display: none;">莫生我要金come教學</samp>
-    <samp id="莫生我要開通金come" style="display: none;">莫生我要開通金come</samp>
-    <samp id="莫生我要試用金come" style="display: none;">莫生我要試用金come</samp>
-    <samp id="莫生我要下載金come" style="display: none;">莫生我要下載金come</samp>
     <samp id="莫生我要金come解決方案" style="display: none;">莫生我要金come解決方案</samp>
  
  
@@ -285,7 +281,7 @@
 
 
         <div style="text-align: center">
-            <a href="#" id="查詢金comeA" class="cta-button">💰 立即查詢金come系統 💰</a>
+            <a href="#" id="查詢金comeA" target="_blank" class="cta-button">💰 立即查詢金come系統 💰</a>
         </div>
 
         
@@ -338,7 +334,7 @@
 -->
  
         <div style="text-align: center">
-            <a href="#" id="金come教學A" class="cta-button">💰 收看金come系統演示 💰</a>
+            <a href="#" id="金come教學A" target="_blank" class="cta-button">💰 收看金come系統演示 💰</a>
         </div>
 
         
@@ -451,7 +447,7 @@
                      <div id="金come流程-arrow-c2_cN"></div>
                 </div>
                 <!-- Final Step -->
-                <a id="金come流程-final" href="#" >成交</a>
+                <a id="金come流程-final" href="#" target="_blank">成交</a>
         
         
                 <!-- SVG Layer for Arrows -->
@@ -638,17 +634,16 @@
 
         function _金come查詢Ulr() {
             const 莫生查詢a = document.getElementById('莫生查詢').textContent;
-            const 金come教學a = document.getElementById('莫生我要金come教學').textContent;
-            const 開通金comea = document.getElementById('莫生我要開通金come').textContent;
-            const 試用金comea = document.getElementById('莫生我要試用金come').textContent;
-            const 下載金comea = document.getElementById('莫生我要下載金come').textContent;
 
             // 獲取連結元素並修改其屬性
             document.getElementById("查詢金comeA").href = `https://wa.me/${我司號}/?text=${莫生查詢a}`;
-            document.getElementById("金come教學A").href = `https://wa.me/${我司號}/?text=${金come教學a}`;
-            document.getElementById("金come流程-final").href = `https://wa.me/${我司號}/?text=${開通金comea}`;
-            document.getElementById("試用金comeA").href = `https://wa.me/${我司號}/?text=${試用金comea}`;
-            document.getElementById("下載金comeA").href = `https://wa.me/${我司號}/?text=${下載金comea}`;
+            document.getElementById("金come教學A").href = `https://www.youtube.com/watch?v=dBTxzLg-eFA&list=PLyJPqAgyFi65hvH3RKDUtqRb_ILBgRLN_`;
+            document.getElementById("金come流程-final").href = `https://wa.me/${我司號}/?text=${莫生查詢a}`;
+
+
+
+            document.getElementById("試用金comeA").href = `https://github.com/GoldComeHK/GoldComeHK.github.io/raw/main/金come.exe`;
+            document.getElementById("下載金comeA").href = `https://github.com/GoldComeHK/GoldComeHK.github.io/raw/main/金come.exe`;
         }
 
 

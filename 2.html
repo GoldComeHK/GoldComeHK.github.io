@@ -784,7 +784,7 @@
             
             const link = document.createElement("a");
             link.href = url;
-            link.download = `創作鍠_設定檔${_現在時間()}.json`;
+            link.download = `${_現在時間()}_創作鍠.json`;
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
