@@ -202,13 +202,21 @@ class _chrome_雜項:
 
 
 
-
-    def _檢查元素存在(driver,xpath):
+    檢元 = 0
+    def _檢查元素存在(driver,位置,xpath, timeout=20):
         try:
-            driver.find_element(By.XPATH, xpath)
-            return True
-        except NoSuchElementException:
+            元素 = WebDriverWait(driver, timeout).until(
+                EC.element_to_be_clickable((By.XPATH, xpath))
+            )
+            return 元素
+        except Exception as e:
+            _chrome_雜項.檢元 += 1
+            if _chrome_雜項.檢元 > 3:
+                _chrome_雜項.檢元 = 0
+                _雜項._請告知作者更新(位置, xpath)
             return False
+        #except NoSuchElementException:
+        #    return False
 
 
 
@@ -231,7 +239,7 @@ class _chrome_雜項:
 
     檢字 = 0
     def _檢查文字輸入(driver,位置,xpath, text, timeout=10):
-        if _chrome_雜項._檢查元素存在(driver,xpath):
+        if _chrome_雜項._檢查元素存在(driver,位置,xpath):
             element = WebDriverWait(driver, timeout).until(
                 EC.visibility_of_element_located((By.XPATH, xpath))
             )
@@ -818,7 +826,7 @@ class _Start:
         while True:
             driver.get(f'{我官網}set.html')
             #driver.get('C:/Users/mokaki/Desktop/金/金come(2025)/GoldComeHK.github.io/set.html')
-            _chrome_雜項._檢查元素存在(driver,'//*[@id="更新日期"]')
+            _chrome_雜項._檢查元素存在(driver,'更新日期','//*[@id="更新日期"]')
             break
 
         while True:
@@ -849,8 +857,8 @@ class _Start:
 
             # 將特殊標記轉回\n轉義字符
             user_code = user_code.replace('@換行@', r'\n')
-            #print(f'\n----1-----\n{user_code}\n----1-----\n')
-            #input('按任意鍵執行...')
+            print(f'\n----1-----\n{user_code}\n----1-----\n')
+            input('按任意鍵執行...')
 
             try:
                 exec(user_code, globals())
@@ -1029,7 +1037,7 @@ class _Start:
 
 if __name__ == "__main__":
 
-    更新時間 = '202504272114'
+    更新時間 = '202504272302'
     本程式名 = '金come'
     賺錢鍠瀏覽器位 = 本程式名
 
