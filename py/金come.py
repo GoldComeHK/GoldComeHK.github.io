@@ -824,7 +824,6 @@ class _Start:
         while True:
             code標籤 = "#########結束#########"
                 
-            
             # 写入空内容覆盖剪贴板
             pyperclip.copy('')
             # 点击前的剪贴板内容（用于检测变化）
@@ -832,13 +831,6 @@ class _Start:
 
             while True:
                 current_clipboard = pyperclip.paste()
-
-                '''
-                # 加解密
-                if current_clipboard != original_clipboard and current_clipboard[0:9] == 密切:
-                    return _雜項._對稱加密(current_clipboard)
-                '''
-
                 if current_clipboard != original_clipboard and code標籤 in current_clipboard:
                     break
                 print(f"設置完成後， 請按 執行{本程式名}...")
@@ -903,7 +895,6 @@ class _Start:
         +-----------------------------------------------------+
         '''
         print(歡迎)
-
         
         歡迎Op網 = f'''
             <h1>{本程式名}</h1>
@@ -913,13 +904,18 @@ class _Start:
             聯絡我們={我官網}ContactAKI.html<br><br>
             [{功能}] 執行中....<br><br>
         '''
-        
-        
-        
+
         driver.execute_script("""
                 const 網位 = document.getElementById('執行中請不要關閉網頁');
                 網位.innerHTML = arguments[0] + (網位.innerHTML || "");
         """, 歡迎Op網)
+
+
+
+
+
+
+
 
 
 
@@ -1033,7 +1029,7 @@ class _Start:
 
 if __name__ == "__main__":
 
-    更新時間 = '202504271529'
+    更新時間 = '202504272114'
     本程式名 = '金come'
     賺錢鍠瀏覽器位 = 本程式名
 
