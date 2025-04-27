@@ -154,6 +154,10 @@
                 <label>請填寫搜尋關鍵字</label>
                 <input id="關鍵字" type="text" placeholder="請填寫搜尋關鍵字" title="請填寫搜尋關鍵字" value="金融">
             
+                <label>搜尋頁數(愈大需時愈久)</label>
+                <input id="最多找幾頁" value="10" type="number" min="1" step="1" required oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+            
+
             </div>
 
             <!-- 部份3: 結果 -->
@@ -464,6 +468,7 @@
             const WhatsApp號 = document.getElementById('WhatsApp號').value;
             const 關鍵字 = document.getElementById('關鍵字').value;
             const 地區 = document.getElementById('地區').value;
+            const 最多找幾頁 = document.getElementById('最多找幾頁').value;
             let 搵客鍠py
             // 按地區選py code
             if (地區 == 'hk') {
@@ -486,7 +491,9 @@
                 }
             }
 
-            const 執行碼 = 搵客鍠py.replace("@帳號1181@", `'${區號}','${WhatsApp號}','搵客鍠'`).replace(/@關鍵字@/g, 關鍵字); 
+            const 執行碼 = 搵客鍠py.replace("@帳號1181@", `'${區號}','${WhatsApp號}','搵客鍠'`)
+            .replace(/@關鍵字@/g, 關鍵字)
+            .replace('@找幾頁@', 最多找幾頁);
             navigator.clipboard.writeText(執行碼);
 
             document.querySelector('#執行中請不要關閉網頁').style.display = 'block';
