@@ -8,7 +8,7 @@ h1 { text-align: center;margin-bottom: 20px;font-size: 2em;text-shadow: 2px 2px 
 
 
 #執行中請不要關閉網頁 {position: fixed;top: 0;left: 0;width: 100vw;    /* 使用视口单位确保全覆盖 */
-    height: 100vh;background: rgba(0, 0, 0, 0.1); /* 改用 rgba 透明度 */
+    height: 100vh;background: rgba(0, 0, 0, 0.5); /* 改用 rgba 透明度 */
     backdrop-filter: blur(2px);-webkit-backdrop-filter: blur(10px); /* Safari 兼容 */
     z-index: 9999;   /* 确保在最顶层 */
     padding: 20px;text-align: center;
