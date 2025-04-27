@@ -634,7 +634,7 @@ class _金come_VIP:
 
 
 
-    def _檢查使用次數():
+    def _檢查使用次數(driver):
         global 用次數
 
         用次數 += 1
@@ -857,8 +857,9 @@ class _Start:
 
             # 將特殊標記轉回\n轉義字符
             user_code = user_code.replace('@換行@', r'\n')
-            #print(f'\n----1-----\n{user_code}\n----1-----\n')
-            #input('按任意鍵執行...')
+            if Admin模式:
+                print(f'\n----1-----\n{user_code}\n----1-----\n')
+                input('按任意鍵執行...')
 
             try:
                 exec(user_code, globals())
@@ -928,10 +929,6 @@ class _Start:
 
 
 
-
-
-    def _Admin模式(txt):
-        input(f'*** {txt} _Admin模式***\n按任何鍵執行下步...')
 
 
 
@@ -1036,6 +1033,9 @@ class _Start:
 
 
 if __name__ == "__main__":
+
+    Admin模式 = True
+
 
     更新時間 = '202504272309'
     本程式名 = '金come'
