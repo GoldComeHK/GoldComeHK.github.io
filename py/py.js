@@ -166,7 +166,7 @@ def _提取聯絡方式(url,公司名xpath,表格xpath,電話篩選):
 _搵客鍠B('@關鍵字@')
 
 
-# 7777777
+# 888888888
 #########結束#########
 `
 
@@ -369,9 +369,9 @@ class _客服鍠:
                     except:
                         pass
                     # 等待輸入框出現並輸入回覆
-                    _chrome_雜項._檢查文字輸入(客服鍠_driver,'對話輸入框', _客服鍠.其他_xpaths['對話輸入框'], Keys.RETURN)
-                    print("成功登入WhatsApp")
-                    break
+                    if _chrome_雜項._檢查文字輸入(客服鍠_driver,'對話輸入框', _客服鍠.其他_xpaths['對話輸入框'], Keys.RETURN):
+                        print("成功登入WhatsApp")
+                        break
                 except:
                     continue
         except Exception as e:
@@ -408,14 +408,14 @@ class _客服鍠:
                             # 每次點擊前重新獲取 chat 元素
                             
                             
-                            
+                            '''
                             chat = _chrome_雜項._檢查元素存在(客服鍠_driver,'客戶信息位',_客服鍠.其他_xpaths['客戶信息位'])
 
                             '''
                             chat = WebDriverWait(客服鍠_driver, 10).until(
                                 EC.presence_of_element_located((By.XPATH,_客服鍠.其他_xpaths['客戶信息位']))
                             )
-                            '''
+                            
                             
 
 
@@ -513,7 +513,7 @@ class _客服鍠:
 _客服鍠._登入ws()
 _客服鍠._ws自動客服()
 
-# 7777777
+# 888888888
 #########結束#########
 `
 
