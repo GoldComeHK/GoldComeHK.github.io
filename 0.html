@@ -1,0 +1,947 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+      :::    :::       ::::::::::           :::        :::::::::
+     :+:    :+:       :+:                :+: :+:      :+:    :+:
+    +:+    +:+       +:+               +:+   +:+     +:+    +:+
+   +#++:++#++       +#++:++#         +#++:++#++:    +#+    +:+
+  +#+    +#+       +#+              +#+     +#+    +#+    +#+
+ #+#    #+#       #+#              #+#     #+#    #+#    #+#
+###    ###       ##########       ###     ###    #########
+-->
+
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>遠端鍠 👑| 金come</title>
+    <style>
+        body { font-family: Arial, sans-serif;background: linear-gradient(145deg, #a8a8a8, #000000);color: #ecf0f1;padding: 20px; }
+        h1 { text-align: center;margin-bottom: 20px;font-size: 2em;text-shadow: 2px 2px 4px gold; }
+        .container { max-width: 600px;margin: 0 auto;padding: 20px;border-radius: 12px;background: #2f3030;box-shadow: 4px 4px 8px #767676; }
+        label, p { margin: 10px 0 5px; }
+
+
+        input, textarea, select, button,.臨時結果A { margin-bottom: 10px;padding: 8px;border-radius: 8px;border: none;outline: none; }
+        input, select, textarea { width: 100%; }
+        .大鍵 {border-radius: 10px; background: #282828;color: #bdbdbd;box-shadow: inset 25px 25px 50px rgba(139, 139, 139, 0.8);border: 1px solid #686868;font-size: 48px;width: 100%; }
+        .大鍵:hover { background: #484949; }
+
+
+        button,.臨時結果A { background-color: #000000;color: white;cursor: pointer; }
+        button:hover,.臨時結果A:hover { background-color: #484949; }
+        
+        .hidden,#uploadInput,.執行金come { display: none; }
+        .執行金come{place-items: center;}
+
+    </style>
+
+  <!-- ws icon https://www.thinkcmf.com/font/font_awesome/icons.html -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+  <script src="../mokJsapi/a.js">//琪琪修改</script>
+  <script src="py/py.js"></script>
+
+  <link rel="stylesheet" href="html.css">
+  <script src="html.js"></script>
+
+  <script src="https://cdn.staticfile.net/translate.js/3.1.7/translate.js">// 翻譯 放最後</script>
+
+</head>
+<body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+  :::::::::::       :::    :::   :::::::::::
+     :+:           :+:    :+:       :+:
+    +:+            +:+  +:+        +:+
+   +#+             +#++:+         +#+
+  +#+            +#+  +#+        +#+
+ #+#           #+#    #+#       #+#
+###           ###    ###       ###
+-->
+    <samp id="莫生查詢" style="display: none;">莫生我要查詢促銷鍠使用問題</samp>
+
+    <samp id="匯入警告" style="display: none;">匯入設定檔會刪除現時設定！</samp>
+    <samp id="設定匯入" style="display: none;">設定檔已成功匯入！</samp>
+    <samp id="設定格式錯誤" style="display: none;">檔案格式錯誤或解析失敗</samp>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- 部份0: 基本 -->
+    <div id="執行中請不要關閉網頁">
+        <h2>執行中請不要關閉網頁...</h2>
+    </div>
+    <h1>遠端鍠 👑| <a href="./set.html"><b class="_我司名"></b></a></h1>
+    <p class="mokJsApi_copyright">版權</p>
+    <div id="導航" ><!-- JS 導航 --></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- 部份1: 帳號 -->
+    <div class="container" style="padding: 20px;">
+            <label>請填寫您的手機地區號*</label>
+            <input id="區號" class="記錄數據用" type="text" placeholder="例如: 86" title="例如: 86" required>
+            <label>請填寫您的 WhatsApp 號碼*</label>
+            <input id="WhatsApp號" class="記錄數據用" type="text" placeholder="請填寫WhatsApp號碼" title="請填寫WhatsApp號碼" required>
+    </div>
+    <hr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- 部份2: 搵客鍠 -->
+    <div class="container" style="padding: 20px;">
+            <h3>搵客鍠🔍</h3>
+            <div class="reply-group">
+                
+                <label>請選擇搜尋地區*</label>
+                <select id="地區" class="記錄數據用" title="請選擇搜尋地區">
+                    <option value="hk" selected>香港</option>
+                </select>
+
+                <label>請填寫搜尋關鍵字</label>
+                <input id="關鍵字" class="記錄數據用" type="text" placeholder="請填寫搜尋關鍵字" title="請填寫搜尋關鍵字" value="金融">
+            
+                <label>搜尋頁數(愈大需時愈久)</label>
+                <input id="最多找幾頁" class="記錄數據用" value="10" type="number" min="1" step="1" required oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+            </div>
+            <textarea id="搵客鍠結果" class="記錄數據用"></textarea>
+            <p id="臨時結果"></p>
+    </div>
+    <hr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- 部份3: 促銷鍠 -->
+    <div class="container" style="padding: 20px;">
+            
+            <h3>促銷鍠 📣</h3>
+
+            <label>發出促銷信的gmail*</label>
+            <input id="發出促銷信的gmail" class="記錄數據用" type="text" placeholder="請填寫發出促銷信的gmail" title="請填寫發出促銷信的gmail" required>
+
+            <a href="https://myaccount.google.com/u/1/apppasswords?pli=1&rapt=AEjHL4NB4hK6Th7KGvq8QXmew8zX6e0Q0vg_Ruwjaxi6rHdyqR9HRAen2ocS95fglp1iHWQ2zcuydfYf4-aeUc4F2sJBPQ0s7iayeTEjdPFPKUTS0UILi60"><label>gmail的應用程式密碼*</label><b>❔</b></a>
+            <input id="gmail的應用程式密碼" class="記錄數據用" type="text" placeholder="請填寫gmail的應用程式密碼" title="請填寫gmail的應用程式密碼" required>
+            
+            <label>促銷間隔天數*</label>
+            <input id="促銷間隔天數" class="記錄數據用" value="7" type="number" min="1" step="1" required oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+            
+            <label>促銷信的標題*</label>
+            <input id="信件標題" class="記錄數據用" type="text" placeholder="請填寫促銷信的標題" title="請填寫促銷信的標題" required>
+
+            <div id="repliesSelectContainer"> <!-- 促銷鍠客詢select --> </div>
+
+            <label>促銷信內容*</label>
+            <textarea id="促銷信內容" class="記錄數據用" placeholder="請編寫促銷信內容..." title="請編寫促銷信內容"></textarea>
+
+            <hr>
+            <label>草稿</label>
+            <p id="促銷信草稿" class="container"></p>
+            <label>自動回覆內容</label>
+            <p id="自動回覆內容" class="container"></p>
+            <hr>
+
+            <textarea id="促銷鍠結果" class="記錄數據用"></textarea>
+            <p id="臨時結果A"></p>
+    </div>
+    <hr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- 部份4: 設定 -->
+    <div class="container" style="padding: 20px;">
+            <samp style="float: right;">
+                <button onclick="下載設定檔()">⬇️ 下載設定檔</button>
+                <input type="file" id="uploadInput" accept=".json" onchange="上傳設定檔(event)">
+                <button onclick="document.getElementById('uploadInput').click()">⬆️ 上傳設定檔</button>
+            </samp>        
+
+            <div id="ContactAKI" class="ContactAKI"><!-- JS _顯示聯莫 --></div>
+            <br>
+
+            <div class="執行金come">
+                <button class="大鍵 執行遠端鍠" title="執行遠端鍠 👑" onclick="執行遠端鍠()">執行遠端鍠 👑</button>
+                <h3><a href="./set.html">返回<b class="_我司名"></b></a></h3>
+            </div>
+
+            <div class="scroll-top" id="scrollTop" onclick="scrollToTop()">↑</div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+    <script>
+/*
+      ::::::::       ::::::::::   :::::::::::   :::::::::::       :::::::::::       ::::    :::       ::::::::
+    :+:    :+:      :+:              :+:           :+:               :+:           :+:+:   :+:      :+:    :+:
+   +:+             +:+              +:+           +:+               +:+           :+:+:+  +:+      +:+
+  +#++:++#++      +#++:++#         +#+           +#+               +#+           +#+ +:+ +#+      :#:
+        +#+      +#+              +#+           +#+               +#+           +#+  +#+#+#      +#+   +#+#
+#+#    #+#      #+#              #+#           #+#               #+#           #+#   #+#+#      #+#    #+#
+########       ##########       ###           ###           ###########       ###    ####       ########
+*/
+
+        // 客詢select
+        let 對應回覆內容 = ''
+        function _客詢select() {
+            const container = document.getElementById('repliesSelectContainer');
+
+            const replies = JSON.parse(localStorage.getItem('replies') || '{}');
+            
+
+            // 如果有数据，创建 select 元素
+            const select = document.createElement('select');
+            select.id = '促銷鍠客詢select';  // 添加 ID
+            select.className = '記錄數據用';  // 添加 class
+
+            // 遍历 replies 的 key，添加到 select
+            Object.keys(replies).forEach(key => {
+                const option = document.createElement('option');
+                option.value = key;
+                option.textContent = key;
+                select.appendChild(option);
+            });
+
+            // 添加到页面
+            const label = document.createElement('label');
+            label.textContent = '請選擇回覆關鍵字*'; // 设置标签文字
+            container.appendChild(label); // 先添加 label
+            container.appendChild(select);
+
+            // 可选：监听选择变化
+            select.addEventListener('change', (e) => {
+                const selectedKey = e.target.value;
+                if (selectedKey) {
+                    對應回覆內容 = replies[selectedKey]
+
+                    _促銷鍠草稿();
+                    
+                }
+            });
+        }
+
+
+
+
+
+
+        
+        function _促銷鍠草稿() {
+            // 获取DOM元素
+            const 區號B = document.getElementById('區號').value;
+            const WhatsApp號B = document.getElementById('WhatsApp號').value;
+            const 我ws號 = 區號B + WhatsApp號B
+
+            // 将换行符转换为 <br>，并保留空格（使用HTML实体&nbsp;）
+            const promoContent = document.getElementById('促銷信內容').value
+                .replace(/\n/g, '<br>')  // 替换换行符
+                .replace(/ /g, '&nbsp;'); // 替换空格（可选，如需保留空格）
+                
+            const querySelect = document.getElementById('促銷鍠客詢select').value;
+                
+            對應回覆內容 = 對應回覆內容.replace(/\n/g, '<br>')  // 替换换行符
+            .replace(/ /g, '&nbsp;'); // 替换空格（可选，如需保留空格）
+
+            // 構建WhatsApp鏈接
+            let whatsappLink = '';
+            if (我ws號) {
+                whatsappLink = `https://wa.me/${我ws號}/?text=${querySelect}`;
+                /*
+                if (querySelect) {
+                    //whatsappLink += `/?text=${encodeURIComponent(querySelect)}`;
+                    whatsappLink += `/?text=${encodeURIComponent(querySelect)}`;
+                }
+                */
+            }
+
+            // 更新自动回复内容的函数
+            document.getElementById('促銷信草稿').innerHTML  = 
+                `${promoContent}<br><br>${whatsappLink}`;
+            document.getElementById('自動回覆內容').innerHTML  = 對應回覆內容;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+      ::::::::           :::     :::     :::       ::::::::::       :::::::::
+    :+:    :+:        :+: :+:   :+:     :+:       :+:              :+:    :+:
+   +:+              +:+   +:+  +:+     +:+       +:+              +:+    +:+
+  +#++:++#++      +#++:++#++: +#+     +:+       +#++:++#         +#+    +:+
+        +#+      +#+     +#+  +#+   +#+        +#+              +#+    +#+
+#+#    #+#      #+#     #+#   #+#+#+#         #+#              #+#    #+#
+########       ###     ###     ###           ##########       #########
+*/
+
+
+
+
+        //AllData位 = ['區號','WhatsApp號','關鍵字','地區','搵客鍠結果','最多找幾頁','發出促銷信的gmail','gmail的應用程式密碼', '促銷間隔天數', '促銷鍠客詢select', '信件標題', '促銷信內容','促銷鍠結果']
+
+        
+
+        const 記錄位 = document.querySelectorAll(".記錄數據用");
+
+        function 記錄已填寫數據() {
+            // 獲取所有帶有 class="auto-save" 的元素
+            
+
+            // 頁面加載時，從 LocalStorage 恢復數據
+            document.addEventListener("DOMContentLoaded", () => {
+                記錄位.forEach(element => {
+                const savedValue = localStorage.getItem(element.id);
+                if (savedValue !== null) {
+                    element.value = savedValue; // 適用於 input、textarea、select
+                }
+                });
+            });
+
+            // 監聽輸入事件，實時保存數據
+            記錄位.forEach(element => {
+                element.addEventListener("input", () => {
+                localStorage.setItem(element.id, element.value);
+                });
+            });
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+      :::::::::       ::::::::     :::       :::       ::::    :::       :::        ::::::::           :::        :::::::::
+     :+:    :+:     :+:    :+:    :+:       :+:       :+:+:   :+:       :+:       :+:    :+:        :+: :+:      :+:    :+:
+    +:+    +:+     +:+    +:+    +:+       +:+       :+:+:+  +:+       +:+       +:+    +:+       +:+   +:+     +:+    +:+
+   +#+    +:+     +#+    +:+    +#+  +:+  +#+       +#+ +:+ +#+       +#+       +#+    +:+      +#++:++#++:    +#+    +:+
+  +#+    +#+     +#+    +#+    +#+ +#+#+ +#+       +#+  +#+#+#       +#+       +#+    +#+      +#+     +#+    +#+    +#+
+ #+#    #+#     #+#    #+#     #+#+# #+#+#        #+#   #+#+#       #+#       #+#    #+#      #+#     #+#    #+#    #+#
+#########       ########       ###   ###         ###    ####       ########## ########       ###     ###    #########
+
+*/
+        // 手動上下載
+        function 下載設定檔() {
+            const 記錄位B = document.querySelectorAll(".記錄數據用");
+            const data = {};
+            // 遍歷所有帶有 .記錄數據用 類的元素
+            記錄位B.forEach(element => {
+                // 使用元素的 id 作為鍵，如果沒有 id 則使用 name 或其他屬性
+                const key = element.id || element.name || element.className;
+                if (key) {
+                    data[key] = element.value || '';
+                }
+            });
+
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+            const url = URL.createObjectURL(blob);
+            
+            const link = document.createElement("a");
+            link.href = url;
+            link.download = `${_現在時間()}_遠端鍠.json`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        function 上傳設定檔(event) {
+            const 設定匯入 = document.getElementById('設定匯入').textContent;
+            const 設定格式錯誤 = document.getElementById('設定格式錯誤').textContent;
+            const 匯入警告 = document.getElementById('匯入警告').textContent;
+            
+            if (!confirm(匯入警告)) {
+                location.reload(); 
+                return;
+            }
+
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const importedData = JSON.parse(e.target.result);
+                    
+                    // 遍歷所有 .記錄數據用 元素並導入數據
+                    記錄位.forEach(element => {
+                        const key = element.id || element.name || element.className;
+                        if (key && importedData.hasOwnProperty(key)) {
+                            element.value = importedData[key] || '';
+                        }
+                    });
+
+                    alert(設定匯入);
+                } catch (error) {
+                    alert(設定格式錯誤);
+                    console.error("解析错误:", error);
+                }
+            };
+            reader.readAsText(file);
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+      :::::::::       ::::::::::       ::::::::      :::    :::       :::    :::::::::::
+     :+:    :+:      :+:             :+:    :+:     :+:    :+:       :+:        :+:
+    +:+    +:+      +:+             +:+            +:+    +:+       +:+        +:+
+   +#++:++#:       +#++:++#        +#++:++#++     +#+    +:+       +#+        +#+
+  +#+    +#+      +#+                    +#+     +#+    +#+       +#+        +#+
+ #+#    #+#      #+#             #+#    #+#     #+#    #+#       #+#        #+#
+###    ###      ##########       ########       ########        ########## ###
+*/
+
+
+
+
+
+
+        // 搵客鍠結果
+        // 監聽臨時結果元素的變化
+        const 臨時結果 = document.getElementById("臨時結果");
+        const 搵客鍠結果 = document.getElementById("搵客鍠結果");
+        const observer = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutation) {
+                if (臨時結果.innerHTML.trim() !== "") {  // 改用innerHTML
+                    // 將<br>轉換為換行符
+                    const 格式化內容 = 臨時結果.innerHTML
+                        .replace(/<br\s*\/?>/gi, "\n")  // 處理普通<br>
+                        .replace(/<\/?[^>]+(>|$)/g, ""); // 移除其他HTML標籤（可選）
+                    
+                    搵客鍠結果.value = 格式化內容 + "\n" + 搵客鍠結果.value;
+                    臨時結果.innerHTML = ""; // 用innerHTML清空
+                }
+            });
+        });
+        // 開始觀察臨時結果元素的子節點和文本內容變化
+        observer.observe(臨時結果, {
+            childList: true,
+            characterData: true,
+            subtree: true
+        });
+        // <textarea> 根据内容自动显示/隐藏
+        // 内容变化监听函数
+        function toggleVisibility() {
+            const hasContent = 搵客鍠結果.value.trim().length > 0;
+            // 使用 classList 切换样式
+            搵客鍠結果.classList.toggle('hidden', !hasContent);
+            document.querySelector('#執行中請不要關閉網頁').style.display = 'none';
+        }
+        // 事件监听（兼容现代浏览器）
+        搵客鍠結果.addEventListener('input', toggleVisibility);
+        搵客鍠結果.addEventListener('paste', toggleVisibility);  // 处理粘贴操作
+        搵客鍠結果.addEventListener('cut', toggleVisibility);    // 处理剪切操作
+        // 初始化检查
+        toggleVisibility();
+        // 可选：处理页面加载后的动态内容注入
+        window.addEventListener('load', function() {
+        // 如果通过其他方式加载内容需要再次检查
+        toggleVisibility();
+        });
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // 促銷鍠結果
+        // 監聽臨時結果元素的變化
+        const 臨時結果A = document.getElementById("臨時結果A");
+        //_取消執行中
+        const warningElement = document.querySelector("#執行中請不要關閉網頁");
+        if (臨時結果A) {
+            const observer = new MutationObserver((mutations) => {
+                mutations.forEach((mutation) => {
+                    if (mutation.target.textContent.trim() !== "") {
+                        warningElement.style.display = "none";
+                        //observer.disconnect(); // 停止监听（可选）
+                    }
+                });
+            });
+            // 监听「自動回覆內容」的文本变化
+            observer.observe(臨時結果A, {
+                childList: true,      // 监听子元素变化
+                subtree: true,         // 监听所有后代元素
+                characterData: true,   // 监听文本内容变化
+            });
+        }
+        const 促銷鍠結果 = document.getElementById("促銷鍠結果");
+        // <textarea> 根据内容自动显示/隐藏
+        // 内容变化监听函数
+        function toggleVisibility() {
+            const hasContent = 促銷鍠結果.value.trim().length > 0;
+            // 使用 classList 切换样式
+            促銷鍠結果.classList.toggle('hidden', !hasContent);
+            //document.querySelector('#執行中請不要關閉網頁').style.display = 'none';
+        }
+        // 事件监听（兼容现代浏览器）
+        促銷鍠結果.addEventListener('input', toggleVisibility);
+        促銷鍠結果.addEventListener('paste', toggleVisibility);  // 处理粘贴操作
+        促銷鍠結果.addEventListener('cut', toggleVisibility);    // 处理剪切操作
+        // 初始化检查
+        toggleVisibility();
+        // 可选：处理页面加载后的动态内容注入
+        window.addEventListener('load', function() {
+        // 如果通过其他方式加载内容需要再次检查
+        toggleVisibility();
+        });
+
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+        
+
+
+
+
+
+/*
+      :::::::::      :::    :::       ::::    :::                       ::::::::::       :::    :::       ::::::::::
+     :+:    :+:     :+:    :+:       :+:+:   :+:                       :+:              :+:    :+:       :+:
+    +:+    +:+     +:+    +:+       :+:+:+  +:+                       +:+               +:+  +:+        +:+
+   +#++:++#:      +#+    +:+       +#+ +:+ +#+                       +#++:++#           +#++:+         +#++:++#
+  +#+    +#+     +#+    +#+       +#+  +#+#+#                       +#+               +#+  +#+        +#+
+ #+#    #+#     #+#    #+#       #+#   #+#+#                       #+#              #+#    #+#       #+#
+###    ###      ########        ###    ####       ##########      ##########       ###    ###       ##########
+
+*/
+
+        /* ********************* */
+        async function 執行遠端鍠() {
+
+            const 區號 = document.getElementById('區號').value;
+            const WhatsApp號 = document.getElementById('WhatsApp號').value;
+
+            const 發出促銷信的gmail = document.getElementById('發出促銷信的gmail').value;
+            const gmail的應用程式密碼 = document.getElementById('gmail的應用程式密碼').value;
+            const 促銷間隔天數 = document.getElementById('促銷間隔天數').value;
+
+            const 信件標題 = document.getElementById('信件標題').value;
+            const 促銷信草稿 = document.getElementById('促銷信草稿').innerHTML;
+
+            const 關鍵字 = document.getElementById('關鍵字').value;
+            const 地區 = document.getElementById('地區').value;
+            const 最多找幾頁 = document.getElementById('最多找幾頁').value;
+
+            // 先齊必填
+            const 要齊料 = {
+                區號: 區號,
+                WhatsApp號: WhatsApp號,
+                發出促銷信的gmail: 發出促銷信的gmail,
+                gmail的應用程式密碼: gmail的應用程式密碼,
+                促銷間隔天數: 促銷間隔天數,
+                信件標題: 信件標題,
+                促銷信草稿: 促銷信草稿,
+                關鍵字:關鍵字,
+                地區: 地區,
+                最多找幾頁: 最多找幾頁
+            };
+            const 必填欄位 = Object.keys(要齊料);
+            for (const 欄位 of 必填欄位) {
+                if (要齊料[欄位] == null || 要齊料[欄位] === '') {
+                    alert(`${欄位} 沒填寫!`);
+                    return;
+                }
+            }
+
+
+
+
+
+
+
+
+
+
+            let 搵客鍠py
+            // 按地區選py code
+            if (地區 == 'hk') {
+                搵客鍠py = 搜HK;
+            }
+
+
+            const 執行碼 = 搵客鍠py.replace("@帳號1181@", `'${區號}','${WhatsApp號}','搵客鍠'`)
+            .replace(/@關鍵字@/g, 關鍵字)
+            .replace('@找幾頁@', 最多找幾頁);
+            navigator.clipboard.writeText(執行碼);
+            
+            // 不用 先出搵客鍠結果 直接用py搵客鍠結果 做促銷
+            // const 搵客鍠結果 = localStorage.getItem('搵客鍠結果');
+
+            const 執行碼 = 促銷.replace("@帳號1181@", `'${區號}','${WhatsApp號}','促銷鍠'`) // _獲取帳號資料 必須
+                // 執行的功能要值
+                .replace("@促銷gmail@", 發出促銷信的gmail)
+                .replace("@gmail應密@", gmail的應用程式密碼)
+                .replace("@間隔天@", 促銷間隔天數)
+                .replace("@標題@", 信件標題)
+                
+                .replace("@促銷信@", 促銷信草稿)
+                .replace("@搵客鍠結果@", 搵客鍠結果)
+
+            navigator.clipboard.writeText(執行碼);
+            // py 檢查 剪贴板 轉變執行
+
+            document.querySelector('#執行中請不要關閉網頁').style.display = 'flex';
+        }
+        /* ********************* */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+          :::        :::    :::       :::::::::::
+       :+: :+:      :+:   :+:            :+:
+     +:+   +:+     +:+  +:+             +:+
+   +#++:++#++:    +#++:++              +#+
+  +#+     +#+    +#+  +#+             +#+
+ #+#     #+#    #+#   #+#            #+#
+###     ###    ###    ###       ###########
+*/
+
+
+        function _現在時間() {
+            const now = new Date();
+            return [
+                now.getFullYear(),
+                String(now.getMonth() + 1).padStart(2, '0'),
+                String(now.getDate()).padStart(2, '0'),
+                String(now.getHours()).padStart(2, '0'),
+                String(now.getMinutes()).padStart(2, '0'),
+                String(now.getSeconds()).padStart(2, '0')
+            ].join('');
+        }
+
+        function _翻譯(){ 
+            translate.service.use('client.edge'); //設置機器翻譯服務通道，直接客戶端本身，不依賴服務端 。相關說明參考 http://translate.zvo.cn/43086.html
+            translate.execute();//進行翻譯 
+        }
+
+        // 等待頁面完全加載 
+        window.onload = function() {
+            // 再顯示按鈕
+            document.querySelector('.執行金come').style.display = 'grid';
+            // 監聽輸入變化
+            document.getElementById('促銷信內容').addEventListener('input', _促銷鍠草稿());
+        };
+
+        function Start() {
+            // 顯示聯莫
+            const 聯莫 = ['moksurky@gmail.com','https://wa.me/85264071181/','https://i.meee.com.tw/atcX6QM.png','https://www.instagram.com/moksurky2025/','https://line.me/ti/p/UlSPd7p9zh/','https://www.facebook.com/aki.mok.10/','http://t.me/mokaki/'
+            ];
+            _翻譯()
+            _顯示聯莫(聯莫);
+        }
+
+        _客詢select();
+        記錄已填寫數據();
+        琪琪修改()
+    </script>
+</body>
+</html>

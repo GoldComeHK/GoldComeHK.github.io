@@ -170,7 +170,7 @@
 
             <!-- 部份4: 結果 -->
             <textarea id="促銷鍠結果" ></textarea>
-            <p id="臨時結果"></p>
+            <p id="臨時結果A"></p>
 
 
             <!-- 部份5: 設定檔 -->
@@ -626,11 +626,13 @@
             // 構建WhatsApp鏈接
             let whatsappLink = '';
             if (我ws號) {
-                whatsappLink = `https://wa.me/${我ws號}`;
+                whatsappLink = `https://wa.me/${我ws號}/?text=${querySelect}`;
+                /*
                 if (querySelect) {
                     //whatsappLink += `/?text=${encodeURIComponent(querySelect)}`;
                     whatsappLink += `/?text=${encodeURIComponent(querySelect)}`;
                 }
+                */
             }
 
             // 更新自动回复内容的函数
