@@ -408,13 +408,14 @@ class _客服鍠:
                             # 每次點擊前重新獲取 chat 元素
                             
                             
-                            '''
+                            
                             chat = _chrome_雜項._檢查元素存在(客服鍠_driver,'客戶信息位',_客服鍠.其他_xpaths['客戶信息位'])
 
                             '''
                             chat = WebDriverWait(客服鍠_driver, 10).until(
                                 EC.presence_of_element_located((By.XPATH,_客服鍠.其他_xpaths['客戶信息位']))
                             )
+                            '''
                             
 
 
@@ -423,14 +424,14 @@ class _客服鍠:
                             # 判斷是否需回覆
                             if 客來詢 in _客服鍠.回覆內容:
                                 chat.click()  # 點擊進入對話
-                            
-                                '''
-                                if 客來詢[0:3] == '#遠端鍠':
-                                    _遠端鍠()
-                                '''
-
-
                                 _客服鍠._ws自動回覆(客來詢)
+
+
+
+                            if 客來詢[0:3] == '#遠端鍠': # qqqq
+                                _遠端鍠()
+
+
                         except StaleElementReferenceException:
                             print("元素已過期，重新取得 chat 元素...")
                             continue
