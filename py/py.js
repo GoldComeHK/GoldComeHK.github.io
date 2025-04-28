@@ -166,7 +166,7 @@ def _提取聯絡方式(url,公司名xpath,表格xpath,電話篩選):
 _搵客鍠B('@關鍵字@')
 
 
-# 888888888
+# 99
 #########結束#########
 `
 
@@ -356,8 +356,10 @@ class _客服鍠:
         客服鍠_driver = cls._取得driver()
 
         send料 = f"https://api.whatsapp.com/send/?phone={官Ws}&text={月費用戶}%0D%0A{本程式名}%0D%0A{帳號1181}"
+        發成功 = '成功登入WhatsApp
         if 遠端料:
             send料 = f"https://api.whatsapp.com/send/?phone={_客服鍠.国家代码}{_客服鍠.电话号码}&text={遠端料}"
+            發成功 = '遠端料發成功'
         try:
             客服鍠_driver.get(send料)   # qqqqq
 
@@ -370,7 +372,7 @@ class _客服鍠:
                         pass
                     # 等待輸入框出現並輸入回覆
                     if _chrome_雜項._檢查文字輸入(客服鍠_driver,'對話輸入框', _客服鍠.其他_xpaths['對話輸入框'], Keys.RETURN):
-                        print("成功登入WhatsApp")
+                        print(發成功)
                         break
                 except:
                     continue
@@ -513,7 +515,7 @@ class _客服鍠:
 _客服鍠._登入ws()
 _客服鍠._ws自動客服()
 
-# 888888888
+# 99
 #########結束#########
 `
 
