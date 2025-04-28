@@ -166,7 +166,7 @@
             <label>請填寫您的 WhatsApp 號碼*</label>
             <input id="WhatsApp號" class="記錄數據用" type="text" placeholder="請填寫WhatsApp號碼" title="請填寫WhatsApp號碼" required>
     </div>
-    <hr>
+    <hr class="container">
 
 
 
@@ -202,7 +202,7 @@
             <textarea id="搵客鍠結果" class="記錄數據用"></textarea>
             <p id="臨時結果"></p>
     </div>
-    <hr>
+    <hr class="container">
 
 
 
@@ -252,7 +252,7 @@
             <textarea id="促銷鍠結果" class="記錄數據用"></textarea>
             <p id="臨時結果A"></p>
     </div>
-    <hr>
+    <hr class="container">
 
 
 
@@ -473,14 +473,7 @@
         +#+      +#+     +#+  +#+   +#+        +#+              +#+    +#+
 #+#    #+#      #+#     #+#   #+#+#+#         #+#              #+#    #+#
 ########       ###     ###     ###           ##########       #########
-*/
-
-
-
-
-        //AllData位 = ['區號','WhatsApp號','關鍵字','地區','搵客鍠結果','最多找幾頁','發出促銷信的gmail','gmail的應用程式密碼', '促銷間隔天數', '促銷鍠客詢select', '信件標題', '促銷信內容','促銷鍠結果']
-
-        
+*/        
 
         const 記錄位 = document.querySelectorAll(".記錄數據用");
 
@@ -730,22 +723,22 @@
         const 促銷鍠結果 = document.getElementById("促銷鍠結果");
         // <textarea> 根据内容自动显示/隐藏
         // 内容变化监听函数
-        function toggleVisibility() {
+        function toggleVisibility_B() {
             const hasContent = 促銷鍠結果.value.trim().length > 0;
             // 使用 classList 切换样式
             促銷鍠結果.classList.toggle('hidden', !hasContent);
             //document.querySelector('#執行中請不要關閉網頁').style.display = 'none';
         }
         // 事件监听（兼容现代浏览器）
-        促銷鍠結果.addEventListener('input', toggleVisibility);
-        促銷鍠結果.addEventListener('paste', toggleVisibility);  // 处理粘贴操作
-        促銷鍠結果.addEventListener('cut', toggleVisibility);    // 处理剪切操作
+        促銷鍠結果.addEventListener('input', toggleVisibility_B);
+        促銷鍠結果.addEventListener('paste', toggleVisibility_B);  // 处理粘贴操作
+        促銷鍠結果.addEventListener('cut', toggleVisibility_B);    // 处理剪切操作
         // 初始化检查
-        toggleVisibility();
+        toggleVisibility_B();
         // 可选：处理页面加载后的动态内容注入
         window.addEventListener('load', function() {
         // 如果通过其他方式加载内容需要再次检查
-        toggleVisibility();
+        toggleVisibility_B();
         });
 
 
@@ -818,14 +811,6 @@
             }
 
 
-
-
-
-
-
-
-
-
             let 搵客鍠py
             // 按地區選py code
             if (地區 == 'hk') {
@@ -833,24 +818,38 @@
             }
 
 
-            const 執行碼 = 搵客鍠py.replace("@帳號1181@", `'${區號}','${WhatsApp號}','搵客鍠'`)
-            .replace(/@關鍵字@/g, 關鍵字)
-            .replace('@找幾頁@', 最多找幾頁);
-            navigator.clipboard.writeText(執行碼);
-            
-            // 不用 先出搵客鍠結果 直接用py搵客鍠結果 做促銷
-            // const 搵客鍠結果 = localStorage.getItem('搵客鍠結果');
+            const 搵客鍠碼 = 搵客鍠py.replace("@帳號1181@", `'${區號}','${WhatsApp號}','搵客鍠'`)
+            .replace("_搵客鍠('@關鍵字@')", '')
 
-            const 執行碼 = 促銷.replace("@帳號1181@", `'${區號}','${WhatsApp號}','促銷鍠'`) // _獲取帳號資料 必須
+            .replace(/@關鍵字@/g, 關鍵字)
+            .replace('@找幾頁@', 最多找幾頁)
+            .replace("#########結束#########", '');
+
+            // 遠端鍠 = 'True'
+            // _搵客鍠('@關鍵字@')
+            // driver.get(f'{我官網}0.html')
+
+            // op ws
+
+
+            const 促銷鍠碼 = 促銷.replace("@帳號1181@", `'${區號}','${WhatsApp號}','促銷鍠'`) // _獲取帳號資料 必須
                 // 執行的功能要值
                 .replace("@促銷gmail@", 發出促銷信的gmail)
                 .replace("@gmail應密@", gmail的應用程式密碼)
                 .replace("@間隔天@", 促銷間隔天數)
                 .replace("@標題@", 信件標題)
-                
                 .replace("@促銷信@", 促銷信草稿)
-                .replace("@搵客鍠結果@", 搵客鍠結果)
 
+                .replace("all客聯 = '''@搵客鍠結果@'''", '')
+                // if 遠端鍠:   _促銷鍠._執行_自動send野(真all_Boss料)
+
+                .replace(
+                    "_促銷鍠._執行_自動send野()",
+                    `遠端鍠 = 'True'\ndriver.get(f'{我官網}0.html')\n_搵客鍠('${關鍵字}')`);
+                
+
+
+            const 執行碼 = `#遠端鍠\n${搵客鍠碼}${促銷鍠碼}`
             navigator.clipboard.writeText(執行碼);
             // py 檢查 剪贴板 轉變執行
 
