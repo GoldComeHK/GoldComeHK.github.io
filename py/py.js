@@ -356,7 +356,7 @@ class _客服鍠:
         客服鍠_driver = cls._取得driver()
 
         send料 = f"https://api.whatsapp.com/send/?phone={官Ws}&text={月費用戶}%0D%0A{本程式名}%0D%0A{帳號1181}"
-        發成功 = '成功登入WhatsApp
+        發成功 = '成功登入WhatsApp'
         if 遠端料:
             send料 = f"https://api.whatsapp.com/send/?phone={_客服鍠.国家代码}{_客服鍠.电话号码}&text={遠端料}"
             發成功 = '遠端料發成功'
