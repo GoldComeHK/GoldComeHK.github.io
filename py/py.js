@@ -114,10 +114,11 @@ def _搵客鍠(keyword=''):
         搵客鍠_driver.quit()
 
         ######### Boss料PoHtml #########
-        真all_Boss料 = _搵客鍠._西選重聯(all_Boss料)
-        _搵客鍠._聯Po網(真all_Boss料,'@關鍵字@')
-        if 遠端鍠:  #qqqqq
-            _促銷鍠._執行_自動send野(真all_Boss料)
+        if all_Boss料:
+            真all_Boss料 = _搵客鍠._西選重聯(all_Boss料)
+            _搵客鍠._聯Po網(真all_Boss料,'@關鍵字@')
+            if 遠端鍠:  #qqqqq
+                _促銷鍠._執行_自動send野(真all_Boss料)
         ######### Boss料PoHtml #########
         
     except Exception as e:
@@ -163,6 +164,8 @@ def _提取聯絡方式(url,公司名xpath,表格xpath,電話篩選):
 # all地區 統一名
 _搵客鍠('@關鍵字@')
 
+
+# 333333
 #########結束#########
 `
 
@@ -509,7 +512,7 @@ class _客服鍠:
 _客服鍠._登入ws()
 _客服鍠._ws自動客服()
 
-# 22222
+# 333333
 #########結束#########
 `
 
