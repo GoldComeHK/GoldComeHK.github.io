@@ -402,7 +402,18 @@ class _客服鍠:
                     for chat in chat_list:
                         try:
                             # 每次點擊前重新獲取 chat 元素
+                            
+                            
+                            '''
                             chat = _chrome_雜項._檢查元素存在(客服鍠_driver,'客戶信息位',_客服鍠.其他_xpaths['客戶信息位'])
+
+                            '''
+                            chat = WebDriverWait(客服鍠_driver, 10).until(
+                                EC.presence_of_element_located((By.XPATH,_客服鍠.其他_xpaths['客戶信息位']))
+                            )
+                            
+
+
                             客來詢 = chat.text
 
                             # 判斷是否需回覆
@@ -496,8 +507,7 @@ class _客服鍠:
 _客服鍠._登入ws()
 _客服鍠._ws自動客服()
 
-
-# 00000
+# 111111
 #########結束#########
 `
 
