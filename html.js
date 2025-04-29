@@ -21,6 +21,9 @@
             <samp>客服鍠</samp>
         </div>
 
+        <div class="" style="text-align: center;" ><a class='' href="./0.html"> 👑 </a></div>
+        <br><br>
+
         <iframe width="100%" height="315" src="https://www.youtube.com/embed/videoseries?si=uwBbKqm1vo_ZfsFE&amp;list=PLyJPqAgyFi65hvH3RKDUtqRb_ILBgRLN_" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
     </div>
 `
