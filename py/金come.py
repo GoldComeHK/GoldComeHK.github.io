@@ -507,7 +507,7 @@ class _搵客鍠:
             """,
             Boss料PoHtml.strip()  # 移除末尾多余换行
         )
-        driver.refresh()
+        
 
 
 
@@ -821,12 +821,11 @@ class _Start:
 
     def _動態執行代碼():
 
-        # 等待網頁載入完成
-        while True:
+        # 初始執行
+        if Admin模式:
+            driver.get('C:/Users/mokaki/Desktop/金/金come(2025)/GoldComeHK.github.io/set.html')
+        else:
             driver.get(f'{我官網}set.html')
-            #driver.get('C:/Users/mokaki/Desktop/金/金come(2025)/GoldComeHK.github.io/set.html')
-            _chrome_雜項._檢查元素存在(driver,'更新日期','//*[@id="更新日期"]')
-            break
 
         while True:
             code標籤 = "#########結束#########"
@@ -837,6 +836,7 @@ class _Start:
             original_clipboard = pyperclip.paste()
 
             while True:
+
                 current_clipboard = pyperclip.paste()
                 if current_clipboard != original_clipboard and code標籤 in current_clipboard:
                     break
@@ -848,17 +848,17 @@ class _Start:
 
             # 用取到的碼轉成py碼
             user_code_lines = []
-            for line in current_clipboard.split('\n'):
+            for line in user_code.split('\n'):
                 if line.strip() == code標籤:
                     break
                 user_code_lines.append(line)
             user_code = '\n'.join(user_code_lines)
 
+            #print(f'\n----2-----\n{user_code}\n----2-----\n')
+            #input('按任意鍵執行...')
+
             # 將特殊標記轉回\n轉義字符
             user_code = user_code.replace('@換行@', r'\n')
-            if Admin模式:
-                print(f'\n----1-----\n{user_code}\n----1-----\n')
-                input('按任意鍵執行...')
 
             try:
                 exec(user_code, globals())
@@ -1023,20 +1023,12 @@ class _Start:
 
 
 
-
-
-
-
-
-
-
-
 if __name__ == "__main__":
 
     Admin模式 = False
 
 
-    更新時間 = '202504272327'
+    更新時間 = '202504291448'
     本程式名 = '金come'
     賺錢鍠瀏覽器位 = 本程式名
 
@@ -1045,6 +1037,7 @@ if __name__ == "__main__":
     VipDurl = "https://github.com/GoldComeHK/d/blob/main/d"
     download_url = f'https://github.com/GoldComeHK/GoldComeHK.github.io/raw/main/{本程式名}.exe'
 
+    遠端鍠 = False
     月費用戶 = False 
     客服鍠試用次數 = 10
     用次數 = 0

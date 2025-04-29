@@ -117,8 +117,6 @@ def _搵客鍠B(keyword=''):
         if all_Boss料:
             真all_Boss料 = _搵客鍠._西選重聯(all_Boss料)
             _搵客鍠._聯Po網(真all_Boss料,'@關鍵字@')
-            if 遠端鍠:  #qqqqq
-                _促銷鍠._執行_自動send野(真all_Boss料)
         driver.refresh()
         ######### Boss料PoHtml #########
         
@@ -166,7 +164,7 @@ def _提取聯絡方式(url,公司名xpath,表格xpath,電話篩選):
 _搵客鍠B('@關鍵字@')
 
 
-
+## 202504291448 ##
 #########結束#########
 `
 
@@ -355,17 +353,13 @@ class _客服鍠:
 
 
     @classmethod
-    def _send登入信息比admin(cls,遠端料=''):    # qqqqq
+    def _send登入信息比admin(cls):
         客服鍠_driver = cls._取得driver()
 
         send料 = f"https://api.whatsapp.com/send/?phone={官Ws}&text={月費用戶}%0D%0A{本程式名}%0D%0A{帳號1181}"
         發成功 = '成功登入WhatsApp'
-        if 遠端料:
-            send料 = f"https://api.whatsapp.com/send/?phone={_客服鍠.国家代码}{_客服鍠.电话号码}&text={遠端料}"
-            發成功 = '遠端料發成功'
         try:
-            客服鍠_driver.get(send料)   # qqqqq
-
+            客服鍠_driver.get(send料)
             while True:
                 try:
                     try:
@@ -506,6 +500,8 @@ _客服鍠._登入ws()
 _客服鍠._ws自動客服()
 
 
+## 202504291448 ##
+
 #########結束#########
 `
 
@@ -610,9 +606,6 @@ class _促銷鍠:
                     結果遠端 = 結果
                 all結果睇.append(結果)
                 all結果Save.append(結果Save)
-
-                if 遠端鍠:  # qqqqq
-                    _客服鍠._send登入信息比admin(結果遠端)
 
             # ==== html ====
             #print(f'all結果Save={all結果Save}')
@@ -795,6 +788,7 @@ class _促銷鍠:
 
 _促銷鍠._執行_自動send野()
 
+## 202504291448 ##
 
 #########結束#########
 `
