@@ -404,29 +404,6 @@
         // 監聽臨時結果元素的變化
         const 臨時結果 = document.getElementById("臨時結果");
         const 促銷鍠結果 = document.getElementById("促銷鍠結果");
-        /*
-        const observer = new MutationObserver(function(mutations) {
-            mutations.forEach(function(mutation) {
-                if (臨時結果.innerHTML.trim() !== "") {  // 改用innerHTML
-                    // 將<br>轉換為換行符
-                    const 格式化內容 = 臨時結果.innerHTML
-                        .replace(/<br\s*\/?>/gi, "\n")  // 處理普通<br>
-                        .replace(/<\/?[^>]+(>|$)/g, ""); // 移除其他HTML標籤（可選）
-                    
-                    促銷鍠結果.value = 格式化內容 + "\n" + 促銷鍠結果.value;
-
-                    //臨時結果.innerHTML = ""; // 用innerHTML清空
-                }
-            });
-        });
-
-        // 開始觀察臨時結果元素的子節點和文本內容變化
-        observer.observe(臨時結果, {
-            childList: true,
-            characterData: true,
-            subtree: true
-        });
-        */
 
         //_取消執行中
         const autoReplyElement = document.getElementById("臨時結果");
@@ -449,9 +426,6 @@
                 characterData: true,   // 监听文本内容变化
             });
         }
-
-
-/**/
 
         // <textarea> 根据内容自动显示/隐藏
             const resultTextarea = document.getElementById('促銷鍠結果');
