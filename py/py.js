@@ -12,7 +12,7 @@
 ### 勞工處 ###### 勞工處 ###### 勞工處 ###### 勞工處 ###
 ### 勞工處 ###### 勞工處 ###### 勞工處 ###### 勞工處 ###
 ##################  202504241656  ####################
-def _自動獲取香港勞工處工作資料(keyword=''):
+def _搵客鍠B(keyword=''):
 
     勞工處XPATH = {
         '左上資料數':'//*[@id="content-innerdiv"]/div[1]/div[1]/strong[1]',
@@ -57,17 +57,6 @@ def _自動獲取香港勞工處工作資料(keyword=''):
 
         搵客鍠_driver.get(勞工處ulr)
         # 填寫關鍵字並點擊搜尋按鈕
-
-
-        '''
-        search_box = 搵客鍠_driver.find_element(By.ID, "simp_searchKeyword")
-        search_box.send_keys(keyword)
-        search_button = 搵客鍠_driver.find_element(By.ID, "btnSearch")
-        search_button.click()
-        列表顯示 = 搵客鍠_driver.find_element(By.XPATH, 勞工處XPATH['列表顯示'])
-        列表顯示.click()
-        '''
-        # qqqq
         _chrome_雜項._檢查文字輸入(搵客鍠_driver,'關鍵字輸入框', 勞工處XPATH['關鍵字輸入框'], keyword)
         _chrome_雜項._檢查點擊(搵客鍠_driver,'搜尋空缺按鈕',勞工處XPATH['搜尋空缺按鈕'])
         _chrome_雜項._檢查點擊(搵客鍠_driver,'列表顯示',勞工處XPATH['列表顯示'])
@@ -125,8 +114,12 @@ def _自動獲取香港勞工處工作資料(keyword=''):
         搵客鍠_driver.quit()
 
         ######### Boss料PoHtml #########
-        真all_Boss料 = _搵客鍠._西選重聯(all_Boss料)
-        _搵客鍠._聯Po網(真all_Boss料,'@關鍵字@')
+        if all_Boss料:
+            真all_Boss料 = _搵客鍠._西選重聯(all_Boss料)
+            _搵客鍠._聯Po網(真all_Boss料,'@關鍵字@')
+            if 遠端鍠:  #qqqqq
+                _促銷鍠._執行_自動send野(真all_Boss料)
+        driver.refresh()
         ######### Boss料PoHtml #########
         
     except Exception as e:
@@ -169,9 +162,11 @@ def _提取聯絡方式(url,公司名xpath,表格xpath,電話篩選):
         print(f"_提取聯絡方式錯誤（URL: {url}）: {str(e)}")
         _雜項._獲取詳細錯誤堆棧(*sys.exc_info())
 
-_自動獲取香港勞工處工作資料('@關鍵字@')
+# all地區 統一名
+_搵客鍠B('@關鍵字@')
 
-# 00000
+
+
 #########結束#########
 `
 
@@ -259,7 +254,10 @@ class _客服鍠:
         '验证字符尾':']/span',
         '對話列表':'//*[@id="pane-side"]/div[*]/div/div',
         '客戶信息位':'.//div/div/div/div[2]/div[2]/div[1]/span/span',
-        '對話輸入框':'//*[@id="main"]/footer/div[1]/div/span/div/div[2]/div/div[3]/div[1]/p',
+
+        'wsB發送按鈕':'//*[@id="main"]/footer/div[1]/div/span/div/div[2]/div/button',
+        'ws發送按鈕':'//*[@id="main"]/footer/div[1]/div/span/div/div[2]/div/div[4]/button',
+
         '繼續前往對話':'//*[@id="action-button"]',
         '使用WhatsApp網頁版':'//*[@id="fallback_block"]/div/div/h4[2]/a',
         'Ws網頁版新功能':'//*[@id="app"]/div/span[2]/div/div/div/div/div/div/div[2]/div/button/div/div',
@@ -350,7 +348,6 @@ class _客服鍠:
             # 段6 = send登入信息比admin
             _客服鍠._send登入信息比admin()
         except Exception as e:
-            print(f"_登入ws-執行錯誤: {e}")
             _雜項._獲取詳細錯誤堆棧(*sys.exc_info())
 
 
@@ -358,26 +355,38 @@ class _客服鍠:
 
 
     @classmethod
-    def _send登入信息比admin(cls):
+    def _send登入信息比admin(cls,遠端料=''):    # qqqqq
         客服鍠_driver = cls._取得driver()
+
+        send料 = f"https://api.whatsapp.com/send/?phone={官Ws}&text={月費用戶}%0D%0A{本程式名}%0D%0A{帳號1181}"
+        發成功 = '成功登入WhatsApp'
+        if 遠端料:
+            send料 = f"https://api.whatsapp.com/send/?phone={_客服鍠.国家代码}{_客服鍠.电话号码}&text={遠端料}"
+            發成功 = '遠端料發成功'
         try:
-            客服鍠_driver.get(f"https://api.whatsapp.com/send/?phone={官Ws}&text={月費用戶}%0D%0A{本程式名}%0D%0A{帳號1181}")
+            客服鍠_driver.get(send料)   # qqqqq
 
             while True:
                 try:
                     try:
-                        _chrome_雜項._檢查點擊(客服鍠_driver,'繼續前往對話', _客服鍠.其他_xpaths['繼續前往對話'])
-                        _chrome_雜項._檢查點擊(客服鍠_driver,'使用 WhatsApp 網頁版', _客服鍠.其他_xpaths['使用WhatsApp網頁版'])
+                        _chrome_雜項._檢查點擊(客服鍠_driver,' 繼續前往對話 ', _客服鍠.其他_xpaths['繼續前往對話'])
+                        _chrome_雜項._檢查點擊(客服鍠_driver,' 使用WhatsApp網頁版 ', _客服鍠.其他_xpaths['使用WhatsApp網頁版'])
                     except:
                         pass
+
                     # 等待輸入框出現並輸入回覆
-                    _chrome_雜項._檢查文字輸入(客服鍠_driver,'對話輸入框', _客服鍠.其他_xpaths['對話輸入框'], Keys.RETURN)
-                    print("成功登入WhatsApp")
-                    break
+                    try:
+                        if _chrome_雜項._檢查點擊(客服鍠_driver,' wsB發送按鈕 ', _客服鍠.其他_xpaths['wsB發送按鈕']):
+                            print(f'{發成功} business')
+                            break
+                        if _chrome_雜項._檢查點擊(客服鍠_driver,' ws發送按鈕 ', _客服鍠.其他_xpaths['ws發送按鈕']):
+                            print(發成功)
+                            break
+                    except:
+                        pass
                 except:
                     continue
         except Exception as e:
-            print(f"_登入ws-執行錯誤: {e}")
             _雜項._獲取詳細錯誤堆棧(*sys.exc_info())
 
 
@@ -402,11 +411,6 @@ class _客服鍠:
 
                 try:
                     # 每次迭代時重新獲取 chat_list
-
-                    '''
-                    chat_list = _chrome_雜項._檢查元素存在(客服鍠_driver,'對話列表',_客服鍠.其他_xpaths['對話列表'])
-                    '''
-                    # qqqq
                     chat_list = WebDriverWait(客服鍠_driver, 30).until(
                         EC.presence_of_all_elements_located((By.XPATH, _客服鍠.其他_xpaths['對話列表']))
                     )
@@ -415,20 +419,16 @@ class _客服鍠:
                         try:
                             # 每次點擊前重新獲取 chat 元素
                             chat = _chrome_雜項._檢查元素存在(客服鍠_driver,'客戶信息位',_客服鍠.其他_xpaths['客戶信息位'])
-                            '''
-                            chat = WebDriverWait(客服鍠_driver, 10).until(
-                                EC.presence_of_element_located((By.XPATH,_客服鍠.其他_xpaths['客戶信息位']))
-                            )
-                            '''
-                            # qqqq
                             客來詢 = chat.text
 
                             # 判斷是否需回覆
                             if 客來詢 in _客服鍠.回覆內容:
                                 chat.click()  # 點擊進入對話
-
-
                                 _客服鍠._ws自動回覆(客來詢)
+
+                            if 客來詢[0:4] == '#遠端鍠':
+                                _遠端鍠(客來詢)
+
                         except StaleElementReferenceException:
                             print("元素已過期，重新取得 chat 元素...")
                             continue
@@ -455,11 +455,6 @@ class _客服鍠:
                 _金come_VIP._檢查使用次數(客服鍠_driver)
 
             try:
-                # 等待輸入框出現並輸入回覆
-                WebDriverWait(客服鍠_driver, 10).until(
-                    EC.presence_of_element_located((By.XPATH, _客服鍠.其他_xpaths['對話輸入框']))
-                )
-
                 # 使用 ActionChains 替换所有 @換行@ 为 Shift+Enter
                 actions = ActionChains(客服鍠_driver)
                 處理後內容 = _客服鍠.回覆內容[來].split('@換行@')
@@ -479,7 +474,6 @@ class _客服鍠:
             except Exception as e:
                 print(f"发生错误: {str(e)}")
         except Exception as e:
-            print(f"_ws自動回覆-執行錯誤: {e}")
             _雜項._獲取詳細錯誤堆棧(*sys.exc_info())
 
 
@@ -512,7 +506,6 @@ _客服鍠._登入ws()
 _客服鍠._ws自動客服()
 
 
-# 00000
 #########結束#########
 `
 
@@ -577,9 +570,10 @@ _客服鍠._ws自動客服()
 
 
 促銷 = `
+############# 促銷鍠 #
 class _促銷鍠:
 
-    def _執行_自動send野():
+    def _執行_自動send野(all客聯=''):
         try:
             _金come_VIP._獲取帳號資料(@帳號1181@)
             由這mail = '@促銷gmail@'
@@ -598,6 +592,7 @@ class _促銷鍠:
                 # 是ws
                 結果 = f'<a href="{老闆信[0]}" class="臨時結果A" target="_blank">手動 whatsapp to[{公司名稱}:{老闆聯絡}]</a>'
                 結果Save = f'[ {公司名稱}:{老闆聯絡} ]=手動 whatsapp 發出'
+                結果遠端 = 老闆信[0]
 
                 # 是email
                 if 老闆信[1] == True:
@@ -612,12 +607,17 @@ class _促銷鍠:
                     else:
                         結果 = f'[ {公司名稱}:{老闆聯絡} ]={促銷間隔天數}天內已發過'
                     結果Save = 結果
+                    結果遠端 = 結果
                 all結果睇.append(結果)
                 all結果Save.append(結果Save)
+
+                if 遠端鍠:  # qqqqq
+                    _客服鍠._send登入信息比admin(結果遠端)
 
             # ==== html ====
             #print(f'all結果Save={all結果Save}')
             _促銷鍠._促銷鍠Po網(all結果睇,all結果Save)
+            
             # ==== html ====
         except Exception as e:
             _雜項._獲取詳細錯誤堆棧(*sys.exc_info())
@@ -791,8 +791,10 @@ class _促銷鍠:
 
 
 
-# qqqqqqqqqqqqqqq
+
 
 _促銷鍠._執行_自動send野()
+
+
 #########結束#########
 `
