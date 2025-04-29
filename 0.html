@@ -413,12 +413,6 @@
             let whatsappLink = '';
             if (我ws號) {
                 whatsappLink = `https://wa.me/${我ws號}/?text=${querySelect}`;
-                /*
-                if (querySelect) {
-                    //whatsappLink += `/?text=${encodeURIComponent(querySelect)}`;
-                    whatsappLink += `/?text=${encodeURIComponent(querySelect)}`;
-                }
-                */
             }
 
             // 更新自动回复内容的函数
@@ -476,9 +470,6 @@
         const 記錄位 = document.querySelectorAll(".記錄數據用");
 
         function 記錄已填寫數據() {
-            // 獲取所有帶有 class="auto-save" 的元素
-            
-
             // 頁面加載時，從 LocalStorage 恢復數據
             document.addEventListener("DOMContentLoaded", () => {
                 記錄位.forEach(element => {
@@ -641,50 +632,6 @@
 
 
 
-        /*
-        // 搵客鍠結果
-        // 監聽臨時結果元素的變化
-        const 臨時結果 = document.getElementById("臨時結果");
-        const 搵客鍠結果 = document.getElementById("搵客鍠結果");
-        const observer = new MutationObserver(function(mutations) {
-            mutations.forEach(function(mutation) {
-                if (臨時結果.innerHTML.trim() !== "") {  // 改用innerHTML
-                    // 將<br>轉換為換行符
-                    const 格式化內容 = 臨時結果.innerHTML
-                        .replace(/<br\s*\/?>/gi, "\n")  // 處理普通<br>
-                        .replace(/<\/?[^>]+(>|$)/g, ""); // 移除其他HTML標籤（可選）
-                    
-                    搵客鍠結果.value = 格式化內容 + "\n" + 搵客鍠結果.value;
-                    臨時結果.innerHTML = ""; // 用innerHTML清空
-                }
-            });
-        });
-        // 開始觀察臨時結果元素的子節點和文本內容變化
-        observer.observe(臨時結果, {
-            childList: true,
-            characterData: true,
-            subtree: true
-        });
-        // <textarea> 根据内容自动显示/隐藏
-        // 内容变化监听函数
-        function toggleVisibility() {
-            const hasContent = 搵客鍠結果.value.trim().length > 0;
-            // 使用 classList 切换样式
-            搵客鍠結果.classList.toggle('hidden', !hasContent);
-            document.querySelector('#執行中請不要關閉網頁').style.display = 'none';
-        }
-        // 事件监听（兼容现代浏览器）
-        搵客鍠結果.addEventListener('input', toggleVisibility);
-        搵客鍠結果.addEventListener('paste', toggleVisibility);  // 处理粘贴操作
-        搵客鍠結果.addEventListener('cut', toggleVisibility);    // 处理剪切操作
-        // 初始化检查
-        toggleVisibility();
-        // 可选：处理页面加载后的动态内容注入
-        window.addEventListener('load', function() {
-        // 如果通过其他方式加载内容需要再次检查
-        toggleVisibility();
-        });
-        */
 
 
 
@@ -698,63 +645,10 @@
 
 
 
-        // 促銷鍠結果
-        // 監聽臨時結果元素的變化
-        const 臨時結果A = document.getElementById("臨時結果A");
-        //_取消執行中
-        const warningElement = document.querySelector("#執行中請不要關閉網頁");
-        if (臨時結果A) {
-            const observer = new MutationObserver((mutations) => {
-                mutations.forEach((mutation) => {
-                    if (mutation.target.textContent.trim() !== "") {
-                        warningElement.style.display = "none";
-                        //observer.disconnect(); // 停止监听（可选）
-                    }
-                });
-            });
-            // 监听「自動回覆內容」的文本变化
-            observer.observe(臨時結果A, {
-                childList: true,      // 监听子元素变化
-                subtree: true,         // 监听所有后代元素
-                characterData: true,   // 监听文本内容变化
-            });
-        }
-        const 促銷鍠結果 = document.getElementById("促銷鍠結果");
-        // <textarea> 根据内容自动显示/隐藏
-        // 内容变化监听函数
-        function toggleVisibility_B() {
-            const hasContent = 促銷鍠結果.value.trim().length > 0;
-            // 使用 classList 切换样式
-            促銷鍠結果.classList.toggle('hidden', !hasContent);
-            //document.querySelector('#執行中請不要關閉網頁').style.display = 'none';
-        }
-        // 事件监听（兼容现代浏览器）
-        促銷鍠結果.addEventListener('input', toggleVisibility_B);
-        促銷鍠結果.addEventListener('paste', toggleVisibility_B);  // 处理粘贴操作
-        促銷鍠結果.addEventListener('cut', toggleVisibility_B);    // 处理剪切操作
-        // 初始化检查
-        toggleVisibility_B();
-        // 可选：处理页面加载后的动态内容注入
-        window.addEventListener('load', function() {
-        // 如果通过其他方式加载内容需要再次检查
-        toggleVisibility_B();
-        });
 
 
 
 
-
-
-
-
-
-
-        
-
-
-
-
-        
 
 
 
@@ -816,34 +710,13 @@
                 搵客鍠py = `自動send老闆._搵老闆('${關鍵字}')`;
             }
 
-            
-            const 執行碼 = `/*${分隔符}${搵客鍠py}${分隔符}${最多找幾頁}${分隔符}${區號}${WhatsApp號}${分隔符}${信件標題}${分隔符}${促銷信草稿}${分隔符}${發出促銷信的gmail}${分隔符}${gmail的應用程式密碼}${分隔符}
-            `
+            const 執行碼 = `/%${分隔符}${搵客鍠py}${分隔符}${最多找幾頁}${分隔符}${區號}${WhatsApp號}${分隔符}${信件標題}${分隔符}${促銷信草稿}${分隔符}${發出促銷信的gmail}${分隔符}${gmail的應用程式密碼}${分隔符}`
             navigator.clipboard.writeText(執行碼);
             window.open('https://t.me/aki_get_boss2025_bot', '_blank');
             // py 檢查 剪贴板 轉變執行
 
-            //document.querySelector('#執行中請不要關閉網頁').style.display = 'flex';
         }
         /* ********************* */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
