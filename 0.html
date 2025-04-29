@@ -199,8 +199,6 @@
                 <label>搜尋頁數(愈大需時愈久)</label>
                 <input id="最多找幾頁" class="記錄數據用" value="10" type="number" min="1" step="1" required oninput="this.value = this.value.replace(/[^0-9]/g, '');">
             </div>
-            <textarea id="搵客鍠結果" class="記錄數據用"></textarea>
-            <p id="臨時結果"></p>
     </div>
     <hr class="container">
 
@@ -643,7 +641,7 @@
 
 
 
-
+        /*
         // 搵客鍠結果
         // 監聽臨時結果元素的變化
         const 臨時結果 = document.getElementById("臨時結果");
@@ -686,6 +684,7 @@
         // 如果通过其他方式加载内容需要再次检查
         toggleVisibility();
         });
+        */
 
 
 
@@ -795,10 +794,10 @@
                 WhatsApp號: WhatsApp號,
                 發出促銷信的gmail: 發出促銷信的gmail,
                 gmail的應用程式密碼: gmail的應用程式密碼,
-                促銷間隔天數: 促銷間隔天數,
+                //促銷間隔天數: 促銷間隔天數,
                 信件標題: 信件標題,
                 促銷信草稿: 促銷信草稿,
-                關鍵字:關鍵字,
+                // 關鍵字:關鍵字,
                 地區: 地區,
                 最多找幾頁: 最多找幾頁
             };
@@ -810,43 +809,21 @@
                 }
             }
 
-
+            分隔符 = '@////////@'
             let 搵客鍠py
             // 按地區選py code
             if (地區 == 'hk') {
-                搵客鍠py = 搜HK;
+                搵客鍠py = `自動send老闆._搵老闆('${關鍵字}')`;
             }
 
-
-            const 搵客鍠碼 = 搵客鍠py.replace("@帳號1181@", `'${區號}','${WhatsApp號}','搵客鍠'`)
-            .replace("_搵客鍠B('@關鍵字@')", '')
-
-            .replace(/@關鍵字@/g, 關鍵字)
-            .replace('@找幾頁@', 最多找幾頁)
-            .replace("#########結束#########", '');
-
-            const 促銷鍠碼 = 促銷.replace("@帳號1181@", `'${區號}','${WhatsApp號}','促銷鍠'`) // _獲取帳號資料 必須
-                // 執行的功能要值
-                .replace("@促銷gmail@", 發出促銷信的gmail)
-                .replace("@gmail應密@", gmail的應用程式密碼)
-                .replace("@間隔天@", 促銷間隔天數)
-                .replace("@標題@", 信件標題)
-                .replace("@促銷信@", 促銷信草稿)
-
-                .replace("all客聯 = '''@搵客鍠結果@'''", '')
-                // if 遠端鍠:   _促銷鍠._執行_自動send野(真all_Boss料)
-
-                .replace(
-                    "_促銷鍠._執行_自動send野()",
-                    `遠端鍠 = 'True'\nprint(f"遠端鍠123456789")\ndriver.get(f'{我官網}0.html')\n_搵客鍠B('${關鍵字}')`);
-                
-
-
-            const 執行碼 = `#遠端鍠\n${搵客鍠碼}${促銷鍠碼}`
+            
+            const 執行碼 = `/*${分隔符}${搵客鍠py}${分隔符}${最多找幾頁}${分隔符}${區號}${WhatsApp號}${分隔符}${信件標題}${分隔符}${促銷信草稿}${分隔符}${發出促銷信的gmail}${分隔符}${gmail的應用程式密碼}${分隔符}
+            `
             navigator.clipboard.writeText(執行碼);
+            window.open('https://t.me/aki_get_boss2025_bot', '_blank');
             // py 檢查 剪贴板 轉變執行
 
-            document.querySelector('#執行中請不要關閉網頁').style.display = 'flex';
+            //document.querySelector('#執行中請不要關閉網頁').style.display = 'flex';
         }
         /* ********************* */
 
