@@ -97,7 +97,7 @@
  #+#           #+#    #+#       #+#
 ###           ###    ###       ###
 -->
-    <samp id="莫生查詢" style="display: none;">莫生我要查詢促銷鍠使用問題</samp>
+    <samp id="莫生查詢" style="display: none;">莫生我要查詢遠端鍠使用問題</samp>
 
     <samp id="匯入警告" style="display: none;">匯入設定檔會刪除現時設定！</samp>
     <samp id="設定匯入" style="display: none;">設定檔已成功匯入！</samp>
@@ -138,7 +138,7 @@
 
     <!-- 部份0: 基本 -->
     <div id="執行中請不要關閉網頁">
-        <h2>執行中請不要關閉網頁...</h2>
+        <h2 id="執行中說明">請稍候...</h2>
     </div>
     <h1>遠端鍠 👑| <a href="./set.html"><b class="_我司名"></b></a></h1>
     <p class="mokJsApi_copyright">版權</p>
@@ -688,7 +688,7 @@
                 WhatsApp號: WhatsApp號,
                 發出促銷信的gmail: 發出促銷信的gmail,
                 gmail的應用程式密碼: gmail的應用程式密碼,
-                //促銷間隔天數: 促銷間隔天數,
+                促銷間隔天數: 促銷間隔天數,
                 信件標題: 信件標題,
                 促銷信草稿: 促銷信草稿,
                 // 關鍵字:關鍵字,
@@ -771,6 +771,7 @@
             document.querySelector('.執行金come').style.display = 'grid';
             // 監聽輸入變化
             document.getElementById('促銷信內容').addEventListener('input', _促銷鍠草稿());
+            document.querySelector("#執行中請不要關閉網頁").style.display = "none";
         };
 
         function Start() {

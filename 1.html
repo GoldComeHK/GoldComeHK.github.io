@@ -125,7 +125,7 @@
 
     <!-- 部份0: 基本 -->
     <div id="執行中請不要關閉網頁">
-        <h2>執行中請不要關閉網頁...</h2>
+        <h2 id="執行中說明">請稍候...</h2>
     </div>
     <h1>搵客鍠🔍 | <a href="./set.html"><b class="_我司名"></b></a></h1>
     <p class="mokJsApi_copyright">版權</p>
@@ -146,9 +146,10 @@
             <!-- 部份2: setting -->
             <div class="reply-group">
                 
-                <label>請選擇搜尋地區*</label>
+                <label>請選擇搜尋地區*(需要在當地網絡才能搜尋)</label>
                 <select id="地區" title="請選擇搜尋地區">
-                    <option value="hk" selected>香港</option>
+                    <option value="HK" selected>香港</option>
+                    <option value="TW">台灣</option>
                 </select>
 
                 <label>請填寫搜尋關鍵字</label>
@@ -256,6 +257,16 @@
                 saveToLocalStorage(field, document.getElementById(field).value);
             });
         });
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -460,8 +471,6 @@
 ###    ###      ########        ###    ####       ##########      ##########       ###    ###       ##########
 
 */
-
-
         /* ********************* */
         async function 執行搵客鍠() {
             const 區號 = document.getElementById('區號').value;
@@ -469,35 +478,32 @@
             const 關鍵字 = document.getElementById('關鍵字').value;
             const 地區 = document.getElementById('地區').value;
             const 最多找幾頁 = document.getElementById('最多找幾頁').value;
-            let 搵客鍠py
-            // 按地區選py code
-            if (地區 == 'hk') {
-                搵客鍠py = 搜HK;
-            }
+            const 搵客鍠py = `搜${地區}`
 
-
+            // 要齊料岩料
+            if (最多找幾頁 < 1) {alert('搜尋頁數不能為零!');return;}
             // 先齊必填
             const 要齊料 = {
                 區號: 區號,
                 WhatsApp號: WhatsApp號,
-                關鍵字: 關鍵字,
-                地區: 地區
+                地區: 地區,
+                最多找幾頁:最多找幾頁
             };
-            const 必填欄位 = Object.keys(要齊料);
-            for (const 欄位 of 必填欄位) {
-                if (要齊料[欄位] == null || 要齊料[欄位] === '') {
-                    alert(`${欄位} 沒填寫!`);
-                    return;
-                }
+            for (const 欄位 of Object.keys(要齊料)) {
+                if (要齊料[欄位] == null || 要齊料[欄位] === '') {alert(`${欄位} 沒填寫!`);return;}
             }
 
-            const 執行碼 = 搵客鍠py.replace("@帳號1181@", `'${區號}','${WhatsApp號}','搵客鍠'`)
+            // 按地區選py code
+            const 變數庫 = {
+                搜HK: 搜HK,
+                搜TW: 搜TW,
+            };
+            const 執行碼 = 變數庫[搵客鍠py].replace("@帳號1181@", `'${區號}','${WhatsApp號}','搵客鍠'`)
             .replace(/@關鍵字@/g, 關鍵字)
             .replace('@找幾頁@', 最多找幾頁);
             navigator.clipboard.writeText(執行碼);
 
             document.querySelector('#執行中請不要關閉網頁').style.display = 'flex';
-
             // py 檢查 剪贴板 轉變執行
         }
         /* ********************* */
@@ -556,6 +562,7 @@
         window.onload = function() {
             // 再顯示按鈕
             document.querySelector('.執行金come').style.display = 'grid';
+            document.querySelector("#執行中請不要關閉網頁").style.display = "none";
         };
         function Start() {
             // 顯示聯莫

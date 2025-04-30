@@ -128,7 +128,7 @@
 
     <!-- 部份0: 基本 -->
     <div id="執行中請不要關閉網頁">
-        <h2>執行中請不要關閉網頁...</h2>
+        <h2 id="執行中說明">請稍候...</h2>
     </div>
     <h1>創作鍠✒️ | <a href="./set.html"><b class="_我司名"></b></a></h1>
     <p class="mokJsApi_copyright">版權</p>
@@ -892,6 +892,7 @@ function _現在時間() {
         window.onload = function() {
             // 再顯示按鈕
             document.querySelector('.執行金come').style.display = 'grid';
+            document.querySelector("#執行中請不要關閉網頁").style.display = "none";
         };
         
         function Start() {
