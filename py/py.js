@@ -8,6 +8,23 @@
 
 
 
+
+
+
+
+
+
+
+/*
+      ::::::::       ::::::::::           :::        :::::::::       ::::::::       :::    :::
+    :+:    :+:      :+:                :+: :+:      :+:    :+:     :+:    :+:      :+:    :+:
+   +:+             +:+               +:+   +:+     +:+    +:+     +:+             +:+    +:+
+  +#++:++#++      +#++:++#         +#++:++#++:    +#++:++#:      +#+             +#++:++#++
+        +#+      +#+              +#+     +#+    +#+    +#+     +#+             +#+    +#+
+#+#    #+#      #+#              #+#     #+#    #+#    #+#     #+#    #+#      #+#    #+#
+########       ##########       ###     ###    ###    ###      ########       ###    ###
+*/
+
 搜HK = `
 ### 勞工處 ###### 勞工處 ###### 勞工處 ###### 勞工處 ###
 ### 勞工處 ###### 勞工處 ###### 勞工處 ###### 勞工處 ###
@@ -28,8 +45,6 @@ def _搵客鍠B(keyword=''):
     }
 
     try:
-        
-
         搵客鍠_driver = _chrome_雜項._Chrome設定('搵客鍠')
         搵客鍠_driver.maximize_window() # 最大化窗口
 
@@ -61,10 +76,7 @@ def _搵客鍠B(keyword=''):
         _chrome_雜項._檢查點擊(搵客鍠_driver,'搜尋空缺按鈕',勞工處XPATH['搜尋空缺按鈕'])
         _chrome_雜項._檢查點擊(搵客鍠_driver,'列表顯示',勞工處XPATH['列表顯示'])
 
-
         目前網址 = 搵客鍠_driver.current_url
-        #print(f"目前網址:{目前網址}")
-
 
         # 取得資料總數
         顯總料數 = 0
@@ -72,34 +84,32 @@ def _搵客鍠B(keyword=''):
             EC.visibility_of_element_located((By.XPATH, 勞工處XPATH['左上資料數']))
         )
         顯總料數 = 顯總料數.text.strip()
-        print(f'*** 正在搜尋[{keyword}]有{顯總料數}個公司資料 @ 香港勞工處 ***')
+        _雜項._執行中說明('執行中說明',f'*** 正在搜尋[{keyword}]有{顯總料數}個公司資料 @ 香港勞工處 ***')
 
         找頁數 = 1
         _每頁量 = 20
         while True:
             
             if int(顯總料數) == 0:
-                print("沒有資料，搜尋結束...")
+                _雜項._執行中說明('執行中說明',"沒有資料，搜尋結束...")
                 break
 
-            print(f"獲取第{找頁數}頁...")
+            _雜項._執行中說明('執行中說明',f"獲取第{找頁數}頁...")
             # 6. 擷取工作列表中的所有 href 連結
             WebDriverWait(搵客鍠_driver, 10).until(
                 EC.presence_of_element_located((By.XPATH, 勞工處XPATH['工作列表']))
             )
             rows = 搵客鍠_driver.find_elements(By.XPATH, 勞工處XPATH['工作列表中的所有href'])
-
-            print(f'結果列表中每行')
             # 遍历每行提取链接
             for row in rows:
                 網址 = row.get_attribute('href')
-                客的真聯 = _提取聯絡方式(網址,公司名xpath,表格xpath,[電話開頭,電話位數])
+                客的真聯 = _搵客鍠._提取聯絡方式(網址,公司名xpath,表格xpath,[電話開頭,電話位數])
                 if 客的真聯:
                     all_Boss料.append(客的真聯)
-                    print(f'{客的真聯}')
+                    _雜項._執行中說明('執行中說明',f'{客的真聯}')
 
             if 找頁數 >= 最多找幾頁 :
-                print(f"第{找頁數}頁，結束搜尋")
+                _雜項._執行中說明('執行中說明',f"第{找頁數}頁，結束搜尋")
                 break
 
             # 點擊下一頁按鈕
@@ -115,56 +125,132 @@ def _搵客鍠B(keyword=''):
 
         ######### Boss料PoHtml #########
         if all_Boss料:
-            真all_Boss料 = _搵客鍠._西選重聯(all_Boss料)
-            _搵客鍠._聯Po網(真all_Boss料,'@關鍵字@')
+            真all_Boss料 = _搵客鍠._西選重聯(all_Boss料)    #['利嘉閣地產有限公司=65340006',]
+            _搵客鍠._聯Po網(真all_Boss料,'香港','@關鍵字@')
         driver.refresh()
         ######### Boss料PoHtml #########
         
     except Exception as e:
-        print(f"_自動獲取香港勞工處工作資料-執行錯誤: {e}")
         _雜項._獲取詳細錯誤堆棧(*sys.exc_info())
 
-
-
-
-def _提取聯絡方式(url,公司名xpath,表格xpath,電話篩選):
-    try:
-        # 獲取網頁內容
-        response = requests.get(url)
-        response.raise_for_status()  # 檢查請求是否成功
-
-        # 解析HTML
-        tree = html.fromstring(response.content)
-
-        # 1. 提取公司名稱、廣告整頁內容
-        company_name = tree.xpath(公司名xpath)[0]
-        #print(f"company_name",company_name)
-        job_table = tree.xpath(表格xpath)[0]
-        table_text = job_table.text_content()
-        #print(f"廣告整頁內容",table_text)
-
-        # 提取聯絡方式
-        phones, emails = _搵客鍠._篩選聯絡(table_text,電話篩選)
-
-        # 優先找ws
-        if phones:
-            for phone in phones:
-                return f'{company_name}={phone}'
-        else:
-            if emails:
-                for email in emails:
-                    return f'{company_name}={email}'
-            else:
-                return False
-    except Exception as e:
-        print(f"_提取聯絡方式錯誤（URL: {url}）: {str(e)}")
-        _雜項._獲取詳細錯誤堆棧(*sys.exc_info())
-
-# all地區 統一名
 _搵客鍠B('@關鍵字@')
 
 
-## 202504291448 ##
+## 202505010101 ##
+#########結束#########
+`
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+搜TW = `
+### 台灣就業通 ###### 台灣就業通 ###### 台灣就業通 ###
+def _搵客鍠B(keyword=''):
+
+    電話開頭 = '0'
+    電話位數 = 9
+    最多找幾頁 = @找幾頁@
+    
+    就業通XPATH = {
+        '關鍵字輸入框':'//*[@id="CPH1_SearchBar_txtKeyword"]',
+        '搜尋空缺按鈕':'//*[@id="btnSearchJob"]',
+        '顯總料數':'//*[@id="tuJobFilter"]/ul/li[1]/strong',
+        '移至頁數':'//*[@id="tuJobList"]/li[21]/span[2]/select/option[last()]',
+        '等待載入更多消失':'//*[@id="plPageLinkRight"]/a',
+        '所职hire':'//*[starts-with(@id, "hire_")]//a[@class="t-card-title text-inherit"]',
+        '公司名xpath':'//*[@id="CPH1_hlkcomp_Header"]/text()',
+        '表格xpath':'//*[@id="detailContent"]/div[1]/article[5]',
+    }
+
+    all_Boss料 = []
+    try:
+        if not _金come_VIP._獲取帳號資料(@帳號1181@):
+            最多找幾頁 = 1
+        最多頁轉總料數 = 最多找幾頁 * 20
+
+        搵客鍠_driver = _chrome_雜項._Chrome設定('搵客鍠')
+        搵客鍠_driver.maximize_window() # 最大化窗口
+
+        # 去首頁
+        while True:
+            搵客鍠_driver.get("https://job.taiwanjobs.gov.tw/Internet/index/job_search_list.aspx?")
+            if _chrome_雜項._檢查元素存在(搵客鍠_driver,'關鍵字輸入框',就業通XPATH['關鍵字輸入框']):
+                break
+            else:
+                _雜項._執行中說明('執行中說明','等待載入首頁')
+
+        # 输入关键字（等待输入框加载并输入内容）
+        _chrome_雜項._檢查文字輸入(搵客鍠_driver,'關鍵字輸入框', 就業通XPATH['關鍵字輸入框'], keyword)
+
+        # 点击搜索按钮（等待按钮可点击）
+        _chrome_雜項._檢查點擊(搵客鍠_driver,'搜尋空缺按鈕',就業通XPATH['搜尋空缺按鈕'])
+
+        # 取得資料總數
+        顯總料數 = 0
+        顯總料數 = _chrome_雜項._檢查元素存在(搵客鍠_driver,'顯總料數',就業通XPATH['顯總料數'])
+        顯總料數 = 顯總料數.text.strip("()")
+        _雜項._執行中說明('執行中說明',f'*** 正在搜尋[{keyword}]有{顯總料數}個公司資料 @ 台灣就業通 ***')
+        if int(顯總料數) == 0:
+            _雜項._執行中說明('執行中說明',"沒有資料，搜尋結束...")
+            return
+
+        # 列出所有工作
+        _chrome_雜項._檢查點擊(搵客鍠_driver,'移至頁數',就業通XPATH['移至頁數'])
+
+        # 等待 載入更多消失
+        WebDriverWait(搵客鍠_driver, 180).until_not(
+            EC.presence_of_element_located((
+                By.XPATH,
+                就業通XPATH['等待載入更多消失']
+            ))
+        )
+
+        # 定位所有职位链接元素
+        job_links = WebDriverWait(搵客鍠_driver, 20).until(
+            lambda d: d.find_elements(By.XPATH, 就業通XPATH['所职hire'])
+        )
+        for idx, link in enumerate(job_links, 1):
+            href = link.get_attribute('href')
+
+            # _提取聯絡方式
+            客的真聯 = _搵客鍠._提取聯絡方式(href,就業通XPATH['公司名xpath'],就業通XPATH['表格xpath'],[電話開頭,電話位數])
+            if 客的真聯:
+                all_Boss料.append(客的真聯)
+                _雜項._執行中說明('執行中說明',f'{客的真聯}')
+
+            if idx == 最多頁轉總料數:
+                _雜項._執行中說明('執行中說明',f"第{最多找幾頁}頁，結束搜尋")
+                break
+        # 關閉瀏覽器
+        搵客鍠_driver.quit()
+
+        ######### Boss料PoHtml #########
+        if all_Boss料:
+            真all_Boss料 = _搵客鍠._西選重聯(all_Boss料)    #['盛棠企業行=0907690858',]
+            _搵客鍠._聯Po網(真all_Boss料,'台灣','@關鍵字@')
+        driver.refresh()
+        ######### Boss料PoHtml #########
+
+    except Exception as e:
+        _雜項._獲取詳細錯誤堆棧(*sys.exc_info())
+
+_搵客鍠B('@關鍵字@')
+
+## 202505010101 ##
 #########結束#########
 `
 
@@ -223,12 +309,16 @@ _搵客鍠B('@關鍵字@')
 
 
 
+/*
+    :::       :::       ::::::::
+   :+:       :+:      :+:    :+:
+  +:+       +:+      +:+
+ +#+  +:+  +#+      +#++:++#++
++#+ +#+#+ +#+             +#+
+#+#+# #+#+#       #+#    #+#
+###   ###         ########
 
-
-
-
-
-
+*/
 客服 = `
 class _客服鍠:
 
@@ -283,7 +373,7 @@ class _客服鍠:
                     time.sleep(random.uniform(3, 20))
 
                     if _客服鍠._登入ws_等待對話列表出現():
-                        print(f"已登入WhatsApp,如需登入其他帳號，請登出再重新執行程式。")
+                        _雜項._執行中說明('執行中說明',f"已登入WhatsApp,如需登入其他帳號，請登出再重新執行程式。")
                         break
 
                     # 段2 = 填寫手機號碼
@@ -314,12 +404,12 @@ class _客服鍠:
                             )
                             verification_code.append(code_element.text)
                         except _ReloadPageException:
-                            print(f"无法获取验证码字符:")
+                            _雜項._執行中說明('執行中說明',f"无法获取验证码字符:")
                             continue
-                    print("@換行@验证码为:", ''.join(verification_code))
+                    _雜項._執行中說明('執行中說明',"@換行@验证码为:", ''.join(verification_code))
 
                     # 段4 = 等待验证成功後 使用QR碼登入 消失
-                    print("等待手機端填寫验证碼...")
+                    _雜項._執行中說明('執行中說明',"等待手機端填寫验证碼...")
                     WebDriverWait(客服鍠_driver, 180).until_not(
                         EC.presence_of_element_located((
                             By.XPATH,
@@ -338,8 +428,6 @@ class _客服鍠:
                     _客服鍠._登入ws_等待對話列表出現()
 
                 except Exception as e:
-                    print(f"主程序出错: {str(e)}")
-                    print(f"登入WhatsApp超时，刷新页面...")
                     _雜項._獲取詳細錯誤堆棧(*sys.exc_info())
                     continue
 
@@ -371,10 +459,10 @@ class _客服鍠:
                     # 等待輸入框出現並輸入回覆
                     try:
                         if _chrome_雜項._檢查點擊(客服鍠_driver,' wsB發送按鈕 ', _客服鍠.其他_xpaths['wsB發送按鈕']):
-                            print(f'{發成功} business')
+                            _雜項._執行中說明('執行中說明',f'{發成功} business')
                             break
                         if _chrome_雜項._檢查點擊(客服鍠_driver,' ws發送按鈕 ', _客服鍠.其他_xpaths['ws發送按鈕']):
-                            print(發成功)
+                            _雜項._執行中說明('執行中說明',發成功)
                             break
                     except:
                         pass
@@ -401,7 +489,7 @@ class _客服鍠:
 
             while True:
                 _客服鍠.計等錢 +=1
-                print(f"你已收到{_客服鍠.計等錢}萬元")
+                _雜項._執行中說明('執行中說明',f"你已收到{_客服鍠.計等錢}萬元")
 
                 try:
                     # 每次迭代時重新獲取 chat_list
@@ -424,17 +512,16 @@ class _客服鍠:
                                 _遠端鍠(客來詢)
 
                         except StaleElementReferenceException:
-                            print("元素已過期，重新取得 chat 元素...")
+                            _雜項._執行中說明('執行中說明',"元素已過期，重新取得 chat 元素...")
                             continue
                         except TimeoutException:
-                            print("等待訊息載入超時，跳過此聊天...")
+                            _雜項._執行中說明('執行中說明',"等待訊息載入超時，跳過此聊天...")
                             continue
                 except TimeoutException:
                     continue
                 time.sleep(3)
                 continue
         except Exception as e:
-            print(f"_ws自動客服-執行錯誤: {e}")
             _雜項._獲取詳細錯誤堆棧(*sys.exc_info())
 
 
@@ -460,13 +547,13 @@ class _客服鍠:
                 actions.send_keys(Keys.RETURN)  # 最后提交
                 actions.perform()
 
-                print(f"客戶: {來}, 已自動回覆@換行@{_客服鍠.回覆內容[來]}@換行@")
+                _雜項._執行中說明('執行中說明',f"客戶: {來}, 已自動回覆@換行@{_客服鍠.回覆內容[來]}@換行@")
                 _客服鍠.計等錢 = 0  # 回覆成功，重置_客服鍠.計等錢
 
             except TimeoutException as e:
-                print(f"操作超时: {str(e)}")
+                _雜項._執行中說明('執行中說明',f"操作超时: {str(e)}")
             except Exception as e:
-                print(f"发生错误: {str(e)}")
+                _雜項._執行中說明('執行中說明',f"发生错误: {str(e)}")
         except Exception as e:
             _雜項._獲取詳細錯誤堆棧(*sys.exc_info())
 
@@ -493,14 +580,13 @@ class _客服鍠:
                     _雜項._請告知作者更新('對話列表', _客服鍠.其他_xpaths['對話列表'])
                 return False
         except Exception as e:
-            print(f"_登入ws_等待對話列表出現-執行錯誤: {e}")
             _雜項._獲取詳細錯誤堆棧(*sys.exc_info())
 
 _客服鍠._登入ws()
 _客服鍠._ws自動客服()
 
 
-## 202504291448 ##
+## 202505010101 ##
 
 #########結束#########
 `
@@ -563,7 +649,16 @@ _客服鍠._ws自動客服()
 
 
 
+/*
+      ::::::::       ::::::::::       :::        :::
+    :+:    :+:      :+:              :+:        :+:
+   +:+             +:+              +:+        +:+
+  +#++:++#++      +#++:++#         +#+        +#+
+        +#+      +#+              +#+        +#+
+#+#    #+#      #+#              #+#        #+#
+########       ##########       ########## ##########
 
+*/
 
 促銷 = `
 ############# 促銷鍠 #
@@ -604,11 +699,11 @@ class _促銷鍠:
                         結果 = f'[ {公司名稱}:{老闆聯絡} ]={促銷間隔天數}天內已發過'
                     結果Save = 結果
                     結果遠端 = 結果
+                    _雜項._執行中說明('執行中說明',結果)
                 all結果睇.append(結果)
                 all結果Save.append(結果Save)
 
             # ==== html ====
-            #print(f'all結果Save={all結果Save}')
             _促銷鍠._促銷鍠Po網(all結果睇,all結果Save)
             
             # ==== html ====
@@ -649,7 +744,7 @@ class _促銷鍠:
             # 关闭连接
             mail.logout()
 
-            #print(f"7天內 [{有冇semd}] 發過郵件給[{to_email}] ")
+            _雜項._執行中說明('執行中說明',f"7天內 [{有冇semd}] 發過郵件給[{to_email}] ")
             return 有冇semd
         except Exception as e:
             _雜項._獲取詳細錯誤堆棧(*sys.exc_info())
@@ -788,7 +883,7 @@ class _促銷鍠:
 
 _促銷鍠._執行_自動send野()
 
-## 202504291448 ##
+## 202505010101 ##
 
 #########結束#########
 `

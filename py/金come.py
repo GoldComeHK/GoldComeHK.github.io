@@ -215,8 +215,6 @@ class _chrome_雜項:
                 _chrome_雜項.檢元 = 0
                 _雜項._請告知作者更新(位置, xpath)
             return False
-        #except NoSuchElementException:
-        #    return False
 
 
 
@@ -243,6 +241,7 @@ class _chrome_雜項:
             element = WebDriverWait(driver, timeout).until(
                 EC.visibility_of_element_located((By.XPATH, xpath))
             )
+            element.clear()  # qqqq
             element.send_keys(text)
             return True
         else:
@@ -364,6 +363,16 @@ class _雜項:
 
 
 
+    def _執行中說明(id,po文):
+        位 = f"""
+                const 網位 = document.getElementById('{id}');
+                網位.innerHTML = arguments[0];
+        """
+        driver.execute_script(位, po文)
+        
+
+
+
 
 
 
@@ -434,8 +443,6 @@ class _雜項:
 '''
 class _搵客鍠:
     def _篩選聯絡(表格內文, 電話篩選):
-        import re
-
         # 全形數字轉半形
         表格內文 = ''.join(
             chr(ord(c) - 65248) if '０' <= c <= '９' else c
@@ -449,8 +456,8 @@ class _搵客鍠:
         # 印出處理後的內容
         #print(f"=============\n[清理後的表格內文]：{表格內文}")
 
-        # 抓所有 8 位數、4/5/6/9 開頭的號碼
-        phone_pattern = fr'(?<!\d)([{電話篩選[0]}]\d{{{電話篩選[1]}}})(?!\d)'
+        # 電話篩選[0] = 電話開頭 4569 | 電話篩選[1] = 電話位數 8
+        phone_pattern = fr'(?<!\d)([{電話篩選[0]}]\d{{{電話篩選[1]}}})(?!\d)'        
         phones = re.findall(phone_pattern, 表格內文)
 
         # 抓 email
@@ -459,6 +466,8 @@ class _搵客鍠:
 
         #print(f"[篩選結果] phones={phones}, emails={emails}\n")
         return phones, emails
+
+
 
 
 
@@ -485,14 +494,57 @@ class _搵客鍠:
 
 
 
-    def _聯Po網(Boss料list,關鍵字=''):
+
+
+
+    def _提取聯絡方式(url,公司名xpath,表格xpath,電話篩選):
+        try:
+            # 獲取網頁內容
+            response = requests.get(url)
+            response.raise_for_status()  # 檢查請求是否成功
+
+            # 解析HTML
+            tree = html.fromstring(response.content)
+
+            # 1. 提取公司名稱、廣告整頁內容
+            company_name = tree.xpath(公司名xpath)[0]
+            #print(f"company_name",company_name)
+            job_table = tree.xpath(表格xpath)[0]
+            table_text = job_table.text_content()
+            #print(f"廣告整頁內容",table_text)
+
+            # 提取聯絡方式
+            phones, emails = _搵客鍠._篩選聯絡(table_text,電話篩選)
+
+            # 優先找ws
+            if phones:
+                for phone in phones:
+                    return f'{company_name}={phone}'
+            else:
+                if emails:
+                    for email in emails:
+                        return f'{company_name}={email}'
+                else:
+                    return False
+        except Exception as e:
+            print(f"_提取聯絡方式錯誤（URL: {url}）: {str(e)}")
+            _雜項._獲取詳細錯誤堆棧(*sys.exc_info())
+
+
+
+
+
+
+
+
+    def _聯Po網(Boss料list,地區,關鍵字=''):
 
         # 時間生成
         now = datetime.now()
         現在時間 = now.strftime("[%Y-%m-%d|%H:%M:%S]")
 
         # 转换为带换行的字符串（每条记录占一行）
-        Boss料PoHtml = f"{現在時間}[{關鍵字}]\n" +"\n".join(Boss料list) +"\n---------\n"
+        Boss料PoHtml = f"{現在時間}[{地區}|{關鍵字}]\n" +"\n".join(Boss料list) +"\n---------\n"
         print(Boss料PoHtml)
 
         driver.execute_script(
@@ -834,18 +886,16 @@ class _Start:
             pyperclip.copy('')
             # 点击前的剪贴板内容（用于检测变化）
             original_clipboard = pyperclip.paste()
-
             while True:
-
                 current_clipboard = pyperclip.paste()
                 if current_clipboard != original_clipboard and code標籤 in current_clipboard:
+                    if not Admin模式: pyperclip.copy('')
                     break
                 print(f"設置完成後， 請按 執行{本程式名}...")
                 time.sleep(1)  # 避免过高频率检查
             
             # 提取代碼部分
             user_code = current_clipboard.split(code標籤)[0].strip()
-
             # 用取到的碼轉成py碼
             user_code_lines = []
             for line in user_code.split('\n'):
@@ -910,106 +960,10 @@ class _Start:
             月費用戶={月費用戶}<br><br>
             手機號碼={国家代码} {电话号码}<br><br>
             聯絡我們={我官網}ContactAKI.html<br><br>
-            [{功能}] 執行中....<br><br>
+            <h2 id="執行中說明">[{功能}] 執行中....</h2><br><br>
         '''
 
-        driver.execute_script("""
-                const 網位 = document.getElementById('執行中請不要關閉網頁');
-                網位.innerHTML = arguments[0] + (網位.innerHTML || "");
-        """, 歡迎Op網)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        _雜項._執行中說明('執行中請不要關閉網頁',歡迎Op網)
 
 
 
@@ -1028,7 +982,7 @@ if __name__ == "__main__":
     Admin模式 = False
 
 
-    更新時間 = '202504291448'
+    更新時間 = '202505010251'
     本程式名 = '金come'
     賺錢鍠瀏覽器位 = 本程式名
 
