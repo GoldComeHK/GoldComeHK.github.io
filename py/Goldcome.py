@@ -774,67 +774,46 @@ class _金come_VIP:
 class _Exe_Set():
     def _UpData本程式():
         
-        print(f"\n🥳目前版本[{更新時間}]🥳\n")
+        print(f"🥳目前版本[{目前版本}]🥳")
         try:
-            # 取得網頁內容
-            response = requests.get(f'{我官網}set.html') 
-            response.raise_for_status()  # 檢查請求是否成功
-
-            # 解析HTML
-            soup = BeautifulSoup(response.text, 'html.parser')
-            p_element = soup.find('p', id='更新日期')
-            
-            if not p_element:
+            # 直接請求 py.js 文件
+            js_url = f"{我官網}/py/py.js"
+            response = requests.get(js_url)
+            response.encoding = "utf-8"  # 確保中文編碼正確
+            # 使用正則提取日期（精確匹配格式）
+            最新版本 = re.search(r"更新日期\s*=\s*'(\d{12})'", response.text).group(1) 
+            if not 最新版本:
                 raise Exception("找不到更新日期元素")
-            
-            web_time = p_element.text.strip()
-            
+            print(f"🥳最新版本[{最新版本}]🥳")
+
             # 比較時間
-            if web_time > 更新時間:
+            if 最新版本 > 目前版本:
                 # 下載檔案
-                
-                exe_response = requests.get(download_url)
+                下載檔案 = f'https://github.com/GoldComeHK/GoldComeHK.github.io/releases/download/v{最新版本}/{本程式名}.exe'
+                exe_response = requests.get(下載檔案)
                 exe_response.raise_for_status()
                 
-                # 產生新檔名
-                new_filename = f'{本程式名}{web_time}.exe'
+                # 獲取當前腳本所在目錄的絕對路徑
+                current_dir = os.path.dirname(os.path.abspath(__file__))
+                # 生成新文件名（可自定義格式）
+                new_filename = f'{本程式名}_{最新版本}.exe'
+                save_path = os.path.join(current_dir, new_filename)
                 
                 # 儲存檔案
-                with open(new_filename, 'wb') as f:
+                with open(save_path, 'wb') as f:
                     f.write(exe_response.content)
                 
                 print(f'[{new_filename}]已更新,請重新執行')
                 sys.exit()
                 
             else:
-                print(f"\n🥳目前版本[{更新時間}]已是最新版本🥳\n")
+                print(f"\n🥳目前版本[{目前版本}]已是最新版本🥳\n")
 
         except requests.exceptions.RequestException as e:
             print(f"網路錯誤: {str(e)}")
         except Exception as e:
             print(f"發生錯誤: {str(e)}")
             _雜項._獲取詳細錯誤堆棧(*sys.exc_info()) 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -951,7 +930,7 @@ class _Start:
         歡迎 = f'''
                 _\|/_
                 (o o)
-        +----oOO--U--OOo-------------------------{更新時間}-+
+        +----oOO--U--OOo-------------------------{目前版本}-+
         |                                                     |
             {本程式名} 歡迎您 !                                      
         |                                                     |
@@ -999,14 +978,13 @@ if __name__ == "__main__":
     Admin模式 = False
 
 
-    更新時間 = '202505020419'
+    目前版本 = '202505020515'
     本程式名 = 'Goldcome'
     賺錢鍠瀏覽器位 = 本程式名
 
     官Ws = '85264071181'
     我官網 = 'https://www.金come.com/'
     VipDurl = "https://github.com/GoldComeHK/d/blob/main/d"
-    download_url = f'https://github.com/GoldComeHK/GoldComeHK.github.io/releases/download/{更新時間}/{本程式名}.exe'
 
     遠端鍠 = False
     月費用戶 = False 
