@@ -14,6 +14,7 @@
 
   <link rel="stylesheet" href="html.css">
   <script src="html.js"></script>
+  <script src="py/py.js"></script>
 
   <script src="https://cdn.staticfile.net/translate.js/3.1.7/translate.js">// 翻譯 放最後</script>
 
@@ -63,7 +64,7 @@
     
 
         <h1><a href="./"><b class="_我司名"></b></a> | 全自動營銷閉環系統 💱</h1>
-        <p id="更新日期">202505020225</p>
+        <p id="更新日期"></p>
     </div>
 
         <div id="導航" ><!-- JS 導航 --></div>
@@ -105,12 +106,17 @@
         translate.execute();//進行翻譯 
     }
     function Start() {
+        document.getElementById('更新日期').innerText = 更新日期;
         // 顯示聯莫
         const 聯莫 = ['moksurky@gmail.com','https://wa.me/85264071181/','https://i.meee.com.tw/atcX6QM.png','https://www.instagram.com/moksurky2025/','https://line.me/ti/p/UlSPd7p9zh/','https://www.facebook.com/aki.mok.10/','http://t.me/mokaki/','https://github.com/GoldComeHK/GoldComeHK.github.io'
             ];
         _翻譯()
         _顯示聯莫(聯莫);
     }
+
+    
+
+
     琪琪修改()
 </script>
 </body>
