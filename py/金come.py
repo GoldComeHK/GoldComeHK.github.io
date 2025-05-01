@@ -997,14 +997,14 @@ if __name__ == "__main__":
     Admin模式 = False
 
 
-    更新時間 = '202505011420'
+    更新時間 = '202505020225'
     本程式名 = '金come'
     賺錢鍠瀏覽器位 = 本程式名
 
     官Ws = '85264071181'
     我官網 = 'https://www.金come.com/'
     VipDurl = "https://github.com/GoldComeHK/d/blob/main/d"
-    download_url = f'https://github.com/GoldComeHK/GoldComeHK.github.io/raw/main/{本程式名}.exe'
+    download_url = f'https://github.com/GoldComeHK/GoldComeHK.github.io/releases/download/v202505011420/Goldcome.exe'
 
     遠端鍠 = False
     月費用戶 = False 
