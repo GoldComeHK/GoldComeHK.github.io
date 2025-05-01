@@ -596,25 +596,18 @@ class _遠端鍠_雜項:
     def _整字雜項(公司名稱,聯絡方式):
         start_time = time.time()
 
-        # 刪空格及符號
-        #公司名稱 = re.sub(r'[^\w\u4e00-\u9fa5]', '', 公司名稱)
-        #聯絡方式 = 聯絡方式.replace(' ', '')
-        #公司名稱,聯絡方式 = 聯.split('=')
-
         # 分類聯絡並加字
         聯絡方式B = ''
+        宣傳文B = 宣傳文
         if '@' in 聯絡方式:
             聯絡方式B = f"mailto:{聯絡方式}?subject={信標隨}&body="
         else:
             聯絡方式B = f'https://wa.me/{聯絡方式}?text='
-            #if len(聯絡方式) == 8:
-            #    聯絡方式B = f'https://wa.me/852{聯絡方式}?text='
-            #else:
-            #    聯絡方式B = f'https://wa.me/{聯絡方式}?text='
+            #.replace('=莫', '%3D莫')
+            宣傳文B = 宣傳文.replace('\n', '%0A').replace(' ', '%20').replace('=', '%3D')
 
-        #宣傳文B = 宣傳文.replace('aki公司名稱aki', 公司名稱)
 
-        sell客文 = f"{聯絡方式B}{公司名稱}{宣傳文}"
+        sell客文 = f"{聯絡方式B}{公司名稱}{宣傳文B}"
         end_time = time.time()
         print(f"[_整字雜項] 花費了 {雜項._計算花費了的時間(start_time,end_time)} 秒")
         return sell客文
@@ -1165,11 +1158,27 @@ def _執行遠端鍠(指令):
     宣傳文 = 指令[5]
     由這mail = 指令[6]
     由這mail的key = 指令[7]
-    #for 睇 in 指令:
-    #    print(f'----------\n{睇}')
-
 
     all_data = []
+
+    if Admin模式:
+        for 睇 in 指令:
+            print(f'----------\n{睇}')
+        測料 = ['Admin模式測料=98672794','Admin模式測料=moksurky@gmail.com',]
+        for 結果 in 測料:
+            公司名稱,聯絡方式 = 結果.split('=')
+            sell客文 = _遠端鍠_雜項._整字雜項(公司名稱,聯絡方式)
+            睇結果 = sell客文   #ws
+            if '@' in 聯絡方式: #mail
+                標題 = sell客文.split('?subject=')[1].split('&body=')[0]
+                內文 = sell客文.split('&body=')[1]
+                發成點 = 自動send野._自動sendGmail(標題, 內文, 聯絡方式)
+                睇結果 = f'[ {公司名稱}:{聯絡方式} ]={發成點}'
+
+            all_data.append(睇結果)
+        return all_data
+
+
     for 結果 in eval(遠端鍠py): # _香港勞工處('${關鍵字}') / _台灣就業通('${關鍵字}')
         
         # 結果 = ['利嘉閣地產有限公司=65340006',]
@@ -1229,9 +1238,7 @@ if __name__ == "__main__":
             找老闆  = 貼上
     '''
 
-    # 冇必要
-    找老闆區號 = '852' # 冇必要
-    冇keyword最多找幾頁 = 5
+    Admin模式 = False
     分隔號 = '$'*18
 
     # 遠端鍠 在 https://金come.com/0  set
