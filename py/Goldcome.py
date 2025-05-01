@@ -669,7 +669,7 @@ class _搵客鍠:
 '''
 
 
-class _Goldcome_VIP:
+class _金come_VIP:
     @staticmethod
     def _獲取帳號資料(国码,电码,功能):
         global 月費用戶,帳號1181
@@ -890,7 +890,7 @@ class _Start:
 
         # 初始執行
         if Admin模式:
-            driver.get('C:/Users/mokaki/Desktop/金/Goldcome(2025)/GoldComeHK.github.io/set.html')
+            driver.get('C:/Users/mokaki/Desktop/金/金come(2025)/GoldComeHK.github.io/set.html')
         else:
             driver.get(f'{我官網}set.html')
 
@@ -994,10 +994,10 @@ class _Start:
 
 if __name__ == "__main__":
 
-    Admin模式 = False
+    Admin模式 = 'False'
 
 
-    更新時間 = '202505020225'
+    更新時間 = '202505020327'
     本程式名 = 'Goldcome'
     賺錢鍠瀏覽器位 = 本程式名
 
