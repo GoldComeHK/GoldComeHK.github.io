@@ -677,7 +677,7 @@
             const 促銷間隔天數 = document.getElementById('促銷間隔天數').value;
 
             const 信件標題 = document.getElementById('信件標題').value;
-            const 促銷信草稿 = document.getElementById('促銷信草稿').innerHTML;
+            let 促銷信草稿 = document.getElementById('促銷信草稿').innerHTML;
 
             const 關鍵字 = document.getElementById('關鍵字').value;
             const 地區 = document.getElementById('地區').value;
@@ -707,6 +707,10 @@
                     return;
                 }
             }
+
+
+            促銷信草稿 = 促銷信草稿.replace(/<br>/g, '\n'); // 將 <br> 轉換回換行符
+            促銷信草稿 = 促銷信草稿.replace(/&nbsp;/g, ' '); // 將 &nbsp; 轉換回空格
 
             分隔符 = '@////////@'
             // 按地區選py code
