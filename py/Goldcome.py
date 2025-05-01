@@ -773,6 +773,8 @@ class _金come_VIP:
 
 class _Exe_Set():
     def _UpData本程式():
+        
+        print(f"\n🥳目前版本[{更新時間}]🥳\n")
         try:
             # 取得網頁內容
             response = requests.get(f'{我官網}set.html') 
@@ -805,7 +807,7 @@ class _Exe_Set():
                 sys.exit()
                 
             else:
-                print("\n🥳目前版本已是最新版本🥳\n")
+                print(f"\n🥳目前版本[{更新時間}]已是最新版本🥳\n")
 
         except requests.exceptions.RequestException as e:
             print(f"網路錯誤: {str(e)}")
@@ -994,10 +996,10 @@ class _Start:
 
 if __name__ == "__main__":
 
-    Admin模式 = 'False'
+    Admin模式 = False
 
 
-    更新時間 = '202505020327'
+    更新時間 = '202505020419'
     本程式名 = 'Goldcome'
     賺錢鍠瀏覽器位 = 本程式名
 
