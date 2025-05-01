@@ -241,7 +241,7 @@ class _chrome_雜項:
             element = WebDriverWait(driver, timeout).until(
                 EC.visibility_of_element_located((By.XPATH, xpath))
             )
-            element.clear()  # qqqq
+            element.clear() 
             element.send_keys(text)
             return True
         else:
@@ -508,6 +508,21 @@ class _搵客鍠:
 
             # 1. 提取公司名稱、廣告整頁內容
             company_name = tree.xpath(公司名xpath)[0]
+
+            # 將空格替換為_刪除所有非中文、英文、數字
+            company_name = re.sub(r'\s', '_', company_name)
+            company_name = re.sub(
+                r'[^a-zA-Z0-9_'
+                r'\u4e00-\u9fff'    # 基本中文
+                r'\u3400-\u4dbf'    # 扩展A
+                r'\uf900-\ufaff'    # 兼容象形字
+                r'\U00020000-\U0002a6df'  # 扩展B（需确保Python3环境）
+                r'-]',  # 连字符放在最后，避免被解析为范围符号
+                '', 
+                company_name,
+                flags=re.UNICODE
+            )
+
             #print(f"company_name",company_name)
             job_table = tree.xpath(表格xpath)[0]
             table_text = job_table.text_content()
@@ -760,7 +775,7 @@ class _Exe_Set():
     def _UpData本程式():
         try:
             # 取得網頁內容
-            response = requests.get(f'{我官網}set.html')  # qqq set.html
+            response = requests.get(f'{我官網}set.html') 
             response.raise_for_status()  # 檢查請求是否成功
 
             # 解析HTML
@@ -982,7 +997,7 @@ if __name__ == "__main__":
     Admin模式 = False
 
 
-    更新時間 = '202505010251'
+    更新時間 = '202505011420'
     本程式名 = '金come'
     賺錢鍠瀏覽器位 = 本程式名
 
