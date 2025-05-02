@@ -155,8 +155,8 @@
                 <label>請填寫搜尋關鍵字</label>
                 <input id="關鍵字" type="text" placeholder="請填寫搜尋關鍵字" title="請填寫搜尋關鍵字" value="金融">
             
-                <label>搜尋頁數(愈大需時愈久)</label>
-                <input id="最多找幾頁" value="10" type="number" min="1" step="1" required oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+                <label>最多找資料數(愈大需時愈久)</label>
+                <input id="最多找資料數" value="10" type="number" min="1" step="1" required oninput="this.value = this.value.replace(/[^0-9]/g, '');">
             
 
             </div>
@@ -232,7 +232,7 @@
 -->
     <script>
 
-        AllData位 = ['區號','WhatsApp號','關鍵字','地區','搵客鍠結果','最多找幾頁']
+        AllData位 = ['區號','WhatsApp號','關鍵字','地區','搵客鍠結果','最多找資料數']
 
         // loadSaved 自動保存
         function saveToLocalStorage(key, value) {
@@ -477,17 +477,17 @@
             const WhatsApp號 = document.getElementById('WhatsApp號').value;
             const 關鍵字 = document.getElementById('關鍵字').value;
             const 地區 = document.getElementById('地區').value;
-            const 最多找幾頁 = document.getElementById('最多找幾頁').value;
+            const 最多找資料數 = document.getElementById('最多找資料數').value;
             const 搵客鍠py = `搜${地區}`
 
             // 要齊料岩料
-            if (最多找幾頁 < 1) {alert('搜尋頁數不能為零!');return;}
+            if (最多找資料數 < 1) {alert('最多找資料數不能為零!');return;}
             // 先齊必填
             const 要齊料 = {
                 區號: 區號,
                 WhatsApp號: WhatsApp號,
                 地區: 地區,
-                最多找幾頁:最多找幾頁
+                最多找資料數:最多找資料數
             };
             for (const 欄位 of Object.keys(要齊料)) {
                 if (要齊料[欄位] == null || 要齊料[欄位] === '') {alert(`${欄位} 沒填寫!`);return;}
@@ -500,7 +500,7 @@
             };
             const 執行碼 = 變數庫[搵客鍠py].replace("@帳號1181@", `'${區號}','${WhatsApp號}','搵客鍠'`)
             .replace(/@關鍵字@/g, 關鍵字)
-            .replace('@找幾頁@', 最多找幾頁);
+            .replace('@找幾料@', 最多找資料數);
             navigator.clipboard.writeText(執行碼);
 
             document.querySelector('#執行中請不要關閉網頁').style.display = 'flex';

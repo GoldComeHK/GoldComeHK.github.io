@@ -197,8 +197,8 @@
                 <label>請填寫搜尋關鍵字</label>
                 <input id="關鍵字" class="記錄數據用" type="text" placeholder="請填寫搜尋關鍵字" title="請填寫搜尋關鍵字" value="金融">
             
-                <label>搜尋頁數(愈大需時愈久)</label>
-                <input id="最多找幾頁" class="記錄數據用" value="10" type="number" min="1" step="1" required oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+                <label>最多找資料數(愈大需時愈久)</label>
+                <input id="最多找資料數" class="記錄數據用" value="10" type="number" min="1" step="1" required oninput="this.value = this.value.replace(/[^0-9]/g, '');">
             </div>
     </div>
     <hr class="container">
@@ -681,11 +681,11 @@
 
             const 關鍵字 = document.getElementById('關鍵字').value;
             const 地區 = document.getElementById('地區').value;
-            const 最多找幾頁 = document.getElementById('最多找幾頁').value;
+            const 最多找資料數 = document.getElementById('最多找資料數').value;
             const 搵客鍠py = `搜${地區}`
 
             // 要齊料岩料
-            if (最多找幾頁 < 1) {alert('搜尋頁數不能為零!');return;}
+            if (最多找資料數 < 1) {alert('最多找資料數不能為零!');return;}
 
             // 先齊必填
             const 要齊料 = {
@@ -698,7 +698,7 @@
                 促銷信草稿: 促銷信草稿,
                 // 關鍵字:關鍵字,
                 地區: 地區,
-                最多找幾頁: 最多找幾頁
+                最多找資料數: 最多找資料數
             };
             const 必填欄位 = Object.keys(要齊料);
             for (const 欄位 of 必填欄位) {
@@ -718,7 +718,7 @@
                 搜HK: `_香港勞工處('${關鍵字}')`,
                 搜TW: `_台灣就業通('${關鍵字}')`,
             };
-            const 執行碼 = `/%${分隔符}${變數庫[搵客鍠py]}${分隔符}${最多找幾頁}${分隔符}${區號}${WhatsApp號}${分隔符}${信件標題}${分隔符}${促銷信草稿}${分隔符}${發出促銷信的gmail}${分隔符}${gmail的應用程式密碼}${分隔符}`
+            const 執行碼 = `/%${分隔符}${變數庫[搵客鍠py]}${分隔符}${最多找資料數}${分隔符}${區號}${WhatsApp號}${分隔符}${信件標題}${分隔符}${促銷信草稿}${分隔符}${發出促銷信的gmail}${分隔符}${gmail的應用程式密碼}${分隔符}`
             navigator.clipboard.writeText(執行碼);
             window.open('https://t.me/aki_get_boss2025_bot', '_blank');
             // py 檢查 剪贴板 轉變執行
