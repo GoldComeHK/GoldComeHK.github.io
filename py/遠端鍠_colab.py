@@ -785,12 +785,12 @@ def _香港勞工處(keyword=''):
                 if 客的真聯:
                     all_Boss料.append(客的真聯)
                     print(f'{客的真聯}')
-
-            if 找頁數 >= 最多找幾頁 :
-                print(f"第{找頁數}頁，結束搜尋")
-                break
+                    if len(all_Boss料) >= 最多找資料數 :
+                        print(f"已找{最多找資料數}個資料，結束搜尋")
+                        break
 
             # 點擊下一頁按鈕
+            if len(all_Boss料) >= 最多找資料數 : break
             if int(顯總料數) > _每頁量:
                 # 點擊下一頁按鈕
                 _每頁量 += 20
@@ -840,7 +840,6 @@ def _台灣就業通(keyword=''):
 
     電話開頭 = '0'
     電話位數 = 9
-    最多找幾頁 = 1
     
     就業通XPATH = {
         '關鍵字輸入框':'//*[@id="CPH1_SearchBar_txtKeyword"]',
@@ -855,8 +854,6 @@ def _台灣就業通(keyword=''):
 
     all_Boss料 = []
     try:
-
-        最多頁轉總料數 = 最多找幾頁 * 20
 
         搵客鍠_driver = _chrome_雜項._Chrome設定()
         搵客鍠_driver.maximize_window() # 最大化窗口
@@ -908,8 +905,8 @@ def _台灣就業通(keyword=''):
                 all_Boss料.append(客的真聯)
                 print(f'{客的真聯}')
 
-            if idx == 最多頁轉總料數:
-                print(f"第{最多找幾頁}頁，結束搜尋")
+            if idx == 最多找資料數:
+                print(f"已找{最多找資料數}個資料，結束搜尋")
                 break
         # 關閉瀏覽器
         搵客鍠_driver.quit()
@@ -1136,14 +1133,14 @@ class _TG機器人系列:
 
 
 def _執行遠端鍠(指令):
-    global 最多找幾頁,akiWs,信標隨,宣傳文,由這mail,由這mail的key            
+    global 最多找資料數,akiWs,信標隨,宣傳文,由這mail,由這mail的key            
 
     # 遠端鍠
     '''
     const 執行碼 = `
         /*${分隔符}
         ${搵客鍠py}${分隔符}
-        ${最多找幾頁}${分隔符}
+        ${最多找資料數}${分隔符}
         ${區號}${WhatsApp號}${分隔符}
         ${信件標題}${分隔符}
         ${促銷信草稿}${分隔符}
@@ -1152,7 +1149,7 @@ def _執行遠端鍠(指令):
     `
     '''
     遠端鍠py = 指令[1]  
-    最多找幾頁 = int(指令[2])
+    最多找資料數 = int(指令[2])
     akiWs = 指令[3]
     信標隨 = 指令[4] 
     宣傳文 = 指令[5]
@@ -1242,7 +1239,7 @@ if __name__ == "__main__":
     分隔號 = '$'*18
 
     # 遠端鍠 在 https://金come.com/0  set
-    最多找幾頁 = ''
+    最多找資料數 = ''
     akiWs = 'akiWs'
     我司名 = '我司名'
     我司網 = '我司網'
