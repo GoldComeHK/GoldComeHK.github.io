@@ -679,8 +679,12 @@ class _促銷鍠:
             all結果Save = []
 
             if Admin模式: 
-                測料 = ['Admin模式測料=98672794','Admin模式測料=moksurky@gmail.com',]
-                for 結果 in 測料:
+                測料 = ['Admin模式測料1=98672794','Admin模式測料2=moksurky@gmail.com','Admin模式測料3=lamelle1995@gmail.com','Admin模式測料4=wongcyres@gmail.com',]
+                for index, 結果 in enumerate(測料):
+                    # 非vip限制每次只發5封
+                    if (not 係咪V) and (index == 1):
+                        break
+
                     公司名稱,老闆聯絡 = 結果.split('=')
                     老闆信 = _促銷鍠._整字雜項(信件標題, 老闆聯絡, 公司名稱, 宣傳文)
 
@@ -704,10 +708,7 @@ class _促銷鍠:
                 return
 
 
-
-            # qqq for 公司名稱, 老闆聯絡 in all客聯B.items():
             for index, (公司名稱, 老闆聯絡) in enumerate(all客聯B.items(), start=1):  # 添加枚举器
-                
                 # 非vip限制每次只發5封
                 if (not 係咪V) and (index == 5):
                     break
