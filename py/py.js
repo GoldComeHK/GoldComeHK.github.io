@@ -7,7 +7,7 @@
 
 
 
-更新日期 = '202505020515'
+更新日期 = '202505040127'
 
 
 
@@ -53,8 +53,7 @@ def _搵客鍠B(keyword=''):
         電話位數 = 7
         最多找資料數 = @找幾料@
 
-        if not _金come_VIP._獲取帳號資料(@帳號1181@):
-            最多找資料數 = 10
+        _金come_VIP._獲取帳號資料(@帳號1181@)
 
         all_Boss料 = []
         # 勞工處網分流
@@ -177,8 +176,7 @@ def _搵客鍠B(keyword=''):
 
     all_Boss料 = []
     try:
-        if not _金come_VIP._獲取帳號資料(@帳號1181@):
-            最多找資料數 = 10
+        _金come_VIP._獲取帳號資料(@帳號1181@)
 
         搵客鍠_driver = _chrome_雜項._Chrome設定('搵客鍠')
         搵客鍠_driver.maximize_window() # 最大化窗口
@@ -664,7 +662,7 @@ class _促銷鍠:
 
     def _執行_自動send野(all客聯=''):
         try:
-            係咪V = _金come_VIP._獲取帳號資料(@帳號1181@)
+            _金come_VIP._獲取帳號資料(@帳號1181@)
 
             由這mail = '@促銷gmail@'
             由這mail的key = '@gmail應密@'
@@ -679,18 +677,16 @@ class _促銷鍠:
             all結果Save = []
 
             if Admin模式: 
-                測料 = ['Admin模式測料1=98672794','Admin模式測料2=moksurky@gmail.com','Admin模式測料3=lamelle1995@gmail.com','Admin模式測料4=wongcyres@gmail.com',]
+                測料 = ['Ad測料1=98672794','Ad測料2=moksurky@gmail.com','Ad測料3=lamelle1995@gmail.com','Ad測料4=wongcyres@gmail.com',]
                 for index, 結果 in enumerate(測料):
                     # 非vip限制每次只發5封
-                    if (not 係咪V) and (index == 1):
+                    if (not 月費用戶) and (index == 2):
+                        _雜項._執行中說明('執行中說明','非vip限制每次只發5封')
                         break
-
                     公司名稱,老闆聯絡 = 結果.split('=')
                     老闆信 = _促銷鍠._整字雜項(信件標題, 老闆聯絡, 公司名稱, 宣傳文)
-
                     # 是ws
                     結果 = f'<a href="{老闆信[0]}" class="臨時結果" target="_blank">手動 whatsapp to[{公司名稱}:{老闆聯絡}]</a>'
-
                     # 是email
                     if 老闆信[1] == True:
                         標題 = 老闆信[0].split('?subject=')[1].split('&body=')[0]
@@ -707,10 +703,10 @@ class _促銷鍠:
                 _促銷鍠._促銷鍠Po網(all結果睇,all結果Save)
                 return
 
-
             for index, (公司名稱, 老闆聯絡) in enumerate(all客聯B.items(), start=1):  # 添加枚举器
                 # 非vip限制每次只發5封
-                if (not 係咪V) and (index == 5):
+                if (not 月費用戶) and (index == 5):
+                    _雜項._執行中說明('執行中說明','非vip限制每次只發5封')
                     break
 
                 老闆信 = _促銷鍠._整字雜項(信件標題, 老闆聯絡, 公司名稱, 宣傳文)
@@ -746,6 +742,9 @@ class _促銷鍠:
 
 
 
+
+
+            
     def _檢查郵件7天已發(to_email, 間隔, 由這):
         try:
             有冇semd = '有'
@@ -778,13 +777,16 @@ class _促銷鍠:
             # 关闭连接
             mail.logout()
 
-            _雜項._執行中說明('執行中說明',f"7天內 [{有冇semd}] 發過郵件給[{to_email}] ")
+            #_雜項._執行中說明('執行中說明',f"7天內 [{有冇semd}] 發過郵件給[{to_email}] ")
             return 有冇semd
         except Exception as e:
             _雜項._獲取詳細錯誤堆棧(*sys.exc_info())
 
 
 
+
+
+            
     # 在 Gmail 帳戶中，您可以前往 Google 帳戶設定 > "安全性" > "應用程式密碼" 來生成應用程式專用密碼。
     # https://myaccount.google.com/u/1/apppasswords?pli=1&rapt=AEjHL4NB4hK6Th7KGvq8QXmew8zX6e0Q0vg_Ruwjaxi6rHdyqR9HRAen2ocS95fglp1iHWQ2zcuydfYf4-aeUc4F2sJBPQ0s7iayeTEjdPFPKUTS0UILi60
     def _自動sendGmail(subject, body, to_email, 由這):
@@ -820,13 +822,17 @@ class _促銷鍠:
 
 
 
+
+            
     def _整字雜項(信件標題, 聯絡方式, 公司名稱, 宣傳文):
         try:
             是email = True
 
-            # 最後一個 <br> 切分wa.me
-            宣傳文1,來詢句 = 宣傳文.rsplit('<br>', 1)
-            來詢句1,來詢句2 = 來詢句.split('?text=')
+            # 切分wa.me
+            宣傳文1,來詢句 = 宣傳文.split('<hr id="切分wa" style="display: none;">')
+            來詢句 = re.search(r'https?://wa\.me/(.+?)(/\?text=|/?\?text=)(.+?)"', 來詢句)
+            來詢句1 = 來詢句.group(1).replace('/?', '')
+            來詢句2 = 來詢句.group(3)
 
             # 刪空格及符號
             公司名稱 = re.sub(r'[^\w\u4e00-\u9fff]', '', 公司名稱)
@@ -842,19 +848,25 @@ class _促銷鍠:
             else:
                 聯絡方式B = f'https://wa.me/{聯絡方式}?text='
 
+                # 取我wsLink
+                我wsLink = re.findall(r'href="([^"]+)"', 宣傳文)[-1]
+
                 # 取得宣傳文中的圖片
                 src_list1 = re.findall(r'src="([^"]+)"', 宣傳文)
-                # 刪除圖片html
+                # 整合圖片url
+                圖all = ''
+                for 圖 in src_list1:
+                    圖all += f'%0A%0A{圖}'
+
+                # 刪除all 圖片 wsLink html
                 宣傳文 = re.sub(
                     r'<br style="display: none;">.*?(?=<br style="display: none;">|$)',  
                     '', 
                     宣傳文,
                     flags=re.DOTALL
                 )
-                圖all = ''
-                for 圖 in src_list1:
-                    圖all += f'%0A%0A{圖}'
-                宣傳文 = f'{宣傳文}%0A%0A{圖all}'
+
+                宣傳文 = f'{宣傳文}%0A%0A{我wsLink}%0A%0A{圖all}'
 
                 宣傳文 = 宣傳文.replace('<br>', '%0A').replace('&nbsp;', '%20').replace('=', '%3D')
                 是email = False
@@ -866,6 +878,9 @@ class _促銷鍠:
 
 
 
+
+
+            
     def _整all客聯(客聯):
         try:
             # 初始化字典
@@ -888,6 +903,9 @@ class _促銷鍠:
 
 
 
+
+
+
     def _促銷鍠Po網(結果睇, 結果Save):
         try:
             # 取得當前時間
@@ -901,12 +919,12 @@ class _促銷鍠:
                 結果Save = [結果Save]
 
             # (1) 處理「顯示用」的內容（HTML格式，用 <br> 換行）
-            html_content = f"{現在時間}[促銷鍠結果]<br>"
+            html_content = f"{現在時間}[促銷鍠結果|{vip}]<br>"
             html_content += "<br>".join(str(item) for item in 結果睇)  # 用 <br> 連接每一條結果
             html_content += "<br>---------<br>"  # 加入分隔線
 
             # (2) 處理「儲存用」的內容（純文字格式，用 @換行@ 換行）
-            text_content = f"{現在時間}[促銷鍠結果]@換行@"
+            text_content = f"{現在時間}[促銷鍠結果|{vip}]@換行@"
             text_content += "@換行@".join(str(item) for item in 結果Save)  # 用 @換行@ 連接每一條結果
             text_content += "@換行@---------@換行@"  # 加入分隔線
 

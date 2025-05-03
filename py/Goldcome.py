@@ -450,21 +450,23 @@ class _搵客鍠:
 
 
     def _西選重聯(聯):
-        # print(f'_西損重聯={聯}')
+        #print(f'_西損重聯={聯}')
 
         # 使用集合來追蹤已出現的聯絡方式
         seen_contacts = set()
         filtered_data = []
 
         for entry in 聯:
-            # 提取聯絡方式（假設每個集合的第一項是聯絡方式）
+            # 提取聯絡方式
             contact = entry.split('=')[1] # 欣貫有限公司:55472829
-            # print(f'contact@@@={contact}')
 
             # 如果聯絡方式不在 seen_contacts 中，加入 filtered_data 並添加至 seen_contacts
             if contact not in seen_contacts:
                 filtered_data.append(entry)
                 seen_contacts.add(contact)
+                if (not 月費用戶) and (len(filtered_data) == 10):
+                    _雜項._執行中說明('執行中說明','非vip每次最多取10個資料')
+                    break
 
         # 輸出篩選後的列表
         return filtered_data
@@ -536,7 +538,7 @@ class _搵客鍠:
         現在時間 = now.strftime("[%Y-%m-%d|%H:%M:%S]")
 
         # 转换为带换行的字符串（每条记录占一行）
-        Boss料PoHtml = f"{現在時間}[{地區}|{關鍵字}]\n" +"\n".join(Boss料list) +"\n---------\n"
+        Boss料PoHtml = f"{現在時間}[{地區}|{關鍵字}][{vip}]\n" +"\n".join(Boss料list) +"\n---------\n"
         print(Boss料PoHtml)
 
         driver.execute_script(
@@ -602,8 +604,9 @@ class _搵客鍠:
 class _金come_VIP:
     @staticmethod
     def _獲取帳號資料(国码,电码,功能):
-        global 月費用戶,帳號1181
+        global 月費用戶,帳號1181,vip
 
+        vip = '試用版'
         帳號 = 国码+电码
         # 創建一個 SHA-256 雜湊物件
         帳號1181 = hashlib.sha256(帳號.encode('utf-8')).hexdigest()
@@ -615,6 +618,7 @@ class _金come_VIP:
             # 搜索 帳號1181
             if 帳號1181 in response.text:
                 月費用戶 = True
+                vip = 'VIP'
 
             _Start._歡迎登入(国码,电码,功能)
         except requests.exceptions.RequestException as e:
@@ -691,7 +695,7 @@ class _金come_VIP:
 class _Exe_Set():
     def _UpData本程式():
         
-        print(f"🥳目前版本[{目前版本}]🥳")
+        #print(f"🥳目前版本[{目前版本}]🥳")
         try:
             # 直接請求 py.js 文件
             js_url = f"{我官網}/py/py.js"
@@ -701,7 +705,7 @@ class _Exe_Set():
             最新版本 = re.search(r"更新日期\s*=\s*'(\d{12})'", response.text).group(1) 
             if not 最新版本:
                 raise Exception("找不到更新日期元素")
-            print(f"🥳最新版本[{最新版本}]🥳")
+            #print(f"🥳最新版本[{最新版本}]🥳")
 
             # 比較時間
             if 最新版本 > 目前版本:
@@ -871,7 +875,7 @@ class _Start:
             {本程式名} 歡迎您 !                                      
         |                                                     |
             {帳號1181}    
-            月費用戶 = {月費用戶}                      
+            {vip}                      
             國家代碼 = {国家代码}      
             手機號碼 = {电话号码}                  
         |                                                     | 
@@ -888,11 +892,12 @@ class _Start:
         
         歡迎Op網 = f'''
             <h1>{本程式名}</h1>
-            帳號={帳號1181}<br><br>
-            月費用戶={月費用戶}<br><br>
-            手機號碼={国家代码} {电话号码}<br><br>
-            聯絡我們={我官網}ContactAKI.html<br><br>
-            <h2 id="執行中說明">[{功能}] 執行中....</h2><br><br>
+            <p>{vip}</p>
+            <p>{帳號1181}</p>
+            <p>{国家代码} {电话号码}</p>
+            <p><a href="{我官網}ContactAKI.html" target="_blank">聯絡我們</a></p>
+            <br>
+            <h2 id="執行中說明">[{功能}] 執行中....</h2>
         '''
 
         _雜項._執行中說明('執行中請不要關閉網頁',歡迎Op網)
@@ -933,8 +938,7 @@ if __name__ == "__main__":
 
     Admin模式 = False
 
-
-    目前版本 = '202505020515'
+    目前版本 = '202505040127'
     本程式名 = 'Goldcome'
     賺錢鍠瀏覽器位 = 本程式名
 
@@ -953,9 +957,6 @@ if __name__ == "__main__":
     _雜項._WindowsAPI阻止系统休眠()
 
     _Start._動態執行代碼()
-
-
-
 
 # 執行本程式系列 \
 
