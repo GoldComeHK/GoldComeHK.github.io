@@ -34,12 +34,12 @@
         h1 { text-align: center;margin-bottom: 20px;font-size: 2em;text-shadow: 2px 2px 4px gold; }
         .container { max-width: 600px;margin: 0 auto;padding: 20px;border-radius: 12px;background: #2f3030;box-shadow: 4px 4px 8px #767676; }
         label, p { margin: 10px 0 5px; }
-        input, textarea, select, button,.臨時結果A { margin-bottom: 10px;padding: 8px;border-radius: 8px;border: none;outline: none; }
+        input, textarea, select, button,.臨時結果 { margin-bottom: 10px;padding: 8px;border-radius: 8px;border: none;outline: none; }
         input, select, textarea { width: 100%; }
         .大鍵 {border-radius: 10px; background: #282828;color: #bdbdbd;box-shadow: inset 25px 25px 50px rgba(139, 139, 139, 0.8);border: 1px solid #686868;font-size: 48px;width: 100%; }
         .大鍵:hover { background: #484949; }
-        button,.臨時結果A { background-color: #000000;color: white;cursor: pointer; }
-        button:hover,.臨時結果A:hover { background-color: #484949; }
+        button,.臨時結果 { background-color: #000000;color: white;cursor: pointer; }
+        button:hover,.臨時結果:hover { background-color: #484949; }
         .reply-group { margin-bottom: 15px;position: relative; }
         .delete-btn { position: absolute;right: -15px;top: 35%;transform: translateY(-50%);width: 30px;height: 30px;background-color: #444;color: white;border-radius: 50%;display: flex;align-items: center;justify-content: center;font-size: 16px;padding: 0; }
         .delete-btn:hover { background-color: #777; }
@@ -158,6 +158,11 @@
             <label>促銷信內容*</label>
             <textarea id="促銷信內容" placeholder="請編寫促銷信內容..." title="請編寫促銷信內容"></textarea>
 
+            <!-- qqqqqq --> 
+            <a href="https://playground.z.wiki/img-cloud/index.html" target="_blank"><label>圖片網址</label><b>❔</b></a>
+            <textarea id="圖片網址" class="記錄數據用"></textarea>
+
+
 
             <!-- 部份3: 促銷鍠草稿 -->
             <hr>
@@ -167,10 +172,11 @@
             <p id="自動回覆內容" class="container"></p>
             <hr>
 
+            
 
             <!-- 部份4: 結果 -->
             <textarea id="促銷鍠結果" ></textarea>
-            <p id="臨時結果A"></p>
+            <p id="臨時結果"></p>
 
 
             <!-- 部份5: 設定檔 -->
@@ -224,7 +230,7 @@
 ########       ###     ###     ###           ##########       #########
 -->
     <script>
-        AllData位 = ['區號','WhatsApp號','發出促銷信的gmail','gmail的應用程式密碼', '促銷間隔天數', '促銷鍠客詢select', '信件標題', '促銷信內容','促銷鍠結果']
+        AllData位 = ['區號','WhatsApp號','發出促銷信的gmail','gmail的應用程式密碼', '促銷間隔天數', '促銷鍠客詢select', '信件標題', '促銷信內容','促銷鍠結果','圖片網址']
         // loadSaved 自動保存
         function saveToLocalStorage(key, value) {
             localStorage.setItem(key, value);
@@ -589,6 +595,12 @@
             const WhatsApp號B = document.getElementById('WhatsApp號').value;
             const 我ws號 = 區號B + WhatsApp號B
 
+            let 真圖片網址all = [];
+            let 圖片網址all = document.getElementById('圖片網址').value.split("\n");
+            圖片網址all.forEach(icon => {
+                真圖片網址all.push(`<a href="${icon}" target="_blank"><img src="${icon}" style="max-width: 200px; height: auto;margin: 2%;"></a>`);
+            });
+
             // 将换行符转换为 <br>，并保留空格（使用HTML实体&nbsp;）
             const promoContent = document.getElementById('促銷信內容').value
                 .replace(/\n/g, '<br>')  // 替换换行符
@@ -603,17 +615,11 @@
             let whatsappLink = '';
             if (我ws號) {
                 whatsappLink = `https://wa.me/${我ws號}/?text=${querySelect}`;
-                /*
-                if (querySelect) {
-                    //whatsappLink += `/?text=${encodeURIComponent(querySelect)}`;
-                    whatsappLink += `/?text=${encodeURIComponent(querySelect)}`;
-                }
-                */
             }
 
             // 更新自动回复内容的函数
             document.getElementById('促銷信草稿').innerHTML  = 
-                `${promoContent}<br><br>${whatsappLink}`;
+                `${promoContent}<br><br><br style="display: none;">${真圖片網址all}<br style="display: none;"><br><br>${whatsappLink}`;
             document.getElementById('自動回覆內容').innerHTML  = 對應回覆內容;
 
         }
@@ -665,10 +671,6 @@
 
             const 信件標題 = document.getElementById('信件標題').value;
             const 促銷信草稿 = document.getElementById('促銷信草稿').innerHTML;
-
-            //促銷信草稿 = encodeURIComponent(促銷信草稿);
-            //console.log(`促銷信草稿=${促銷信草稿}`);
-
 
             // 先齊必填
             const 要齊料 = {

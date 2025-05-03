@@ -227,7 +227,7 @@
             <label>發出促銷信的gmail*</label>
             <input id="發出促銷信的gmail" class="記錄數據用" type="text" placeholder="請填寫發出促銷信的gmail" title="請填寫發出促銷信的gmail" required>
 
-            <a href="https://myaccount.google.com/u/1/apppasswords?pli=1&rapt=AEjHL4NB4hK6Th7KGvq8QXmew8zX6e0Q0vg_Ruwjaxi6rHdyqR9HRAen2ocS95fglp1iHWQ2zcuydfYf4-aeUc4F2sJBPQ0s7iayeTEjdPFPKUTS0UILi60"><label>gmail的應用程式密碼*</label><b>❔</b></a>
+            <a href="https://myaccount.google.com/u/1/apppasswords?pli=1&rapt=AEjHL4NB4hK6Th7KGvq8QXmew8zX6e0Q0vg_Ruwjaxi6rHdyqR9HRAen2ocS95fglp1iHWQ2zcuydfYf4-aeUc4F2sJBPQ0s7iayeTEjdPFPKUTS0UILi60" target="_blank"><label>gmail的應用程式密碼*</label><b>❔</b></a>
             <input id="gmail的應用程式密碼" class="記錄數據用" type="text" placeholder="請填寫gmail的應用程式密碼" title="請填寫gmail的應用程式密碼" required>
             
             <label>促銷間隔天數*</label>
@@ -241,6 +241,10 @@
             <label>促銷信內容*</label>
             <textarea id="促銷信內容" class="記錄數據用" placeholder="請編寫促銷信內容..." title="請編寫促銷信內容"></textarea>
 
+            <a href="https://playground.z.wiki/img-cloud/index.html" target="_blank"><label>圖片網址</label><b>❔</b></a>
+            <textarea id="圖片網址" class="記錄數據用"></textarea>
+            
+            
             <hr>
             <label>草稿</label>
             <p id="促銷信草稿" class="container"></p>
@@ -400,6 +404,12 @@
             const WhatsApp號B = document.getElementById('WhatsApp號').value;
             const 我ws號 = 區號B + WhatsApp號B
 
+            let 真圖片網址all = [];
+            let 圖片網址all = document.getElementById('圖片網址').value.split("\n");
+            圖片網址all.forEach(icon => {
+                真圖片網址all.push(`<a href="${icon}" target="_blank"><img src="${icon}" style="max-width: 200px; height: auto;margin: 2%;"></a>`);
+            });
+
             // 将换行符转换为 <br>，并保留空格（使用HTML实体&nbsp;）
             const promoContent = document.getElementById('促銷信內容').value
                 .replace(/\n/g, '<br>')  // 替换换行符
@@ -418,7 +428,7 @@
 
             // 更新自动回复内容的函数
             document.getElementById('促銷信草稿').innerHTML  = 
-                `${promoContent}<br><br>${whatsappLink}`;
+                `${promoContent}<br><br><br style="display: none;">${真圖片網址all}<br style="display: none;"><br><br>${whatsappLink}`;
             document.getElementById('自動回覆內容').innerHTML  = 對應回覆內容;
         }
 
@@ -708,9 +718,6 @@
                 }
             }
 
-
-            促銷信草稿 = 促銷信草稿.replace(/<br>/g, '\n'); // 將 <br> 轉換回換行符
-            促銷信草稿 = 促銷信草稿.replace(/&nbsp;/g, ' '); // 將 &nbsp; 轉換回空格
 
             分隔符 = '@////////@'
             // 按地區選py code
