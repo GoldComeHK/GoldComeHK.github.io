@@ -614,12 +614,15 @@
             // 構建WhatsApp鏈接
             let whatsappLink = '';
             if (我ws號) {
-                whatsappLink = `https://wa.me/${我ws號}/?text=${querySelect}`;
+                whatsappLink = `<a href="https://wa.me/${我ws號}/?text=${querySelect}" target="_blank">${querySelect}</a>`;
             }
-
+            
             // 更新自动回复内容的函数
             document.getElementById('促銷信草稿').innerHTML  = 
-                `${promoContent}<br><br><br style="display: none;">${真圖片網址all}<br style="display: none;"><br><br>${whatsappLink}`;
+                `${promoContent}<br><br>
+                <br style="display: none;">${真圖片網址all}<br style="display: none;"><br><br>
+                <hr id="切分wa" style="display: none;">
+                <br style="display: none;">${whatsappLink}<br style="display: none;"><br><br>`;
             document.getElementById('自動回覆內容').innerHTML  = 對應回覆內容;
 
         }
