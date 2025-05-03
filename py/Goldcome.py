@@ -409,29 +409,6 @@ class _雜項:
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 '''
       ::::::::       ::::::::::           :::        :::::::::       ::::::::       :::    :::
     :+:    :+:      :+:                :+: :+:      :+:    :+:     :+:    :+:      :+:    :+:
@@ -611,53 +588,6 @@ class _搵客鍠:
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 '''
           :::        ::::::::         :::         :::       ::::::::         :::
        :+: :+:     :+:    :+:      :+:+:       :+:+:      :+:    :+:      :+:+:
@@ -708,19 +638,6 @@ class _金come_VIP:
         if 用次數 > 客服鍠試用次數:
             print(f"已超過試用次數 {客服鍠試用次數} 次，退出程式...")
             driver.quit()
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -885,7 +802,6 @@ class _Start:
             while True:
                 current_clipboard = pyperclip.paste()
                 if current_clipboard != original_clipboard and code標籤 in current_clipboard:
-                    if not Admin模式: pyperclip.copy('')
                     break
                 print(f"設置完成後， 請按 執行{本程式名}...")
                 time.sleep(1)  # 避免过高频率检查
@@ -900,8 +816,11 @@ class _Start:
                 user_code_lines.append(line)
             user_code = '\n'.join(user_code_lines)
 
-            #print(f'\n----2-----\n{user_code}\n----2-----\n')
-            #input('按任意鍵執行...')
+            if Admin模式:
+                print(f'\n----2-----\n{user_code}\n----2-----\n')
+                input('按任意鍵執行...')
+            else:
+                pyperclip.copy('')
 
             # 將特殊標記轉回\n轉義字符
             user_code = user_code.replace('@換行@', r'\n')
@@ -910,6 +829,23 @@ class _Start:
                 exec(user_code, globals())
             except:
                 _雜項._獲取詳細錯誤堆棧(*sys.exc_info()) 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -973,6 +909,26 @@ class _Start:
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 if __name__ == "__main__":
 
     Admin模式 = False
@@ -997,6 +953,7 @@ if __name__ == "__main__":
     _雜項._WindowsAPI阻止系统休眠()
 
     _Start._動態執行代碼()
+
 
 
 

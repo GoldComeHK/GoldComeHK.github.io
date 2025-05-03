@@ -664,24 +664,59 @@ class _促銷鍠:
 
     def _執行_自動send野(all客聯=''):
         try:
-            _金come_VIP._獲取帳號資料(@帳號1181@)
+            係咪V = _金come_VIP._獲取帳號資料(@帳號1181@)
+
             由這mail = '@促銷gmail@'
             由這mail的key = '@gmail應密@'
             促銷間隔天數 = @間隔天@
             信件標題 = '@標題@'
             宣傳文 = f'''@促銷信@'''
+
             all客聯 = '''@搵客鍠結果@'''
             all客聯B = _促銷鍠._整all客聯(all客聯)
 
             all結果睇 = []
             all結果Save = []
-            for 公司名稱, 老闆聯絡 in all客聯B.items():
+
+            if Admin模式: 
+                測料 = ['Admin模式測料=98672794','Admin模式測料=moksurky@gmail.com',]
+                for 結果 in 測料:
+                    公司名稱,老闆聯絡 = 結果.split('=')
+                    老闆信 = _促銷鍠._整字雜項(信件標題, 老闆聯絡, 公司名稱, 宣傳文)
+
+                    # 是ws
+                    結果 = f'<a href="{老闆信[0]}" class="臨時結果" target="_blank">手動 whatsapp to[{公司名稱}:{老闆聯絡}]</a>'
+
+                    # 是email
+                    if 老闆信[1] == True:
+                        標題 = 老闆信[0].split('?subject=')[1].split('&body=')[0]
+                        內文 = 老闆信[0].split('&body=')[1]
+                        發成點 = _促銷鍠._自動sendGmail(標題, 內文, 老闆聯絡, [由這mail,由這mail的key])
+                        if 發成點:
+                            結果 = f'[ {公司名稱}:{老闆聯絡} ]=成功發送郵件'
+                        else:
+                            結果 = f'[ {公司名稱}:{老闆聯絡} ]={發成點}'
+
+                        _雜項._執行中說明('執行中說明',結果)
+                    all結果睇.append(結果)
+                    all結果Save.append(結果)
+                _促銷鍠._促銷鍠Po網(all結果睇,all結果Save)
+                return
+
+
+
+            # qqq for 公司名稱, 老闆聯絡 in all客聯B.items():
+            for index, (公司名稱, 老闆聯絡) in enumerate(all客聯B.items(), start=1):  # 添加枚举器
+                
+                # 非vip限制每次只發5封
+                if (not 係咪V) and (index == 5):
+                    break
+
                 老闆信 = _促銷鍠._整字雜項(信件標題, 老闆聯絡, 公司名稱, 宣傳文)
 
                 # 是ws
-                結果 = f'<a href="{老闆信[0]}" class="臨時結果A" target="_blank">手動 whatsapp to[{公司名稱}:{老闆聯絡}]</a>'
+                結果 = f'<a href="{老闆信[0]}" class="臨時結果" target="_blank">手動 whatsapp to[{公司名稱}:{老闆聯絡}]</a>'
                 結果Save = f'[ {公司名稱}:{老闆聯絡} ]=手動 whatsapp 發出'
-                結果遠端 = 老闆信[0]
 
                 # 是email
                 if 老闆信[1] == True:
@@ -696,7 +731,7 @@ class _促銷鍠:
                     else:
                         結果 = f'[ {公司名稱}:{老闆聯絡} ]={促銷間隔天數}天內已發過'
                     結果Save = 結果
-                    結果遠端 = 結果
+
                     _雜項._執行中說明('執行中說明',結果)
                 all結果睇.append(結果)
                 all結果Save.append(結果Save)
@@ -760,7 +795,7 @@ class _促銷鍠:
             msg['Subject'] = subject
 
             # 添加邮件内容
-            msg.attach(MIMEText(body, 'plain'))
+            msg.attach(MIMEText(body, 'html', 'utf-8'))
 
             try:
                 # 连接到 Gmail 的 SMTP 服务器
@@ -801,11 +836,25 @@ class _促銷鍠:
             來詢句3 = ''
             if '@' in 聯絡方式:
                 聯絡方式B = f"mailto:{聯絡方式}?subject=尊敬的{公司名稱}{信件標題}&body="
-                宣傳文1 = 宣傳文1.replace('<br>', '@換行@').replace('&nbsp;', ' ')
                 來詢句3 = f'{來詢句1}?text={來詢句2}'
                 宣傳文 = 宣傳文1+來詢句3
             else:
                 聯絡方式B = f'https://wa.me/{聯絡方式}?text='
+
+                # 取得宣傳文中的圖片
+                src_list1 = re.findall(r'src="([^"]+)"', 宣傳文)
+                # 刪除圖片html
+                宣傳文 = re.sub(
+                    r'<br style="display: none;">.*?(?=<br style="display: none;">|$)',  
+                    '', 
+                    宣傳文,
+                    flags=re.DOTALL
+                )
+                圖all = ''
+                for 圖 in src_list1:
+                    圖all += f'%0A%0A{圖}'
+                宣傳文 = f'{宣傳文}%0A%0A{圖all}'
+
                 宣傳文 = 宣傳文.replace('<br>', '%0A').replace('&nbsp;', '%20').replace('=', '%3D')
                 是email = False
 
