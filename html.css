@@ -21,3 +21,6 @@ h1 { text-align: center;margin-bottom: 20px;font-size: 2em;text-shadow: 2px 2px 
     display: flex;
 }
 #執行中請不要關閉網頁 h2 {color: white;font-size: 2rem;text-shadow: 0 2px 4px rgba(0,0,0,0.5);}
+
+/* 聚焦时高度变大 */
+textarea:focus {height: 300px; }
