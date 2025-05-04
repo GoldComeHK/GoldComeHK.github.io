@@ -822,7 +822,7 @@ def _香港勞工處(keyword=''):
         ######### Boss料PoHtml #########
         if all_Boss料:
             真all_Boss料 = _遠端鍠_雜項._西選重聯(all_Boss料)    #['利嘉閣地產有限公司=65340006',]
-            return 真all_Boss料 # qqq to semd
+            return 真all_Boss料 
         ######### Boss料PoHtml #########
         
     except Exception as e:
@@ -1166,43 +1166,62 @@ def _執行遠端鍠(指令):
         ${gmail的應用程式密碼}${分隔符}
     `
     '''
+
     遠端鍠py = 指令[1]  
     最多找資料數 = int(指令[2])
+
     akiWs = 指令[3]
     信標隨 = 指令[4] 
     宣傳文 = 指令[5]
+
     由這mail = 指令[6]
     由這mail的key = 指令[7]
+
+    發送促銷信件數 = int(指令[8])
+    all成功發送 = 0
 
     all_data = []
 
     if Admin模式:
+
         for 睇 in 指令:
             print(f'----------\n{睇}')
+        
         測料 = ['Admin模式測料1=98672794','Admin模式測料2=moksurky@gmail.com','Admin模式測料3=lamelle1995@gmail.com','Admin模式測料4=wongcyres@gmail.com',]
         for 結果 in 測料:
+            if all成功發送 >= 發送促銷信件數:
+                print(f'已成功發送{發送促銷信件數}封,促銷鍠結束')
+                break
+            
             公司名稱,聯絡方式 = 結果.split('=')
             sell客文 = _遠端鍠_雜項._整字雜項(公司名稱,聯絡方式)
-            睇結果 = sell客文   #ws
+
             if '@' in 聯絡方式: #mail
                 標題 = sell客文.split('?subject=')[1].split('&body=')[0]
                 內文 = sell客文.split('&body=')[1]
                 發成點 = 自動send野._自動sendGmail(標題, 內文, 聯絡方式)
                 睇結果 = f'[ {公司名稱}:{聯絡方式} ]={發成點}'
+            #ws
+            else:
+                睇結果 = sell客文
 
+            all成功發送 += 1
             all_data.append(睇結果)
         return all_data
 
 
     for 結果 in eval(遠端鍠py): # _香港勞工處('${關鍵字}') / _台灣就業通('${關鍵字}')
-        
+        if all成功發送 >= 發送促銷信件數:
+            print(f'已成功發送{發送促銷信件數}封,促銷鍠結束')
+            all_data.append(f'已成功發送{發送促銷信件數}封,促銷鍠結束')
+            break
+
         # 結果 = ['利嘉閣地產有限公司=65340006',]
         公司名稱,聯絡方式 = 結果.split('=')
 
         # 生成sell客文
         sell客文 = _遠端鍠_雜項._整字雜項(公司名稱,聯絡方式)
-
-        睇結果 = sell客文
+        
         # 篩選 mail
         if '@' in 聯絡方式:
             if 自動send野._檢查郵件7天已發(聯絡方式) == '冇':
@@ -1210,8 +1229,13 @@ def _執行遠端鍠(指令):
                 內文 = sell客文.split('&body=')[1]
                 發成點 = 自動send野._自動sendGmail(標題, 內文, 聯絡方式)
                 睇結果 = f'[ {公司名稱}:{聯絡方式} ]={發成點}'
+                all成功發送 += 1
             else:
                 睇結果 = f'[ {公司名稱}:{聯絡方式} ]={促銷間隔天數}天內已發過'
+        #ws
+        else:
+            睇結果 = sell客文   
+            all成功發送 += 1
 
         all_data.append(睇結果)
     return all_data
@@ -1256,22 +1280,18 @@ if __name__ == "__main__":
     Admin模式 = False
     分隔號 = '$'*18
 
-    # 遠端鍠 在 https://金come.com/0  set
-    最多找資料數 = ''
-    akiWs = 'akiWs'
-    我司名 = '我司名'
-    我司網 = '我司網'
-    我產品名 = 'ws鍠'
-    客詢文 = '客詢文'
+    # 遠端鍠 在 https://金come.com/0  set _執行遠端鍠 global 不可刪
+    最多找資料數 = 10
+    akiWs = ''
     促銷間隔天數 = 7
-    信標隨 = []
+    信標隨 = ''
     宣傳文 = ''
     由這mail = ''
     由這mail的key = ''
 
     now = datetime.now()
     版本號 = '遠端鍠 202505040127'
-    print(f'$$$ {版本號} 版 已執行 $$$')
+    print(f'$$$ {版本號} 版 {now} 已執行 $$$')
     _TG機器人系列._TG多工機器人()
 
 # 執行本程式系列 \
