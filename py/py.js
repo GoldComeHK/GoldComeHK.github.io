@@ -666,27 +666,33 @@ class _促銷鍠:
 
             由這mail = '@促銷gmail@'
             由這mail的key = '@gmail應密@'
-            促銷間隔天數 = @間隔天@
+            促銷間隔天數 = 7
+            
             信件標題 = '@標題@'
             宣傳文 = f'''@促銷信@'''
 
             all客聯 = '''@搵客鍠結果@'''
             all客聯B = _促銷鍠._整all客聯(all客聯)
 
+            發送促銷信件數 = @發送促銷信件數@
+            if (not 月費用戶) and (發送促銷信件數 > 5):
+                發送促銷信件數 = 5
+                _雜項._執行中說明('執行中說明',f'非vip限制每次只發{發送促銷信件數}封')
+            all成功發送 = 0
+
             all結果睇 = []
             all結果Save = []
 
             if Admin模式: 
                 測料 = ['Ad測料1=98672794','Ad測料2=moksurky@gmail.com','Ad測料3=lamelle1995@gmail.com','Ad測料4=wongcyres@gmail.com',]
-                for index, 結果 in enumerate(測料):
-                    # 非vip限制每次只發5封
-                    if (not 月費用戶) and (index == 2):
-                        _雜項._執行中說明('執行中說明','非vip限制每次只發5封')
+                for 結果 in 測料:
+                    if all成功發送 >= 發送促銷信件數:
+                        _雜項._執行中說明('執行中說明','已成功發送{發送促銷信件數}封,促銷鍠結束')
                         break
+
                     公司名稱,老闆聯絡 = 結果.split('=')
                     老闆信 = _促銷鍠._整字雜項(信件標題, 老闆聯絡, 公司名稱, 宣傳文)
-                    # 是ws
-                    結果 = f'<a href="{老闆信[0]}" class="臨時結果" target="_blank">手動 whatsapp to[{公司名稱}:{老闆聯絡}]</a>'
+
                     # 是email
                     if 老闆信[1] == True:
                         標題 = 老闆信[0].split('?subject=')[1].split('&body=')[0]
@@ -694,26 +700,34 @@ class _促銷鍠:
                         發成點 = _促銷鍠._自動sendGmail(標題, 內文, 老闆聯絡, [由這mail,由這mail的key])
                         if 發成點:
                             結果 = f'[ {公司名稱}:{老闆聯絡} ]=成功發送郵件'
+                            all成功發送 += 1
                         else:
                             結果 = f'[ {公司名稱}:{老闆聯絡} ]={發成點}'
-
-                        _雜項._執行中說明('執行中說明',結果)
+                    # 是ws
+                    else:
+                        結果 = f'<a href="{老闆信[0]}" class="臨時結果" target="_blank">手動 whatsapp to[{公司名稱}:{老闆聯絡}]</a>'
+                        all成功發送 += 1
+                    
+                    _雜項._執行中說明('執行中說明',結果)
                     all結果睇.append(結果)
                     all結果Save.append(結果)
                 _促銷鍠._促銷鍠Po網(all結果睇,all結果Save)
                 return
 
-            for index, (公司名稱, 老闆聯絡) in enumerate(all客聯B.items(), start=1):  # 添加枚举器
-                # 非vip限制每次只發5封
-                if (not 月費用戶) and (index == 5):
-                    _雜項._執行中說明('執行中說明','非vip限制每次只發5封')
+
+
+
+
+
+
+
+
+            for 公司名稱, 老闆聯絡 in all客聯B.items():
+                if all成功發送 >= 發送促銷信件數:
+                    _雜項._執行中說明('執行中說明','已成功發送{發送促銷信件數}封,促銷鍠結束')
                     break
 
                 老闆信 = _促銷鍠._整字雜項(信件標題, 老闆聯絡, 公司名稱, 宣傳文)
-
-                # 是ws
-                結果 = f'<a href="{老闆信[0]}" class="臨時結果" target="_blank">手動 whatsapp to[{公司名稱}:{老闆聯絡}]</a>'
-                結果Save = f'[ {公司名稱}:{老闆聯絡} ]=手動 whatsapp 發出'
 
                 # 是email
                 if 老闆信[1] == True:
@@ -729,7 +743,12 @@ class _促銷鍠:
                         結果 = f'[ {公司名稱}:{老闆聯絡} ]={促銷間隔天數}天內已發過'
                     結果Save = 結果
 
-                    _雜項._執行中說明('執行中說明',結果)
+                # 是ws
+                else:
+                    結果 = f'<a href="{老闆信[0]}" class="臨時結果" target="_blank">手動 whatsapp to[{公司名稱}:{老闆聯絡}]</a>'
+                    結果Save = f'[ {公司名稱}:{老闆聯絡} ]=手動 whatsapp 發出'
+
+                _雜項._執行中說明('執行中說明',結果Save)
                 all結果睇.append(結果)
                 all結果Save.append(結果Save)
 
@@ -737,6 +756,21 @@ class _促銷鍠:
             _促銷鍠._促銷鍠Po網(all結果睇,all結果Save)
             
             # ==== html ====
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         except Exception as e:
             _雜項._獲取詳細錯誤堆棧(*sys.exc_info())
 
