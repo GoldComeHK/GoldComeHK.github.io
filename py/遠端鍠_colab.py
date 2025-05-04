@@ -248,8 +248,7 @@ class 自動send野:
         msg['Subject'] = subject
 
         # 添加邮件内容
-        msg.attach(MIMEText(body, 'plain'))
-
+        msg.attach(MIMEText(body, 'html', 'utf-8'))
         try:
             # 连接到 Gmail 的 SMTP 服务器
             server = smtplib.SMTP('smtp.gmail.com', 587)
@@ -495,7 +494,7 @@ class _遠端鍠_雜項:
             # 提取聯絡方式 '利嘉閣地產有限公司=65340006'
             contact = entry.split('=')[1] 
 
-            print(f'contact@@@={contact}') 
+            #print(f'contact@@@={contact}') 
 
             # 如果聯絡方式不在 seen_contacts 中，加入 filtered_data 並添加至 seen_contacts
             if contact not in seen_contacts:
@@ -600,14 +599,33 @@ class _遠端鍠_雜項:
         聯絡方式B = ''
         宣傳文B = 宣傳文
         if '@' in 聯絡方式:
-            聯絡方式B = f"mailto:{聯絡方式}?subject={信標隨}&body="
+            聯絡方式B = f"mailto:{聯絡方式}?subject=尊敬的{公司名稱}{信標隨}&body="
+            #sell客文 = f"{聯絡方式B}{公司名稱}{宣傳文B}"
         else:
             聯絡方式B = f'https://wa.me/{聯絡方式}?text='
-            #.replace('=莫', '%3D莫')
-            宣傳文B = 宣傳文.replace('\n', '%0A').replace(' ', '%20').replace('=', '%3D')
 
+            # 取我wsLink
+            我wsLink = re.findall(r'href="([^"]+)"', 宣傳文)[-1]
 
-        sell客文 = f"{聯絡方式B}{公司名稱}{宣傳文B}"
+            # 取得宣傳文中的圖片
+            src_list1 = re.findall(r'src="([^"]+)"', 宣傳文)
+            # 整合圖片url
+            圖all = ''
+            for 圖 in src_list1:
+                圖all += f'%0A%0A{圖}'
+
+            # 刪除all 圖片 wsLink html
+            宣傳文B = re.sub(
+                r'<br style="display: none;">.*?(?=<br style="display: none;">|$)',  
+                '', 
+                宣傳文,
+                flags=re.DOTALL
+            )
+            宣傳文B = 宣傳文B.replace('<br>', '%0A').replace('&nbsp;', '%20').replace('=', '%3D')
+            宣傳文B = f'{宣傳文B}%0A%0A{我wsLink}%0A%0A{圖all}'
+            
+
+        sell客文 = f"{聯絡方式B}尊敬的{公司名稱}{宣傳文B}"
         end_time = time.time()
         print(f"[_整字雜項] 花費了 {雜項._計算花費了的時間(start_time,end_time)} 秒")
         return sell客文
@@ -1161,7 +1179,7 @@ def _執行遠端鍠(指令):
     if Admin模式:
         for 睇 in 指令:
             print(f'----------\n{睇}')
-        測料 = ['Admin模式測料=98672794','Admin模式測料=moksurky@gmail.com',]
+        測料 = ['Admin模式測料1=98672794','Admin模式測料2=moksurky@gmail.com','Admin模式測料3=lamelle1995@gmail.com','Admin模式測料4=wongcyres@gmail.com',]
         for 結果 in 測料:
             公司名稱,聯絡方式 = 結果.split('=')
             sell客文 = _遠端鍠_雜項._整字雜項(公司名稱,聯絡方式)
@@ -1252,7 +1270,7 @@ if __name__ == "__main__":
     由這mail的key = ''
 
     now = datetime.now()
-    版本號 = '遠端鍠 202505011420'
+    版本號 = '遠端鍠 202505040127'
     print(f'$$$ {版本號} 版 已執行 $$$')
     _TG機器人系列._TG多工機器人()
 

@@ -828,23 +828,14 @@ class _促銷鍠:
         try:
             是email = True
 
-            # 切分wa.me
-            宣傳文1,來詢句 = 宣傳文.split('<hr id="切分wa" style="display: none;">')
-            來詢句 = re.search(r'https?://wa\.me/(.+?)(/\?text=|/?\?text=)(.+?)"', 來詢句)
-            來詢句1 = 來詢句.group(1).replace('/?', '')
-            來詢句2 = 來詢句.group(3)
-
             # 刪空格及符號
             公司名稱 = re.sub(r'[^\w\u4e00-\u9fff]', '', 公司名稱)
             聯絡方式 = 聯絡方式.replace(' ', '')
 
             # 分類聯絡並加字
             聯絡方式B = ''
-            來詢句3 = ''
             if '@' in 聯絡方式:
                 聯絡方式B = f"mailto:{聯絡方式}?subject=尊敬的{公司名稱}{信件標題}&body="
-                來詢句3 = f'{來詢句1}?text={來詢句2}'
-                宣傳文 = 宣傳文1+來詢句3
             else:
                 聯絡方式B = f'https://wa.me/{聯絡方式}?text='
 
