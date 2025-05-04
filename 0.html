@@ -231,8 +231,8 @@
             <a href="https://myaccount.google.com/u/1/apppasswords?pli=1&rapt=AEjHL4NB4hK6Th7KGvq8QXmew8zX6e0Q0vg_Ruwjaxi6rHdyqR9HRAen2ocS95fglp1iHWQ2zcuydfYf4-aeUc4F2sJBPQ0s7iayeTEjdPFPKUTS0UILi60" target="_blank"><label>gmail的應用程式密碼*</label><b>❔</b></a>
             <input id="gmail的應用程式密碼" class="記錄數據用" type="text" placeholder="請填寫gmail的應用程式密碼" title="請填寫gmail的應用程式密碼" required>
             
-            <label>促銷間隔天數*</label>
-            <input id="促銷間隔天數" class="記錄數據用" value="7" type="number" min="1" step="1" required oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+            <label>發送促銷信件數*</label>
+            <input id="發送促銷信件數" class="記錄數據用" value="10" type="number" min="1" step="1" required oninput="this.value = this.value.replace(/[^0-9]/g, '');">
             
             <label>促銷信的標題*</label>
             <input id="信件標題" class="記錄數據用" type="text" placeholder="請填寫促銷信的標題" title="請填寫促銷信的標題" required>
@@ -691,7 +691,7 @@
 
             const 發出促銷信的gmail = document.getElementById('發出促銷信的gmail').value;
             const gmail的應用程式密碼 = document.getElementById('gmail的應用程式密碼').value;
-            const 促銷間隔天數 = document.getElementById('促銷間隔天數').value;
+            const 發送促銷信件數 = document.getElementById('發送促銷信件數').value; // qqqqqqq
 
             const 信件標題 = document.getElementById('信件標題').value;
             let 促銷信草稿 = document.getElementById('促銷信草稿').innerHTML;
@@ -703,6 +703,7 @@
 
             // 要齊料岩料
             if (最多找資料數 < 1) {alert('最多找資料數不能為零!');return;}
+            if (發送促銷信件數 < 1) {alert('發送促銷信件數不能為零!');return;}
 
             // 先齊必填
             const 要齊料 = {
@@ -710,7 +711,6 @@
                 WhatsApp號: WhatsApp號,
                 發出促銷信的gmail: 發出促銷信的gmail,
                 gmail的應用程式密碼: gmail的應用程式密碼,
-                促銷間隔天數: 促銷間隔天數,
                 信件標題: 信件標題,
                 促銷信草稿: 促銷信草稿,
                 // 關鍵字:關鍵字,

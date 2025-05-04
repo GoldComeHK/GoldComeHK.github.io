@@ -136,29 +136,28 @@
         
             <!-- 部份1: 帳號 -->
             <label>請填寫您的手機地區號*</label>
-            <input id="區號" type="text" placeholder="例如: 86" title="例如: 86" required>
+            <input id="區號" class="記錄數據用" type="text" placeholder="例如: 86" title="例如: 86" required>
             <label>請填寫您的 WhatsApp 號碼*</label>
-            <input id="WhatsApp號" type="text" placeholder="請填寫WhatsApp號碼" title="請填寫WhatsApp號碼" required>
-
+            <input id="WhatsApp號" class="記錄數據用" type="text" placeholder="請填寫WhatsApp號碼" title="請填寫WhatsApp號碼" required>
 
             <!-- 部份2: 促銷鍠設定 -->
             <label>發出促銷信的gmail*</label>
-            <input id="發出促銷信的gmail" type="text" placeholder="請填寫發出促銷信的gmail" title="請填寫發出促銷信的gmail" required>
+            <input id="發出促銷信的gmail" class="記錄數據用" type="text" placeholder="請填寫發出促銷信的gmail" title="請填寫發出促銷信的gmail" required>
+
             <a href="https://myaccount.google.com/u/1/apppasswords?pli=1&rapt=AEjHL4NB4hK6Th7KGvq8QXmew8zX6e0Q0vg_Ruwjaxi6rHdyqR9HRAen2ocS95fglp1iHWQ2zcuydfYf4-aeUc4F2sJBPQ0s7iayeTEjdPFPKUTS0UILi60"><label>gmail的應用程式密碼*</label><b>❔</b></a>
-            <input id="gmail的應用程式密碼" type="text" placeholder="請填寫gmail的應用程式密碼" title="請填寫gmail的應用程式密碼" required>
+            <input id="gmail的應用程式密碼" class="記錄數據用" type="text" placeholder="請填寫gmail的應用程式密碼" title="請填寫gmail的應用程式密碼" required>
             
-            
-            <label>促銷間隔天數*</label>
-            <input id="促銷間隔天數" value="7" type="number" min="1" step="1" required oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+            <label>發送促銷信件數*</label>
+            <input id="發送促銷信件數" class="記錄數據用" value="10" type="number" min="1" step="1" required oninput="this.value = this.value.replace(/[^0-9]/g, '');">
             
             <label>促銷信的標題*</label>
-            <input id="信件標題" type="text" placeholder="請填寫促銷信的標題" title="請填寫促銷信的標題" required>
+            <input id="信件標題" class="記錄數據用" type="text" placeholder="請填寫促銷信的標題" title="請填寫促銷信的標題" required>
 
             <div id="repliesSelectContainer"> <!-- 这里动态加载 select 或提示 --> </div>
-            <label>促銷信內容*</label>
-            <textarea id="促銷信內容" placeholder="請編寫促銷信內容..." title="請編寫促銷信內容"></textarea>
 
-            <!-- qqqqqq --> 
+            <label>促銷信內容*</label>
+            <textarea id="促銷信內容" class="記錄數據用" placeholder="請編寫促銷信內容..." title="請編寫促銷信內容"></textarea>
+
             <a href="https://playground.z.wiki/img-cloud/index.html" target="_blank"><label>圖片網址</label><b>❔</b></a>
             <textarea id="圖片網址" class="記錄數據用"></textarea>
 
@@ -175,7 +174,7 @@
             
 
             <!-- 部份4: 結果 -->
-            <textarea id="促銷鍠結果" ></textarea>
+            <textarea id="促銷鍠結果" class="記錄數據用" ></textarea>
             <p id="臨時結果"></p>
 
 
@@ -220,7 +219,9 @@
 
 
 
-<!-- 
+
+    <script>
+/*
       ::::::::           :::     :::     :::       ::::::::::       :::::::::
     :+:    :+:        :+: :+:   :+:     :+:       :+:              :+:    :+:
    +:+              +:+   +:+  +:+     +:+       +:+              +:+    +:+
@@ -228,35 +229,28 @@
         +#+      +#+     +#+  +#+   +#+        +#+              +#+    +#+
 #+#    #+#      #+#     #+#   #+#+#+#         #+#              #+#    #+#
 ########       ###     ###     ###           ##########       #########
--->
-    <script>
-        AllData位 = ['區號','WhatsApp號','發出促銷信的gmail','gmail的應用程式密碼', '促銷間隔天數', '促銷鍠客詢select', '信件標題', '促銷信內容','促銷鍠結果','圖片網址']
-        // loadSaved 自動保存
-        function saveToLocalStorage(key, value) {
-            localStorage.setItem(key, value);
-        }
+*/        
 
-        function loadFromLocalStorage(key) {
-            return localStorage.getItem(key);
-        }
+        const 記錄位 = document.querySelectorAll(".記錄數據用");
 
-        function loadSavedData() {
-            AllData位.forEach((field) => {
-                const element = document.getElementById(field);
-                if (element) {
-                    element.value = loadFromLocalStorage(field) || '';
+        function 記錄已填寫數據() {
+            // 頁面加載時，從 LocalStorage 恢復數據
+            document.addEventListener("DOMContentLoaded", () => {
+                記錄位.forEach(element => {
+                const savedValue = localStorage.getItem(element.id);
+                if (savedValue !== null) {
+                    element.value = savedValue; // 適用於 input、textarea、select
                 }
+                });
             });
-        }
 
-        window.addEventListener('beforeunload', () => {
-            AllData位.forEach((field) => {
-                saveToLocalStorage(field, document.getElementById(field).value);
+            // 監聽輸入事件，實時保存數據
+            記錄位.forEach(element => {
+                element.addEventListener("input", () => {
+                localStorage.setItem(element.id, element.value);
+                });
             });
-        });
-
-
-
+}
 
 
 
@@ -286,18 +280,23 @@
 */
         // 手動上下載
         function 下載設定檔() {
-            const data = AllData位.reduce((obj, field) => {
-                const element = document.getElementById(field);
-                obj[field] = element ? element.value : '';
-                return obj;
-            }, {});
+            const 記錄位B = document.querySelectorAll(".記錄數據用");
+            const data = {};
+            // 遍歷所有帶有 .記錄數據用 類的元素
+            記錄位B.forEach(element => {
+                // 使用元素的 id 作為鍵，如果沒有 id 則使用 name 或其他屬性
+                const key = element.id || element.name || element.className;
+                if (key) {
+                    data[key] = element.value || '';
+                }
+            });
 
             const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
             const url = URL.createObjectURL(blob);
             
             const link = document.createElement("a");
             link.href = url;
-            link.download = `${_現在時間()}_促銷鍠.json`;
+            link.download = `${_現在時間()}_遠端鍠.json`;
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
@@ -305,12 +304,30 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         function 上傳設定檔(event) {
             const 設定匯入 = document.getElementById('設定匯入').textContent;
             const 設定格式錯誤 = document.getElementById('設定格式錯誤').textContent;
-
             const 匯入警告 = document.getElementById('匯入警告').textContent;
-            if (!confirm(匯入警告)) {location.reload(); return;}
+            
+            if (!confirm(匯入警告)) {
+                location.reload(); 
+                return;
+            }
 
             const file = event.target.files[0];
             if (!file) return;
@@ -320,11 +337,11 @@
                 try {
                     const importedData = JSON.parse(e.target.result);
                     
-                    // 使用 AllData位 自动匹配并导入数据
-                    AllData位.forEach(field => {
-                        const element = document.getElementById(field);
-                        if (element) {
-                            element.value = importedData[field] || '';
+                    // 遍歷所有 .記錄數據用 元素並導入數據
+                    記錄位.forEach(element => {
+                        const key = element.id || element.name || element.className;
+                        if (key && importedData.hasOwnProperty(key)) {
+                            element.value = importedData[key] || '';
                         }
                     });
 
@@ -336,6 +353,7 @@
             };
             reader.readAsText(file);
         }
+
 
 
 
@@ -557,6 +575,7 @@
             // 如果有数据，创建 select 元素
             const select = document.createElement('select');
             select.id = '促銷鍠客詢select';  // 添加 ID
+            select.className = '記錄數據用';  // 添加 class
 
             // 遍历 replies 的 key，添加到 select
             Object.keys(replies).forEach(key => {
@@ -671,18 +690,19 @@
 
             const 發出促銷信的gmail = document.getElementById('發出促銷信的gmail').value;
             const gmail的應用程式密碼 = document.getElementById('gmail的應用程式密碼').value;
-            const 促銷間隔天數 = document.getElementById('促銷間隔天數').value;
+            const 發送促銷信件數 = document.getElementById('發送促銷信件數').value;
 
             const 信件標題 = document.getElementById('信件標題').value;
             const 促銷信草稿 = document.getElementById('促銷信草稿').innerHTML;
 
+            // 要齊料岩料
+            if (發送促銷信件數 < 1) {alert('發送促銷信件數不能為零!');return;}
             // 先齊必填
             const 要齊料 = {
                 區號: 區號,
                 WhatsApp號: WhatsApp號,
                 發出促銷信的gmail: 發出促銷信的gmail,
                 gmail的應用程式密碼: gmail的應用程式密碼,
-                促銷間隔天數: 促銷間隔天數,
                 信件標題: 信件標題,
                 促銷信草稿: 促銷信草稿
             };
@@ -698,7 +718,13 @@
                 // 執行的功能要值
                 .replace("@促銷gmail@", 發出促銷信的gmail)
                 .replace("@gmail應密@", gmail的應用程式密碼)
-                .replace("@間隔天@", 促銷間隔天數)
+
+
+
+
+                .replace("@發送促銷信件數@", 發送促銷信件數)
+
+
                 .replace("@標題@", 信件標題)
                 
                 .replace("@促銷信@", 促銷信草稿)
@@ -800,6 +826,7 @@
             loadSavedData();
         }
 
+        記錄已填寫數據();
         琪琪修改()
     </script>
 </body>
