@@ -729,6 +729,7 @@ class _促銷鍠:
                         發成點 = _促銷鍠._自動sendGmail(標題, 內文, 老闆聯絡, [由這mail,由這mail的key])
                         if 發成點:
                             結果 = f'[ {公司名稱}:{老闆聯絡} ]=成功發送郵件'
+                            all成功發送 += 1
                         else:
                             結果 = f'[ {公司名稱}:{老闆聯絡} ]={發成點}'
                     else:
@@ -739,6 +740,7 @@ class _促銷鍠:
                 else:
                     結果 = f'<a href="{老闆信[0]}" class="臨時結果" target="_blank">手動 whatsapp to[{公司名稱}:{老闆聯絡}]</a>'
                     結果Save = f'[ {公司名稱}:{老闆聯絡} ]=手動 whatsapp 發出'
+                    all成功發送 += 1
 
                 _雜項._執行中說明('執行中說明',結果Save)
                 all結果睇.append(結果)
@@ -748,20 +750,6 @@ class _促銷鍠:
             _促銷鍠._促銷鍠Po網(all結果睇,all結果Save)
             
             # ==== html ====
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         except Exception as e:
             _雜項._獲取詳細錯誤堆棧(*sys.exc_info())
