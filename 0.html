@@ -406,10 +406,16 @@
             const 我ws號 = 區號B + WhatsApp號B
 
             let 真圖片網址all = [];
+            
             let 圖片網址all = document.getElementById('圖片網址').value.split("\n");
-            圖片網址all.forEach(icon => {
-                真圖片網址all.push(`<a href="${icon}" target="_blank"><img src="${icon}" style="max-width: 200px; height: auto;margin: 2%;"></a>`);
-            });
+
+            if (圖片網址all != ""){
+                圖片網址all.forEach(icon => {
+                    真圖片網址all.push(`<a href="${icon}" target="_blank"><img src="${icon}" style="max-width: 200px; height: auto;margin: 2%;"></a>`);
+                });
+            }
+            
+
 
             // 将换行符转换为 <br>，并保留空格（使用HTML实体&nbsp;）
             const promoContent = document.getElementById('促銷信內容').value
@@ -429,10 +435,7 @@
 
             // 更新自动回复内容的函数
             document.getElementById('促銷信草稿').innerHTML  = 
-                `${promoContent}<br><br>
-                <br style="display: none;">${真圖片網址all}<br style="display: none;"><br><br>
-                <hr id="切分wa" style="display: none;">
-                <br style="display: none;">${whatsappLink}<br style="display: none;"><br><br>`;
+                `${promoContent}<br><br><br style="display: none;">${真圖片網址all}<br style="display: none;"><br><br><hr id="切分wa" style="display: none;"><br style="display: none;">${whatsappLink}<br style="display: none;"><br><br>`;
             document.getElementById('自動回覆內容').innerHTML  = 對應回覆內容;
         }
 
