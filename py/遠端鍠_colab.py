@@ -432,7 +432,7 @@ class _chrome_雜項:
             element = WebDriverWait(driver, timeout).until(
                 EC.visibility_of_element_located((By.XPATH, xpath))
             )
-            element.clear()  # qqqq
+            element.clear()
             element.send_keys(text)
             return True
         else:
@@ -1032,7 +1032,7 @@ class _TG機器人系列:
                     print('遠端鍠 code 錯誤')
                     return
 
-                回答 = f'🐣🛎️💰 qqq 遠端鍠 找老闆 請稍候(約20分鐘)... qqqq 🐣🛎️💰'
+                回答 = f'🐣🛎️💰 遠端鍠 找老闆 請稍候(約20分鐘)... 🐣🛎️💰'
                 bot.reply_to(message, 回答)
                 print(回答)
 
@@ -1290,7 +1290,7 @@ if __name__ == "__main__":
     由這mail的key = ''
 
     now = datetime.now()
-    更新日期 = '202505051518'
+    更新日期 = '202505051531'
     print(f'$$$ 遠端鍠 {更新日期} 版 {now} 已執行 $$$')
     _TG機器人系列._TG多工機器人()
 
