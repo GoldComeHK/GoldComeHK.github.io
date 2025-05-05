@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <title>Goldcome - Passkey 登入</title>
+  <!-- 載入 Firebase 模組（模組化寫法專用） -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+    import { getAuth, onAuthStateChanged, signInWithPopup, PublicKeyCredentialProvider } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+
+    // 你的 Firebase 設定
+    const firebaseConfig = {
+      apiKey: "AIzaSyAyTb_KhBIqeiMZHHfmYrmOj83Kb2ZJXX8",
+      authDomain: "goldcome-2f749.firebaseapp.com",
+      projectId: "goldcome-2f749"
+    };
+
+    // 初始化 Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    // 登入按鈕事件
+    document.getElementById("loginBtn").addEventListener("click", async () => {
+      try {
+        const provider = new PublicKeyCredentialProvider();
+        const result = await signInWithPopup(auth, provider);
+        console.log("登入成功：", result.user);
+        document.getElementById("memberContent").style.display = "block";
+      } catch (error) {
+        alert("登入失敗：" + error.message);
+        console.error(error);
+      }
+    });
+
+    // 登入狀態變更
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        document.getElementById("memberContent").style.display = "block";
+      }
+    });
+  </script>
+</head>
+<body>
+  <h1>🔐 Goldcome 使用 Passkey 登入</h1>
+  <button id="loginBtn">使用 Passkey 登入</button>
+
+  <div id="memberContent" style="display:none; margin-top: 20px;">
+    <h2>🎉 歡迎回來，會員！</h2>
+  </div>
+</body>
+</html>
