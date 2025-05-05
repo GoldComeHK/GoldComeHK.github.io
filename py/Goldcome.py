@@ -693,48 +693,59 @@ class _金come_VIP:
 '''
 
 class _Exe_Set():
+
+
     def _UpData本程式():
-        
-        #print(f"🥳更新日期[{更新日期}]🥳")
+        最新版本, 下載Url = _Exe_Set._檢查最新版()
+        print(f'本機版本：{更新日期}，最新版本：{最新版本}')
+        if _Exe_Set._比較版本時間(更新日期, 最新版本):
+            _Exe_Set._下載更新檔(下載Url, 最新版本)
+        else:
+            print(f"\n🥳目前[{本程式名}_{更新日期}.exe]已是最新版本🥳\n")
+
+
+    def _檢查最新版():
+        url = f'https://api.github.com/repos/{REPO_OWNER}/{REPO_NAME}/releases/latest'
+        response = requests.get(url)
+        if response.status_code != 200:
+            raise Exception('無法取得 GitHub Release 資訊')
+        data = response.json()
+        tag = data['tag_name'].lstrip('v')  # 移除前面的 v
+        assets = data['assets']
+        for asset in assets:
+            if asset['name'] == 檔名:
+                download_url = asset['browser_download_url']
+                return tag, download_url
+        raise Exception(f'找不到 {檔名} 檔案於 GitHub Release 中')
+
+
+    def _比較版本時間(local, remote):
+        def to_tuple(v): return tuple(map(int, v.split('.')))
+        return to_tuple(remote) > to_tuple(local)
+
+
+    def _下載更新檔(url ,新版):
+        new_filename = f'{本程式名}_{新版}.exe'
+        print(f'正在下載 {url} ...')
+        print('-'*18)
+        response = requests.get(url)
+        with open(new_filename, 'wb') as f:
+            f.write(response.content)
+        full_path = os.path.abspath(new_filename)
+        print(f'🥳 {new_filename} 已儲存至： {full_path} 🥳')
+        _Exe_Set._以管理員權限執行新版本(full_path)
+        sys.exit()
+
+
+    def _以管理員權限執行新版本(path):
+        print(f'準備以系統管理員權限執行：{path}')
         try:
-            # 直接請求 py.js 文件
-            js_url = f"{我官網}/py/py.js"
-            response = requests.get(js_url)
-            response.encoding = "utf-8"  # 確保中文編碼正確
-            # 使用正則提取日期（精確匹配格式）
-            最新版本 = re.search(r"更新日期\s*=\s*'(\d{12})'", response.text).group(1) 
-            if not 最新版本:
-                raise Exception("找不到更新日期元素")
-            #print(f"🥳最新版本[{最新版本}]🥳")
-
-            # 比較時間
-            if 最新版本 > 更新日期:
-                # 下載檔案
-                下載檔案 = f'https://github.com/GoldComeHK/GoldComeHK.github.io/releases/download/v{最新版本}/{本程式名}.exe'
-                exe_response = requests.get(下載檔案)
-                exe_response.raise_for_status()
-                
-                # 獲取當前腳本所在目錄的絕對路徑
-                current_dir = os.path.dirname(os.path.abspath(__file__))
-                # 生成新文件名（可自定義格式）
-                new_filename = f'{本程式名}_{最新版本}.exe'
-                save_path = os.path.join(current_dir, new_filename)
-                
-                # 儲存檔案
-                with open(save_path, 'wb') as f:
-                    f.write(exe_response.content)
-                
-                print(f'[{new_filename}]已更新,請重新執行')
-                sys.exit()
-                
-            else:
-                print(f"\n🥳目前[{更新日期}]已是最新版本🥳\n")
-
-        except requests.exceptions.RequestException as e:
-            print(f"網路錯誤: {str(e)}")
+            # 使用 ShellExecuteEx 執行，觸發 UAC 提示
+            ctypes.windll.shell32.ShellExecuteW(
+                None, "runas", path, None, None, 1
+            )
         except Exception as e:
-            print(f"發生錯誤: {str(e)}")
-            _雜項._獲取詳細錯誤堆棧(*sys.exc_info()) 
+            print(f'執行失敗：{e}')
 
 
 
@@ -937,7 +948,7 @@ if __name__ == "__main__":
 
     Admin模式 = False
 
-    更新日期 = '202505050655'
+    更新日期 = '202505051507'
     本程式名 = 'Goldcome'
     賺錢鍠瀏覽器位 = 本程式名
 
@@ -945,11 +956,16 @@ if __name__ == "__main__":
     我官網 = 'https://www.金come.com/'
     VipDurl = "https://github.com/GoldComeHK/d/blob/main/d"
 
+    REPO_OWNER = 'GoldComeHK'
+    REPO_NAME = 'GoldComeHK.github.io'
+    檔名 = f'{本程式名}.exe'
+
     遠端鍠 = False
     月費用戶 = False 
     客服鍠試用次數 = 10
     用次數 = 0
     帳號1181 = None
+
     _Exe_Set._UpData本程式()
     _chrome_雜項._下載賺錢王Chrome()
     driver = _chrome_雜項._Chrome設定()
