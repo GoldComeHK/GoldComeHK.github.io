@@ -272,9 +272,9 @@ class _自動更新GitHub:
 
         # 顯示結果
         if response.status_code in [200, 201]:
-            print(f'✅ {TARGET_PATH}已成功{action}到 GitHub。')
+            print(f'✅ 已成功{action} = {TARGET_PATH}')
         else:
-            print(f'❌ {TARGET_PATH} 上傳失敗: {response.status_code}\n{response.text}')
+            print(f'❌ 上傳失敗: {TARGET_PATH} = {response.status_code}\n{response.text}')
 
 
 
