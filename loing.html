@@ -2,13 +2,22 @@
 <html lang="zh-Hant">
 <head>
   <meta charset="UTF-8">
-  <title>Goldcome - Google 登入</title>
-  <!-- 載入 Firebase 模組 -->
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
-    import { getAuth, onAuthStateChanged, signInWithPopup, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+  <title>Goldcome - Firebase 會員系統</title>
+  <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore-compat.js"></script>
+</head>
+<body>
+  <h1>Goldcome 登入系統</h1>
+  <button id="loginBtn">使用 Google 登入</button>
 
-    // 你的 Firebase 設定
+  <div id="memberContent" style="display:none; margin-top:20px;">
+    <h2>🎉 歡迎回來，會員！</h2>
+    <p id="userInfo"></p>
+  </div>
+
+  <script>
+    // Firebase 設定
     const firebaseConfig = {
       apiKey: "AIzaSyAyTb_KhBIqeiMZHHfmYrmOj83Kb2ZJXX8",
       authDomain: "goldcome-2f749.firebaseapp.com",
@@ -16,38 +25,34 @@
     };
 
     // 初始化 Firebase
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const db = firebase.firestore();
 
-    // 登入按鈕事件
-    document.addEventListener('DOMContentLoaded', () => {
-      document.getElementById("loginBtn").addEventListener("click", async () => {
-        try {
-          const provider = new GoogleAuthProvider();
-          const result = await signInWithPopup(auth, provider);
-          console.log("登入成功：", result.user);
-          document.getElementById("memberContent").style.display = "block";
-        } catch (error) {
-          alert("登入失敗：" + error.message);
-          console.error(error);
-        }
-      });
+    // 登入事件
+    document.getElementById("loginBtn").addEventListener("click", async () => {
+      const provider = new firebase.auth.GoogleAuthProvider();
+      try {
+        const result = await auth.signInWithPopup(provider);
+        const user = result.user;
 
-      // 登入狀態變更
-      onAuthStateChanged(auth, (user) => {
-        if (user) {
-          document.getElementById("memberContent").style.display = "block";
-        }
-      });
+        // 顯示會員內容
+        document.getElementById("memberContent").style.display = "block";
+        document.getElementById("userInfo").innerText = `登入帳號：${user.email}`;
+
+        // 儲存會員資料到 Firestore
+        await db.collection("users").doc(user.uid).set({
+          email: user.email,
+          name: user.displayName || "匿名會員",
+          lastLogin: new Date()
+        }, { merge: true });
+
+        console.log("會員資料已儲存");
+      } catch (error) {
+        alert("登入失敗：" + error.message);
+        console.error(error);
+      }
     });
   </script>
-</head>
-<body>
-  <h1>🔐 Goldcome 使用 Google 登入</h1>
-  <button id="loginBtn">使用 Google 登入</button>
-
-  <div id="memberContent" style="display:none; margin-top: 20px;">
-    <h2>🎉 歡迎回來，會員！</h2>
-  </div>
 </body>
 </html>
