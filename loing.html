@@ -44,8 +44,10 @@
         await db.collection("users").doc(user.uid).set({
           email: user.email,
           name: user.displayName || "匿名會員",
-          lastLogin: new Date()
-        }, { merge: true });
+          lastLogin: new Date(),
+            score: 0,           // 預設分數
+            role: "user"        // 預設為一般會員
+            }, { merge: true });   // merge: true 可以避免覆蓋原資料
 
         console.log("會員資料已儲存");
       } catch (error) {
