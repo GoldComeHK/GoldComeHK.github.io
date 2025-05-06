@@ -33,30 +33,42 @@
     const db = firebase.firestore();
 
     // 登入事件
-    document.getElementById("loginBtn").addEventListener("click", async () => {
-      const provider = new firebase.auth.GoogleAuthProvider();
-      try {
-        const result = await auth.signInWithPopup(provider);
-        const user = result.user;
+    const loginBtn = document.getElementById("loginBtn");
+
+    loginBtn.addEventListener("click", async () => {
+        try {
+        // 使用 Passkey 登入
+        const userCredential = await auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+
+        const 等級 = userCredential.等級;
+        const uid = 等級.uid;
+        const email = 等級.email;
+        const displayName = 等級.displayName || "";
+        const 用戶等級 = 等級.用戶等級 || "";
+        const 創建時間 = firebase.firestore.Timestamp.now();
+
+
 
         // 顯示會員內容
         document.getElementById("memberContent").style.display = "block";
-        document.getElementById("userInfo").innerText = `登入帳號：${user.email}`;
+        document.getElementById("userInfo").innerText = `登入帳號：${等級.email}`;
 
-        // 儲存會員資料到 Firestore
-        await db.collection("users").doc(user.uid).set({
-            email: user.email,
-            name: user.displayName || "匿名會員",
-            lastLogin: new Date(),
-            score: 0,           // 預設分數
-            role: "等級"        // 預設為一般會員
-            }, { merge: true });   // merge: true 可以避免覆蓋原資料
 
-        console.log("會員資料已儲存");
-      } catch (error) {
+
+        // 寫入 Firestore users 集合
+        await db.collection("等級").doc(uid).set({
+            email,
+            displayName,
+            用戶等級,
+            創建時間,
+            uid,
+        }, { merge: true }); // merge 可避免覆蓋舊資料
+
+        alert("登入成功，資料已寫入 Firestore");
+        } catch (error) {
+        console.error("登入失敗", error);
         alert("登入失敗：" + error.message);
-        console.error(error);
-      }
+        }
     });
   </script>
 </body>
