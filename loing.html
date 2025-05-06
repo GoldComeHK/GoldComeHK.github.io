@@ -19,13 +19,16 @@
   <script>
     // Firebase 設定
     const firebaseConfig = {
-      apiKey: "AIzaSyAyTb_KhBIqeiMZHHfmYrmOj83Kb2ZJXX8",
-      authDomain: "goldcome-2f749.firebaseapp.com",
-      projectId: "goldcome-2f749"
+        apiKey: "AIzaSyAyTb_KhBIqeiMZHHfmYrmOj83Kb2ZJXX8",
+        authDomain: "goldcome-2f749.firebaseapp.com",
+        projectId: "goldcome-2f749",
+        storageBucket: "goldcome-2f749.firebasestorage.app",
+        messagingSenderId: "253689582897",
+        appId: "1:253689582897:web:b2471430dd678acd69cc10"
     };
 
     // 初始化 Firebase
-    firebase.initializeApp(firebaseConfig);
+    const app = firebase.initializeApp(firebaseConfig);
     const auth = firebase.auth();
     const db = firebase.firestore();
 
@@ -42,9 +45,9 @@
 
         // 儲存會員資料到 Firestore
         await db.collection("users").doc(user.uid).set({
-          email: user.email,
-          name: user.displayName || "匿名會員",
-          lastLogin: new Date(),
+            email: user.email,
+            name: user.displayName || "匿名會員",
+            lastLogin: new Date(),
             score: 0,           // 預設分數
             role: "等級"        // 預設為一般會員
             }, { merge: true });   // merge: true 可以避免覆蓋原資料
