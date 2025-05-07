@@ -213,12 +213,83 @@ class _chrome_雜項:
         # 返回預設 driver
         return 初始化浏览器
 
+
+
+
+
+
+
+
+    # 自动获取当前系统用户名
+    def get_username():
+        # Windows 系统
+        if os.name == 'nt':
+            return os.getenv('USERNAME')
+        # Linux/macOS 系统
+        else:
+            return os.getenv('USER')  # 或 os.getenv('LOGNAME')
+
+    # 生成 Chrome 用户数据目录路径
+    def get_chrome_user_data_dir():
+        username = _chrome_雜項.get_username()
+        if not username:
+            raise ValueError("无法获取系统用户名！")
+
+        # 根据不同操作系统返回路径
+        if os.name == 'nt':  # Windows
+            return f"C:/Users/{username}/AppData/Local/Google/Chrome/User Data"
+        elif os.name == 'posix':  # macOS/Linux
+            # macOS
+            if os.uname().sysname == 'Darwin':
+                return f"/Users/{username}/Library/Application Support/Google/Chrome"
+            # Linux
+            else:
+                return f"/home/{username}/.config/google-chrome"
+        else:
+            raise OSError("不支持的操作系统")
+
     @staticmethod
     def _Chrome設定(set=''):
+
+        # 配置 Chrome 选项
         chrome_options = webdriver.ChromeOptions()
-        chrome_options.add_experimental_option("debuggerAddress", "127.0.0.1:9222")
+        user_data_dir = _chrome_雜項.get_chrome_user_data_dir()
+
+        # 加载用户数据目录
+        chrome_options.add_argument(f"--user-data-dir={user_data_dir}")
+        chrome_options.add_argument("--profile-directory=Default")
+
+        # 其他防检测配置
+        chrome_options.add_argument("--disable-blink-features=AutomationControlled")
+        chrome_options.add_experimental_option("excludeSwitches", ["enable-automation"])
+        chrome_options.add_experimental_option("useAutomationExtension", False)
+
         初始化浏览器 = webdriver.Chrome(options=chrome_options)
+        # 连接到现有 Chrome 实例（需提前手动启动调试端口）
+        # options.add_experimental_option("debuggerAddress", "127.0.0.1:9222")
+
         return 初始化浏览器
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -915,7 +986,7 @@ if __name__ == "__main__":
 
     Admin模式 = False
 
-    更新日期 = '202505080225'
+    更新日期 = '202505080238'
     本程式名 = 'Goldcome'
     賺錢鍠瀏覽器位 = 本程式名
 
