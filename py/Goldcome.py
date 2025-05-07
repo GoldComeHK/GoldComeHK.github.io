@@ -258,7 +258,7 @@ class _chrome_雜項:
 
 
     @staticmethod
-    def _Chrome設定():
+    def _Chrome設定(set=''):
 
         # 启动 Chrome
         chrome_proc = _chrome_雜項.launch_chrome_with_debug_port()
@@ -987,7 +987,7 @@ if __name__ == "__main__":
 
     Admin模式 = False
 
-    更新日期 = '202505080354'
+    更新日期 = '202505080358'
     本程式名 = 'Goldcome'
     賺錢鍠瀏覽器位 = 本程式名
 
