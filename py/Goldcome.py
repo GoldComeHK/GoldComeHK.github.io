@@ -258,14 +258,14 @@ class _chrome_雜項:
 
 
     @staticmethod
-    def _Chrome設定(port=9222):
+    def _Chrome設定():
 
         # 启动 Chrome
         chrome_proc = _chrome_雜項.launch_chrome_with_debug_port()
 
         # 配置 Chrome 选项
         chrome_options = webdriver.ChromeOptions()
-        chrome_options.add_experimental_option("debuggerAddress", f"127.0.0.1:{port}")
+        chrome_options.add_experimental_option("debuggerAddress", f"127.0.0.1:9222")
         try:
             初始化浏览器 = webdriver.Chrome(options=chrome_options)
             return 初始化浏览器
@@ -987,7 +987,7 @@ if __name__ == "__main__":
 
     Admin模式 = False
 
-    更新日期 = '202505080339'
+    更新日期 = '202505080354'
     本程式名 = 'Goldcome'
     賺錢鍠瀏覽器位 = 本程式名
 
