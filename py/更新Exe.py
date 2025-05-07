@@ -499,7 +499,9 @@ if __name__ == "__main__":
         (("../3.html"), "3.html"),
         (("../4.html"), "4.html"),
         (("../html.js"), "html.js"),
-        (("../html.css"), "html.css")
+        (("../html.css"), "html.css"),
+        (("../login.js"), "login.js"),
+        (("../u.html"), "u.html")
     ]
     for 本地文件路径, 仓库目标路径 in files_to_upload:
         manager._up文件用(本地文件路径, 仓库目标路径, 現在時間)
