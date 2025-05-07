@@ -1181,6 +1181,8 @@ def _執行遠端鍠(指令):
 
     all_data = []
 
+    比客睇 = []
+
     if Admin模式:
 
         for 睇 in 指令:
@@ -1211,7 +1213,7 @@ def _執行遠端鍠(指令):
 
     for 結果 in eval(遠端鍠py): # _香港勞工處('${關鍵字}') / _台灣就業通('${關鍵字}')
         if all成功發送 >= 發送促銷信件數:
-            print(f'已成功發送{發送促銷信件數}封,促銷鍠結束')
+            #print(f'已成功發送{發送促銷信件數}封,促銷鍠結束')
             all_data.append(f'已成功發送{發送促銷信件數}封,促銷鍠結束')
             break
 
@@ -1228,15 +1230,22 @@ def _執行遠端鍠(指令):
                 內文 = sell客文.split('&body=')[1]
                 發成點 = 自動send野._自動sendGmail(標題, 內文, 聯絡方式)
                 睇結果 = f'[ {公司名稱}:{聯絡方式} ]={發成點}'
+                比客睇.append(結果)
                 all成功發送 += 1
             else:
                 睇結果 = f'[ {公司名稱}:{聯絡方式} ]={促銷間隔天數}天內已發過'
         #ws
         else:
-            睇結果 = sell客文   
+            睇結果 = sell客文  
+            比客睇.append(結果) 
             all成功發送 += 1
 
         all_data.append(睇結果)
+    
+    # 將比客睇結果加到all_data後面
+    all_data.append('-'*18)
+    all_data.extend(比客睇)
+
     return all_data
 
 
@@ -1290,7 +1299,7 @@ if __name__ == "__main__":
     由這mail的key = ''
 
     now = datetime.now()
-    更新日期 = '202505051531'
+    更新日期 = '202505080134'
     print(f'$$$ 遠端鍠 {更新日期} 版 {now} 已執行 $$$')
     _TG機器人系列._TG多工機器人()
 
