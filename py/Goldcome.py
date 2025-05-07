@@ -266,6 +266,18 @@ class _chrome_雜項:
         # 配置 Chrome 选项
         chrome_options = webdriver.ChromeOptions()
         chrome_options.add_experimental_option("debuggerAddress", f"127.0.0.1:9222")
+
+        # 功能用 Chrome
+        if set:
+            USER_DATA_DIR = os.path.join(os.getcwd(), f'chrome_user_data_{set}')
+        else:
+            chrome_options.add_experimental_option("detach", True)
+            USER_DATA_DIR = os.path.join(os.getcwd(), 'chrome_user_data_default')
+
+        if set == '搵客鍠':
+            chrome_options.add_argument("--headless=new")
+        chrome_options.add_argument(f"--user-data-dir={USER_DATA_DIR}")
+
         try:
             初始化浏览器 = webdriver.Chrome(options=chrome_options)
             return 初始化浏览器
@@ -987,7 +999,7 @@ if __name__ == "__main__":
 
     Admin模式 = False
 
-    更新日期 = '202505080358'
+    更新日期 = '202505080405'
     本程式名 = 'Goldcome'
     賺錢鍠瀏覽器位 = 本程式名
 
