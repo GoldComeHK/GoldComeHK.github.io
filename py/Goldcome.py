@@ -269,9 +269,10 @@ class _chrome_雜項:
         try:
             初始化浏览器 = webdriver.Chrome(options=chrome_options)
             return 初始化浏览器
-        finally:
+        except Exception as e:
             初始化浏览器.quit()
             chrome_proc.terminate()
+            _雜項._獲取詳細錯誤堆棧(*sys.exc_info())
 
 
 
@@ -986,7 +987,7 @@ if __name__ == "__main__":
 
     Admin模式 = False
 
-    更新日期 = '202505080335'
+    更新日期 = '202505080339'
     本程式名 = 'Goldcome'
     賺錢鍠瀏覽器位 = 本程式名
 
