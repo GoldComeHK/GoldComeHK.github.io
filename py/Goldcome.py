@@ -216,11 +216,8 @@ class _chrome_雜項:
     @staticmethod
     def _Chrome設定(set=''):
         chrome_options = webdriver.ChromeOptions()
-        chrome_options.binary_location = "C:/Program Files/Google/Chrome/Application/chrome.exe"  # Windows 默认路径
-
-        # 初始化浏览器
+        chrome_options.add_experimental_option("debuggerAddress", "127.0.0.1:9222")
         初始化浏览器 = webdriver.Chrome(options=chrome_options)
-        # 返回預設 driver
         return 初始化浏览器
 
 
@@ -918,7 +915,7 @@ if __name__ == "__main__":
 
     Admin模式 = False
 
-    更新日期 = '202505080217'
+    更新日期 = '202505080225'
     本程式名 = 'Goldcome'
     賺錢鍠瀏覽器位 = 本程式名
 
