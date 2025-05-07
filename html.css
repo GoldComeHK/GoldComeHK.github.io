@@ -26,3 +26,22 @@ h1 { text-align: center;margin-bottom: 20px;font-size: 2em;text-shadow: 2px 2px 
 textarea:focus {height: 300px; }
 
 
+textarea {
+  /* 滚动条设置 */
+  overflow-y: auto;  /* 强制显示垂直滚动条 */
+  resize: vertical;   /* 允许垂直调整大小 */
+  /* 移动端优化 */
+  -webkit-overflow-scrolling: touch; /* 启用顺滑滚动 */
+  touch-action: manipulation;       /* 减少触摸延迟 */
+
+  /* 可选样式 */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px; /* 移动端最小推荐字号 */
+ }
+
+.textarea-container {
+    /* 移动端适配 */
+    max-width: 90%;
+    overflow: auto;
+  }

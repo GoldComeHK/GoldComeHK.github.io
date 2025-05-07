@@ -135,7 +135,10 @@ onAuthStateChanged(auth, async (user) => {
     if (user) {
 
         document.getElementById('login-form').style.display = 'none';
-        document.getElementById('user-email').textContent = user.email;
+        // 選取所有具有 class="user-email" 的元素
+        document.querySelectorAll('.user-email').forEach(element => {
+            element.textContent = user.email;
+        });
         
         // 检查是否是管理员
         const isAdmin = await checkAdmin();
@@ -220,15 +223,18 @@ async function loadUserScore(userId) {
         const userSnap = await getDoc(userRef);
         
         if (userSnap.exists()) {
-            // 使用「會員分數」而非「score」
-            document.getElementById('user-score').textContent = userSnap.data().會員分數 || 0;
+            document.querySelectorAll('.user-score').forEach(element => {
+                element.textContent = userSnap.data().會員分數 || 0;
+            });
         } else {
             // 新用戶初始化
             await setDoc(userRef, {
                 email: auth.currentUser.email,
                 會員分數: 100  // 新用戶送100分
             });
-            document.getElementById('user-score').textContent = 0;
+            document.querySelectorAll('.user-score').forEach(element => {
+                element.textContent = 0;
+            });
         }
     } catch (error) {
         showDbError("載入分數失敗: " + error.message);
@@ -464,14 +470,14 @@ const lastLogin = await getLastLogin(loginHistoryRef);
 
 const row = `
 <tr>
-<td>${userData.email || '未提供'}</td>
-<td>
-  <span id="score-${userDoc.id}">${userData.會員分數 || 0}</span>
-  <button onclick="changeScore('${userDoc.id}', 10)">+10</button>
-  <button onclick="changeScore('${userDoc.id}', -10)">-10</button>
-</td>
-<td>${lastLogin || '无记录'}</td>
-
+  <td>${userData.email || userEmail || '未提供'}</td>
+  <td>
+    <span id="score-${userDoc.id || userId}">${userData.會員分數 || 0}</span>
+    <br>
+    <input type="number" id="score-input-${userDoc.id || userId}" placeholder="分數" style="width: 50px;">
+    <button onclick="changeScore('${userDoc.id || userId}', document.getElementById('score-input-${userDoc.id || userId}').value)">改</button>
+  </td>
+  <td>${lastLogin || '无记录'}</td>
 </tr>
 `;
 tableBody.innerHTML += row;
@@ -542,15 +548,16 @@ const loginHistoryRef = collection(db, "users", userId, "loginHistory");
 const lastLogin = await getLastLogin(loginHistoryRef);
 
 const row = `
-  <tr>
-    <td>${userEmail}</td>
-    <td>
-      <span id="score-${userId}">${userData.會員分數 || 0}</span>
-      <button onclick="changeScore('${userId}', 10)">+10</button>
-      <button onclick="changeScore('${userId}', -10)">-10</button>
-    </td>
-    <td>${lastLogin || '无记录'}</td>
-  </tr>
+<tr>
+  <td>${userData.email || userEmail || '未提供'}</td>
+  <td>
+    <span id="score-${userDoc.id || userId}">${userData.會員分數 || 0}</span>
+    <br>
+    <input type="number" id="score-input-${userDoc.id || userId}" placeholder="分數" style="width: 50px;">
+    <button onclick="changeScore('${userDoc.id || userId}', document.getElementById('score-input-${userDoc.id || userId}').value)">改</button>
+  </td>
+  <td>${lastLogin || '无记录'}</td>
+</tr>
 `;
 tableBody.innerHTML += row;
 foundUsers++;

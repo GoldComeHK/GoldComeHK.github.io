@@ -36,6 +36,42 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 function 充值() {
     window.open("./PayAki", "_blank");
 }
+
+
+
+
+
+
+
+

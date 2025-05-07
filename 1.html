@@ -136,9 +136,9 @@
         
             <!-- 部份1: 帳號 -->
             <label>請填寫您的手機地區號*</label>
-            <input id="區號" type="text" placeholder="例如: 86" title="例如: 86" required>
+            <input id="區號" type="text" class="記錄數據用" placeholder="例如: 86" title="例如: 86" required>
             <label>請填寫您的 WhatsApp 號碼*</label>
-            <input id="WhatsApp號" type="text" placeholder="請填寫WhatsApp號碼" title="請填寫WhatsApp號碼" required>
+            <input id="WhatsApp號" class="記錄數據用" type="text" placeholder="請填寫WhatsApp號碼" title="請填寫WhatsApp號碼" required>
 
 
 
@@ -146,22 +146,22 @@
             <div class="reply-group">
                 
                 <label>請選擇搜尋地區*(需要在當地網絡才能搜尋)</label>
-                <select id="地區" title="請選擇搜尋地區">
+                <select id="地區" class="記錄數據用" title="請選擇搜尋地區">
                     <option value="HK" selected>香港</option>
                     <option value="TW">台灣</option>
                 </select>
 
                 <label>請填寫搜尋關鍵字</label>
-                <input id="關鍵字" type="text" placeholder="請填寫搜尋關鍵字" title="請填寫搜尋關鍵字" value="金融">
+                <input id="關鍵字" class="記錄數據用" type="text" placeholder="請填寫搜尋關鍵字" title="請填寫搜尋關鍵字" value="金融">
             
                 <label>最多找資料數(愈大需時愈久)(1資料 = 1💰)</label>
-                <input id="最多找資料數" value="10" type="number" min="1" step="1" required oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+                <input id="最多找資料數" class="記錄數據用" value="10" type="number" min="1" step="1" required oninput="this.value = this.value.replace(/[^0-9]/g, '');">
             
 
             </div>
 
             <!-- 部份3: 結果 -->
-            <textarea id="搵客鍠結果" ></textarea>
+            <textarea id="搵客鍠結果" class="記錄數據用" ></textarea>
             <p id="臨時結果"></p>
 
 
@@ -191,8 +191,8 @@
                 <div id="admin-panel" style="display: none;"></div>
                 <div id="user-info" style="display: none;">
                     <button onclick="充值()" title="充值" >💰 = </button>
-                    <span id="user-score"  title="悠的點數" >0</span>
-                    🙂 = <span id="user-email"></span>
+                    <span class="user-score"  title="悠的點數" >0</span>
+                    🙂 = <span class="user-email"></span>
                     <button onclick="logout()">登出</button>
                     <div id="success-message" class="success"></div>
                     <div id="db-error-message" class="error"></div>
@@ -241,43 +241,39 @@
 
 
 
-<!-- 
-      ::::::::           :::     :::     :::       ::::::::::       :::::::::
-    :+:    :+:        :+: :+:   :+:     :+:       :+:              :+:    :+:
-   +:+              +:+   +:+  +:+     +:+       +:+              +:+    +:+
-  +#++:++#++      +#++:++#++: +#+     +:+       +#++:++#         +#+    +:+
-        +#+      +#+     +#+  +#+   +#+        +#+              +#+    +#+
-#+#    #+#      #+#     #+#   #+#+#+#         #+#              #+#    #+#
-########       ###     ###     ###           ##########       #########
--->
     <script>
-
-        AllData位 = ['區號','WhatsApp號','關鍵字','地區','搵客鍠結果','最多找資料數']
-
-        // loadSaved 自動保存
-        function saveToLocalStorage(key, value) {
-            localStorage.setItem(key, value);
+        /*
+              ::::::::           :::     :::     :::       ::::::::::       :::::::::
+            :+:    :+:        :+: :+:   :+:     :+:       :+:              :+:    :+:
+           +:+              +:+   +:+  +:+     +:+       +:+              +:+    +:+
+          +#++:++#++      +#++:++#++: +#+     +:+       +#++:++#         +#+    +:+
+                +#+      +#+     +#+  +#+   +#+        +#+              +#+    +#+
+        #+#    #+#      #+#     #+#   #+#+#+#         #+#              #+#    #+#
+        ########       ###     ###     ###           ##########       #########
+        */        
+        
+                const 記錄位 = document.querySelectorAll(".記錄數據用");
+        
+                function 記錄已填寫數據() {
+                    // 頁面加載時，從 LocalStorage 恢復數據
+                    document.addEventListener("DOMContentLoaded", () => {
+                        記錄位.forEach(element => {
+                        const savedValue = localStorage.getItem(element.id);
+                        if (savedValue !== null) {
+                            element.value = savedValue; // 適用於 input、textarea、select
+                        }
+                        });
+                    });
+        
+                    // 監聽輸入事件，實時保存數據
+                    記錄位.forEach(element => {
+                        element.addEventListener("input", () => {
+                        localStorage.setItem(element.id, element.value);
+                        });
+                    });
         }
-
-        function loadFromLocalStorage(key) {
-            return localStorage.getItem(key);
-        }
-
-        function loadSavedData() {
-            AllData位.forEach((field) => {
-                const element = document.getElementById(field);
-                if (element) {
-                    element.value = loadFromLocalStorage(field) || '';
-                }
-            });
-        }
-
-        window.addEventListener('beforeunload', () => {
-            AllData位.forEach((field) => {
-                saveToLocalStorage(field, document.getElementById(field).value);
-            });
-        });
-
+        
+        
 
 
 
@@ -315,18 +311,23 @@
 */
         // 手動上下載
         function 下載設定檔() {
-            const data = AllData位.reduce((obj, field) => {
-                const element = document.getElementById(field);
-                obj[field] = element ? element.value : '';
-                return obj;
-            }, {});
+            const 記錄位B = document.querySelectorAll(".記錄數據用");
+            const data = {};
+            // 遍歷所有帶有 .記錄數據用 類的元素
+            記錄位B.forEach(element => {
+                // 使用元素的 id 作為鍵，如果沒有 id 則使用 name 或其他屬性
+                const key = element.id || element.name || element.className;
+                if (key) {
+                    data[key] = element.value || '';
+                }
+            });
 
             const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
             const url = URL.createObjectURL(blob);
             
             const link = document.createElement("a");
             link.href = url;
-            link.download = `${_現在時間()}_搵客鍠.json`;
+            link.download = `${_現在時間()}_遠端鍠.json`;
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
@@ -334,12 +335,30 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         function 上傳設定檔(event) {
             const 設定匯入 = document.getElementById('設定匯入').textContent;
             const 設定格式錯誤 = document.getElementById('設定格式錯誤').textContent;
-
             const 匯入警告 = document.getElementById('匯入警告').textContent;
-            if (!confirm(匯入警告)) {location.reload(); return;}
+            
+            if (!confirm(匯入警告)) {
+                location.reload(); 
+                return;
+            }
 
             const file = event.target.files[0];
             if (!file) return;
@@ -349,11 +368,11 @@
                 try {
                     const importedData = JSON.parse(e.target.result);
                     
-                    // 使用 AllData位 自动匹配并导入数据
-                    AllData位.forEach(field => {
-                        const element = document.getElementById(field);
-                        if (element) {
-                            element.value = importedData[field] || '';
+                    // 遍歷所有 .記錄數據用 元素並導入數據
+                    記錄位.forEach(element => {
+                        const key = element.id || element.name || element.className;
+                        if (key && importedData.hasOwnProperty(key)) {
+                            element.value = importedData[key] || '';
                         }
                     });
 
@@ -365,7 +384,6 @@
             };
             reader.readAsText(file);
         }
-
 
 
 
@@ -605,8 +623,9 @@
             _翻譯()
             _顯示聯莫(聯莫);
             
-            loadSavedData();
+            
         }
+        記錄已填寫數據();
         琪琪修改()
     </script>
 </body>
