@@ -176,6 +176,12 @@ class _chrome_雜項:
         chromium_path = os.path.join(exe_dir, 賺錢鍠瀏覽器位, "chromium-1140", "chrome-win", "chrome.exe")
         chrome_options.binary_location = chromium_path  # 指定 Chrome 可执行路径
 
+        # 隐藏自动化特征
+        chrome_options.add_experimental_option("excludeSwitches", ["enable-automation"])
+        chrome_options.add_experimental_option("useAutomationExtension", False)
+        chrome_options.add_argument("--disable-blink-features=AutomationControlled")
+        chrome_options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36")
+
         # 功能用 Chrome
         if set:
             USER_DATA_DIR = os.path.join(os.getcwd(), f'chrome_user_data_{set}')
@@ -197,8 +203,15 @@ class _chrome_雜項:
         chrome_options.add_argument('--disable-dev-shm-usage')
         chrome_options.add_argument('--disable-infobars')
 
+        # 初始化浏览器
+        初始化浏览器 = webdriver.Chrome(options=chrome_options)
+        # 覆盖navigator.webdriver属性
+        初始化浏览器.execute_script(
+            "Object.defineProperty(navigator, 'webdriver', {get: () => undefined})"
+        )
+
         # 返回預設 driver
-        return webdriver.Chrome(options=chrome_options)  
+        return 初始化浏览器
 
 
 
@@ -884,7 +897,7 @@ if __name__ == "__main__":
 
     Admin模式 = False
 
-    更新日期 = '202505080134'
+    更新日期 = '202505080147'
     本程式名 = 'Goldcome'
     賺錢鍠瀏覽器位 = 本程式名
 
