@@ -116,6 +116,8 @@
 
     <!-- 部份0: 基本 -->
     <div id="執行中請不要關閉網頁">
+        <h2>🙂 = <span class="user-email"></span></h2>
+        <h2>💰 = <span class="user-score"  title="悠的點數" >0</span></h2>
         <h2 id="執行中說明">請稍候...</h2>
     </div>
 
@@ -551,7 +553,7 @@
                 return;
             }
 
-            const 執行碼 = 客服.replace("@帳號1181@", `'${區號}','${WhatsApp號}','客服鍠'`) // _獲取帳號資料 必須
+            const 執行碼 = 客服
                 // 執行的功能要值
                 .replace("@国家代码@", 區號)
                 .replace("@电话号码@", WhatsApp號)
