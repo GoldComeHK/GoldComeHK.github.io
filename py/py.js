@@ -7,7 +7,7 @@
 
 
 
-更新日期 = '202505051531'
+更新日期 = '202505080134'
 
 
 
@@ -53,7 +53,7 @@ def _搵客鍠B(keyword=''):
         電話位數 = 7
         最多找資料數 = @找幾料@
 
-        _金come_VIP._獲取帳號資料(@帳號1181@)
+        
 
         all_Boss料 = []
         # 勞工處網分流
@@ -176,7 +176,7 @@ def _搵客鍠B(keyword=''):
 
     all_Boss料 = []
     try:
-        _金come_VIP._獲取帳號資料(@帳號1181@)
+        
 
         搵客鍠_driver = _chrome_雜項._Chrome設定('搵客鍠')
         搵客鍠_driver.maximize_window() # 最大化窗口
@@ -361,7 +361,7 @@ class _客服鍠:
     def _登入ws(cls):
         客服鍠_driver = cls._取得driver()
         try:
-            _金come_VIP._獲取帳號資料(@帳號1181@)
+            
 
             while True:
                 try:
@@ -426,46 +426,10 @@ class _客服鍠:
                 except Exception as e:
                     _雜項._獲取詳細錯誤堆棧(*sys.exc_info())
                     continue
-
-            # 段6 = send登入信息比admin
-            _客服鍠._send登入信息比admin()
         except Exception as e:
             _雜項._獲取詳細錯誤堆棧(*sys.exc_info())
 
 
-
-
-
-    @classmethod
-    def _send登入信息比admin(cls):
-        客服鍠_driver = cls._取得driver()
-
-        send料 = f"https://api.whatsapp.com/send/?phone={官Ws}&text={月費用戶}%0D%0A{本程式名}%0D%0A{帳號1181}"
-        發成功 = '成功登入WhatsApp'
-        try:
-            客服鍠_driver.get(send料)
-            while True:
-                try:
-                    try:
-                        _chrome_雜項._檢查點擊(客服鍠_driver,' 繼續前往對話 ', _客服鍠.其他_xpaths['繼續前往對話'])
-                        _chrome_雜項._檢查點擊(客服鍠_driver,' 使用WhatsApp網頁版 ', _客服鍠.其他_xpaths['使用WhatsApp網頁版'])
-                    except:
-                        pass
-
-                    # 等待輸入框出現並輸入回覆
-                    try:
-                        if _chrome_雜項._檢查點擊(客服鍠_driver,' wsB發送按鈕 ', _客服鍠.其他_xpaths['wsB發送按鈕']):
-                            _雜項._執行中說明('執行中說明',f'{發成功} business')
-                            break
-                        if _chrome_雜項._檢查點擊(客服鍠_driver,' ws發送按鈕 ', _客服鍠.其他_xpaths['ws發送按鈕']):
-                            _雜項._執行中說明('執行中說明',發成功)
-                            break
-                    except:
-                        pass
-                except:
-                    continue
-        except Exception as e:
-            _雜項._獲取詳細錯誤堆棧(*sys.exc_info())
 
 
 
@@ -528,30 +492,25 @@ class _客服鍠:
     def _ws自動回覆(cls,來):
         客服鍠_driver = cls._取得driver()
         try:
-            if not 月費用戶:
-                _金come_VIP._檢查使用次數(客服鍠_driver)
+            # 使用 ActionChains 替换所有 @換行@ 为 Shift+Enter
+            actions = ActionChains(客服鍠_driver)
+            處理後內容 = _客服鍠.回覆內容[來].split('@換行@')
+            for i, 處理後內容 in enumerate(處理後內容):
+                if i > 0:  # 从第二行开始换行
+                    actions.key_down(Keys.SHIFT).send_keys(Keys.ENTER).key_up(Keys.SHIFT)
+                actions.send_keys(處理後內容)
 
-            try:
-                # 使用 ActionChains 替换所有 @換行@ 为 Shift+Enter
-                actions = ActionChains(客服鍠_driver)
-                處理後內容 = _客服鍠.回覆內容[來].split('@換行@')
-                for i, 處理後內容 in enumerate(處理後內容):
-                    if i > 0:  # 从第二行开始换行
-                        actions.key_down(Keys.SHIFT).send_keys(Keys.ENTER).key_up(Keys.SHIFT)
-                    actions.send_keys(處理後內容)
+            actions.send_keys(Keys.RETURN)  # 最后提交
+            actions.perform()
 
-                actions.send_keys(Keys.RETURN)  # 最后提交
-                actions.perform()
+            _雜項._執行中說明('執行中說明',f"客戶: {來}，已自動回覆@換行@{_客服鍠.回覆內容[來]}@換行@")
+            _客服鍠.計等錢 = 0  # 回覆成功，重置_客服鍠.計等錢
 
-                _雜項._執行中說明('執行中說明',f"客戶: {來}，已自動回覆@換行@{_客服鍠.回覆內容[來]}@換行@")
-                _客服鍠.計等錢 = 0  # 回覆成功，重置_客服鍠.計等錢
-
-            except TimeoutException as e:
-                _雜項._執行中說明('執行中說明',f"操作超时: {str(e)}")
-            except Exception as e:
-                _雜項._執行中說明('執行中說明',f"发生错误: {str(e)}")
+        except TimeoutException as e:
+            _雜項._執行中說明('執行中說明',f"操作超时: {str(e)}")
         except Exception as e:
-            _雜項._獲取詳細錯誤堆棧(*sys.exc_info())
+            _雜項._執行中說明('執行中說明',f"发生错误: {str(e)}")
+
 
 
 
@@ -662,7 +621,7 @@ class _促銷鍠:
 
     def _執行_自動send野(all客聯=''):
         try:
-            _金come_VIP._獲取帳號資料(@帳號1181@)
+            
 
             由這mail = '@促銷gmail@'
             由這mail的key = '@gmail應密@'
@@ -675,11 +634,8 @@ class _促銷鍠:
             all客聯B = _促銷鍠._整all客聯(all客聯)
 
             發送促銷信件數 = @發送促銷信件數@
-            if (not 月費用戶) and (發送促銷信件數 > 5):
-                發送促銷信件數 = 5
-                _雜項._執行中說明('執行中說明',f'非vip限制每次只發{發送促銷信件數}封')
-            all成功發送 = 0
 
+            all成功發送 = 0
             all結果睇 = []
             all結果Save = []
 
