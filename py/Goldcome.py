@@ -168,7 +168,7 @@ class _chrome_雜項:
 
 
     @staticmethod
-    def _Chrome設定(set=''):
+    def _C22hrome設定(set=''):
 
         # 共用設定
         chrome_options = webdriver.ChromeOptions()
@@ -212,6 +212,27 @@ class _chrome_雜項:
 
         # 返回預設 driver
         return 初始化浏览器
+
+    @staticmethod
+    def _Chrome設定(set=''):
+        chrome_options = webdriver.ChromeOptions()
+        chrome_options.binary_location = "C:/Program Files/Google/Chrome/Application/chrome.exe"  # Windows 默认路径
+
+        # 初始化浏览器
+        初始化浏览器 = webdriver.Chrome(options=chrome_options)
+        # 返回預設 driver
+        return 初始化浏览器
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -897,7 +918,7 @@ if __name__ == "__main__":
 
     Admin模式 = False
 
-    更新日期 = '202505080147'
+    更新日期 = '202505080217'
     本程式名 = 'Goldcome'
     賺錢鍠瀏覽器位 = 本程式名
 
@@ -914,7 +935,7 @@ if __name__ == "__main__":
     帳號1181 = None
 
     _Exe_Set._UpData本程式()
-    _chrome_雜項._下載賺錢王Chrome()
+    #_chrome_雜項._下載賺錢王Chrome()
     driver = _chrome_雜項._Chrome設定()
     _雜項._WindowsAPI阻止系统休眠()
 
