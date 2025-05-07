@@ -273,11 +273,15 @@ class _chrome_雜項:
         if set:
             USER_DATA_DIR = os.path.join(os.getcwd(), f'chrome_user_data_{set}')
             chrome_options.add_argument(f"--user-data-dir={USER_DATA_DIR}")
+        else:
+            chrome_options.add_experimental_option("detach", True)
+            USER_DATA_DIR = os.path.join(os.getcwd(), 'chrome_user_data_default')
 
+        # 每次執行程式都會重用此資料夾，LocalStorage、Cookies 等記錄不會消失
+        chrome_options.add_argument(f"--user-data-dir={USER_DATA_DIR}")
 
-
-
-
+        初始化浏览器 = webdriver.Chrome(options=chrome_options)
+        return 初始化浏览器
 
         try:
             初始化浏览器 = webdriver.Chrome(options=chrome_options)
@@ -1000,7 +1004,7 @@ if __name__ == "__main__":
 
     Admin模式 = False
 
-    更新日期 = '202505080419'
+    更新日期 = '202505080425'
     本程式名 = 'Goldcome'
     賺錢鍠瀏覽器位 = 本程式名
 
