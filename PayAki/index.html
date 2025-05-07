@@ -1,7 +1,7 @@
 <html>
     <head>
     <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>莫氏金流商匯| 付款方式選擇</title>
+    <title>金come | 付款方式選擇</title>
 
     <style>
         * {margin: 0;padding: 0;box-sizing: border-box;}
@@ -30,17 +30,13 @@
         .bgimg{ background-size: auto;background-repeat: no-repeat;}
     </style>
 
-    <link rel="stylesheet" href="https://64071181.github.io/mokJsapi/aki.css">
     <!-- ws icon https://www.thinkcmf.com/font/font_awesome/icons.html -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-
-
-    <!--<script src="../../mokJsapi/a.js"></script>-->
-<script src="https://GoldComeHK.github.io/mokJsapi/a.js"></script>
-
+    <script src="../../mokJsapi/a.js"></script>
+    <script src="https://cdn.staticfile.net/translate.js/3.1.7/translate.js"></script>
     </head>
     <body>
         <samp id="莫生查詢" style="display: none;">莫生我要查詢付款</samp>
@@ -50,10 +46,7 @@
         <div class="payment-container">
 
             <div style="text-align: center;">
-                <h1>
-                    <a href="../"><b id="_我司名"></b></a>
-                    | 付款方式選擇
-                </h1>
+                <h1>付款方式選擇 | <a href="../set.html"><b class="_我司名"></b></a></h1>
                 <br>
                 <p id="translate"></p>
                 <p class="mokJsApi_copyright">版權</p>
@@ -194,16 +187,20 @@
     
     <script src="https://cdn.staticfile.net/translate.js/3.1.7/translate.js"></script>
     <script>
-        function Start() {
-            // 翻譯 
-            //translate.language.setLocal('chinese_traditional'); //設置本地語種（當前網頁的語種）。如果不設置，默認自動識別當前網頁顯示文字的語種。 可填寫如 'english'、'chinese_simplified' 等，具體參見文檔下方關於此的說明。
+
+function _翻譯(){ 
             translate.service.use('client.edge'); //設置機器翻譯服務通道，直接客戶端本身，不依賴服務端 。相關說明參考 http://translate.zvo.cn/43086.html
             translate.execute();//進行翻譯 
+        }
 
+
+        function Start() {
             // 顯示聯莫
-            const 聯莫 = ['moksurky@gmail.com','https://wa.me/85264071181/','https://i.meee.com.tw/atcX6QM.png','https://www.instagram.com/moksurky2025/','https://line.me/ti/p/UlSPd7p9zh/','https://www.facebook.com/aki.mok.10/','http://t.me/mokaki/'
+            const 聯莫 = ['moksurky@gmail.com','https://wa.me/85264071181/','https://i.meee.com.tw/atcX6QM.png','https://www.instagram.com/moksurky2025/','https://line.me/ti/p/UlSPd7p9zh/','https://www.facebook.com/aki.mok.10/','http://t.me/mokaki/','https://github.com/GoldComeHK/GoldComeHK.github.io'
             ];
+            _翻譯()
             _顯示聯莫(聯莫);
+            
         }
 
 
