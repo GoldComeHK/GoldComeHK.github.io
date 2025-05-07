@@ -60,6 +60,7 @@
 
   <link rel="stylesheet" href="html.css">
   <script src="html.js"></script>
+  <script type="module" src="login.js"></script>
 
   <script src="https://cdn.staticfile.net/translate.js/3.1.7/translate.js">// 翻譯 放最後</script>
 
@@ -147,7 +148,7 @@
             <a href="https://myaccount.google.com/u/1/apppasswords?pli=1&rapt=AEjHL4NB4hK6Th7KGvq8QXmew8zX6e0Q0vg_Ruwjaxi6rHdyqR9HRAen2ocS95fglp1iHWQ2zcuydfYf4-aeUc4F2sJBPQ0s7iayeTEjdPFPKUTS0UILi60"><label>gmail的應用程式密碼*</label><b>❔</b></a>
             <input id="gmail的應用程式密碼" class="記錄數據用" type="text" placeholder="請填寫gmail的應用程式密碼" title="請填寫gmail的應用程式密碼" required>
             
-            <label>發送促銷信件數*</label>
+            <label>發送促銷信件數*(1信件 = 1💰)</label>
             <input id="發送促銷信件數" class="記錄數據用" value="10" type="number" min="1" step="1" required oninput="this.value = this.value.replace(/[^0-9]/g, '');">
             
             <label>促銷信的標題*</label>
@@ -192,7 +193,22 @@
 
             <!-- 部份7: 執行促銷鍠 -->
             <div class="執行金come">
-                <button class="大鍵 執行促銷鍠" title="執行促銷鍠 📣" onclick="執行促銷鍠()">執行促銷鍠 📣</button>
+                <!-- Google 登入 -->
+                <div id="login-form">     
+                    <button onclick="loginWithGoogle()" class="大鍵" >Google 登入</button>
+                    <div id="error-message" class="error"></div>
+                </div>
+                <div id="admin-panel" style="display: none;"></div>
+                <div id="user-info" style="display: none;">
+                    <button onclick="充值()" title="充值" >💰 = </button>
+                    <span id="user-score"  title="悠的點數" >0</span>
+                    🙂 = <span id="user-email"></span>
+                    <button onclick="logout()">登出</button>
+                    <div id="success-message" class="success"></div>
+                    <div id="db-error-message" class="error"></div>
+                    <button class="大鍵 執行促銷鍠" title="執行促銷鍠 📣" onclick="執行促銷鍠()">執行促銷鍠 📣</button>
+                </div><!-- Google 登入 -->
+
                 <h3><a href="./set.html">返回<b class="_我司名"></b></a></h3>
             </div>
 
@@ -713,6 +729,16 @@
                 }
             }
 
+
+            // 檢查分數
+            使用分數 = 發送促銷信件數
+            const result = await redeemPoints(使用分數); // 接收 redeemPoints() 的返回值
+            if (!result.success) {
+                alert(`您的分數不足${使用分數}點，請充值!`);
+                充值();
+                return;
+            }
+
             const 執行碼 = 促銷.replace("@帳號1181@", `'${區號}','${WhatsApp號}','促銷鍠'`) // _獲取帳號資料 必須
                 // 執行的功能要值
                 .replace("@促銷gmail@", 發出促銷信的gmail)
@@ -822,7 +848,6 @@
             _翻譯()
             _顯示聯莫(聯莫);
             
-            loadSavedData();
         }
 
         記錄已填寫數據();

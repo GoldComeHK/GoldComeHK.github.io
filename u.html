@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <title>會員系統 - 積分功能</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 600px; margin: 20px auto; padding: 20px; }
+        .form-group { margin-bottom: 15px; }
+        input { padding: 8px; width: 100%; }
+        button { padding: 10px 20px; margin: 5px; background: #007bff; color: white; border: none; cursor: pointer; }
+        .user-info { margin-top: 20px; padding: 20px; background: #f0f0f0; border-radius: 5px; }
+        .error { color: red; margin: 10px 0; }
+        .success { color: green; margin: 10px 0; }
+        .score-display { font-size: 24px; margin: 15px 0; }
+
+
+        /* 登入记录 */
+        .history-container {
+            margin-top: 20px;
+            max-height: 200px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            padding: 10px;
+            background: white;
+        }
+        .history-item {
+            padding: 8px;
+            border-bottom: 1px solid #eee;
+            font-size: 14px;
+        }
+        .history-item:last-child {
+            border-bottom: none;
+        }
+    </style>
+
+<script type="module" src="login.js"></script>
+</head>
+<body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+        #             #           
+  ##### #  #           #          
+      # # #             #         
+   #  #  #  #           #         
+    ##   # #            #         
+    #     #            # #        
+   #########           # #        
+  #       # ###        # #        
+##  ######## #        #   #       
+    #     #           #   #       
+    #     #          #     #      
+    #######          #     #      
+     #   #          #       #     
+      # #   #      #        #     
+ #############    #          ###  
+                 #            #   
+
+-->
+    <div id="login-form">
+        <h2>會員登入</h2>        
+        <button onclick="loginWithGoogle()" style="background: #dd4b39;">Google 登入</button>
+        <div id="error-message" class="error"></div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+<!--
+       #                    #     
+       #            ##########    
+      # #           #       #     
+     #   #          #       #     
+    #     #         #########     
+   #       #                 #    
+  # ####### ###    ############   
+##           #     #         #    
+           #       #    #    #    
+  ###########      #    #    #    
+      #            #    #    #    
+      #            #    #    #    
+     #   #         #   #     #    
+    #     #           #   ##      
+   #########        ##      ##    
+           #      ##          #   
+
+-->
+    <div id="user-info" class="user-info" style="display: none;">
+        <h3>會員資訊</h3>
+        <p>電子郵件: <span id="user-email"></span></p>
+        <p>用戶ID: <span id="user-uid"></span></p>
+
+        
+        <h4>最近登入记录</h4>
+        <div id="login-history" class="history-container">
+            <p>正在加载记录...</p>
+        </div>
+
+
+        <div class="score-display">
+            會員分數: <span id="user-score">0</span>
+        </div>
+        
+        <input type="number" id="redeemPointsInput" placeholder="輸入要兌換的分數" min="1" step="1" value="100">
+
+
+        <button onclick="redeemPoints()" style="background: #28a745;">兌換獎勵</button>
+        <button onclick="logout()" style="background: #dc3545;">登出</button>
+        
+        <div id="success-message" class="success"></div>
+        <div id="db-error-message" class="error"></div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+   #     #                   #               #     
+   ##### #####      #  ########      ##########    
+  # #   #  #     ##### #  #  #       #       #     
+ #   # #    #      #   #  #  #       #       #     
+       #           #   #######       #########     
+ ##############    #   #  #  #                #    
+ #            #  ##### #  #  #      ############   
+#  ######### #     #   #######      #         #    
+   #       #       #      #         #    #    #    
+   #########       #      # #       #    #    #    
+   #               #   #######      #    #    #    
+   #########       ####   #         #    #    #    
+   #       #     ###      #         #   #     #    
+   #       #      #       #   #        #   ##      
+   #########         ###########     ##      ##    
+   #                               ##          #   
+    
+-->
+
+    <div id="admin-panel" style="display: none;">
+        <h2>管理员控制台
+            <button onclick="logout()" style="background: #dc3545;">登出</button>
+        </h2>
+
+        <div class="user-controls">
+          <input type="text" id="search-user" placeholder="搜索用户ID或邮箱">
+          <button onclick="searchUsers()">搜索</button>
+        </div>
+      
+        <table id="users-table">
+          <thead>
+            <tr>
+              <th>邮箱</th>
+              <th>会员分数</th>
+              <th>最后登录</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
+</body>
+</html>
