@@ -220,58 +220,58 @@ class _chrome_雜項:
 
 
 
-    # 自动获取当前系统用户名
-    def get_username():
-        # Windows 系统
+
+
+
+
+
+    def launch_chrome_with_debug_port(port=9222, user_data_dir=None):
+        # 自动识别系统路径
         if os.name == 'nt':
-            return os.getenv('USERNAME')
-        # Linux/macOS 系统
+            chrome_path = "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"
+        elif os.name == 'posix':
+            chrome_path = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
         else:
-            return os.getenv('USER')  # 或 os.getenv('LOGNAME')
+            raise OSError("Unsupported OS")
 
-    # 生成 Chrome 用户数据目录路径
-    def get_chrome_user_data_dir():
-        username = _chrome_雜項.get_username()
-        if not username:
-            raise ValueError("无法获取系统用户名！")
+        # 设置临时用户数据目录
+        if not user_data_dir:
+            user_data_dir = os.path.join(os.getcwd(), "temp_chrome_data")
+            os.makedirs(user_data_dir, exist_ok=True)
 
-        # 根据不同操作系统返回路径
-        if os.name == 'nt':  # Windows
-            return f"C:/Users/{username}/AppData/Local/Google/Chrome/User Data"
-        elif os.name == 'posix':  # macOS/Linux
-            # macOS
-            if os.uname().sysname == 'Darwin':
-                return f"/Users/{username}/Library/Application Support/Google/Chrome"
-            # Linux
-            else:
-                return f"/home/{username}/.config/google-chrome"
-        else:
-            raise OSError("不支持的操作系统")
+        # 启动命令
+        args = [
+            chrome_path,
+            f"--remote-debugging-port={port}",
+            f"--user-data-dir={user_data_dir}",
+            "--no-first-run",
+            "--no-default-browser-check",
+        ]
+
+        # 启动进程
+        process = subprocess.Popen(args, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        time.sleep(5)  # 确保 Chrome 完全启动
+        return process
+
+
+
+
 
     @staticmethod
-    def _Chrome設定(set=''):
+    def _Chrome設定(port=9222):
+
+        # 启动 Chrome
+        chrome_proc = _chrome_雜項.launch_chrome_with_debug_port()
 
         # 配置 Chrome 选项
         chrome_options = webdriver.ChromeOptions()
-        user_data_dir = _chrome_雜項.get_chrome_user_data_dir()
-
-        # 加载用户数据目录
-        chrome_options.add_argument(f"--user-data-dir={user_data_dir}")
-        chrome_options.add_argument("--profile-directory=Default")
-
-        # 其他防检测配置
-        chrome_options.add_argument("--disable-blink-features=AutomationControlled")
-        chrome_options.add_experimental_option("excludeSwitches", ["enable-automation"])
-        chrome_options.add_experimental_option("useAutomationExtension", False)
-
-        初始化浏览器 = webdriver.Chrome(options=chrome_options)
-        # 连接到现有 Chrome 实例（需提前手动启动调试端口）
-        # options.add_experimental_option("debuggerAddress", "127.0.0.1:9222")
-
-        return 初始化浏览器
-
-
-
+        chrome_options.add_experimental_option("debuggerAddress", f"127.0.0.1:{port}")
+        try:
+            初始化浏览器 = webdriver.Chrome(options=chrome_options)
+            return 初始化浏览器
+        finally:
+            driver.quit()
+            chrome_proc.terminate()
 
 
 
@@ -986,7 +986,7 @@ if __name__ == "__main__":
 
     Admin模式 = False
 
-    更新日期 = '202505080238'
+    更新日期 = '202505080330'
     本程式名 = 'Goldcome'
     賺錢鍠瀏覽器位 = 本程式名
 
