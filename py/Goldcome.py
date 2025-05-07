@@ -464,9 +464,6 @@ class _搵客鍠:
             if contact not in seen_contacts:
                 filtered_data.append(entry)
                 seen_contacts.add(contact)
-                if (not 月費用戶) and (len(filtered_data) == 10):
-                    _雜項._執行中說明('執行中說明','非vip每次最多取10個資料')
-                    break
 
         # 輸出篩選後的列表
         return filtered_data
@@ -538,7 +535,7 @@ class _搵客鍠:
         現在時間 = now.strftime("[%Y-%m-%d|%H:%M:%S]")
 
         # 转换为带换行的字符串（每条记录占一行）
-        Boss料PoHtml = f"{現在時間}[{地區}|{關鍵字}][{vip}]\n" +"\n".join(Boss料list) +"\n---------\n"
+        Boss料PoHtml = f"{現在時間}[{地區}|{關鍵字}]\n" +"\n".join(Boss料list) +"\n---------\n"
         print(Boss料PoHtml)
 
         driver.execute_script(
@@ -585,63 +582,6 @@ class _搵客鍠:
 
 
 
-
-
-
-
-
-'''
-          :::        ::::::::         :::         :::       ::::::::         :::
-       :+: :+:     :+:    :+:      :+:+:       :+:+:      :+:    :+:      :+:+:
-     +:+   +:+    +:+               +:+         +:+      +:+    +:+        +:+
-   +#++:++#++:   +#+               +#+         +#+       +#++:++#         +#+
-  +#+     +#+   +#+               +#+         +#+      +#+    +#+        +#+
- #+#     #+#   #+#    #+#        #+#         #+#      #+#    #+#        #+#
-###     ###    ########       #######     #######     ########       #######
-'''
-
-
-class _金come_VIP:
-    @staticmethod
-    def _獲取帳號資料(国码,电码,功能):
-        global 月費用戶,帳號1181,vip
-
-        vip = '試用版'
-        帳號 = 国码+电码
-        # 創建一個 SHA-256 雜湊物件
-        帳號1181 = hashlib.sha256(帳號.encode('utf-8')).hexdigest()
-        try:
-            # 獲取網頁內容
-            response = requests.get(VipDurl)
-            response.raise_for_status()  # 檢查請求是否成功
-            
-            # 搜索 帳號1181
-            if 帳號1181 in response.text:
-                月費用戶 = True
-                vip = 'VIP'
-
-            _Start._歡迎登入(国码,电码,功能)
-        except requests.exceptions.RequestException as e:
-            print(f"請求帳號資料失敗:{e}")
-        
-        return 月費用戶
-
-
-
-
-
-
-
-
-
-
-    def _檢查使用次數(driver):
-        global 用次數
-
-        用次數 += 1
-        if 用次數 > 客服鍠試用次數:
-            print(f"已超過試用次數 {客服鍠試用次數} 次，退出程式...")
-            driver.quit()
 
 
 
@@ -884,9 +824,7 @@ class _Start:
         +----oOO--U--OOo-------------------------{更新日期}-+
         |                                                     |
             {本程式名} 歡迎您 !                                      
-        |                                                     |
-            {帳號1181}    
-            {vip}                      
+        |                                                     |                    
             國家代碼 = {国家代码}      
             手機號碼 = {电话号码}                  
         |                                                     | 
@@ -903,15 +841,13 @@ class _Start:
         
         歡迎Op網 = f'''
             <h1>{本程式名}</h1>
-            <p>{vip}</p>
-            <p>{帳號1181}</p>
             <p>{国家代码} {电话号码}</p>
             <p><a href="{我官網}ContactAKI.html" target="_blank">聯絡我們</a></p>
             <br>
-            <h2 id="執行中說明">[{功能}] 執行中....</h2>
+            <h2>[{功能}] 執行中....</h2>
         '''
 
-        _雜項._執行中說明('執行中請不要關閉網頁',歡迎Op網)
+        _雜項._執行中說明('執行中說明',歡迎Op網)
 
 
 
@@ -948,20 +884,18 @@ if __name__ == "__main__":
 
     Admin模式 = False
 
-    更新日期 = '202505051531'
+    更新日期 = '202505080134'
     本程式名 = 'Goldcome'
     賺錢鍠瀏覽器位 = 本程式名
 
     官Ws = '85264071181'
     我官網 = 'https://www.金come.com/'
-    VipDurl = "https://github.com/GoldComeHK/d/blob/main/d"
 
     REPO_OWNER = 'GoldComeHK'
     REPO_NAME = 'GoldComeHK.github.io'
     檔名 = f'{本程式名}.exe'
 
     遠端鍠 = False
-    月費用戶 = False 
     客服鍠試用次數 = 10
     用次數 = 0
     帳號1181 = None
