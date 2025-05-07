@@ -33,3 +33,9 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('導航').innerHTML = 導航; // 正确写法;
 });
 
+
+
+
+function 充值() {
+    window.open("./PayAki", "_blank");
+}
