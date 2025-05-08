@@ -660,10 +660,10 @@ class _搵客鍠:
             """
                 const tempResult = document.getElementById('臨時結果');
                 let newContent = arguments[0];
-                if (tempResult.innerHTML) {
-                    tempResult.innerHTML = newContent + '<br>' + tempResult.innerHTML;
+                if (tempResult.value) {
+                    tempResult.value = newContent + '\n' + tempResult.value;
                 } else {
-                    tempResult.innerHTML = newContent;
+                    tempResult.value = newContent;
                 }
             """,
             Boss料PoHtml.strip()  # 移除末尾多余换行
@@ -1002,7 +1002,7 @@ if __name__ == "__main__":
 
     Admin模式 = False
 
-    更新日期 = '202505081411'
+    更新日期 = '202505081430'
     本程式名 = 'Goldcome'
     賺錢鍠瀏覽器位 = 本程式名
 
