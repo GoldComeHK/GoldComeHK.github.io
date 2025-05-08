@@ -452,18 +452,18 @@
 
 
         // <textarea> 根据内容自动显示/隐藏
-        const resultTextarea = document.getElementById('搵客鍠結果');
+        //const resultTextarea = document.getElementById('搵客鍠結果');
         // 内容变化监听函数
         function toggleVisibility() {
-            const hasContent = resultTextarea.value.trim().length > 0;
+            //const hasContent = resultTextarea.value.trim().length > 0;
             // 使用 classList 切换样式
-            resultTextarea.classList.toggle('hidden', !hasContent);
+            //resultTextarea.classList.toggle('hidden', !hasContent);
             document.querySelector('#執行中請不要關閉網頁').style.display = 'none';
         }
         // 事件监听（兼容现代浏览器）
-        resultTextarea.addEventListener('input', toggleVisibility);
-        resultTextarea.addEventListener('paste', toggleVisibility);  // 处理粘贴操作
-        resultTextarea.addEventListener('cut', toggleVisibility);    // 处理剪切操作
+        //resultTextarea.addEventListener('input', toggleVisibility);
+        //resultTextarea.addEventListener('paste', toggleVisibility);  // 处理粘贴操作
+        //resultTextarea.addEventListener('cut', toggleVisibility);    // 处理剪切操作
         // 初始化检查
         toggleVisibility();
         // 可选：处理页面加载后的动态内容注入
