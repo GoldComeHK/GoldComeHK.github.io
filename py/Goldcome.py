@@ -260,40 +260,36 @@ class _chrome_雜項:
     @staticmethod
     def _Chrome設定(set=''):
 
-        # 启动 Chrome
-        chrome_proc = _chrome_雜項.launch_chrome_with_debug_port()
-
-        # 配置 Chrome 选项
-        chrome_options = webdriver.ChromeOptions()
-        chrome_options.add_experimental_option("debuggerAddress", f"127.0.0.1:9222")
-
-        # 功能用 Chrome
-        if set == '搵客鍠':
-            chrome_options.add_argument("--headless=new")
-        if set:
-            USER_DATA_DIR = os.path.join(os.getcwd(), f'chrome_user_data_{set}')
-            chrome_options.add_argument(f"--user-data-dir={USER_DATA_DIR}")
-        else:
-            chrome_options.add_experimental_option("detach", True)
-            USER_DATA_DIR = os.path.join(os.getcwd(), 'chrome_user_data_default')
-
-        # 每次執行程式都會重用此資料夾，LocalStorage、Cookies 等記錄不會消失
-        chrome_options.add_argument(f"--user-data-dir={USER_DATA_DIR}")
-
-        初始化浏览器 = webdriver.Chrome(options=chrome_options)
-        return 初始化浏览器
-
+        chrome_proc = None
+        初始化浏览器 = None
         try:
+            # 启动 Chrome
+            chrome_proc = _chrome_雜項.launch_chrome_with_debug_port()
+
+            # 配置 Chrome 选项
+            chrome_options = webdriver.ChromeOptions()
+            chrome_options.add_experimental_option("debuggerAddress", f"127.0.0.1:9222")
+
+            # 根据条件启用无头模式
+            if set:
+                chrome_options.add_argument("--headless=new")  # Chrome 112+ 推荐写法
+                chrome_options.add_argument("--disable-gpu")
+        
             初始化浏览器 = webdriver.Chrome(options=chrome_options)
             return 初始化浏览器
+        
         except Exception as e:
-            初始化浏览器.quit()
-            chrome_proc.terminate()
+            # 安全释放资源
+            if 初始化浏览器 is not None:
+                初始化浏览器.quit()
+            if chrome_proc is not None:
+                chrome_proc.terminate()
+            
+            # 记录错误日志
             _雜項._獲取詳細錯誤堆棧(*sys.exc_info())
-
-
-
-
+            
+            # 返回明确错误标识
+            return None
 
 
 
@@ -1004,7 +1000,7 @@ if __name__ == "__main__":
 
     Admin模式 = False
 
-    更新日期 = '202505080425'
+    更新日期 = '202505081308'
     本程式名 = 'Goldcome'
     賺錢鍠瀏覽器位 = 本程式名
 
