@@ -658,13 +658,14 @@ class _搵客鍠:
 
         driver.execute_script(
             """
-                const tempResult = document.getElementById('臨時結果');
+                const textarea = document.getElementById('搵客鍠結果');
                 let newContent = arguments[0];
-                if (tempResult.value) {
-                    tempResult.value = newContent + '\n' + tempResult.value;
-                } else {
-                    tempResult.value = newContent;
-                }
+                
+                // 保留原有内容并添加新内容在顶部
+                textarea.value = newContent + '\\n' + textarea.value;
+                
+                // 保持自动滚动到顶部
+                textarea.scrollTop = 0;
             """,
             Boss料PoHtml.strip()  # 移除末尾多余换行
         )
@@ -1002,7 +1003,7 @@ if __name__ == "__main__":
 
     Admin模式 = False
 
-    更新日期 = '202505081430'
+    更新日期 = '202505081436'
     本程式名 = 'Goldcome'
     賺錢鍠瀏覽器位 = 本程式名
 
