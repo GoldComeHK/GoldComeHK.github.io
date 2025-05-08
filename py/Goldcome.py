@@ -258,39 +258,37 @@ class _chrome_雜項:
 
 
     @staticmethod
-    def _Chrome設定(set=''):
+    def _Chrome設定(instance_name=None):
+        import os
+        import hashlib
 
-        chrome_proc = None
-        初始化浏览器 = None
+        # 生成唯一配置
+        unique_id = hashlib.md5(str(instance_name).encode()).hexdigest()[:8]
+        port = 9222 + int(unique_id, 16) % 1000  # 範圍 9222-10221
+        user_data_dir = os.path.join("chrome_profiles", f"profile_{unique_id}")
+
+        # 啟動 Chrome 進程
+        chrome_proc = subprocess.Popen([
+            "chrome.exe",
+            f"--remote-debugging-port={port}",
+            f"--user-data-dir={user_data_dir}",
+            "--no-first-run"
+        ])
+
+        # 等待進程初始化
+        time.sleep(3)
+
+        # 連接調試端口
+        chrome_options = webdriver.ChromeOptions()
+        chrome_options.add_experimental_option("debuggerAddress", f"127.0.0.1:{port}")
+
         try:
-            # 启动 Chrome
-            chrome_proc = _chrome_雜項.launch_chrome_with_debug_port()
-
-            # 配置 Chrome 选项
-            chrome_options = webdriver.ChromeOptions()
-            chrome_options.add_experimental_option("debuggerAddress", f"127.0.0.1:9222")
-
-            # 根据条件启用无头模式
-            if set:
-                chrome_options.add_argument("--headless=new")  # Chrome 112+ 推荐写法
-                chrome_options.add_argument("--disable-gpu")
-        
-            初始化浏览器 = webdriver.Chrome(options=chrome_options)
-            return 初始化浏览器
-        
+            driver = webdriver.Chrome(options=chrome_options)
+            driver.switch_to.window(driver.current_window_handle)  # 強制聚焦
+            return driver
         except Exception as e:
-            # 安全释放资源
-            if 初始化浏览器 is not None:
-                初始化浏览器.quit()
-            if chrome_proc is not None:
-                chrome_proc.terminate()
-            
-            # 记录错误日志
-            _雜項._獲取詳細錯誤堆棧(*sys.exc_info())
-            
-            # 返回明确错误标识
-            return None
-
+            chrome_proc.terminate()
+            raise RuntimeError(f"初始化失敗: {e}")
 
 
 
@@ -1000,7 +998,7 @@ if __name__ == "__main__":
 
     Admin模式 = False
 
-    更新日期 = '202505081308'
+    更新日期 = '202505081321'
     本程式名 = 'Goldcome'
     賺錢鍠瀏覽器位 = 本程式名
 
