@@ -132,99 +132,6 @@ from datetime import datetime, timedelta
 
 class _chrome_雜項:
 
-    def _下載賺錢王Chrome():
-        # 確定 EXE 同層目錄，若在打包環境下，使用 sys.executable 取得 EXE 目錄
-        exe_dir = os.path.dirname(sys.executable) if hasattr(sys, 'frozen') else os.path.dirname(os.path.abspath(__file__))
-
-        # 設置 MoneyKingChrome 資料夾路徑
-        chrome_dir = os.path.join(exe_dir, 賺錢鍠瀏覽器位)
-        os.environ["PLAYWRIGHT_BROWSERS_PATH"] = chrome_dir
-
-        # Playwright 預設下載的臨時位置
-        temp_chrome_dir = os.path.join(os.getenv("LOCALAPPDATA"), "ms-playwright")
-
-        chromium_path = os.path.join(chrome_dir, "chromium-1140", "chrome-win", "chrome.exe")
-        #print('chromium_path =', chromium_path)
-
-        # 檢查 EXE 同層 MoneyKingChrome 資料夾是否已存在 Chrome
-        if not os.path.isfile(chromium_path):
-            try:
-                # 執行 playwright install
-                subprocess.run(["playwright", "install"], check=True)
-                
-                # 在臨時資料夾中找到下載的 Chrome 目錄並複製到 EXE 同層目錄
-                downloaded_chrome = os.path.join(temp_chrome_dir, "chromium-1140", "chrome-win")
-                if os.path.exists(downloaded_chrome):
-                    # 若 EXE 同層 MoneyKingChrome 資料夾已存在，先刪除再複製
-                    if os.path.exists(chrome_dir):
-                        shutil.rmtree(chrome_dir)
-                    shutil.copytree(downloaded_chrome, os.path.join(chrome_dir, "chromium-1140", "chrome-win"))
-                    print(f"已將 Chrome 瀏覽器複製到 EXE 同層的 {賺錢鍠瀏覽器位} 資料夾中。")
-                else:
-                    print("瀏覽器下載失敗，無法找到下載的目錄。")
-            except subprocess.CalledProcessError as e:
-                print(f"安裝 Playwright 瀏覽器失敗: {e}")
-
-
-
-    @staticmethod
-    def _C22hrome設定(set=''):
-
-        # 共用設定
-        chrome_options = webdriver.ChromeOptions()
-        exe_dir = os.path.dirname(sys.executable) if hasattr(sys, 'frozen') else os.path.dirname(os.path.abspath(__file__))
-        chromium_path = os.path.join(exe_dir, 賺錢鍠瀏覽器位, "chromium-1140", "chrome-win", "chrome.exe")
-        chrome_options.binary_location = chromium_path  # 指定 Chrome 可执行路径
-
-        # 隐藏自动化特征
-        chrome_options.add_experimental_option("excludeSwitches", ["enable-automation"])
-        chrome_options.add_experimental_option("useAutomationExtension", False)
-        chrome_options.add_argument("--disable-blink-features=AutomationControlled")
-        chrome_options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36")
-
-        # 功能用 Chrome
-        if set:
-            USER_DATA_DIR = os.path.join(os.getcwd(), f'chrome_user_data_{set}')
-        else:
-            chrome_options.add_experimental_option("detach", True)
-            USER_DATA_DIR = os.path.join(os.getcwd(), 'chrome_user_data_default')
-
-        if set == '搵客鍠':
-            chrome_options.add_argument("--headless=new")
-
-        # 每次執行程式都會重用此資料夾，LocalStorage、Cookies 等記錄不會消失
-        chrome_options.add_argument(f"--user-data-dir={USER_DATA_DIR}")
-        chrome_options.add_argument("--profile-directory=Default")
-        chrome_options.add_argument("--disable-restore-session-state")  # 禁用会话恢复
-
-        # Chrome配置选项
-        #chrome_options.add_argument('--no-sandbox')
-        chrome_options.add_argument('--log-level=3')  # 只显示严重错误
-        chrome_options.add_argument('--disable-dev-shm-usage')
-        chrome_options.add_argument('--disable-infobars')
-
-        # 初始化浏览器
-        初始化浏览器 = webdriver.Chrome(options=chrome_options)
-        # 覆盖navigator.webdriver属性
-        初始化浏览器.execute_script(
-            "Object.defineProperty(navigator, 'webdriver', {get: () => undefined})"
-        )
-
-        # 返回預設 driver
-        return 初始化浏览器
-
-
-
-
-
-
-
-
-
-
-
-
-
     def launch_chrome_with_debug_port(port=9222, user_data_dir=None):
         # 自动识别系统路径
         if os.name == 'nt':
@@ -252,8 +159,6 @@ class _chrome_雜項:
         process = subprocess.Popen(args, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         time.sleep(5)  # 确保 Chrome 完全启动
         return process
-
-
 
 
 
@@ -291,33 +196,6 @@ class _chrome_雜項:
                 chrome_proc.terminate()
             _雜項._獲取詳細錯誤堆棧(*sys.exc_info())
             return None
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     檢元 = 0
@@ -1003,7 +881,7 @@ if __name__ == "__main__":
 
     Admin模式 = False
 
-    更新日期 = '202505081501'
+    更新日期 = '202505081508'
     本程式名 = 'Goldcome'
     賺錢鍠瀏覽器位 = 本程式名
 
