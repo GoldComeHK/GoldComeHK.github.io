@@ -568,7 +568,6 @@ const 記錄位 = document.querySelectorAll(".記錄數據用");
 
         // 客詢select
         let 對應回覆內容 = ''
-        const 搵客鍠結果 = localStorage.getItem('搵客鍠結果');
         alert(`${搵客鍠結果} 搵客鍠結果!`);
 
         function _客詢select() {
@@ -753,15 +752,8 @@ const 記錄位 = document.querySelectorAll(".記錄數據用");
                 // 執行的功能要值
                 .replace("@促銷gmail@", 發出促銷信的gmail)
                 .replace("@gmail應密@", gmail的應用程式密碼)
-
-
-
-
                 .replace("@發送促銷信件數@", 發送促銷信件數)
-
-
                 .replace("@標題@", 信件標題)
-                
                 .replace("@促銷信@", 促銷信草稿)
                 .replace("@搵客鍠結果@", 搵客鍠結果)
 
