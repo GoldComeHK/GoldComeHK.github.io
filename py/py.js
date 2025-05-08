@@ -7,7 +7,7 @@
 
 
 
-更新日期 = '202505081405'
+更新日期 = '202505081411'
 
 
 
@@ -45,7 +45,7 @@ def _搵客鍠B(keyword=''):
 
     try:
         搵客鍠_driver, 搵客鍠_proc = _chrome_雜項._Chrome設定('搵客鍠')
-        搵客鍠_driver.maximize_window() # 最大化窗口
+        #搵客鍠_driver.maximize_window() # 最大化窗口
 
         公司名xpath = 勞工處XPATH['公司名xpath']
         表格xpath = 勞工處XPATH['表格xpath']
@@ -180,7 +180,7 @@ def _搵客鍠B(keyword=''):
         
 
         搵客鍠_driver, 搵客鍠_proc = _chrome_雜項._Chrome設定('搵客鍠')
-        搵客鍠_driver.maximize_window() # 最大化窗口
+        #搵客鍠_driver.maximize_window() # 最大化窗口
 
         # 去首頁
         while True:
