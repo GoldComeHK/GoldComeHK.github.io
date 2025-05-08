@@ -7,7 +7,7 @@
 
 
 
-更新日期 = '202505081508'
+更新日期 = '202505081555'
 
 
 
@@ -645,7 +645,7 @@ class _促銷鍠:
                 測料 = ['Ad測料1=98672794','Ad測料2=moksurky@gmail.com','Ad測料3=lamelle1995@gmail.com','Ad測料4=wongcyres@gmail.com',]
                 for 結果 in 測料:
                     if all成功發送 >= 發送促銷信件數:
-                        _雜項._執行中說明('執行中說明','已成功發送{發送促銷信件數}封,促銷鍠結束')
+                        _雜項._執行中說明('執行中說明',f'已成功發送{發送促銷信件數}封,促銷鍠結束')
                         break
 
                     公司名稱,老闆聯絡 = 結果.split('=')
@@ -674,7 +674,7 @@ class _促銷鍠:
 
             for 公司名稱, 老闆聯絡 in all客聯B.items():
                 if all成功發送 >= 發送促銷信件數:
-                    _雜項._執行中說明('執行中說明','已成功發送{發送促銷信件數}封,促銷鍠結束')
+                    _雜項._執行中說明('執行中說明',f'已成功發送{發送促銷信件數}封,促銷鍠結束')
                     break
 
                 老闆信 = _促銷鍠._整字雜項(信件標題, 老闆聯絡, 公司名稱, 宣傳文)
@@ -882,12 +882,12 @@ class _促銷鍠:
                 結果Save = [結果Save]
 
             # (1) 處理「顯示用」的內容（HTML格式，用 <br> 換行）
-            html_content = f"{現在時間}[促銷鍠結果|{vip}]<br>"
+            html_content = f"{現在時間}[促銷鍠結果]<br>"
             html_content += "<br>".join(str(item) for item in 結果睇)  # 用 <br> 連接每一條結果
             html_content += "<br>---------<br>"  # 加入分隔線
 
             # (2) 處理「儲存用」的內容（純文字格式，用 @換行@ 換行）
-            text_content = f"{現在時間}[促銷鍠結果|{vip}]@換行@"
+            text_content = f"{現在時間}[促銷鍠結果]@換行@"
             text_content += "@換行@".join(str(item) for item in 結果Save)  # 用 @換行@ 連接每一條結果
             text_content += "@換行@---------@換行@"  # 加入分隔線
 
@@ -902,6 +902,8 @@ class _促銷鍠:
                 const textarea = document.getElementById('促銷鍠結果');
                 textarea.value = arguments[0] + (textarea.value || "");
             """, text_content)
+
+            
 
         except Exception as e:
             _雜項._獲取詳細錯誤堆棧(*sys.exc_info())
