@@ -258,37 +258,41 @@ class _chrome_雜項:
 
 
     @staticmethod
-    def _Chrome設定(instance_name=None):
-        import os
-        import hashlib
+    def _Chrome設定(set=''):
 
-        # 生成唯一配置
-        unique_id = hashlib.md5(str(instance_name).encode()).hexdigest()[:8]
-        port = 9222 + int(unique_id, 16) % 1000  # 範圍 9222-10221
-        user_data_dir = os.path.join("chrome_profiles", f"profile_{unique_id}")
-
-        # 啟動 Chrome 進程
-        chrome_proc = subprocess.Popen([
-            "chrome.exe",
-            f"--remote-debugging-port={port}",
-            f"--user-data-dir={user_data_dir}",
-            "--no-first-run"
-        ])
-
-        # 等待進程初始化
-        time.sleep(3)
-
-        # 連接調試端口
-        chrome_options = webdriver.ChromeOptions()
-        chrome_options.add_experimental_option("debuggerAddress", f"127.0.0.1:{port}")
-
+        chrome_proc = None
+        初始化浏览器 = None
         try:
-            driver = webdriver.Chrome(options=chrome_options)
-            driver.switch_to.window(driver.current_window_handle)  # 強制聚焦
-            return driver
+            # 使用 set 名稱產生唯一的 user_data_dir
+            user_data_dir = os.path.join(os.getcwd(), f"temp_chrome_data_{set or 'default'}")
+
+            # 啟動 Chrome，傳入 user_data_dir
+            chrome_proc = _chrome_雜項.launch_chrome_with_debug_port(
+                port=9222 if not set else 9223,  # 不同視窗使用不同 port
+                user_data_dir=user_data_dir
+            )
+
+            # 配置 Chrome options
+            chrome_options = webdriver.ChromeOptions()
+            chrome_options.add_experimental_option("debuggerAddress", f"127.0.0.1:{9222 if not set else 9223}")
+
+            # 啟用無頭模式（若指定）
+            if set:
+                chrome_options.add_argument("--headless=new")
+                chrome_options.add_argument("--disable-gpu")
+            
+            初始化浏览器 = webdriver.Chrome(options=chrome_options)
+            return 初始化浏览器
+
         except Exception as e:
-            chrome_proc.terminate()
-            raise RuntimeError(f"初始化失敗: {e}")
+            if 初始化浏览器 is not None:
+                初始化浏览器.quit()
+            if chrome_proc is not None:
+                chrome_proc.terminate()
+            _雜項._獲取詳細錯誤堆棧(*sys.exc_info())
+            return None
+
+
 
 
 
@@ -998,7 +1002,7 @@ if __name__ == "__main__":
 
     Admin模式 = False
 
-    更新日期 = '202505081321'
+    更新日期 = '202505081339'
     本程式名 = 'Goldcome'
     賺錢鍠瀏覽器位 = 本程式名
 
