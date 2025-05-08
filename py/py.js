@@ -7,7 +7,7 @@
 
 
 
-更新日期 = '202505081339'
+更新日期 = '202505081405'
 
 
 
@@ -44,7 +44,7 @@ def _搵客鍠B(keyword=''):
     }
 
     try:
-        搵客鍠_driver = _chrome_雜項._Chrome設定('搵客鍠')
+        搵客鍠_driver, 搵客鍠_proc = _chrome_雜項._Chrome設定('搵客鍠')
         搵客鍠_driver.maximize_window() # 最大化窗口
 
         公司名xpath = 勞工處XPATH['公司名xpath']
@@ -120,6 +120,7 @@ def _搵客鍠B(keyword=''):
                 break
         # 關閉瀏覽器
         搵客鍠_driver.quit()
+        搵客鍠_proc.terminate()
 
         ######### Boss料PoHtml #########
         if all_Boss料:
@@ -178,7 +179,7 @@ def _搵客鍠B(keyword=''):
     try:
         
 
-        搵客鍠_driver = _chrome_雜項._Chrome設定('搵客鍠')
+        搵客鍠_driver, 搵客鍠_proc = _chrome_雜項._Chrome設定('搵客鍠')
         搵客鍠_driver.maximize_window() # 最大化窗口
 
         # 去首頁
@@ -233,6 +234,7 @@ def _搵客鍠B(keyword=''):
                 break
         # 關閉瀏覽器
         搵客鍠_driver.quit()
+        搵客鍠_proc.terminate()
 
         ######### Boss料PoHtml #########
         if all_Boss料:
@@ -354,7 +356,7 @@ class _客服鍠:
     @classmethod
     def _取得driver(cls):
         if cls._driver is None:
-            cls._driver = _chrome_雜項._Chrome設定('客服鍠')
+            cls._driver = _chrome_雜項._Chrome設定('客服鍠')[0]
         return cls._driver
 
     @classmethod
