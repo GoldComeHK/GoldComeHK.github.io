@@ -7,7 +7,7 @@
 
 
 
-更新日期 = '202505081436'
+更新日期 = '202505081442'
 
 
 
@@ -126,7 +126,7 @@ def _搵客鍠B(keyword=''):
         if all_Boss料:
             真all_Boss料 = _搵客鍠._西選重聯(all_Boss料)    #['利嘉閣地產有限公司=65340006',]
             _搵客鍠._聯Po網(真all_Boss料,'香港','@關鍵字@')
-        driver.refresh()
+        #driver.refresh()
         ######### Boss料PoHtml #########
         
     except Exception as e:
