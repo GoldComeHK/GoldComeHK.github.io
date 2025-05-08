@@ -282,7 +282,7 @@ class _chrome_雜項:
                 chrome_options.add_argument("--disable-gpu")
             
             初始化浏览器 = webdriver.Chrome(options=chrome_options)
-            return 初始化浏览器
+            return 初始化浏览器,chrome_proc
 
         except Exception as e:
             if 初始化浏览器 is not None:
@@ -1002,7 +1002,7 @@ if __name__ == "__main__":
 
     Admin模式 = False
 
-    更新日期 = '202505081339'
+    更新日期 = '202505081405'
     本程式名 = 'Goldcome'
     賺錢鍠瀏覽器位 = 本程式名
 
@@ -1020,7 +1020,7 @@ if __name__ == "__main__":
 
     _Exe_Set._UpData本程式()
     #_chrome_雜項._下載賺錢王Chrome()
-    driver = _chrome_雜項._Chrome設定()
+    driver = _chrome_雜項._Chrome設定()[0]
     _雜項._WindowsAPI阻止系统休眠()
 
     _Start._動態執行代碼()
