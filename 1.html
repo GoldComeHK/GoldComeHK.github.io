@@ -259,6 +259,7 @@
                 function 記錄已填寫數據() {
                     // 頁面加載時，從 LocalStorage 恢復數據
                     document.addEventListener("DOMContentLoaded", () => {
+                        // 從 localStorage 恢復數據
                         記錄位.forEach(element => {
                         const savedValue = localStorage.getItem(element.id);
                         if (savedValue !== null) {
@@ -267,12 +268,21 @@
                         });
                     });
         
-                    // 監聽輸入事件，實時保存數據
+                    // 實時保存輸入數據
                     記錄位.forEach(element => {
                         element.addEventListener("input", () => {
                         localStorage.setItem(element.id, element.value);
                         });
                     });
+
+                    // 在頁面卸載前強制保存所有數據
+                    window.addEventListener('beforeunload', () => {
+                        記錄位.forEach(element => {
+                            localStorage.setItem(element.id, element.value);
+                        });
+                    });
+
+
         }
         
         
