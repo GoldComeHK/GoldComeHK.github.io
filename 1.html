@@ -137,27 +137,21 @@
     <div class="container" style="padding: 20px;">
         
             <!-- 部份1: 帳號 -->
-            <label>請填寫您的手機地區號*</label>
-            <input id="區號" type="text" class="記錄數據用" placeholder="例如: 86" title="例如: 86" required>
-            <label>請填寫您的 WhatsApp 號碼*</label>
-            <input id="WhatsApp號" class="記錄數據用" type="text" placeholder="請填寫WhatsApp號碼" title="請填寫WhatsApp號碼" required>
-
-
 
             <!-- 部份2: setting -->
             <div class="reply-group">
                 
-                <label>請選擇搜尋地區*(需要在當地網絡才能搜尋)</label>
+                <label tabindex="0">請選擇搜尋地區* ❔<b class="說明">需要在當地網絡才能搜尋</b></label>
                 <select id="地區" class="記錄數據用" title="請選擇搜尋地區">
                     <option value="HK" selected>香港</option>
                     <option value="TW">台灣</option>
                 </select>
 
-                <label>請填寫搜尋關鍵字</label>
+                <label tabindex="0">請填寫搜尋關鍵字 ❔<b class="說明">不填寫將直接搜尋所有最新資料</b></label>
                 <input id="關鍵字" class="記錄數據用" type="text" placeholder="請填寫搜尋關鍵字" title="請填寫搜尋關鍵字" value="金融">
             
-                <label>最多找資料數(愈大需時愈久)(1資料 = 1💰)</label>
-                <input id="最多找資料數" class="記錄數據用" value="10" type="number" min="1" step="1" required oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+                <label tabindex="0">最多找資料數 (1資料 = 1💰) ❔<b class="說明">愈多需時愈久，最大1000 <br>(只會獲取最新資料，最好3至5天用一次，短時間重複使用可能會重複收到相同資料)。</b></label>
+                <input id="最多找資料數" class="記錄數據用" value="10" type="number" min="1" max="1000" step="1" required oninput="this.value = this.value.replace(/[^0-9]/g, '');">
             
 
             </div>
@@ -523,10 +517,6 @@
         /* ********************* */
         async function 執行搵客鍠() {
 
-
-
-            const 區號 = document.getElementById('區號').value;
-            const WhatsApp號 = document.getElementById('WhatsApp號').value;
             const 關鍵字 = document.getElementById('關鍵字').value;
             const 地區 = document.getElementById('地區').value;
             const 最多找資料數 = document.getElementById('最多找資料數').value;
@@ -536,8 +526,6 @@
             if (最多找資料數 < 1) {alert('最多找資料數不能為零!');return;}
             // 先齊必填
             const 要齊料 = {
-                區號: 區號,
-                WhatsApp號: WhatsApp號,
                 地區: 地區,
                 最多找資料數:最多找資料數
             };

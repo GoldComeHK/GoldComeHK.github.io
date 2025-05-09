@@ -138,39 +138,39 @@
     <div id="促銷鍠Box" class="container" style="padding: 20px;">
         
             <!-- 部份1: 帳號 -->
-            <label>請填寫您的手機地區號*</label>
+            <label tabindex="0">請填寫您的手機地區號* ❔<b class="說明">用於自動回覆</b></label>
             <input id="區號" class="記錄數據用" type="text" placeholder="例如: 86" title="例如: 86" required>
-            <label>請填寫您的 WhatsApp 號碼*</label>
+            <label tabindex="0">請填寫您的 WhatsApp 號碼* ❔<b class="說明">用於自動回覆</b></label>
             <input id="WhatsApp號" class="記錄數據用" type="text" placeholder="請填寫WhatsApp號碼" title="請填寫WhatsApp號碼" required>
 
             <!-- 部份2: 促銷鍠設定 -->
-            <label>發出促銷信的gmail*</label>
+            <label tabindex="0">發出促銷信的gmail* ❔<b class="說明">必須是Gmail</b></label>
             <input id="發出促銷信的gmail" class="記錄數據用" type="text" placeholder="請填寫發出促銷信的gmail" title="請填寫發出促銷信的gmail" required>
 
-            <a href="https://myaccount.google.com/u/1/apppasswords?pli=1&rapt=AEjHL4NB4hK6Th7KGvq8QXmew8zX6e0Q0vg_Ruwjaxi6rHdyqR9HRAen2ocS95fglp1iHWQ2zcuydfYf4-aeUc4F2sJBPQ0s7iayeTEjdPFPKUTS0UILi60"><label>gmail的應用程式密碼*</label><b>❔</b></a>
+            <a href="https://myaccount.google.com/u/1/apppasswords?pli=1&rapt=AEjHL4NB4hK6Th7KGvq8QXmew8zX6e0Q0vg_Ruwjaxi6rHdyqR9HRAen2ocS95fglp1iHWQ2zcuydfYf4-aeUc4F2sJBPQ0s7iayeTEjdPFPKUTS0UILi60"><label tabindex="0">gmail的應用程式密碼*</label> ❔</a>
             <input id="gmail的應用程式密碼" class="記錄數據用" type="text" placeholder="請填寫gmail的應用程式密碼" title="請填寫gmail的應用程式密碼" required>
             
-            <label>發送促銷信件數*(1信件 = 1💰)</label>
-            <input id="發送促銷信件數" class="記錄數據用" value="10" type="number" min="1" step="1" required oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+            <label tabindex="0">發送促銷信件數*(1信件 = 1💰) ❔<b class="說明">愈多需時愈久，最大500<br>如客戶聯絡方式是手機號，需手動發送WhatsApp促銷信<br> *(建設WhatsApp促銷信每天最多發5個)*</b></label>
+            <input id="發送促銷信件數" class="記錄數據用" value="10" type="number" min="1" max="500" step="1" required oninput="this.value = this.value.replace(/[^0-9]/g, '');">
             
-            <label>促銷信的標題*</label>
+            <label tabindex="0">促銷信的標題*</label>
             <input id="信件標題" class="記錄數據用" type="text" placeholder="請填寫促銷信的標題" title="請填寫促銷信的標題" required>
 
             <div id="repliesSelectContainer"> <!-- 这里动态加载 select 或提示 --> </div>
 
-            <label>促銷信內容*</label>
+            <label tabindex="0">促銷信內容*</label>
             <textarea id="促銷信內容" class="記錄數據用" placeholder="請編寫促銷信內容..." title="請編寫促銷信內容"></textarea>
 
-            <a href="https://playground.z.wiki/img-cloud/index.html" target="_blank"><label>圖片網址</label><b>❔</b></a>
+            <a href="https://playground.z.wiki/img-cloud/index.html" target="_blank"><label tabindex="0">圖片網址</label><b>❔</b></a>
             <textarea id="圖片網址" class="記錄數據用"></textarea>
 
 
 
             <!-- 部份3: 促銷鍠草稿 -->
             <hr>
-            <label>草稿</label>
+            <label tabindex="0">草稿 ❔<b class="說明">如草稿內容沒有變更，請從選回覆關鍵字。</b></label>
             <p id="促銷信草稿" class="container"></p>
-            <label>自動回覆內容</label>
+            <label tabindex="0">自動回覆內容 ❔<b class="說明">如自動回覆內容沒有變更，請從選回覆關鍵字。</b></label>
             <p id="自動回覆內容" class="container"></p>
             <hr>
 

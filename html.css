@@ -45,3 +45,23 @@ textarea {
     max-width: 90%;
     overflow: auto;
   }
+
+.說明 {
+  display: none;
+}
+
+/* 當 label 被點擊時顯示說明 */
+label:active .說明,
+label:focus-within .說明 {
+  display: inline;
+  color: gold;
+  margin-left: 10px;
+}
+
+/* 讓 label 可以接收焦點 */
+label {
+  cursor: pointer;
+  display: inline-block;
+  padding: 5px;
+  border: 1px solid transparent;
+}

@@ -156,15 +156,14 @@
     <div  class="container" style="padding: 20px;">
         
             <!-- 部份1: 帳號 -->
-            <label>請填寫您的手機地區號*</label>
+            <label tabindex="0">請填寫您的手機地區號* ❔<b class="說明">用於自動回覆</b></label>
             <input id="區號" type="text" placeholder="例如: 86" title="例如: 86" required>
-            <label>請填寫您的 WhatsApp 號碼*</label>
+            <label tabindex="0">請填寫您的 WhatsApp 號碼* ❔<b class="說明">用於自動回覆</b></label>
             <input id="WhatsApp號" type="text" placeholder="請填寫WhatsApp號碼" title="請填寫WhatsApp號碼" required>
 
 
             <!-- 部份2: 回覆內容 -->
-            <h3>回覆內容</h3>
-            <samp>不能用表情符號</samp>
+            <label tabindex="0">回覆內容 ❔<b class="說明">只能純文字，不能用表情符號。可以是網址、影片連結、圖片連結。</b></label>
             
             <div id="replies"></div>
             <button onclick="addReply()">增加回覆內容</button>

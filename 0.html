@@ -163,9 +163,9 @@
 
     <!-- 部份1: 帳號 -->
     <div class="container" style="padding: 20px;">
-            <label>請填寫您的手機地區號*</label>
+            <label tabindex="0">請填寫您的手機地區號* ❔<b class="說明">用於自動回覆</b></label>
             <input id="區號" class="記錄數據用" type="text" placeholder="例如: 86" title="例如: 86" required>
-            <label>請填寫您的 WhatsApp 號碼*</label>
+            <label tabindex="0">請填寫您的 WhatsApp 號碼* ❔<b class="說明">用於自動回覆</b></label>
             <input id="WhatsApp號" class="記錄數據用" type="text" placeholder="請填寫WhatsApp號碼" title="請填寫WhatsApp號碼" required>
     </div>
     <hr class="container">
@@ -190,17 +190,17 @@
             <h3>搵客鍠🔍</h3>
             <div class="reply-group">
                 
-                <label>請選擇搜尋地區*(需要在當地網絡才能搜尋)</label>
+                <label tabindex="0">請選擇搜尋地區* ❔<b class="說明">需要在當地網絡才能搜尋</b></label>
                 <select id="地區" class="記錄數據用" title="請選擇搜尋地區">
                     <option value="HK" selected>香港</option>
                     <option value="TW">台灣</option>
                 </select>
 
-                <label>請填寫搜尋關鍵字</label>
+                <label tabindex="0">請填寫搜尋關鍵字 ❔<b class="說明">不填寫將直接搜尋所有最新資料</b></label>
                 <input id="關鍵字" class="記錄數據用" type="text" placeholder="請填寫搜尋關鍵字" title="請填寫搜尋關鍵字" value="金融">
             
-                <label>最多找資料數(愈大需時愈久)(1資料 = 1💰)</label>
-                <input id="最多找資料數" class="記錄數據用" value="10" type="number" min="1" step="1" required oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+                <label tabindex="0">最多找資料數 (1資料 = 1💰) ❔<b class="說明">愈多需時愈久，最大 500 <br>(只會獲取最新資料，最好3至5天用一次，短時間重複使用可能會重複收到相同資料)。</b></label>
+                <input id="最多找資料數" class="記錄數據用" value="10" type="number" min="1" max="500" step="1" required oninput="this.value = this.value.replace(/[^0-9]/g, '');">
             </div>
 
     </div>
@@ -227,31 +227,31 @@
             
             <h3>促銷鍠 📣</h3>
 
-            <label>發出促銷信的gmail*</label>
+            <label tabindex="0">發出促銷信的gmail* ❔<b class="說明">必須是Gmail</b></label>
             <input id="發出促銷信的gmail" class="記錄數據用" type="text" placeholder="請填寫發出促銷信的gmail" title="請填寫發出促銷信的gmail" required>
 
-            <a href="https://myaccount.google.com/u/1/apppasswords?pli=1&rapt=AEjHL4NB4hK6Th7KGvq8QXmew8zX6e0Q0vg_Ruwjaxi6rHdyqR9HRAen2ocS95fglp1iHWQ2zcuydfYf4-aeUc4F2sJBPQ0s7iayeTEjdPFPKUTS0UILi60" target="_blank"><label>gmail的應用程式密碼*</label><b>❔</b></a>
+            <a href="https://myaccount.google.com/u/1/apppasswords?pli=1&rapt=AEjHL4NB4hK6Th7KGvq8QXmew8zX6e0Q0vg_Ruwjaxi6rHdyqR9HRAen2ocS95fglp1iHWQ2zcuydfYf4-aeUc4F2sJBPQ0s7iayeTEjdPFPKUTS0UILi60" target="_blank"><label tabindex="0">gmail的應用程式密碼*</label><b>❔</b></a>
             <input id="gmail的應用程式密碼" class="記錄數據用" type="text" placeholder="請填寫gmail的應用程式密碼" title="請填寫gmail的應用程式密碼" required>
             
-            <label>發送促銷信件數*(1信件 = 1💰)</label>
-            <input id="發送促銷信件數" class="記錄數據用" value="10" type="number" min="1" step="1" required oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+            <label tabindex="0">發送促銷信件數*(1信件 = 1💰) ❔<b class="說明">愈多需時愈久，最大500<br>如客戶聯絡方式是手機號，需手動發送WhatsApp促銷信<br> *(建設WhatsApp促銷信每天最多發5個)*</b></label>
+            <input id="發送促銷信件數" class="記錄數據用" value="10" type="number" min="1" max="500" step="1" required oninput="this.value = this.value.replace(/[^0-9]/g, '');">
             
-            <label>促銷信的標題*</label>
+            <label tabindex="0">促銷信的標題*</label>
             <input id="信件標題" class="記錄數據用" type="text" placeholder="請填寫促銷信的標題" title="請填寫促銷信的標題" required>
 
             <div id="repliesSelectContainer"> <!-- 促銷鍠客詢select --> </div>
 
-            <label>促銷信內容*</label>
+            <label tabindex="0">促銷信內容*</label>
             <textarea id="促銷信內容" class="記錄數據用" placeholder="請編寫促銷信內容..." title="請編寫促銷信內容"></textarea>
 
-            <a href="https://playground.z.wiki/img-cloud/index.html" target="_blank"><label>圖片網址</label><b>❔</b></a>
+            <a href="https://playground.z.wiki/img-cloud/index.html" target="_blank"><label tabindex="0">圖片網址</label><b>❔</b></a>
             <textarea id="圖片網址" class="記錄數據用"></textarea>
             
             
             <hr>
-            <label>草稿</label>
+            <label tabindex="0">草稿 ❔<b class="說明">如草稿內容沒有變更，請從選回覆關鍵字。</b></label>
             <p id="促銷信草稿" class="container"></p>
-            <label>自動回覆內容</label>
+            <label tabindex="0">自動回覆內容 ❔<b class="說明">如自動回覆內容沒有變更，請從選回覆關鍵字。</b></label>
             <p id="自動回覆內容" class="container"></p>
             <hr>
 
