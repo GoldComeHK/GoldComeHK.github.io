@@ -993,8 +993,8 @@ class _TG機器人系列:
         # Telegram bot配置
         bot = telebot.TeleBot(userdata.get('TG找老闆api'))
         # https://chatgpt.com/share/09fa7b01-798e-47d4-b0a3-4e6738e4ba55
+        
         白名單 = userdata.get('tg白名單') # ['mokaki', ''] 白名單列表，將被屏蔽的使用者ID添加到這裡
-
         def _TG白名單(msg):
             # 檢查用戶是否在白名單中
             if msg.from_user.username in 白名單:
@@ -1005,7 +1005,8 @@ class _TG機器人系列:
         @bot.message_handler(func=lambda message: re.match(r'^/[$%@?]', message.text))
         def handle_commands(message):
             
-            if not _TG白名單(message): return  # 如果不在白名單中，則停止處理
+            # 轉了付費模式,不需白名單
+            #if not _TG白名單(message): return  # 如果不在白名單中，則停止處理
 
             # 獲取指令和關鍵字
             指令 = message.text[:2]  # 指令標記，例如 /$, /%, /@ 或 /?
