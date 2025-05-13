@@ -714,7 +714,7 @@ const 記錄位 = document.querySelectorAll(".記錄數據用");
 
             const 發出促銷信的gmail = document.getElementById('發出促銷信的gmail').value;
             const gmail的應用程式密碼 = document.getElementById('gmail的應用程式密碼').value;
-            const 發送促銷信件數 = document.getElementById('發送促銷信件數').value; 
+            let 發送促銷信件數 = document.getElementById('發送促銷信件數').value; 
 
             const 信件標題 = document.getElementById('信件標題').value;
             let 促銷信草稿 = document.getElementById('促銷信草稿').innerHTML;
@@ -729,13 +729,6 @@ const 記錄位 = document.querySelectorAll(".記錄數據用");
 
             // 先齊必填
             const 要齊料 = {
-                //區號: 區號,
-                //WhatsApp號: WhatsApp號,
-                //發出促銷信的gmail: 發出促銷信的gmail,
-                //gmail的應用程式密碼: gmail的應用程式密碼,
-                //信件標題: 信件標題,
-                //促銷信草稿: 促銷信草稿,
-                // 關鍵字:關鍵字,
                 地區: 地區,
                 最多找資料數: 最多找資料數
             };
@@ -746,9 +739,22 @@ const 記錄位 = document.querySelectorAll(".記錄數據用");
                     return;
                 }
             }
+
+
             // 只搵客鍠
-            if (區號 === '' || WhatsApp號 === ''|| 發出促銷信的gmail === '' || gmail的應用程式密碼 === '' || 發送促銷信件數 === ''|| 信件標題 === '' || 促銷信草稿 === '' ) {
-                發送促銷信件數 = 0; 
+            const 只搵客鍠 = {
+                區號: 區號,
+                WhatsApp號: WhatsApp號,
+                發出促銷信的gmail: 發出促銷信的gmail,
+                gmail的應用程式密碼: gmail的應用程式密碼,
+                信件標題: 信件標題,
+                促銷信草稿: 促銷信草稿,
+            };
+            const 只搵客囉 = Object.keys(只搵客鍠);
+            for (const 欄位 of 只搵客囉) {
+                if (只搵客鍠[欄位] == null || 只搵客鍠[欄位] === '') {
+                    發送促銷信件數 = 0; 
+                }
             }
 
             分隔符 = '@////////@'
