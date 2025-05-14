@@ -50,7 +50,7 @@ https://wa.me/85264071181/?text=莫生我要查詢金come遠端系統
 '''
 Telegram端步驟 https://pixnashpython.pixnet.net/blog/post/32391757-%E3%80%90telegram-api%E3%80%91python
 
-步驟一：在Telegram搜尋欄輸入BotFather並打開
+步驟一：在 Telegram 搜尋欄輸入BotFather並打開
 
 步驟二：輸入 /newbot
 
@@ -59,6 +59,8 @@ Telegram端步驟 https://pixnashpython.pixnet.net/blog/post/32391757-%E3%80%90t
 步驟四：輸入機器人可搜尋名稱
 
 步驟五：取得TOKEN複製起來(PYTHON用)
+
+要群中用 = 公開群組 > 機器人需是管理員
 
 https://www.freecodecamp.org/chinese/news/how-to-create-a-telegram-bot-using-python/
 '''
@@ -379,6 +381,23 @@ class 雜項:
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 class _chrome_雜項:
     def _Chrome設定():
         start_time = time.time()
@@ -441,6 +460,28 @@ class _chrome_雜項:
                 _chrome_雜項.檢字 = 0
                 print(f'_請告知作者更新{位置}|{xpath}')
             return False
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -787,7 +828,8 @@ def _香港勞工處(keyword=''):
             
             if int(顯總料數) == 0:
                 print("沒有資料，搜尋結束...")
-                break
+                all_Boss料.append("沒有資料，搜尋結束...")
+                return all_Boss料
 
             print(f"獲取第{找頁數}頁...")
             # 6. 擷取工作列表中的所有 href 連結
@@ -977,6 +1019,35 @@ def _台灣就業通(keyword=''):
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 '''
   :::::::::::       ::::::::
      :+:          :+:    :+:
@@ -1000,24 +1071,69 @@ class _TG機器人系列:
             if msg.from_user.username in 白名單:
                 return True
 
+        '''
+        # 取群id
+        @bot.message_handler(commands=['groupid'])
+        def send_group_id(message):
+            chat_id = message.chat.id
+            bot.reply_to(message, f"群組 ID：`{chat_id}`", parse_mode="Markdown")
+        bot.polling()
+        '''
+
+
+        '''
+        # 用戶發信息給機器人時告訴我
+        YOUR_GROUP_ID = -4706199187
+        @bot.message_handler(func=lambda message: True)
+        def forward_to_group(message):
+            try:
+                bot.send_message(
+                    YOUR_GROUP_ID,
+                    f"👤 @{message.from_user.username} 發送訊息：\n`{message.text}`",
+                    parse_mode="Markdown"
+                )
+            except Exception as e:
+                print(f"轉發失敗：{e}")
+        '''
+
+
         # 使用正則表達式 r'^/\$|^/%|^/\@|^/\?' 同時匹配指令開頭  /$、/%、/@、/？
-        #@bot.message_handler(func=lambda message: re.match(r'^/\$|^/%|^/\@|^/\?', message.text))
         @bot.message_handler(func=lambda message: re.match(r'^/[$%@?]', message.text))
         def handle_commands(message):
-            
+
+
+
+
+
+
+            try:
+                bot.send_message(
+                    -4706199187,
+                    f"👤 @{message.from_user.username} 發送訊息：\n`{message.text}`",
+                    parse_mode="Markdown"
+                )
+            except Exception as e:
+                print(f"轉發失敗：{e}")
+
+
+
+
+
             # 轉了付費模式,不需白名單
             #if not _TG白名單(message): return  # 如果不在白名單中，則停止處理
 
             # 獲取指令和關鍵字
+            match = re.match(r'^/([$%@?])(@\w+)?\s*(.*)', message.text)
+            if not match:
+                return
+            
             指令 = message.text[:2]  # 指令標記，例如 /$, /%, /@ 或 /?
             keyword = message.text[2:]  # 去除指令部分後的關鍵字
 
             回答 = f'''
                 {本程式名}
                 🐣🛎️💰 說明 🐣🛎️💰
-
                 遠端鍠  = https://金come.com/0
-
                 🐣🛎️💰 說明 🐣🛎️💰
             '''
             ### 說明 /? ###
@@ -1025,15 +1141,14 @@ class _TG機器人系列:
                 bot.reply_to(message, 回答)
                 print(回答)
 
-            ### 遠端鍠 找老闆 在 https://金come.com/0  執行 ###
+            ### 遠端鍠 在 https://金come.com/0  執行 ### # 要群中用 = 公開群組 > 機器人需是管理員
             elif 指令 == "/%":
                 aki指令內容 = keyword.split('@////////@')
                 if len(aki指令內容) < 8:
                     bot.reply_to(message, '恭喜發財!')
                     print('遠端鍠 code 錯誤')
                     return
-
-                回答 = f'🐣🛎️💰 遠端鍠 找老闆 請稍候(約20分鐘)... 🐣🛎️💰'
+                回答 = f'🐣🛎️💰 遠端鍠 開始執行 請稍候約20分鐘... 🐣🛎️💰'
                 bot.reply_to(message, 回答)
                 print(回答)
 
@@ -1139,6 +1254,38 @@ class _TG機器人系列:
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 '''
       ::::::::   :::::::::::           :::        :::::::::   :::::::::::
     :+:    :+:      :+:             :+: :+:      :+:    :+:      :+:
@@ -1211,8 +1358,12 @@ def _執行遠端鍠(指令):
             all_data.append(睇結果)
         return all_data
 
+    搜到的料all = eval(遠端鍠py)# _香港勞工處('${關鍵字}') / _台灣就業通('${關鍵字}')
+    if 發送促銷信件數 == 0:
+        搜到的料all.append(f'==搵客鍠已搜尋{len(搜到的料all)}個資料==')
+        return 搜到的料all # 只搵客鍠
 
-    for 結果 in eval(遠端鍠py): # _香港勞工處('${關鍵字}') / _台灣就業通('${關鍵字}')
+    for 結果 in 搜到的料all: 
         if all成功發送 >= 發送促銷信件數:
             #print(f'已成功發送{發送促銷信件數}封,促銷鍠結束')
             all_data.append(f'已成功發送{發送促銷信件數}封,促銷鍠結束')
@@ -1244,10 +1395,37 @@ def _執行遠端鍠(指令):
         all_data.append(睇結果)
     
     # 將比客睇結果加到all_data後面
-    all_data.append('-'*18)
+    all_data.append('💰'*36)
     all_data.extend(比客睇)
+    all_data.append(f"{'💰'*18}=={f'促銷鍠已送出{len(比客睇)}個促銷':^24}=={'💰'*18}")
 
     return all_data
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
