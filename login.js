@@ -39,6 +39,64 @@ function isAdmin(uid) {
 */ 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+新用戶送分 = 100; //202505152140
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*
           :::        :::::::::       :::::::::::
        :+: :+:      :+:    :+:          :+:
@@ -230,7 +288,7 @@ async function loadUserScore(userId) {
             // 新用戶初始化
             await setDoc(userRef, {
                 email: auth.currentUser.email,
-                會員分數: 100  // 新用戶送100分
+                會員分數: 新用戶送分  // 新用戶送100分
             });
             document.querySelectorAll('.user-score').forEach(element => {
                 element.textContent = 0;
@@ -470,7 +528,7 @@ const lastLogin = await getLastLogin(loginHistoryRef);
 
 const row = `
 <tr>
-  <td>${userData.email || userEmail || '未提供'}</td>
+  <td>${userData.email || userEmail || '未提供'}<br>${userDoc.id}</td>
   <td>
     <span id="score-${userDoc.id || userId}">${userData.會員分數 || 0}</span>
     <br>
@@ -549,7 +607,7 @@ const lastLogin = await getLastLogin(loginHistoryRef);
 
 const row = `
 <tr>
-  <td>${userData.email || userEmail || '未提供'}</td>
+  <td>${userData.email || userEmail || '未提供'}<br>${userId}</td>
   <td>
     <span id="score-${userDoc.id || userId}">${userData.會員分數 || 0}</span>
     <br>
@@ -573,6 +631,7 @@ showSuccess(`找到 ${foundUsers} 个匹配用户`);
 showDbError("搜索失败: " + error.message);
 }
 };
+
 
 
 
