@@ -1,0 +1,349 @@
+<html lang="zh-HK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>搵客鍠🔍 | 金come</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
+
+
+
+    <style>
+
+      :root {--primary-color: #0A2463; /* Deep Blue */--secondary-color: #FFD700; /* Gold */--accent-color: #F0F0F0; /* Light Gray */--text-color: #333333;--light-text-color: #FFFFFF;--card-bg: #FFFFFF;--border-radius: 8px;--box-shadow: 0 4px 12px rgba(0,0,0,0.1);}
+      body { font-family: "PMingLiU", "新細明體", "Microsoft JhengHei", sans-serif;background: linear-gradient(145deg, #a8a8a8, #000000);color: #f1ecec;padding: 20px;}
+      h1 { text-align: center;margin-bottom: 20px;font-size: 2em;text-shadow: 2px 2px 4px gold; }
+
+      section p, li{color: #888;}
+      
+      header h1 {margin: 0;font-size: 1.8rem;color: var(--secondary-color);}
+      main {padding: 1rem;}
+      .content-section {background-color: var(--card-bg);padding: 1.5rem;margin-bottom: 1.5rem;border-radius: var(--border-radius);box-shadow: var(--box-shadow);}
+      .content-section h2 {color: var(--secondary-color);margin-top: 0;border-bottom: 2px solid var(--secondary-color);padding-bottom: 0.5rem;margin-bottom: 1rem;}
+      .gold-text {color: var(--secondary-color);font-weight: bold;}
+      .price-value {  font-size: 1.2em;  font-weight: bold;}
+      .highlight-box {background-color: #FFFBEB; /* Light yellow, complementary to gold */border: 1px solid var(--secondary-color);padding: 1rem;margin: 1rem 0;border-radius: var(--border-radius);text-align: center;}
+      .highlight-box .price-value {  font-size: 1.3em;}
+      .calculator-section .price-info {  text-align: center;  font-size: 1.1em;  margin-bottom: 0.5rem;}
+      .calculator {display: flex;flex-direction: column;gap: 0.75rem;margin-top: 1rem;}
+      .calculator label {font-weight: bold;color: var(--primary-color);}
+      .calculator input[type="number"] {padding: 0.75rem;border: 1px solid #ccc;border-radius: var(--border-radius);font-size: 1rem;width: 100%;box-sizing: border-box;}
+      #cost-output {margin-top: 0.5rem;padding: 1rem;background-color: var(--accent-color);border-radius: var(--border-radius);}
+      #cost-output p {margin: 0.5rem 0;font-size: 1.1em;}
+      #cost-output span {font-weight: bold;color: var(--primary-color);}
+      #cost-output .program-price span {  color: #CFB53B; /* Darker Gold for text */}
+
+      .comparison-intro p {  text-align: center;  margin-bottom: 1.5rem;  font-style: italic;}
+      .comparison-container {display: flex;flex-direction: column;gap: 1.5rem;}
+      .card {background-color: var(--card-bg);padding: 1.5rem;border-radius: var(--border-radius);border: 1px solid #ddd;/* Removed box-shadow from individual cards as parent section has it */}
+      .card-icon {display: block;margin: 0 auto 1rem auto;width: 50px;height: 50px;}
+      .card h3 {text-align: center;color: var(--primary-color);margin-top: 0;margin-bottom: 1rem;}
+      #our-service h3 {  color: var(--secondary-color); /* Using gold for "Our Service" title to stand out */}
+      #our-service h3 .gold-text { /* Ensure this inherits properly or apply directly */  color: var(--secondary-color);}
+
+      .card p {margin-bottom: 0.5rem;font-size: 0.95rem;}
+      .card p .value {  font-weight: bold;}
+      .metric-bar-container {  margin: 0.75rem 0;}
+      .metric-bar-container .metric-label {  display: block;  font-size: 0.9em;  margin-bottom: 0.25rem;  color: #555;}
+      .bar-wrapper {  background-color: #e0e0e0;  border-radius: 4px;  height: 18px;  width: 100%;  overflow: hidden;}
+      .bar {  height: 100%;  background-color: #B0BEC5; /* Muted blue-gray for FB/IG */  border-radius: 4px 0 0 4px; /* For partial fills */  transition: width 0.5s ease-in-out;}
+      .bar.our-service-bar {  background-color: var(--secondary-color); /* Gold for our service */}
+
+      .pros h4, .cons h4 {margin-top: 1rem;margin-bottom: 0.5rem;font-weight: bold;color: var(--secondary-color);}
+      .pros ul, .cons ul {list-style: none;padding-left: 0;margin: 0;}
+      .pros li, .cons li {padding-left: 1.5em;position: relative;margin-bottom: 0.25rem;font-size: 0.9rem;}
+      .advantage-icon, .disadvantage-icon {  font-weight: bold;}
+
+
+
+      
+      /* Responsive adjustments */
+      @media (min-width: 768px) {header h1 {  font-size: 2.2rem;}#logo {  height: 60px;}main {  max-width: 960px;  margin: 0 auto;  padding: 2rem;}.content-section {  padding: 2rem;}.calculator {  flex-direction: row;  align-items: center;}.calculator input[type="number"] {  width: 200px; /* Or flex-grow: 1 */}#cost-output {  margin-left: 1rem;  /* flex-grow: 1; */ /* If calculator items need to distribute space */}
+      .comparison-container {  flex-direction: row;  justify-content: space-between;}.card {  width: calc(50% - 1rem); /* Adjust width for two columns with gap */}}
+
+
+
+
+
+              .cta-button {display: inline-block;padding: 1rem 2rem;background: linear-gradient(45deg, #203a43 0%, #2c5364 50%, #203a43 100%);border: 1px solid var(--金come流程-gold);border-radius: 30px;color: var(--金come流程-gold);text-decoration: none;font-weight: bold;transition: all 0.3s;margin: 2rem 0;position: relative;overflow: hidden;animation: 
+                float 3s ease-in-out infinite,metalShine 4s linear infinite;}
+         /* 水中浮动效果 */
+        @keyframes float {0%, 100% {    transform: translateY(0) rotate(1deg);}
+            33% {    transform: translateY(-4px) rotate(-0.5deg);}
+            66% {    transform: translateY(3px) rotate(0.5deg);}
+        }
+        /* 金属光泽流动效果 */
+        @keyframes metalShine {0% {    background-position: -200% 0;}
+            100% {    background-position: 200% 0;}
+        }
+        /* 金属光泽伪元素 */
+        .cta-button::before {content: '';position: absolute;top: 0;left: 0;width: 150%;height: 100%;background: linear-gradient(
+                60deg,rgba(255,255,255,0) 20%,rgba(212,175,55,0.3) 50%,rgba(255,255,255,0) 80%
+            );transform: skewX(-45deg);animation: shineFlow 3s linear infinite;}
+        @keyframes shineFlow {0% {    left: -150%;}
+            100% {    left: 150%;}
+        }
+        /* 悬停效果增强 */
+        .cta-button:hover {animation-play-state: paused;box-shadow: 
+                0 0 25px rgba(64, 156, 255, 0.5),0 0 15px var(--金come流程-gold);transform: scale(1.05);}
+        .cta-button:hover::before {animation: none;opacity: 0;}
+        .feature-list li {padding: 1rem;margin: 1rem 0;border-left: 3px solid var(--金come流程-gold);background: rgba(32, 58, 67, 0.5);}
+        @media (max-width: 768px) {.container {padding: 1rem; }
+            h1 {font-size: 2.5rem; }
+        }
+
+
+
+    </style>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+      const leadsInput = document.getElementById('leads-needed');
+      const standardCostEl = document.getElementById('standard-cost');
+      const programCostEl = document.getElementById('program-cost');
+
+      const STANDARD_RATE = 5;
+      const PROGRAM_RATE = .11;
+
+      function calculateCosts() {
+          const numLeads = parseInt(leadsInput.value) || 0;
+          
+          const standardCost = numLeads * STANDARD_RATE;
+          const programCost = numLeads * PROGRAM_RATE;
+
+          standardCostEl.textContent = standardCost.toFixed(2);
+          programCostEl.textContent = programCost.toFixed(2);
+      }
+
+      if (leadsInput && standardCostEl && programCostEl) {
+          leadsInput.addEventListener('input', calculateCosts);
+          // Initial calculation
+          calculateCosts();
+      } else {
+          console.error("Calculator elements not found!");
+      }
+  });
+
+
+    </script>
+  <!-- ws icon https://www.thinkcmf.com/font/font_awesome/icons.html -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+  <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+  <script src="../mokJsapi/a.js">//琪琪修改</script>
+  <script src="py/py.js"></script>
+
+  <link rel="stylesheet" href="html.css">
+  <script src="html.js"></script>
+  <script type="module" src="login.js"></script>
+  <script src="https://cdn.staticfile.net/translate.js/3.1.7/translate.js">// 翻譯 放最後</script>
+
+
+
+
+
+
+</head>
+<body>
+  <samp id="莫生查詢" style="display: none;">莫生我要查詢搵客鍠</samp>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h1>搵客鍠🔍 | <a href="./"><b class="_我司名"></b></a></h1>
+
+  <main>
+    <section id="intro" class="content-section">
+      <h2>每日精準獲客，大幅節省人力成本</h2>
+      <p>我們可協助您的企業每天針對性獲取精準目標客戶資料，並大量節省貴人力成本。</p>
+      <p><strong>資料包括：</strong>公司名稱，聯絡資料（電話或電郵）</p>
+      <p>資料保證最新有效可聯絡。可作貴公司促銷或收集商業情報用途。</p>
+
+      <div style="text-align: center">
+      <a href="https://wa.me/85264071181/?text=莫生我要立即獲取客戶" target="_blank" class="cta-button" >
+          💰 立即獲取客戶！💰
+      </a>
+      </div>
+
+
+
+    </section>
+
+    <section id="pricing-calculator" class="content-section calculator-section">
+      <h2>您的獲客成本計算</h2>
+      <p class="price-info">使用<strong class="gold-text"><a href="https://wa.me/85264071181/?text=莫生我要查詢搵客鍠" target="_blank">搵客鍠</a></strong>每一筆目標客戶資料只需 <strong class="price-value">0.2 港元</strong>！</p>
+      <div style="text-align: center">
+      <a href="./" target="_blank" class="cta-button" >
+          💰 直接使用 <strong class="gold-text">金come</strong>，可低至每筆資料 <strong class="price-value gold-text">0.11 港元</strong>！💰
+      </a>
+      </div>
+      
+      <div class="calculator" >
+        <label for="leads-needed">您需要獲取多少精準潛在客戶？</label>
+        <input type="number" id="leads-needed" value="1000" min="100" step="100">
+        <div id="cost-output">
+          <p>傳統廣告價格：<span id="standard-cost">200.00</span> HKD</p>
+          <p class="program-price"><strong class="gold-text"><a href="./" target="_blank">金come</a></strong> 價格：<span id="program-cost">100.00</span> HKD</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="about-us" class="content-section">
+      <h2>關於我們</h2>
+      <p>我們是 <a href="./" target="_blank"><strong class="gold-text">金come商務機器人</strong></a>。致力協助企業B2B端業務優化，包辦開拓市場、促銷、AI工具及自動化客戶服務等服務。</p>
+    </section>
+
+    <section id="comparison" class="content-section">
+      <h2>成效對比</h2>
+      <div class="comparison-intro">
+        <p>了解我們的服務與傳統廣告的差異 (以每日100港元投放為例)：</p>
+      </div>
+      <div class="comparison-container">
+        <div class="card" id="fb-ig-ads">
+          <img src="https://i.pinimg.com/736x/79/bf/dc/79bfdc2ec7fa7f00d8ae6ba896c2b1e2.jpg" alt="" class="card-icon">
+          <h3>FB、IG、抖音、小紅書</h3>
+          <p><strong>每日成本:</strong> 100 HKD</p>
+          <p>預估接觸客戶數: <span class="value">50 ~ 7000</span></p>
+          <p>預估成交客戶數: <span class="value">0 ~ 8</span></p>
+          <div class="metric-bar-container">
+            <span class="metric-label">獲取比率 (0 ~ 0.00114)</span>
+            <div class="bar-wrapper"><div class="bar" style="width: 10%;"></div></div> <!-- Max 0.01 vs 0.1 -->
+          </div>
+          <p>平均每1成交客戶獲取成本: <span class="value">100 ~ 12.5 HKD</span></p>
+          <div class="cons">
+            <h4><span class="disadvantage-icon">😓</span> 缺點：</h4>
+            <ul>
+              <li>不能精準針對潛在目標客戶</li>
+              <li>需被平台規範</li>
+              <li>獲取後沒有後續支援</li>
+              <li>成本效益低</li>
+            </ul>
+          </div>
+        </div>
+        <div class="card" id="our-service">
+          <img src="py/0.ico" alt="我們的服務 圖標" class="card-icon">
+          <h3><strong class="gold-text">金come</strong></h3>
+          <p><strong>每日成本:</strong> 100 HKD</p>
+          <p>真實接觸客戶數: <span class="value">500</span> (精準)</p>
+          <p>預估成交客戶數: <span class="value">50</span></p>
+          <div class="metric-bar-container">
+            <span class="metric-label">獲取比率 (0.1)</span>
+            <div class="bar-wrapper"><div class="bar our-service-bar" style="width: 100%;"></div></div> <!-- Max 0.1 vs 0.1 -->
+          </div>
+          <p>平均每1成交客戶獲取成本: <span class="value">2 HKD</span></p>
+          <div class="pros">
+            <h4><span class="advantage-icon">🥳</span> 優點：</h4>
+            <ul>
+              <li>精準針對潛在目標客戶</li>
+              <li>廣告內容完全自由</li>
+              <li>可選用我們程式作自動促銷及客戶服務</li>
+              <li>成本效益高</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <samp class="note" style="color: #666;font-size: smaller;">* 以上資料只供參考。雖然本公司已盡力確保資料準確，但本公司不會明示或暗示保證或擔保該等資料任何時候均準確無誤。本公司不會對任何錯誤或遺漏承擔法律責任。</samp>
+    </section>
+  </main>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="ContactAKI" class="ContactAKI"><!-- JS _顯示聯莫 --></div>
+    <p class="mokJsApi_copyright">版權</p>
+    <div class="scroll-top" id="scrollTop" onclick="scrollToTop()">↑</div>
+
+    <script>
+        function _翻譯(){ 
+            translate.service.use('client.edge'); //設置機器翻譯服務通道，直接客戶端本身，不依賴服務端 。相關說明參考 http://translate.zvo.cn/43086.html
+            translate.execute();//進行翻譯 
+        }
+        function Start() {
+            // 顯示聯莫
+            const 聯莫 = ['moksurky@gmail.com','https://wa.me/85264071181/','https://i.meee.com.tw/atcX6QM.png','https://www.instagram.com/moksurky2025/','https://line.me/ti/p/UlSPd7p9zh/','https://www.facebook.com/aki.mok.10/','http://t.me/mokaki/','https://github.com/GoldComeHK/GoldComeHK.github.io'
+            ];
+            _翻譯()
+            _顯示聯莫(聯莫);
+        }
+        琪琪修改()
+    </script>
+
+</body>
+</html>
