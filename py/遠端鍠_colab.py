@@ -270,11 +270,6 @@ class 自動send野:
 
         return 發成點
     
-
-
-
-
-
 # all 自動send野系列 \
 
 
@@ -332,28 +327,6 @@ class 雜項:
         # 取小數點後兩位
         花費了 = round(終 - 始, 2)
         return 花費了
-
-
-
-    # api token 處理超時問題
-    def _ApiToken處理超時問題(key, max_retries=3, delay=5):
-        start_time = time.time()
-        retries = 0
-        while retries < max_retries:
-            try:
-                secret_value = userdata.get(key)
-                return secret_value
-            except TimeoutException:
-                retries += 1
-                print(f"第 {retries} 次嘗試失敗，等待 {delay} 秒後重試...")
-                time.sleep(delay)
-        end_time = time.time()
-        print(f"[_ApiToken處理超時問題] 花費了 {雜項._計算花費了的時間(start_time,end_time)} 秒")
-        raise TimeoutException(f"無法取得 {key}，超過最大重試次數。")
-
-
-
-
 
 # all 雜項系列 \
 
@@ -1080,53 +1053,27 @@ class _TG機器人系列:
         bot.polling()
         '''
 
-
-        '''
-        # 用戶發信息給機器人時告訴我
-        YOUR_GROUP_ID = -4706199187
-        @bot.message_handler(func=lambda message: True)
-        def forward_to_group(message):
+        def _轉發通知(msg):
             try:
                 bot.send_message(
-                    YOUR_GROUP_ID,
-                    f"👤 @{message.from_user.username} 發送訊息：\n`{message.text}`",
+                    -4706199187,
+                    f"👤 @{msg.from_user.username} 發送訊息：\n`{msg.text}`",
                     parse_mode="Markdown"
                 )
             except Exception as e:
                 print(f"轉發失敗：{e}")
-        '''
 
 
         # 使用正則表達式 r'^/\$|^/%|^/\@|^/\?' 同時匹配指令開頭  /$、/%、/@、/？
         @bot.message_handler(func=lambda message: re.match(r'^/[$%@?]', message.text))
         def handle_commands(message):
 
-
-
-
-
-
-            try:
-                bot.send_message(
-                    -4706199187,
-                    f"👤 @{message.from_user.username} 發送訊息：\n`{message.text}`",
-                    parse_mode="Markdown"
-                )
-            except Exception as e:
-                print(f"轉發失敗：{e}")
-
-
-
-
+            # 用戶發信息給機器人時在群告訴我
+            _轉發通知(message)
 
             # 轉了付費模式,不需白名單
             #if not _TG白名單(message): return  # 如果不在白名單中，則停止處理
 
-            # 獲取指令和關鍵字
-            match = re.match(r'^/([$%@?])(@\w+)?\s*(.*)', message.text)
-            if not match:
-                return
-            
             指令 = message.text[:2]  # 指令標記，例如 /$, /%, /@ 或 /?
             keyword = message.text[2:]  # 去除指令部分後的關鍵字
 
@@ -1478,7 +1425,7 @@ if __name__ == "__main__":
     由這mail的key = ''
 
     now = datetime.now()
-    更新日期 = '202505081604'
+    更新日期 = '202505251646'
     本程式名 = f'$$$ 遠端鍠 {更新日期} 版 {now} 已執行 $$$'
     print(本程式名)
     _TG機器人系列._TG多工機器人()
