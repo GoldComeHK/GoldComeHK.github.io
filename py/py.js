@@ -7,7 +7,7 @@
 
 
 
-更新日期 = '202505081604'
+更新日期 = '202505251646'
 
 
 
@@ -327,7 +327,7 @@ class _客服鍠:
 
     登入流程_xpaths = {
         # 必須按此排列
-        '使用手機號碼登入':'//*[@id="app"]/div/div[2]/div[2]/div[2]/div/div[*]/div[*]/div[1]/div[5]/span/div',
+        '使用手機號碼登入':'//*[@id="app"]/div/div[2]/div[2]/div[2]/div/div[2]/div/div[1]/div[5]/*/div',
         '国家选择':'//*[@id="app"]/div/div[2]/div[2]/div[*]/div/div/div[3]/div[1]/div[1]/button/div/div/div',
         '国家代码':'//*[@id="wa-popovers-bucket"]/div/div[2]/div/div[1]/div/div[2]/div/div/p',
         '地区选择':'//*[@id="wa-popovers-bucket"]/div/div[2]/div/div[2]/div/div/div/div/div/div/button/div/div/div[2]/div/div/div',
