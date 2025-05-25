@@ -4,124 +4,62 @@
     <meta charset="UTF-8">
     <title>會員系統 - 積分功能</title>
     <style>
-        body { font-family: Arial, sans-serif; max-width: 600px; margin: 20px auto; padding: 20px; }
-        .form-group { margin-bottom: 15px; }
-        input { padding: 8px; width: 100%; }
-        button { padding: 10px 20px; margin: 5px; background: #007bff; color: white; border: none; cursor: pointer; }
-        .user-info { margin-top: 20px; padding: 20px; background: #f0f0f0; border-radius: 5px; }
-        .error { color: red; margin: 10px 0; }
-        .success { color: green; margin: 10px 0; }
-        .score-display { font-size: 24px; margin: 15px 0; }
+      body { font-family: Arial, sans-serif; max-width: 600px; margin: 20px auto; padding: 20px; }
+      .form-group { margin-bottom: 15px; }
+      input { padding: 8px; width: 100%; }
+      button { padding: 10px 20px; margin: 5px; background: #007bff; color: white; border: none; cursor: pointer; }
+      .user-info { margin-top: 20px; padding: 20px; background: #f0f0f0; border-radius: 5px; }
+      .error { color: red; margin: 10px 0; }
+      .success { color: green; margin: 10px 0; }
+      .score-display { font-size: 24px; margin: 15px 0; }
+      /* 登入记录 */
+      .history-container {          margin-top: 20px;        max-height: 200px;        overflow-y: auto;        border: 1px solid #ddd;        padding: 10px;        background: white;    }
+      .history-item {          padding: 8px;        border-bottom: 1px solid #eee;        font-size: 14px;    }
+      .history-item:last-child {          border-bottom: none;    }
+      /* 表格整體樣式 */
+      table {width: 100%;border-collapse: collapse;margin: 15px 0;font-family: Arial, sans-serif;}
+      /* 表格標題與單元格 */
+      th, td {padding: 12px 15px;text-align: left;border-bottom: 1px solid #ddd;}
+      /* 滑鼠懸停行效果 */
+      tr:hover {background-color: #f5f5f5;}
+      /* 分數顯示區塊 */
+      td span {font-weight: bold;min-width: 40px;display: inline-block;text-align: center;}
+      /* 分數輸入框 */
+      input[type="number"] {width: 60px;padding: 8px;margin: 0 5px;border: 1px solid #ccc;border-radius: 4px;text-align: center;}
+      /* 按鈕通用樣式 */
+      button {padding: 8px 12px;background-color: #4CAF50; /* 綠色 */
+        color: white;border: none;border-radius: 4px;cursor: pointer;transition: background-color 0.3s;}
+      /* 按鈕懸停效果 */
+      button:hover {background-color: #45a049;}
+      /* 手機版響應式調整 */
+      @media (max-width: 600px) {
+        td {  display: block;text-align: right;}
+        td::before {  content: attr(data-label);float: left;font-weight: bold;}
+      }
+      /* 輸入框聚焦效果 */
+      input[type="number"]:focus {outline: none;border-color: #4CAF50;box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);}
+      /* 分數變化動畫 */
+      @keyframes scoreUpdate {0% { transform: scale(1); }
+        50% { transform: scale(1.1); }
+        100% { transform: scale(1); }
+      }
+      .score-updated {animation: scoreUpdate 0.5s;}
 
-
-        /* 登入记录 */
-        .history-container {
-            margin-top: 20px;
-            max-height: 200px;
-            overflow-y: auto;
-            border: 1px solid #ddd;
-            padding: 10px;
-            background: white;
-        }
-        .history-item {
-            padding: 8px;
-            border-bottom: 1px solid #eee;
-            font-size: 14px;
-        }
-        .history-item:last-child {
-            border-bottom: none;
-        }
-
-        /* 表格整體樣式 */
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 15px 0;
-  font-family: Arial, sans-serif;
+      .referral-item {
+    padding: 8px;
+    border-bottom: 1px solid #eee;
 }
-
-/* 表格標題與單元格 */
-th, td {
-  padding: 12px 15px;
-  text-align: left;
-  border-bottom: 1px solid #ddd;
-}
-
-/* 滑鼠懸停行效果 */
-tr:hover {
-  background-color: #f5f5f5;
-}
-
-/* 分數顯示區塊 */
-td span {
-  font-weight: bold;
-  min-width: 40px;
-  display: inline-block;
-  text-align: center;
-}
-
-/* 分數輸入框 */
-input[type="number"] {
-  width: 60px;
-  padding: 8px;
-  margin: 0 5px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  text-align: center;
-}
-
-/* 按鈕通用樣式 */
-button {
-  padding: 8px 12px;
-  background-color: #4CAF50; /* 綠色 */
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-/* 按鈕懸停效果 */
-button:hover {
-  background-color: #45a049;
-}
-
-/* 手機版響應式調整 */
-@media (max-width: 600px) {
-  td {
-    display: block;
-    text-align: right;
-  }
-  td::before {
-    content: attr(data-label);
-    float: left;
-    font-weight: bold;
-  }
-}
-
-/* 輸入框聚焦效果 */
-input[type="number"]:focus {
-  outline: none;
-  border-color: #4CAF50;
-  box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
-}
-
-/* 分數變化動畫 */
-@keyframes scoreUpdate {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.1); }
-  100% { transform: scale(1); }
-}
-
-.score-updated {
-  animation: scoreUpdate 0.5s;
+.history-container p {
+    padding: 10px;
+    color: #666;
 }
 
 
 
-    </style>
+
+  </style>
 <script src="html.js"></script>
-<script type="module" src="login.js"></script>
+
 </head>
 <body>
 
@@ -174,8 +112,18 @@ input[type="number"]:focus {
 -->
     <div id="login-form">
         <h2>會員登入</h2>        
-        <button onclick="loginWithGoogle()" style="background: #dd4b39;">Google 登入</button>
+        
+        <button onclick="loginWithGoogle()" style="background: gold;">Google 登入</button>
+        
+
+        <br><br>
+        <div class="form-group">
+          <input type="text" id="referrer-id" placeholder="請輸入推廣碼">
+        </div>
+
+
         <div id="error-message" class="error"></div>
+
     </div>
 
 
@@ -222,6 +170,15 @@ input[type="number"]:focus {
         
         <button onclick="充值()" title="充值" style="background: gold;" >充值分數</button>
         <button onclick="logout()" style="background: #666;">登出</button>
+        
+        <div id="referrer-info"></div>
+        <h3>我的推廣碼:</h3>
+        <div class="userId"></div>
+
+        <h3>我的用戶:</h3>
+        <div id="我的用戶" class="history-container">
+            <p>暂无被介绍人</p>
+        </div>
         
         <div id="success-message" class="success"></div>
         <div id="db-error-message" class="error"></div>
@@ -276,7 +233,7 @@ input[type="number"]:focus {
         <table id="users-table">
           <thead>
             <tr>
-              <th>邮箱</th>
+              <th>邮箱/ID</th>
               <th>会员分数</th>
               <th>最后登录</th>
             </tr>
@@ -310,7 +267,9 @@ input[type="number"]:focus {
 
 
 
-
+<script type="module" src="login.js"></script>
       
 </body>
+
+
 </html>
