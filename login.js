@@ -73,7 +73,7 @@ function isAdmin(uid) {
 
 
 const 新用戶送分 = 100; //202505152140
-
+const 推廣送分 = 25; //202505152140
 
 
 
@@ -197,6 +197,11 @@ onAuthStateChanged(auth, async (user) => {
         document.querySelectorAll('.user-email').forEach(element => {
             element.textContent = user.email;
         });
+
+        document.querySelectorAll('.userId').forEach(element => {
+            element.textContent = user.uid;
+        });
+        
         
         // 检查是否是管理员
         const isAdmin = await checkAdmin();
