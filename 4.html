@@ -203,13 +203,8 @@
                     (1次 = 10💰)
                     <button class="大鍵 執行客服鍠" title="執行客服鍠 🫱🏾‍🫲🏻" onclick="執行客服鍠()">執行客服鍠 🫱🏾‍🫲🏻</button>
                 </div><!-- Google 登入 -->
-                <!-- <button class="大鍵 執行客服鍠" title="執行客服鍠 🫱🏾‍🫲🏻" onclick="執行客服鍠()">qqq 客服鍠</button> -->
                 
-                    
-                    
-                
-                
-                
+                <button id="限本機" style="display: none;" class=" 執行客服鍠" title="執行客服鍠 🫱🏾‍🫲🏻" onclick="執行客服鍠(1)">admin 客服鍠 🫱🏾‍🫲🏻</button>
                 <h3><a href="./set.html">返回<b class="_我司名"></b></a></h3>
             </div>
 
@@ -516,7 +511,8 @@
 */
 
         /* ********************* */
-        async function 執行客服鍠() {
+        async function 執行客服鍠(sel='') {
+            if (sel == 1 && !_主機檢查()) return; 
             const 區號 = document.getElementById('區號').value;
             const WhatsApp號 = document.getElementById('WhatsApp號').value;
             
@@ -548,7 +544,7 @@
             // 檢查分數
             使用分數 = 10
             const result = await redeemPoints(使用分數); // 接收 redeemPoints() 的返回值
-            if (!result.success) {
+            if (sel !== 1 && !result.success) {
                 alert(`您的分數不足${使用分數}點，請充值!`);
                 充值();
                 return;
@@ -613,6 +609,13 @@
 ###     ###    ###    ###       ###########
 */
 
+        function _主機檢查() {
+            // 更精確的主機+端口檢查
+            if (window.location.host == '127.0.0.1:5500') {
+                document.getElementById('限本機').style.display = 'block';
+                return true;
+            }
+        }
 
 
 
@@ -649,6 +652,7 @@
             ];
             _翻譯()
             _顯示聯莫(聯莫);
+            _主機檢查();
             
             loadSavedData();
         }
