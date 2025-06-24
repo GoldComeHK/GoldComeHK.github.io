@@ -503,6 +503,14 @@ function getDeviceType() {
 ###     ###    #########       ###       ###     ###########       ###    ####
 
 */
+
+
+
+
+
+
+
+
 // 检查管理员权限
 async function checkAdmin() {
 try {
