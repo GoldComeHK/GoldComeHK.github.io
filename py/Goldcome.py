@@ -740,6 +740,7 @@ class _Start:
 
         # 初始執行
         if Admin模式:
+            # 轉不用登google的試 qqq 0614
             driver.get('C:/Users/mokaki/Desktop/金/金come(2025)/GoldComeHK.github.io/set.html')
         else:
             driver.get(f'{我官網}set.html')
@@ -881,7 +882,7 @@ if __name__ == "__main__":
 
     Admin模式 = False
 
-    更新日期 = '202505251646'
+    更新日期 = '202506250118'
     本程式名 = 'Goldcome'
     賺錢鍠瀏覽器位 = 本程式名
 
