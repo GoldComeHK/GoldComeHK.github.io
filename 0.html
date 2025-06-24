@@ -309,7 +309,7 @@
                     <button class="大鍵 執行遠端鍠" title="執行遠端鍠 👑" onclick="執行遠端鍠()">執行遠端鍠 👑</button>
                 </div><!-- Google 登入 -->
 
-                <button id="限本機" class="大鍵 執行遠端鍠" style="display: none;" title="執行遠端鍠 👑" onclick="執行遠端鍠(1)">admin_遠端鍠 👑</button>
+                <button id="限本機" class="執行遠端鍠" style="display: none;" title="執行遠端鍠 👑" onclick="執行遠端鍠(1)">admin_遠端鍠 👑</button>
                 <h3><a href="./set.html">返回<b class="_我司名"></b></a></h3>
             </div>
             <div class="scroll-top" id="scrollTop" onclick="scrollToTop()">↑</div>
@@ -709,7 +709,7 @@ const 記錄位 = document.querySelectorAll(".記錄數據用");
 
         /* ********************* */
         async function 執行遠端鍠(sel='') {
-            if (sel == 1 && !_主機檢查()) return;
+            if (sel == 1 && !_主機檢查()) return; 
 
             const 區號 = document.getElementById('區號').value;
             const WhatsApp號 = document.getElementById('WhatsApp號').value;
@@ -769,7 +769,7 @@ const 記錄位 = document.querySelectorAll(".記錄數據用");
             // 檢查分數
             使用分數 = +發送促銷信件數 + +最多找資料數
             const result = await redeemPoints(使用分數); // 接收 redeemPoints() 的返回值
-            if (sel !== 1 && !result.success) {
+            if (sel !== 1 && !result.success) { 
                 alert(`您的分數不足${使用分數}點，請充值!`);
                 充值();
                 return;
@@ -810,15 +810,12 @@ const 記錄位 = document.querySelectorAll(".記錄數據用");
 ###     ###    ###    ###       ###########
 */
 
-        
         function _主機檢查() {
             // 更精確的主機+端口檢查
             if (window.location.host == '127.0.0.1:5500') {
                 document.getElementById('限本機').style.display = 'block';
                 return true;
             }
-            
-
         }
 
         function _現在時間() {
