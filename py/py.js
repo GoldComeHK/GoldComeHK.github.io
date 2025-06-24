@@ -7,7 +7,7 @@
 
 
 
-更新日期 = '202505251646'
+更新日期 = '202506250118'
 
 
 
@@ -31,7 +31,7 @@
 def _搵客鍠B(keyword=''):
 
     勞工處XPATH = {
-        '左上資料數':'//*[@id="content-innerdiv"]/div[1]/div[1]/strong[1]',
+        '左上資料數':'//*[@id="content-innerdiv"]/div[*]/strong[1]', #0614
         '勞工處點擊下一頁按鈕':'//*[@id="swapNextPage"]',
         '列表顯示':'//*[@id="content-innerdiv"]/div[1]/div/div[2]/a',
         '公司名xpath':'//*[@id="empName"]/text()',
