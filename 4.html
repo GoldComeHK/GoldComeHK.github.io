@@ -610,8 +610,10 @@
 */
 
         function _主機檢查() {
-            // 更精確的主機+端口檢查
-            if (window.location.host == '127.0.0.1:5500') {
+            // 定義本地文件基礎路徑（注意：使用解碼後的中文字符）
+            const basePath = 'file:///C:/Users/mokaki/Desktop/%E9%87%91/%E9%87%91come(2025)/GoldComeHK.github.io/';            
+            // 檢查當前 URL 是否以基礎路徑開頭
+            if (window.location.href.startsWith(basePath)) {
                 document.getElementById('限本機').style.display = 'block';
                 return true;
             }
