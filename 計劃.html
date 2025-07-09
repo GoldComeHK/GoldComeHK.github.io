@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>美发行业整合平台 - 商业计划书</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #6a0dad;
+            --secondary: #ffd700;
+            --accent: #9c27b0;
+            --dark: #2c0a3a;
+            --light: #f8f5ff;
+            --gray: #e0e0e0;
+            --success: #4caf50;
+        }
+        
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background-color: var(--light);
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* 导航栏样式 */
+        header {
+            background: linear-gradient(135deg, var(--dark) 0%, var(--primary) 100%);
+            color: white;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.2);
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        
+        .logo i {
+            color: var(--secondary);
+            margin-right: 10px;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin: 0 15px;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+        
+        .nav-links a:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        /* 英雄区域样式 */
+        .hero {
+            background: linear-gradient(rgba(42, 10, 58, 0.85), rgba(42, 10, 58, 0.9)), url('https://images.unsplash.com/photo-1560066984-138dadb4c035?ixlib=rb-4.0.3') no-repeat center center/cover;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            color: white;
+            text-align: center;
+            padding: 0 20px;
+            position: relative;
+        }
+        
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding-top: 60px;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+        
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .highlight {
+            color: var(--secondary);
+            font-weight: 700;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: var(--secondary);
+            color: var(--dark);
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+            background: #ffea00;
+        }
+        
+        /* 主要内容区域样式 */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 20px;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--dark);
+            display: inline-block;
+            padding-bottom: 15px;
+        }
+        
+        .section-title h2:after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 4px;
+            background: var(--secondary);
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+        
+        /* 计划步骤样式 */
+        .steps {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .step-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            padding: 35px 30px;
+            flex: 1;
+            min-width: 300px;
+            max-width: 350px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border-top: 4px solid var(--accent);
+        }
+        
+        .step-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+        
+        .step-number {
+            position: absolute;
+            top: -15px;
+            right: -15px;
+            background: var(--primary);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: 700;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .step-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+        
+        .step-card ul {
+            list-style: none;
+            margin: 20px 0;
+        }
+        
+        .step-card ul li {
+            padding: 8px 0;
+            padding-left: 30px;
+            position: relative;
+        }
+        
+        .step-card ul li:before {
+            content: '\f00c';
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: var(--success);
+        }
+        
+        /* 分销商部分样式 */
+        .distributor-section {
+            background: linear-gradient(135deg, #f9f5ff 0%, #eef2ff 100%);
+            padding: 80px 0;
+            border-radius: 20px;
+            margin: 80px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+        
+        .distributor-content {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 50px;
+        }
+        
+        .distributor-text {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .distributor-image {
+            flex: 1;
+            min-width: 300px;
+            text-align: center;
+        }
+        
+        .distributor-image img {
+            max-width: 100%;
+            border-radius: 15px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+        }
+        
+        .profit-model {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin-top: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+        
+        .phase {
+            margin-bottom: 25px;
+            padding-bottom: 25px;
+            border-bottom: 1px dashed var(--gray);
+        }
+        
+        .phase:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .phase h4 {
+            color: var(--primary);
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+        }
+        
+        /* 投资部分样式 */
+        .investment {
+            background: linear-gradient(135deg, var(--dark) 0%, var(--primary) 100%);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+            border-radius: 20px;
+            margin: 80px 0;
+        }
+        
+        .investment h2 {
+            color: var(--secondary);
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+        }
+        
+        .investment h3 {
+            font-size: 2rem;
+            margin-bottom: 40px;
+        }
+        
+        .investment-details {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin: 50px 0;
+        }
+        
+        .investment-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            width: 250px;
+            transition: all 0.3s ease;
+        }
+        
+        .investment-card:hover {
+            transform: scale(1.05);
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        .investment-card i {
+            font-size: 3rem;
+            color: var(--secondary);
+            margin-bottom: 20px;
+        }
+        
+        .investment-card h4 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+        
+        /* 联系表单样式 */
+        .contact-form {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            padding: 40px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark);
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid var(--gray);
+            border-radius: 8px;
+            font-family: 'Noto Sans SC', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(156, 39, 176, 0.2);
+        }
+        
+        .submit-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 10px;
+        }
+        
+        .submit-btn:hover {
+            background: var(--accent);
+            transform: translateY(-2px);
+        }
+        
+        /* 页脚样式 */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 40px 0 20px;
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .footer-content p {
+            margin: 10px 0;
+            color: #ccc;
+        }
+        
+        .copyright {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            
+            .nav-links {
+                margin-top: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .nav-links li {
+                margin: 5px 10px;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+        }
+
+
+        
+    </style>
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+  
+  <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+  <script src="https://xn--come-p35m.com/mokJsapi/a.js">//琪琪修改</script>
+
+
+
+
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <i class="fas fa-scissors"></i>
+                <span>美业联盟</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#vision">愿景</a></li>
+                <li><a href="#plan">计划</a></li>
+                <li><a href="#distributor">分销商</a></li>
+                <li><a href="#investment">投资机会</a></li>
+                <li><a href="#contact">联系我们</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- 英雄区域 -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>整合中国美发行业，打造<span class="highlight">首家上市美发集团</span></h1>
+            <p>预计年纯利达<span class="highlight">4亿人民币</span>的颠覆性商业模式</p>
+            <a href="#investment" class="cta-button">投资此项目</a>
+        </div>
+    </section>
+
+    <!-- 愿景部分 -->
+    <section id="vision" class="container">
+        <div class="section-title">
+            <h2>我们的愿景</h2>
+        </div>
+        <div style="text-align: center; max-width: 900px; margin: 0 auto;">
+            <p style="font-size: 1.3rem; margin-bottom: 30px;">
+                通过科技与美发专业知识的完美结合，整合全中国美发行业资源，建立领先的美发品牌，成为中国首家上市的美发集团。
+            </p>
+            <div style="display: flex; justify-content: center; gap: 30px; margin-top: 50px; flex-wrap: wrap;">
+                <div style="background: white; border-radius: 12px; padding: 25px; width: 250px; box-shadow: 0 5px 20px rgba(0,0,0,0.05);">
+                    <i class="fas fa-chart-line" style="font-size: 3rem; color: var(--accent); margin-bottom: 20px;"></i>
+                    <h3 style="color: var(--dark); margin-bottom: 15px;">4亿年纯利</h3>
+                    <p>通过规模化运营和资源整合实现可观盈利</p>
+                </div>
+                <div style="background: white; border-radius: 12px; padding: 25px; width: 250px; box-shadow: 0 5px 20px rgba(0,0,0,0.05);">
+                    <i class="fas fa-store" style="font-size: 3rem; color: var(--accent); margin-bottom: 20px;"></i>
+                    <h3 style="color: var(--dark); margin-bottom: 15px;">全国加盟网络</h3>
+                    <p>建立覆盖全国的标准化美发门店网络</p>
+                </div>
+                <div style="background: white; border-radius: 12px; padding: 25px; width: 250px; box-shadow: 0 5px 20px rgba(0,0,0,0.05);">
+                    <i class="fas fa-mobile-alt" style="font-size: 3rem; color: var(--accent); margin-bottom: 20px;"></i>
+                    <h3 style="color: var(--dark); margin-bottom: 15px;">科技赋能</h3>
+                    <p>利用小程序和AI技术提升行业效率</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 计划步骤部分 -->
+    <section id="plan" class="container">
+        <div class="section-title">
+            <h2>三步走战略计划</h2>
+        </div>
+        <div class="steps">
+            <!-- 第一步 -->
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <h3>建立基础盈利及品牌</h3>
+                <p>全国招募分銷商，分銷商发展加盟店</p>
+                <h4>加盟店条件：</h4>
+                <ul>
+                    <li>按金888元（可退还）</li>
+                    <li>统一采购一次性用品和保洁服务</li>
+                </ul>
+                <h4>加盟福利：</h4>
+                <ul>
+                    <li>免费使用预约小程序（1%费率）</li>
+                    <li>免费AI换发型功能</li>
+                    <li>每月免费爆款视频制作</li>
+                    <li>盈利优化方案支持</li>
+                </ul>
+                <h4>盈利模式：</h4>
+                <ul>
+                    <li>供应链整合返佣1%</li>
+                    <li>小程序交易费1%</li>
+                </ul>
+            </div>
+            
+            <!-- 第二步 -->
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <h3>扩大知名度，掌控核心资源</h3>
+                <p>整合全中国发型师资源，邀请使用我们的预约系统</p>
+                <ul>
+                    <li>建立发型师认证体系</li>
+                    <li>打造行业人才数据库</li>
+                    <li>提供发型师培训课程</li>
+                    <li>实施绩效评估系统</li>
+                    <li>创建发型师社区平台</li>
+                </ul>
+                <h4>盈利模式：</h4>
+                <ul>
+                    <li>预约系统交易费1%</li>
+                    <li>高级会员订阅服务</li>
+                    <li>发型师认证费用</li>
+                </ul>
+            </div>
+            
+            <!-- 第三步 -->
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <h3>扩大盈利基础，准备上市</h3>
+                <p>建立特许经营体系，吸引投资者开店</p>
+                <ul>
+                    <li>我方提供全面支持：发型师、装修、用品</li>
+                    <li>投资者只需出资</li>
+                    <li>标准化运营流程</li>
+                    <li>中央化管理体系</li>
+                    <li>品牌统一营销</li>
+                </ul>
+                <h4>盈利模式：</h4>
+                <ul>
+                    <li>特许经营加盟费</li>
+                    <li>持续管理费</li>
+                    <li>供应链利润分成</li>
+                    <li>上市后股权增值</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- 分销商部分 -->
+    <section id="distributor" class="distributor-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>分銷商招募计划</h2>
+            </div>
+            <div class="distributor-content">
+                <div class="distributor-text">
+                    <h3 style="font-size: 1.8rem; color: var(--dark); margin-bottom: 20px;">首10位省級分銷商招募中</h3>
+                    <p style="margin-bottom: 20px;">一次性加盟费：<span style="font-weight: 700; color: var(--primary);">1万元</span></p>
+                    <p style="margin-bottom: 25px;">加盟后可代理全省加盟店业务，享受丰厚利润分成。</p>
+                    
+                    <div class="profit-model">
+                        <h4 style="color: var(--primary); text-align: center; margin-bottom: 25px;">利润分成模式</h4>
+                        
+                        <div class="phase">
+                            <h4>第一阶段</h4>
+                            <p>分銷商获得加盟店所有盈利的<span style="font-weight: 700; color: var(--success);">100%</span>，直至完全回收1万元加盟费支出。</p>
+                        </div>
+                        
+                        <div class="phase">
+                            <h4>第二阶段</h4>
+                            <p>分銷商终身获得加盟店所有盈利的<span style="font-weight: 700; color: var(--success);">50%</span>。</p>
+                        </div>
+                        
+                        <div class="phase">
+                            <h4>团队奖励</h4>
+                            <p>当分銷商发展2家加盟店后，可组建团队，获得团队成员所有加盟店<span style="font-weight: 700; color: var(--success);">额外10%盈利</span>。</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="distributor-image">
+                    <img src="https://images.unsplash.com/photo-1580618672591-eb180b1a973f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="分销商网络">
+                    <div style="margin-top: 30px; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                        <h4 style="color: var(--primary); margin-bottom: 15px;">分銷商优势</h4>
+                        <ul style="list-style: none; text-align: left;">
+                            <li style="padding: 8px 0; padding-left: 25px; position: relative;"><i class="fas fa-check-circle" style="position: absolute; left: 0; top: 10px; color: var(--success);"></i>区域独家代理权</li>
+                            <li style="padding: 8px 0; padding-left: 25px; position: relative;"><i class="fas fa-check-circle" style="position: absolute; left: 0; top: 10px; color: var(--success);"></i>快速回本机制</li>
+                            <li style="padding: 8px 0; padding-left: 25px; position: relative;"><i class="fas fa-check-circle" style="position: absolute; left: 0; top: 10px; color: var(--success);"></i>终身被动收入</li>
+                            <li style="padding: 8px 0; padding-left: 25px; position: relative;"><i class="fas fa-check-circle" style="position: absolute; left: 0; top: 10px; color: var(--success);"></i>团队发展奖励</li>
+                            <li style="padding: 8px 0; padding-left: 25px; position: relative;"><i class="fas fa-check-circle" style="position: absolute; left: 0; top: 10px; color: var(--success);"></i>全方位运营支持</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 投资部分 -->
+    <section id="investment" class="container">
+        <div class="investment">
+            <h2>天使轮融资</h2>
+            <h3>寻求10万元人民币投资</h3>
+            
+            <div class="investment-details">
+                <div class="investment-card">
+                    <i class="fas fa-hand-holding-usd"></i>
+                    <h4>投资金额</h4>
+                    <p>100,000元</p>
+                </div>
+                
+                <div class="investment-card">
+                    <i class="fas fa-percentage"></i>
+                    <h4>股权占比</h4>
+                    <p>8-10%</p>
+                </div>
+                
+                <div class="investment-card">
+                    <i class="fas fa-bullseye"></i>
+                    <h4>资金用途</h4>
+                    <p>技术开发、市场拓展、团队建设</p>
+                </div>
+            </div>
+            
+            <p style="max-width: 700px; margin: 0 auto; font-size: 1.2rem;">
+                此轮融资将用于完成平台技术开发，招募核心团队，并在3个重点城市启动试点运营。预计12个月内实现盈亏平衡，24个月启动A轮融资。
+            </p>
+            
+            <a href="#contact" class="cta-button" style="margin-top: 40px;">立即投资</a>
+        </div>
+    </section>
+
+    <!-- 联系部分 -->
+    <section id="contact" class="container">
+        <div class="section-title">
+            <h2>联系我们</h2>
+        </div>
+        <p style="text-align: center; margin-bottom: 40px; font-size: 1.2rem; max-width: 700px; margin-left: auto; margin-right: auto;">
+            如果您对我们的项目感兴趣，请填写以下表格，我们的团队将在24小时内与您联系。
+        </p>
+        
+        <div id="ContactAKI" class="ContactAKI"><!-- JS _顯示聯莫 --></div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="footer-content">
+            <div class="logo" style="justify-content: center; margin-bottom: 20px;">
+                <i class="fas fa-scissors"></i>
+                <span>美业联盟</span>
+            </div>
+            <p>整合中国美发行业，打造首家上市美发集团</p>
+            <p>邮箱：contact@meiyelianmeng.com</p>
+            <p>电话：+86 138 8888 8888</p>
+            
+            <div class="copyright">
+                <p>© 2023 美业联盟科技有限公司 版权所有</p>
+            </div>
+        </div>
+        <div class="scroll-top" id="scrollTop" onclick="scrollToTop()">↑</div>
+    </footer>
+
+    <script>
+        // 平滑滚动效果
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+
+        
+        // 滚动效果
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('header');
+            if(window.scrollY > 50) {
+                navbar.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
+            } else {
+                navbar.style.boxShadow = '0 2px 15px rgba(0,0,0,0.2)';
+            }
+        });
+        
+        // 卡片动画
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        document.querySelectorAll('.step-card, .investment-card').forEach(card => {
+            card.style.opacity = 0;
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            observer.observe(card);
+        });
+
+
+        function Start() {
+            // 顯示聯莫
+            const 聯莫 = ['moksurky@gmail.com','https://wa.me/85264071181/','https://i.meee.com.tw/atcX6QM.png','https://www.instagram.com/moksurky2025/','https://line.me/ti/p/UlSPd7p9zh/','https://www.facebook.com/aki.mok.10/','http://t.me/mokaki/','https://github.com/GoldComeHK/GoldComeHK.github.io'
+            ];
+            _顯示聯莫(聯莫);
+        }
+        琪琪修改('https://xn--come-p35m.com/')
+
+
+    </script>
+</body>
+</html>
