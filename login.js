@@ -1,6 +1,39 @@
 
 
 
+/*
+
+建立 Firebase 專案
+https://console.firebase.google.com/
+
+
+Authentication 開始使用
+登入方式 google
+
+專案的支援電子郵件地址 你的
+
+設定 授權網域 
+測試用 = 127.0.0.1 
+正式用 = 你的網址
+
+
+
+
+
+新增應用程式 網頁
+
+copy CDN 碼貼到login.js
+
+Firestore Database
+建立資料庫 位置 hk
+正式模式
+貼上規則
+
+
+
+
+*/
+
 
 
 /*  規則
