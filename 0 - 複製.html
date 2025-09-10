@@ -163,17 +163,10 @@
 
     <!-- 部份1: 帳號 -->
     <div class="container" style="padding: 20px;">
-        <button id="saveToFirebaseBtn" type="button" style="margin-bottom:18px;padding:10px 24px;font-size:1.2em;background:#1a1a1a;color:#fff;border-radius:8px;">保存到雲端</button>
-        <label tabindex="0">請填寫您的手機地區號* ❔<b class="說明">用於自動回覆</b></label>
-        <div style="display:flex;gap:8px;align-items:center;">
-            <select id="區號_select" style="width:40%;"></select>
-            <input id="區號_input" type="text" placeholder="新增區號" style="width:60%;">
-        </div>
-        <label tabindex="0">請填寫您的 WhatsApp 號碼* ❔<b class="說明">用於自動回覆</b></label>
-        <div style="display:flex;gap:8px;align-items:center;">
-            <select id="WhatsApp號_select" style="width:40%;"></select>
-            <input id="WhatsApp號_input" type="text" placeholder="新增WhatsApp號碼" style="width:60%;">
-        </div>
+            <label tabindex="0">請填寫您的手機地區號* ❔<b class="說明">用於自動回覆</b></label>
+            <input id="區號" class="記錄數據用" type="text" placeholder="例如: 86" title="例如: 86" required>
+            <label tabindex="0">請填寫您的 WhatsApp 號碼* ❔<b class="說明">用於自動回覆</b></label>
+            <input id="WhatsApp號" class="記錄數據用" type="text" placeholder="請填寫WhatsApp號碼" title="請填寫WhatsApp號碼" required>
     </div>
     <hr class="container">
 
@@ -204,13 +197,10 @@
                 </select>
 
                 <label tabindex="0">請填寫搜尋關鍵字 ❔<b class="說明">不填寫將直接搜尋所有最新資料</b></label>
-                <div style="display:flex;gap:8px;align-items:center;">
-                    <select id="關鍵字_select" style="width:40%;"></select>
-                    <input id="關鍵字_input" type="text" placeholder="新增關鍵字" style="width:60%;">
-                </div>
+                <input id="關鍵字" class="記錄數據用" type="text" placeholder="請填寫搜尋關鍵字" title="請填寫搜尋關鍵字" value="金融">
             
-                <label tabindex="0">最多找資料數 (1資料 = 1💰) ❔<b class="說明">愈多需時愈久，最大 100 <br>(只會獲取最新資料，最好2至5天用一次，短時間重複使用可能會重複收到相同資料)。</b></label>
-                <input id="最多找資料數" class="記錄數據用" value="10" type="number" min="1" max="100" step="1" required oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+                <label tabindex="0">最多找資料數 (1資料 = 1💰) ❔<b class="說明">愈多需時愈久，最大 500 <br>(只會獲取最新資料，最好3至5天用一次，短時間重複使用可能會重複收到相同資料)。</b></label>
+                <input id="最多找資料數" class="記錄數據用" value="10" type="number" min="1" max="500" step="1" required oninput="this.value = this.value.replace(/[^0-9]/g, '');">
             </div>
 
     </div>
@@ -238,42 +228,24 @@
             <h3>促銷鍠 📣</h3>
 
             <label tabindex="0">發出促銷信的gmail* ❔<b class="說明">必須是Gmail</b></label>
-            <div style="display:flex;gap:8px;align-items:center;">
-                <select id="發出促銷信的gmail_select" style="width:40%;"></select>
-                <input id="發出促銷信的gmail_input" type="text" placeholder="新增Gmail" style="width:60%;">
-            </div>
+            <input id="發出促銷信的gmail" class="記錄數據用" type="text" placeholder="請填寫發出促銷信的gmail" title="請填寫發出促銷信的gmail" required>
 
             <a href="https://myaccount.google.com/u/1/apppasswords?pli=1&rapt=AEjHL4NB4hK6Th7KGvq8QXmew8zX6e0Q0vg_Ruwjaxi6rHdyqR9HRAen2ocS95fglp1iHWQ2zcuydfYf4-aeUc4F2sJBPQ0s7iayeTEjdPFPKUTS0UILi60" target="_blank"><label tabindex="0">gmail的應用程式密碼*</label><b>❔</b></a>
-            <div style="display:flex;gap:8px;align-items:center;">
-                <select id="gmail的應用程式密碼_select" style="width:40%;"></select>
-                <input id="gmail的應用程式密碼_input" type="text" placeholder="新增應用程式密碼" style="width:60%;">
-            </div>
+            <input id="gmail的應用程式密碼" class="記錄數據用" type="text" placeholder="請填寫gmail的應用程式密碼" title="請填寫gmail的應用程式密碼" required>
             
-            <label tabindex="0">發送促銷信件數*(1信件 = 1💰) ❔<b class="說明">愈多需時愈久，最大100<br>如客戶聯絡方式是手機號，需手動發送WhatsApp促銷信<br> *(建議WhatsApp促銷信每天最多發5個)*</b></label>
-            <div style="display:flex;gap:8px;align-items:center;">
-                <select id="發送促銷信件數_select" style="width:40%;"></select>
-                <input id="發送促銷信件數_input" type="number" min="0" max="100" step="1" placeholder="新增信件數" style="width:60%;">
-            </div>
+            <label tabindex="0">發送促銷信件數*(1信件 = 1💰) ❔<b class="說明">愈多需時愈久，最大500<br>如客戶聯絡方式是手機號，需手動發送WhatsApp促銷信<br> *(建議WhatsApp促銷信每天最多發5個)*</b></label>
+            <input id="發送促銷信件數" class="記錄數據用" value="10" type="number" min="0" max="500" step="1" required oninput="this.value = this.value.replace(/[^0-9]/g, '');">
             
             <label tabindex="0">促銷信的標題*</label>
-            <div style="display:flex;gap:8px;align-items:center;">
-                <select id="信件標題_select" style="width:40%;"></select>
-                <input id="信件標題_input" type="text" placeholder="新增信件標題" style="width:60%;">
-            </div>
+            <input id="信件標題" class="記錄數據用" type="text" placeholder="請填寫促銷信的標題" title="請填寫促銷信的標題" required>
 
             <div id="repliesSelectContainer"> <!-- 促銷鍠客詢select --> </div>
 
             <label tabindex="0">促銷信內容*</label>
-            <div style="display:flex;gap:8px;align-items:center;">
-                <select id="促銷信內容_select" style="width:40%;"></select>
-                <textarea id="促銷信內容_input" placeholder="新增促銷信內容..." style="width:60%;"></textarea>
-            </div>
+            <textarea id="促銷信內容" class="記錄數據用" placeholder="請編寫促銷信內容..." title="請編寫促銷信內容"></textarea>
 
             <a href="https://playground.z.wiki/img-cloud/index.html" target="_blank"><label tabindex="0">圖片網址</label><b>❔</b></a>
-            <div style="display:flex;gap:8px;align-items:center;">
-                <select id="圖片網址_select" style="width:40%;"></select>
-                <textarea id="圖片網址_input" placeholder="新增圖片網址..." style="width:60%;"></textarea>
-            </div>
+            <textarea id="圖片網址" class="記錄數據用"></textarea>
             
             
             <hr>
@@ -388,108 +360,7 @@
 
 
 
-        <script type="module">
-import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-import { getFirestore, doc, setDoc, getDoc, updateDoc, arrayUnion } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-
-const firebaseConfig = window.firebaseConfig;
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
-
-// 欄位清單
-const fields = [
-    '區號','WhatsApp號','關鍵字','發出促銷信的gmail','gmail的應用程式密碼','發送促銷信件數','信件標題','促銷信內容','圖片網址'
-];
-
-
-
-// 初始化select與input，不自動同步firebase
-function initSelectInput(field) {
-    const select = document.getElementById(field+"_select");
-    const input = document.getElementById(field+"_input");
-    if (!select || !input) return;
-    // 載入localStorage
-    let arr = JSON.parse(localStorage.getItem(field+"_arr")||"[]");
-    select.innerHTML = '';
-    arr.forEach(val=>{
-        const opt = document.createElement('option');
-        opt.value = val; opt.textContent = val; select.appendChild(opt);
-    });
-    // select選擇時填到input
-    select.onchange = ()=>{ input.value = select.value; localStorage.setItem(field, select.value); };
-    // input輸入時只存localStorage
-    input.oninput = ()=>{ localStorage.setItem(field, input.value); };
-    // input按Enter自動加入select
-    input.onkeydown = (e)=>{
-        if(e.key==='Enter' && input.value && !arr.includes(input.value)){
-            arr.push(input.value); localStorage.setItem(field+"_arr",JSON.stringify(arr));
-            localStorage.setItem(field, input.value);
-            initSelectInput(field); select.value = input.value;
-        }
-    };
-}
-
-// 點擊保存鍵時，將所有欄位內容與陣列存到firebase，並確保 value 也在 _arr 裡
-async function saveAllFieldsToFirebase() {
-    const user = auth.currentUser;
-    if(!user) { alert('請先登入'); return; }
-    const userRef = doc(db, "users", user.uid);
-    let data = {};
-    fields.forEach(field=>{
-        const value = localStorage.getItem(field)||'';
-        let arr = [];
-        try { arr = JSON.parse(localStorage.getItem(field+"_arr"))||[]; } catch(e){}
-        // 若 value 不在 arr，則加入
-        if(value && !arr.includes(value)) arr.push(value);
-        data[field] = value;
-        data[field+"_arr"] = arr;
-        // 同步回 localStorage
-        localStorage.setItem(field+"_arr", JSON.stringify(arr));
-    });
-    await updateDoc(userRef, data).catch(()=>setDoc(userRef, data, {merge:true}));
-    alert('已保存到雲端');
-}
-
-// 載入firebase陣列與目前值
-function loadUserFields(user) {
-    const userRef = doc(db, "users", user.uid);
-    getDoc(userRef).then(snap=>{
-        if(snap.exists()){
-            const data = snap.data();
-            fields.forEach(field=>{
-                // 陣列
-                if(Array.isArray(data[field+"_arr"])) {
-                    localStorage.setItem(field+"_arr", JSON.stringify(data[field+"_arr"]));
-                }
-                // 目前值
-                if(data[field]) {
-                    localStorage.setItem(field, data[field]);
-                    const input = document.getElementById(field+"_input");
-                    if(input) input.value = data[field];
-                }
-                // select重建
-                initSelectInput(field);
-                // select選擇目前值
-                const select = document.getElementById(field+"_select");
-                if(select && data[field]) select.value = data[field];
-            });
-        }
-    });
-}
-
-// 登入狀態監聽
-onAuthStateChanged(auth, user=>{
-    if(user) loadUserFields(user);
-});
-
-// 頁面載入初始化所有select+input，並綁定保存按鈕
-window.addEventListener('DOMContentLoaded',()=>{
-    fields.forEach(initSelectInput);
-    const btn = document.getElementById('saveToFirebaseBtn');
-    if(btn) btn.onclick = saveAllFieldsToFirebase;
-});
+    <script>
 /*
       ::::::::       ::::::::::   :::::::::::   :::::::::::       :::::::::::       ::::    :::       ::::::::
     :+:    :+:      :+:              :+:           :+:               :+:           :+:+:   :+:      :+:    :+:
@@ -975,11 +846,8 @@ const 記錄位 = document.querySelectorAll(".記錄數據用");
         window.onload = function() {
             // 再顯示按鈕
             document.querySelector('.執行金come').style.display = 'grid';
-            // 修正：監聽促銷信內容 textarea 輸入變化
-            var promoInput = document.getElementById('促銷信內容_input');
-            if (promoInput) {
-                promoInput.addEventListener('input', _促銷鍠草稿);
-            }
+            // 監聽輸入變化
+            document.getElementById('促銷信內容').addEventListener('input', _促銷鍠草稿());
             document.querySelector("#執行中請不要關閉網頁").style.display = "none";
         };
 
