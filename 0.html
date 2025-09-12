@@ -164,15 +164,16 @@
     <!-- 部份1: 帳號 -->
     <div class="container" style="padding: 20px;">
         <button id="saveToFirebaseBtn" type="button" style="margin-bottom:18px;padding:10px 24px;font-size:1.2em;background:#1a1a1a;color:#fff;border-radius:8px;">保存到雲端</button>
+        <br>
         <label tabindex="0">請填寫您的手機地區號* ❔<b class="說明">用於自動回覆</b></label>
-        <div style="display:flex;gap:8px;align-items:center;">
-            <select id="區號_select" style="width:40%;"></select>
-            <input id="區號_input" type="text" placeholder="新增區號" style="width:60%;">
+        <div >
+            <select id="區號_select" ></select>
+            <input id="區號_input" type="text" placeholder="新增區號">
         </div>
         <label tabindex="0">請填寫您的 WhatsApp 號碼* ❔<b class="說明">用於自動回覆</b></label>
-        <div style="display:flex;gap:8px;align-items:center;">
-            <select id="WhatsApp號_select" style="width:40%;"></select>
-            <input id="WhatsApp號_input" type="text" placeholder="新增WhatsApp號碼" style="width:60%;">
+        <div>
+            <select id="WhatsApp號_select" ></select>
+            <input id="WhatsApp號_input" type="text" placeholder="新增WhatsApp號碼" >
         </div>
     </div>
     <hr class="container">
@@ -204,9 +205,9 @@
                 </select>
 
                 <label tabindex="0">請填寫搜尋關鍵字 ❔<b class="說明">不填寫將直接搜尋所有最新資料</b></label>
-                <div style="display:flex;gap:8px;align-items:center;">
-                    <select id="關鍵字_select" style="width:40%;"></select>
-                    <input id="關鍵字_input" type="text" placeholder="新增關鍵字" style="width:60%;">
+                <div>
+                    <select id="關鍵字_select" ></select>
+                    <input id="關鍵字_input" type="text" placeholder="新增關鍵字" >
                 </div>
             
                 <label tabindex="0">最多找資料數 (1資料 = 1💰) ❔<b class="說明">愈多需時愈久，最大 100 <br>(只會獲取最新資料，最好2至5天用一次，短時間重複使用可能會重複收到相同資料)。</b></label>
@@ -238,41 +239,43 @@
             <h3>促銷鍠 📣</h3>
 
             <label tabindex="0">發出促銷信的gmail* ❔<b class="說明">必須是Gmail</b></label>
-            <div style="display:flex;gap:8px;align-items:center;">
-                <select id="發出促銷信的gmail_select" style="width:40%;"></select>
-                <input id="發出促銷信的gmail_input" type="text" placeholder="新增Gmail" style="width:60%;">
+            <div>
+                <select id="發出促銷信的gmail_select" ></select>
+                <input id="發出促銷信的gmail_input" type="text" placeholder="新增Gmail" >
             </div>
 
             <a href="https://myaccount.google.com/u/1/apppasswords?pli=1&rapt=AEjHL4NB4hK6Th7KGvq8QXmew8zX6e0Q0vg_Ruwjaxi6rHdyqR9HRAen2ocS95fglp1iHWQ2zcuydfYf4-aeUc4F2sJBPQ0s7iayeTEjdPFPKUTS0UILi60" target="_blank"><label tabindex="0">gmail的應用程式密碼*</label><b>❔</b></a>
-            <div style="display:flex;gap:8px;align-items:center;">
-                <select id="gmail的應用程式密碼_select" style="width:40%;"></select>
-                <input id="gmail的應用程式密碼_input" type="text" placeholder="新增應用程式密碼" style="width:60%;">
+            <div>
+                <select id="gmail的應用程式密碼_select" ></select>
+                <input id="gmail的應用程式密碼_input" type="text" placeholder="新增應用程式密碼" >
             </div>
             
+            <!--
             <label tabindex="0">發送促銷信件數*(1信件 = 1💰) ❔<b class="說明">愈多需時愈久，最大100<br>如客戶聯絡方式是手機號，需手動發送WhatsApp促銷信<br> *(建議WhatsApp促銷信每天最多發5個)*</b></label>
-            <div style="display:flex;gap:8px;align-items:center;">
-                <select id="發送促銷信件數_select" style="width:40%;"></select>
-                <input id="發送促銷信件數_input" type="number" min="0" max="100" step="1" placeholder="新增信件數" style="width:60%;">
+            <div>
+                <select id="發送促銷信件數_select" ></select>
+                <input id="發送促銷信件數_input" type="number" min="0" max="100" step="1" placeholder="新增信件數" >
             </div>
+            -->
             
             <label tabindex="0">促銷信的標題*</label>
-            <div style="display:flex;gap:8px;align-items:center;">
-                <select id="信件標題_select" style="width:40%;"></select>
-                <input id="信件標題_input" type="text" placeholder="新增信件標題" style="width:60%;">
+            <div>
+                <select id="信件標題_select" ></select>
+                <input id="信件標題_input" type="text" placeholder="新增信件標題" >
             </div>
 
             <div id="repliesSelectContainer"> <!-- 促銷鍠客詢select --> </div>
 
             <label tabindex="0">促銷信內容*</label>
-            <div style="display:flex;gap:8px;align-items:center;">
-                <select id="促銷信內容_select" style="width:40%;"></select>
-                <textarea id="促銷信內容_input" placeholder="新增促銷信內容..." style="width:60%;"></textarea>
+            <div>
+                <select id="促銷信內容_select" ></select>
+                <textarea id="促銷信內容_input" placeholder="新增促銷信內容..." ></textarea>
             </div>
 
             <a href="https://playground.z.wiki/img-cloud/index.html" target="_blank"><label tabindex="0">圖片網址</label><b>❔</b></a>
-            <div style="display:flex;gap:8px;align-items:center;">
-                <select id="圖片網址_select" style="width:40%;"></select>
-                <textarea id="圖片網址_input" placeholder="新增圖片網址..." style="width:60%;"></textarea>
+            <div>
+                <select id="圖片網址_select" ></select>
+                <textarea id="圖片網址_input" placeholder="新增圖片網址..." ></textarea>
             </div>
             
             
@@ -311,11 +314,12 @@
 
     <!-- 部份4: 設定 -->
     <div class="container" style="padding: 20px;">
-            <samp style="float: right;">
+            <samp >
                 <button onclick="下載設定檔()">⬇️ 下載設定檔</button>
                 <input type="file" id="uploadInput" accept=".json" onchange="上傳設定檔(event)">
                 <button onclick="document.getElementById('uploadInput').click()">⬆️ 上傳設定檔</button>
-            </samp>        
+            </samp>   
+            <hr>     
 
             <div id="ContactAKI" class="ContactAKI"><!-- JS _顯示聯莫 --></div>
             <br>
@@ -400,7 +404,9 @@ const db = getFirestore(app);
 
 // 欄位清單
 const fields = [
-    '區號','WhatsApp號','關鍵字','發出促銷信的gmail','gmail的應用程式密碼','發送促銷信件數','信件標題','促銷信內容','圖片網址'
+    '區號','WhatsApp號','關鍵字','發出促銷信的gmail','gmail的應用程式密碼'
+    //,'發送促銷信件數'
+    ,'信件標題','促銷信內容','圖片網址'
 ];
 
 
@@ -429,6 +435,7 @@ function initSelectInput(field) {
             initSelectInput(field); select.value = input.value;
         }
     };
+    
 }
 
 // 點擊保存鍵時，將所有欄位內容與陣列存到firebase，並確保 value 也在 _arr 裡
@@ -482,6 +489,7 @@ function loadUserFields(user) {
 // 登入狀態監聽
 onAuthStateChanged(auth, user=>{
     if(user) loadUserFields(user);
+    _促銷鍠草稿();
 });
 
 // 頁面載入初始化所有select+input，並綁定保存按鈕
@@ -489,6 +497,20 @@ window.addEventListener('DOMContentLoaded',()=>{
     fields.forEach(initSelectInput);
     const btn = document.getElementById('saveToFirebaseBtn');
     if(btn) btn.onclick = saveAllFieldsToFirebase;
+
+    // 預設所有 *_input 為對應 *_select 的第一個選項值（或 textarea 內容）
+    const defaultFields = [
+        '區號','WhatsApp號','關鍵字','發出促銷信的gmail','gmail的應用程式密碼','信件標題','促銷信內容','圖片網址'
+    ];
+    defaultFields.forEach(field => {
+        const select = document.getElementById(field+"_select");
+        const input = document.getElementById(field+"_input");
+        if(select && input && select.options.length > 0) {
+            // textarea 也可設 value
+            input.value = select.options[0].value;
+            localStorage.setItem(field, select.options[0].value);
+        }
+    });
 });
 /*
       ::::::::       ::::::::::   :::::::::::   :::::::::::       :::::::::::       ::::    :::       ::::::::
@@ -547,13 +569,13 @@ window.addEventListener('DOMContentLoaded',()=>{
         
         function _促銷鍠草稿() {
             // 获取DOM元素
-            const 區號B = document.getElementById('區號').value;
-            const WhatsApp號B = document.getElementById('WhatsApp號').value;
+            const 區號B = document.getElementById('區號_input').value;
+            const WhatsApp號B = document.getElementById('WhatsApp號_input').value;
             const 我ws號 = 區號B + WhatsApp號B
 
             let 真圖片網址all = [];
             
-            let 圖片網址all = document.getElementById('圖片網址').value.split("\n");
+            let 圖片網址all = document.getElementById('圖片網址_input').value.split("\n");
 
             if (圖片網址all != ""){
                 圖片網址all.forEach(icon => {
@@ -564,7 +586,7 @@ window.addEventListener('DOMContentLoaded',()=>{
 
 
             // 将换行符转换为 <br>，并保留空格（使用HTML实体&nbsp;）
-            const promoContent = document.getElementById('促銷信內容').value
+            const promoContent = document.getElementById('促銷信內容_input').value
                 .replace(/\n/g, '<br>')  // 替换换行符
                 .replace(/ /g, '&nbsp;'); // 替换空格（可选，如需保留空格）
                 
@@ -838,21 +860,24 @@ const 記錄位 = document.querySelectorAll(".記錄數據用");
 
         /* ********************* */
         async function 執行遠端鍠(sel='') {
+        window.執行遠端鍠 = 執行遠端鍠;
             if (sel == 1 && !_主機檢查()) return; 
 
-            const 區號 = document.getElementById('區號').value;
-            const WhatsApp號 = document.getElementById('WhatsApp號').value;
+            const 區號 = document.getElementById('區號_input').value;
+            const WhatsApp號 = document.getElementById('WhatsApp號_input').value;
 
-            const 發出促銷信的gmail = document.getElementById('發出促銷信的gmail').value;
-            const gmail的應用程式密碼 = document.getElementById('gmail的應用程式密碼').value;
-            let 發送促銷信件數 = document.getElementById('發送促銷信件數').value; 
+            const 發出促銷信的gmail = document.getElementById('發出促銷信的gmail_input').value;
+            const gmail的應用程式密碼 = document.getElementById('gmail的應用程式密碼_input').value;
+            
 
-            const 信件標題 = document.getElementById('信件標題').value;
+            const 信件標題 = document.getElementById('信件標題_input').value;
             let 促銷信草稿 = document.getElementById('促銷信草稿').innerHTML;
 
-            const 關鍵字 = document.getElementById('關鍵字').value;
-            const 地區 = document.getElementById('地區').value;
-            const 最多找資料數 = document.getElementById('最多找資料數').value;
+            const 關鍵字 = document.getElementById('關鍵字_input').value;
+            const 地區 = document.getElementById('地區_input').value;
+            const 最多找資料數 = document.getElementById('最多找資料數_input').value;
+            let 發送促銷信件數 = 最多找資料數; //document.getElementById('發送促銷信件數_input').value; 
+
             const 搵客鍠py = `搜${地區}`
 
             // 要齊料岩料
