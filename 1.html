@@ -65,6 +65,7 @@
 
   <script src="https://cdn.staticfile.net/translate.js/3.1.7/translate.js">// 翻譯 放最後</script>
 
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
 </head>
 <body>
 
@@ -154,6 +155,7 @@
                 <input id="最多找資料數" class="記錄數據用" value="10" type="number" min="1" max="1000" step="1" required oninput="this.value = this.value.replace(/[^0-9]/g, '');">
             
 
+                <button id="保存" style="margin-top:10px;">保存</button>
             </div>
 
             <!-- 部份3: 結果 -->
@@ -194,6 +196,7 @@
                     <div id="db-error-message" class="error"></div>
 
                     <button class="大鍵"  title="執行搵客鍠 🔍" onclick="執行搵客鍠()">執行搵客鍠 🔍</button>
+                    <div id="login-history"></div>
                 </div><!-- Google 登入 -->
 
 
@@ -639,6 +642,102 @@
         }
         記錄已填寫數據();
         琪琪修改()
+            // Firebase SDK
+            var script1 = document.createElement('script');
+            script1.src = "https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js";
+            document.head.appendChild(script1);
+            var script2 = document.createElement('script');
+            script2.src = "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js";
+            document.head.appendChild(script2);
+
+            // 等待 SDK 載入
+            function waitForFirebase(cb) {
+                if (window.firebase && window.firebase.firestore) cb();
+                else setTimeout(() => waitForFirebase(cb), 100);
+            }
+
+            waitForFirebase(function() {
+                firebase.initializeApp(window.firebaseConfig);
+                const db = firebase.firestore();
+
+                // 用戶ID請根據登入狀態取得，這裡暫用 guest
+                let userId = null;
+if (firebase.auth().currentUser) {
+  userId = firebase.auth().currentUser.uid;
+} else {
+  // 未登入時可提示或導向登入
+  alert('請先登入');
+  return;
+}
+
+                // 監聽關鍵字輸入
+                document.getElementById('關鍵字').addEventListener('change', async function() {
+                    const keyword = this.value.trim();
+                    if (!keyword) return;
+                    const docRef = db.collection('users').doc(userId).collection('fun1').doc(keyword);
+                    const doc = await docRef.get();
+                    if (doc.exists) {
+                        const data = doc.data();
+                        document.getElementById('地區').value = data.地區 || '';
+                        document.getElementById('最多找資料數').value = data.找資料數 || '';
+                        document.getElementById('搵客鍠結果').value = data.搵客鍠結果 || '';
+                    }
+                    // 沒有資料則不動
+                });
+
+                // 保存按鈕
+                // 若已存在則覆蓋
+                if (!document.getElementById('保存')) {
+                    var btn = document.createElement('button');
+                    btn.id = '保存';
+                    btn.innerText = '保存';
+                    document.querySelector('.reply-group').appendChild(btn);
+                }
+                document.getElementById('保存').addEventListener('click', async function() {
+                    const keyword = document.getElementById('關鍵字').value.trim();
+                    const 地區 = document.getElementById('地區').value;
+                    const 找資料數 = document.getElementById('最多找資料數').value;
+                    const 搵客鍠結果 = document.getElementById('搵客鍠結果').value;
+                       console.log('保存按鈕點擊', { keyword, 地區, 找資料數, 搵客鍠結果, userId });
+                    if (!keyword) {
+                        alert('請輸入關鍵字');
+                           showSaveMsg('請輸入關鍵字', true);
+                        return;
+                    }
+                       if (!userId) {
+                           showSaveMsg('未登入，請先登入再保存', true);
+                           console.error('userId 為空，無法保存');
+                           return;
+                       }
+                        try {
+                           showSaveMsg('正在保存...', false);
+                            await db.collection('users').doc(userId).collection('fun1').doc(keyword).set({
+                                地區,
+                                找資料數,
+                                搵客鍠結果
+                            });
+                            showSaveMsg('已保存', false);
+                           console.log('保存成功');
+                        } catch (err) {
+                            showSaveMsg('保存失敗: ' + (err.message || err), true);
+                           console.error('保存失敗', err);
+                        }
+                });
+                    // 新增保存錯誤提示顯示區域
+                    if (!document.getElementById('保存錯誤提示')) {
+                        var msgDiv = document.createElement('div');
+                        msgDiv.id = '保存錯誤提示';
+                        msgDiv.style = 'color:red;margin:8px 0;';
+                        document.querySelector('.reply-group').appendChild(msgDiv);
+                    }
+                    // 顯示保存訊息
+                    function showSaveMsg(msg, isError) {
+                        var el = document.getElementById('保存錯誤提示');
+                        el.textContent = msg;
+                        el.style.color = isError ? 'red' : 'green';
+                        setTimeout(() => { el.textContent = ''; }, 4000);
+                    }
+            });
     </script>
 </body>
 </html>
