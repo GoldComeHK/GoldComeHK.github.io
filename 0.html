@@ -59,7 +59,21 @@
 
   <link rel="stylesheet" href="html.css">
   <script src="html.js"></script>
-  <script type="module" src="login.js"></script>
+
+
+    <script>
+        window.firebaseConfig = {
+            apiKey: "AIzaSyDsfMDe0faS58jTTrd8iefsUF66bd1mnzA",
+            authDomain: "goldcomehk20250561544qqq.firebaseapp.com",
+            projectId: "goldcomehk20250561544qqq",
+            storageBucket: "goldcomehk20250561544qqq.appspot.com",
+            messagingSenderId: "690441786277",
+            appId: "1:690441786277:web:1e79f68b2c906ac9428e4c",
+            measurementId: "G-Q62XJZ5THV"
+        };
+    </script>
+    <script src="login.js"></script>
+
   <script src="https://cdn.staticfile.net/translate.js/3.1.7/translate.js">// 翻譯 放最後</script>
 
 </head>
@@ -395,6 +409,7 @@
 
 
         <script type="module">
+            /* */
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
 import { getFirestore, doc, setDoc, getDoc, updateDoc, arrayUnion } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
@@ -403,6 +418,7 @@ const firebaseConfig = window.firebaseConfig;
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
+
 
 // 欄位清單
 const fields = [
