@@ -182,12 +182,12 @@
         <label tabindex="0">請填寫您的手機地區號* ❔<b class="說明">用於自動回覆</b></label>
         <div >
             <select id="區號_select" ></select>
-            <input id="區號_input" type="text" placeholder="新增區號">
+            <input id="區號_input" type="text" class="記錄數據用" placeholder="新增區號">
         </div>
         <label tabindex="0">請填寫您的 WhatsApp 號碼* ❔<b class="說明">用於自動回覆</b></label>
         <div>
             <select id="WhatsApp號_select" ></select>
-            <input id="WhatsApp號_input" type="text" placeholder="新增WhatsApp號碼" >
+            <input id="WhatsApp號_input" type="text" class="記錄數據用" placeholder="新增WhatsApp號碼" >
         </div>
     </div>
     <hr class="container">
@@ -221,7 +221,7 @@
                 <label tabindex="0">請填寫搜尋關鍵字 ❔<b class="說明">不填寫將直接搜尋所有最新資料</b></label>
                 <div>
                     <select id="關鍵字_select" ></select>
-                    <input id="關鍵字_input" type="text" placeholder="新增關鍵字" >
+                    <input id="關鍵字_input" type="text" class="記錄數據用" placeholder="新增關鍵字" >
                 </div>
             
                 <label tabindex="0">最多找資料數 (1資料 = 1💰) ❔<b class="說明">愈多需時愈久，最大 100 <br>(只會獲取最新資料，最好2至5天用一次，短時間重複使用可能會重複收到相同資料)。</b></label>
@@ -275,21 +275,30 @@
             <label tabindex="0">促銷信的標題*</label>
             <div>
                 <select id="信件標題_select" ></select>
-                <input id="信件標題_input" type="text" placeholder="新增信件標題" >
+                <input id="信件標題_input" type="text" class="記錄數據用" placeholder="新增信件標題" >
             </div>
 
-            <div id="repliesSelectContainer"> <!-- 促銷鍠客詢select --> </div>
+
+
+            <!-- <div id="repliesSelectContainer"> 促銷鍠客詢select </div>--> 
+            <label tabindex="0">客戶回覆預設回覆句* ❔<b class="說明">客戶用ws回覆您時的預設回覆句。</b></label>
+            <div>
+                <select id="客戶回覆預設回覆句_select" ></select>
+                <input id="客戶回覆預設回覆句_input" type="text" class="記錄數據用" placeholder="你好的想查詢xyz" >
+            </div>
+
+
 
             <label tabindex="0">促銷信內容*</label>
             <div>
                 <select id="促銷信內容_select" ></select>
-                <textarea id="促銷信內容_input" placeholder="新增促銷信內容..." ></textarea>
+                <textarea id="促銷信內容_input" class="記錄數據用" placeholder="新增促銷信內容..." ></textarea>
             </div>
 
             <a href="https://playground.z.wiki/img-cloud/index.html" target="_blank"><label tabindex="0">圖片網址</label><b>❔</b></a>
             <div>
                 <select id="圖片網址_select" ></select>
-                <textarea id="圖片網址_input" placeholder="新增圖片網址..." ></textarea>
+                <textarea id="圖片網址_input" class="記錄數據用" placeholder="新增圖片網址..." ></textarea>
             </div>
             
             
@@ -424,7 +433,7 @@ const db = getFirestore(app);
 const fields = [
     '區號','WhatsApp號','關鍵字','發出促銷信的gmail','gmail的應用程式密碼'
     //,'發送促銷信件數'
-    ,'信件標題','促銷信內容','圖片網址'
+    ,'信件標題','促銷信內容','圖片網址','客戶回覆預設回覆句'
 ];
 
 
@@ -441,8 +450,12 @@ function initSelectInput(field) {
         const opt = document.createElement('option');
         opt.value = val; opt.textContent = val; select.appendChild(opt);
     });
-    // select選擇時填到input
-    select.onchange = ()=>{ input.value = select.value; localStorage.setItem(field, select.value); };
+    // select選擇時填到input，並執行 _促銷鍠草稿
+    select.onchange = ()=>{ 
+        input.value = select.value; 
+        localStorage.setItem(field, select.value); 
+        if(typeof window._促銷鍠草稿 === 'function') window._促銷鍠草稿();
+    };
     // input輸入時只存localStorage
     input.oninput = ()=>{ localStorage.setItem(field, input.value); };
     // input按Enter自動加入select
@@ -453,7 +466,6 @@ function initSelectInput(field) {
             initSelectInput(field); select.value = input.value;
         }
     };
-    
 }
 
 // 點擊保存鍵時，將所有欄位內容與陣列存到firebase，並確保 value 也在 _arr 裡
@@ -498,7 +510,7 @@ function loadUserFields(user) {
                 initSelectInput(field);
                 // select選擇目前值
                 const select = document.getElementById(field+"_select");
-                if(select && data[field]) select.value = data[field];
+                if(select && data[field]) select.value = data[field]; 
             });
         }
     });
@@ -518,7 +530,7 @@ window.addEventListener('DOMContentLoaded',()=>{
 
     // 預設所有 *_input 為對應 *_select 的第一個選項值（或 textarea 內容）
     const defaultFields = [
-        '區號','WhatsApp號','關鍵字','發出促銷信的gmail','gmail的應用程式密碼','信件標題','促銷信內容','圖片網址'
+        '區號','WhatsApp號','關鍵字','發出促銷信的gmail','gmail的應用程式密碼','信件標題','促銷信內容','圖片網址','客戶回覆預設回覆句'
     ];
     defaultFields.forEach(field => {
         const select = document.getElementById(field+"_select");
@@ -527,6 +539,7 @@ window.addEventListener('DOMContentLoaded',()=>{
             // textarea 也可設 value
             input.value = select.options[0].value;
             localStorage.setItem(field, select.options[0].value);
+            
         }
     });
 });
@@ -540,6 +553,7 @@ window.addEventListener('DOMContentLoaded',()=>{
 ########       ##########       ###           ###           ###########       ###    ####       ########
 */
 
+/* 轉直接input
         // 客詢select
         let 對應回覆內容 = ''
         function _客詢select() {
@@ -578,13 +592,13 @@ window.addEventListener('DOMContentLoaded',()=>{
                 }
             });
         }
+*/
 
 
 
 
 
-
-        
+window._促銷鍠草稿 = _促銷鍠草稿;
         function _促銷鍠草稿() {
             // 获取DOM元素
             const 區號B = document.getElementById('區號_input').value;
@@ -608,10 +622,10 @@ window.addEventListener('DOMContentLoaded',()=>{
                 .replace(/\n/g, '<br>')  // 替换换行符
                 .replace(/ /g, '&nbsp;'); // 替换空格（可选，如需保留空格）
                 
-            const querySelect = document.getElementById('促銷鍠客詢select').value;
+            const querySelect = document.getElementById('客戶回覆預設回覆句_input').value;
                 
-            對應回覆內容 = 對應回覆內容.replace(/\n/g, '<br>')  // 替换换行符
-            .replace(/ /g, '&nbsp;'); // 替换空格（可选，如需保留空格）
+            //對應回覆內容 = 對應回覆內容.replace(/\n/g, '<br>')  // 替换换行符
+            //.replace(/ /g, '&nbsp;'); // 替换空格（可选，如需保留空格）
 
             // 構建WhatsApp鏈接
             let whatsappLink = '';
@@ -622,7 +636,7 @@ window.addEventListener('DOMContentLoaded',()=>{
             // 更新自动回复内容的函数
             document.getElementById('促銷信草稿').innerHTML  = 
                 `${promoContent}<br><br><br style="display: none;">${真圖片網址all}<br style="display: none;"><br><br><hr id="切分wa" style="display: none;"><br style="display: none;">${whatsappLink}<br style="display: none;"><br><br>`;
-            document.getElementById('自動回覆內容').innerHTML  = 對應回覆內容;
+            //document.getElementById('自動回覆內容').innerHTML  = 對應回覆內容;
         }
 
 
@@ -726,6 +740,7 @@ const 記錄位 = document.querySelectorAll(".記錄數據用");
 
 */
         // 手動上下載
+        window.下載設定檔 = 下載設定檔;
         function 下載設定檔() {
             const 記錄位B = document.querySelectorAll(".記錄數據用");
             const data = {};
@@ -766,6 +781,7 @@ const 記錄位 = document.querySelectorAll(".記錄數據用");
 
 
 
+        window.上傳設定檔 = 上傳設定檔;
         function 上傳設定檔(event) {
             const 設定匯入 = document.getElementById('設定匯入').textContent;
             const 設定格式錯誤 = document.getElementById('設定格式錯誤').textContent;
@@ -875,10 +891,10 @@ const 記錄位 = document.querySelectorAll(".記錄數據用");
 
 */
 
-
+window.執行遠端鍠 = 執行遠端鍠;
         /* ********************* */
         async function 執行遠端鍠(sel='') {
-        window.執行遠端鍠 = 執行遠端鍠;
+        //window.執行遠端鍠 = 執行遠端鍠;
             if (sel == 1 && !_主機檢查()) return; 
 
             const 區號 = document.getElementById('區號_input').value;
@@ -892,8 +908,8 @@ const 記錄位 = document.querySelectorAll(".記錄數據用");
             let 促銷信草稿 = document.getElementById('促銷信草稿').innerHTML;
 
             const 關鍵字 = document.getElementById('關鍵字_input').value;
-            const 地區 = document.getElementById('地區_input').value;
-            const 最多找資料數 = document.getElementById('最多找資料數_input').value;
+            const 地區 = document.getElementById('地區').value;
+            const 最多找資料數 = document.getElementById('最多找資料數').value;
             let 發送促銷信件數 = 最多找資料數; //document.getElementById('發送促銷信件數_input').value; 
 
             const 搵客鍠py = `搜${地區}`
@@ -931,7 +947,7 @@ const 記錄位 = document.querySelectorAll(".記錄數據用");
                 }
             }
 
-            分隔符 = '@////////@'
+            const 分隔符 = '@////////@'
             // 按地區選py code
             const 變數庫 = {
                 搜HK: `_香港勞工處('${關鍵字}')`,
@@ -939,7 +955,7 @@ const 記錄位 = document.querySelectorAll(".記錄數據用");
             };
 
             // 檢查分數
-            使用分數 = +發送促銷信件數 + +最多找資料數
+            const 使用分數 = +發送促銷信件數 + +最多找資料數
             const result = await redeemPoints(使用分數); // 接收 redeemPoints() 的返回值
             if (sel !== 1 && !result.success) { 
                 alert(`您的分數不足${使用分數}點，請充值!`);
@@ -1035,7 +1051,7 @@ const 記錄位 = document.querySelectorAll(".記錄數據用");
             _主機檢查();
         }
 
-        _客詢select();
+        //_客詢select();
         記錄已填寫數據();
         琪琪修改()
     </script>
