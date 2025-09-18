@@ -51,10 +51,9 @@
     </style>
 
   <!-- ws icon https://www.thinkcmf.com/font/font_awesome/icons.html -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/fd27287143.js" crossorigin="anonymous">//抖音,threads icon</script>
   <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-  <script src="../mokJsapi/a.js">//琪琪修改</script>
+  <script src="https://64071181.github.io/mokJsapi/a.js">//琪琪修改</script>
   <script src="py/py.js"></script>
 
   <link rel="stylesheet" href="html.css">
@@ -487,6 +486,7 @@ async function saveAllFieldsToFirebase() {
     });
     await updateDoc(userRef, data).catch(()=>setDoc(userRef, data, {merge:true}));
     alert('已保存到雲端');
+    location.reload();
 }
 
 // 載入firebase陣列與目前值
@@ -1053,7 +1053,7 @@ window.執行遠端鍠 = 執行遠端鍠;
 
         //_客詢select();
         記錄已填寫數據();
-        琪琪修改()
+        琪琪修改('https://64071181.github.io/')
     </script>
 </body>
 </html>
