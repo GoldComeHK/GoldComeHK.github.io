@@ -615,8 +615,11 @@ class _遠端鍠_雜項:
             聯絡方式B = f"mailto:{聯絡方式}?subject=尊敬的{公司名稱}{信標隨}&body="
             #sell客文 = f"{聯絡方式B}{公司名稱}{宣傳文B}"
         else:
+            
+          # qqqq 比同事
             聯絡方式B = f'https://wa.me/{聯絡方式}?text='
 
+            '''
             # 取我wsLink
             我wsLink = re.findall(r'href="([^"]+)"', 宣傳文)[-1]
 
@@ -636,6 +639,9 @@ class _遠端鍠_雜項:
             )
             宣傳文B = 宣傳文B.replace('<br>', '%0A').replace('&nbsp;', '%20').replace('=', '%3D')
             宣傳文B = f'{宣傳文B}%0A%0A{我wsLink}%0A%0A{圖all}'
+            '''
+
+            宣傳文B = '%0AHello老闆你好%0A想問下你哋有冇興趣商業合作？%0A我哋系統可以幫你用1蚊招到新客%0A有興趣我哋可以詳細啲傾'
 
 
         sell客文 = f"{聯絡方式B}尊敬的{公司名稱}{宣傳文B}"
@@ -785,7 +791,6 @@ def _香港勞工處(keyword=''):
         目前網址 = 搵客鍠_driver.current_url
 
         # 取得資料總數
-        # qqqqqqqq
         顯總料數 = 0
         顯總料數 = WebDriverWait(搵客鍠_driver, 9).until(
             EC.visibility_of_element_located((By.XPATH, 勞工處XPATH['左上資料數']))
@@ -799,7 +804,6 @@ def _香港勞工處(keyword=''):
         while True:
 
             if int(顯總料數) == 0:
-                print("沒有資料，搜尋結束...")
                 all_Boss料.append("沒有資料，搜尋結束...")
                 return all_Boss料
 
@@ -909,8 +913,8 @@ def _台灣就業通(keyword=''):
         顯總料數 = 顯總料數.text.strip("()")
         print(f'*** 正在搜尋[{keyword}]有{顯總料數}個公司資料 @ 台灣就業通 ***')
         if int(顯總料數) == 0:
-            print("沒有資料，搜尋結束...")
-            return
+            all_Boss料.append("沒有資料，搜尋結束...")
+            return all_Boss料
 
         # 列出所有工作
         _chrome_雜項._檢查點擊(搵客鍠_driver,'移至頁數',就業通XPATH['移至頁數'])
@@ -1055,7 +1059,7 @@ class _TG機器人系列:
         def _轉發通知(msg):
             try:
                 bot.send_message(
-                    -4706199187,
+                    金come客戶記錄群id,
                     f"👤 @{msg.from_user.username} 發送訊息：\n`{msg.text}`",
                     parse_mode="Markdown"
                 )
@@ -1257,6 +1261,7 @@ def _執行遠端鍠(指令):
         ${促銷信草稿}${分隔符}
         ${發出促銷信的gmail}${分隔符}
         ${gmail的應用程式密碼}${分隔符}
+        ${發送促銷信件數}${分隔符}
     `
     '''
 
@@ -1308,6 +1313,10 @@ def _執行遠端鍠(指令):
     if 發送促銷信件數 == 0:
         搜到的料all.append(f'==搵客鍠已搜尋{len(搜到的料all)}個資料==')
         return 搜到的料all # 只搵客鍠
+
+    if len(搜到的料all) == 1: # 沒有資料，搜尋結束
+        return 搜到的料all
+        
 
     for 結果 in 搜到的料all:
         if all成功發送 >= 發送促銷信件數:
@@ -1413,6 +1422,7 @@ if __name__ == "__main__":
     Admin模式 = False
 
     分隔號 = '$'*18
+    金come客戶記錄群id = '-1003013600541'
 
     # 遠端鍠 在 https://金come.com/0  set _執行遠端鍠 global 不可刪
     最多找資料數 = 10
@@ -1423,8 +1433,10 @@ if __name__ == "__main__":
     由這mail = ''
     由這mail的key = ''
 
+    
+
     now = datetime.now()
-    更新日期 = '202506292327'
+    更新日期 = '202509192207'
     本程式名 = f'$$$ 遠端鍠 {更新日期} 版 {now} 已執行 $$$'
     print(本程式名)
     _TG機器人系列._TG多工機器人()
