@@ -169,20 +169,15 @@
 
 
 
-
-
-
-
-
     <!-- 部份1: 帳號 -->
     <div class="container" style="padding: 20px;">
-        <button id="saveToFirebaseBtn" type="button" style="margin-bottom:18px;padding:10px 24px;font-size:1.2em;background:#1a1a1a;color:#fff;border-radius:8px;">保存到雲端</button>
-        <br>
+        
         <label tabindex="0">請填寫您的手機地區號* ❔<b class="說明">用於自動回覆</b></label>
         <div >
             <select id="區號_select" ></select>
             <input id="區號_input" type="text" class="記錄數據用" placeholder="新增區號">
         </div>
+        
         <label tabindex="0">請填寫您的 WhatsApp 號碼* ❔<b class="說明">用於自動回覆</b></label>
         <div>
             <select id="WhatsApp號_select" ></select>
@@ -208,7 +203,6 @@
 
     <!-- 部份2: 搵客鍠 -->
     <div class="container" style="padding: 20px;">
-            <h3>搵客鍠🔍</h3>
             <div class="reply-group">
                 
                 <label tabindex="0">請選擇搜尋地區* ❔<b class="說明">需要在當地網絡才能搜尋</b></label>
@@ -248,20 +242,18 @@
 
     <!-- 部份3: 促銷鍠 -->
     <div class="container" style="padding: 20px;">
-            
-            <h3>促銷鍠 📣</h3>
 
             <label tabindex="0">發出促銷信的gmail* ❔<b class="說明">必須是Gmail</b></label>
             <div>
                 <select id="發出促銷信的gmail_select" ></select>
                 <input id="發出促銷信的gmail_input" type="text" placeholder="新增Gmail" >
-            </div>
+            </div><hr>
 
             <a href="https://myaccount.google.com/u/1/apppasswords?pli=1&rapt=AEjHL4NB4hK6Th7KGvq8QXmew8zX6e0Q0vg_Ruwjaxi6rHdyqR9HRAen2ocS95fglp1iHWQ2zcuydfYf4-aeUc4F2sJBPQ0s7iayeTEjdPFPKUTS0UILi60" target="_blank"><label tabindex="0">gmail的應用程式密碼*</label><b>❔</b></a>
             <div>
                 <select id="gmail的應用程式密碼_select" ></select>
                 <input id="gmail的應用程式密碼_input" type="text" placeholder="新增應用程式密碼" >
-            </div>
+            </div><hr>
             
             <!--
             <label tabindex="0">發送促銷信件數*(1信件 = 1💰) ❔<b class="說明">愈多需時愈久，最大100<br>如客戶聯絡方式是手機號，需手動發送WhatsApp促銷信<br> *(建議WhatsApp促銷信每天最多發5個)*</b></label>
@@ -271,45 +263,50 @@
             </div>
             -->
             
+    </div>
+    <hr class="container">
+
+    <div class="container" style="padding: 20px;">
             <label tabindex="0">促銷信的標題*</label>
             <div>
                 <select id="信件標題_select" ></select>
                 <input id="信件標題_input" type="text" class="記錄數據用" placeholder="新增信件標題" >
-            </div>
-
-
-
-            <!-- <div id="repliesSelectContainer"> 促銷鍠客詢select </div>--> 
-            <label tabindex="0">客戶回覆預設回覆句* ❔<b class="說明">客戶用ws回覆您時的預設回覆句。</b></label>
-            <div>
-                <select id="客戶回覆預設回覆句_select" ></select>
-                <input id="客戶回覆預設回覆句_input" type="text" class="記錄數據用" placeholder="你好的想查詢xyz" >
-            </div>
-
-
+            </div><hr>
 
             <label tabindex="0">促銷信內容*</label>
             <div>
                 <select id="促銷信內容_select" ></select>
                 <textarea id="促銷信內容_input" class="記錄數據用" placeholder="新增促銷信內容..." ></textarea>
-            </div>
+            </div><hr>
 
             <a href="https://playground.z.wiki/img-cloud/index.html" target="_blank"><label tabindex="0">圖片網址</label><b>❔</b></a>
             <div>
                 <select id="圖片網址_select" ></select>
                 <textarea id="圖片網址_input" class="記錄數據用" placeholder="新增圖片網址..." ></textarea>
-            </div>
-            
-            
-            <hr>
-            <label tabindex="0">草稿 ❔<b class="說明">如草稿內容沒有變更，請重選回覆關鍵字。</b></label>
-            <p id="促銷信草稿" class="container"></p>
-            <label tabindex="0">自動回覆內容 ❔<b class="說明">如自動回覆內容沒有變更，請重選回覆關鍵字。</b></label>
-            <p id="自動回覆內容" class="container"></p>
-            <hr>
+            </div><hr>
 
-            <textarea id="促銷鍠結果" class="記錄數據用"></textarea>
-            <p id="臨時結果A"></p>
+    </div>
+    <hr class="container">
+
+
+
+
+    <div class="container" style="padding: 20px;">
+            <!-- <div id="repliesSelectContainer"> 促銷鍠客詢select </div>--> 
+            <label tabindex="0">客戶回覆預設回覆句* ❔<b class="說明">客戶用ws回覆您時的預設回覆句。</b></label>
+            <div>
+                <select id="客戶回覆預設回覆句_select" ></select>
+                <input id="客戶回覆預設回覆句_input" type="text" class="記錄數據用" placeholder="你好的想查詢xyz" >
+            </div><hr>
+    </div>
+    <hr class="container">
+
+<div class="container" style="padding: 20px;">
+    <h3><label tabindex="0">草稿 ❔<b class="說明">如草稿內容沒有變更，請重選回覆關鍵字。</b></label></h3>
+
+            
+            <p id="促銷信草稿" class="container"></p>
+
     </div>
     <hr class="container">
 
@@ -340,6 +337,8 @@
                 <button onclick="下載設定檔()">⬇️ 下載設定檔</button>
                 <input type="file" id="uploadInput" accept=".json" onchange="上傳設定檔(event)">
                 <button onclick="document.getElementById('uploadInput').click()">⬆️ 上傳設定檔</button>
+                <button id="saveToFirebaseBtn" type="button" style="margin-bottom:18px;padding:10px 24px;font-size:1.2em;background:#1a1a1a;color:#fff;border-radius:8px;float: right;">保存到雲端</button>
+
             </samp>   
             <hr>     
 
@@ -356,8 +355,9 @@
                 <div id="user-info" style="display: none;">
                     <button onclick="充值()" title="充值" >💰 = </button>
                     <span class="user-score"  title="悠的點數" >0</span>
+                    <br>
                     🙂 = <span class="user-email"></span>
-                    <button onclick="logout()">登1出</button>
+                    <button onclick="logout()">登出</button>
                     <div id="success-message" class="success"></div>
                     <div id="db-error-message" class="error"></div>
                     <button class="大鍵 執行遠端鍠" title="執行遠端鍠 👑" onclick="執行遠端鍠()">執行遠端鍠 👑</button>
@@ -465,6 +465,44 @@ function initSelectInput(field) {
             initSelectInput(field); select.value = input.value;
         }
     };
+
+    // 新增：渲染 value 列表及刪除鍵
+    let listId = field + '_valueList';
+    let listDiv = document.getElementById(listId);
+    if (!listDiv) {
+        listDiv = document.createElement('div');
+        listDiv.id = listId;
+        // 插入在 select 之後
+        select.parentNode.insertBefore(listDiv, select.nextSibling);
+    }
+    // 清空
+    listDiv.innerHTML = '';
+    arr.forEach((val, idx) => {
+        const span = document.createElement('span');
+        // 最多顯示10個字，超過以 ... 省略
+        let showVal = val;
+        if (val.length > 10) showVal = val.slice(0, 10) + '...';
+        span.textContent = showVal;
+        span.title = val; // 滑鼠懸停顯示完整內容
+        span.style.marginRight = '8px';
+        // 刪除鍵
+        const delBtn = document.createElement('button');
+        delBtn.textContent = '❌';
+        delBtn.style.marginLeft = '2px';
+        delBtn.style.fontSize = '0.9em';
+        delBtn.style.cursor = 'pointer';
+        delBtn.onclick = function() {
+            arr.splice(idx, 1);
+            localStorage.setItem(field+"_arr", JSON.stringify(arr));
+            // 若刪除的是目前 input value，也清空 input
+            if(input.value === val) input.value = '';
+            // 若 select.value 是被刪除的，也清空 select
+            if(select.value === val) select.value = '';
+            initSelectInput(field);
+        };
+        span.appendChild(delBtn);
+        listDiv.appendChild(span);
+    });
 }
 
 // 點擊保存鍵時，將所有欄位內容與陣列存到firebase，並確保 value 也在 _arr 裡
